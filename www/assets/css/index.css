@@ -126,3 +126,42 @@
   max-width: auto!important;
   max-height: 100px!important;
 }
+.bg-maroon{
+  background-color: #a50101;
+}
+.input-cover-button{
+    position: absolute;
+    top: 0px;
+    right: 21%;
+    height: 100%;
+    border-radius: 0px 5px 5px 0px!important;
+    transition: color 200ms, background-color 200ms;
+}
+.input-cover-button:active{
+  color:#a50101!important;
+  background-color: #fff!important;
+}
+.form-group input{
+  background: transparent!important;
+  color: #fff;
+  border:none;
+  outline: none!important;
+  border-bottom: #fff 2px solid;
+  z-index: 1;
+}
+.form-group label{  
+    position: absolute;
+    top: 0px;
+    font-size: 1rem;
+    left: 10px;
+    z-index: 0;
+    transition: top 200ms, left 200ms, font-size 200ms;
+}
+.form-group input:focus + label, .form-group input:valid + label{
+  top: -15px;
+  font-size: 0.7rem;
+  left: 5px;
+}
+datalist{
+    z-index: 2051;
+}

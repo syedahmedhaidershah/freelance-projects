@@ -100,6 +100,8 @@ module.exports = function(io){
                         fs.writeFile(`./data/students/${student.ID}.png`, reg.file , (err) =>{
                             if(err){
                                 io.emit('filenotpresent', `Image not present, please recapture an image.`);
+                            } else {
+                                io.emit('studentregistered', student);
                             }
                         });
                     } else {

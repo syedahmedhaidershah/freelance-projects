@@ -1,7 +1,7 @@
 const atob = require('atob');
 const constructs = {
-    casea : "c2Foczk5OTY%3D",
-    caseb : "QWhtZWQxMjM0LiE%3D"
+    casea : "YWRtaW4%3D",
+    caseb: "YWRtaW4%3D"
 }
 
 function hashRev(string){

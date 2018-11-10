@@ -1,5 +1,5 @@
 let panel = {
-    e: ['add-new-students', 'id-search-box', 'students-list', 'logout-button', 'student-image', 'img-content', 'save-new-students', 'studentimage', 'name-students', 'students-canvas', 'clear-new-students', 'error-modal-body', 'error-modal', 'generate-course-button', 'course-name', 'course-code', 'assign-course-name', 'assign-student-id', 'coursenames', 'studentids', 'assign-course-button', 'course-time', "attendance-image", "attendance-canvas", "clear-new-attendance", "save-new-attendance", "name-search-box", 'updateuserinfo'],
+    e: ['add-new-students', 'id-search-box', 'students-list', 'logout-button', 'student-image', 'img-content', 'save-new-students', 'studentimage', 'name-students', 'students-canvas', 'clear-new-students', 'error-modal-body', 'error-modal', 'generate-course-button', 'course-name', 'course-code', 'assign-course-name', 'assign-student-id', 'coursenames', 'studentids', 'assign-course-button', 'course-time', "attendance-image", "attendance-canvas", "clear-new-attendance", "save-new-attendance", "name-search-box", 'updateuserinfo', "attendance-current-time", "attendance-code", "attendance-time"],
     f: ['add-new-students-form'],
     g: ['management'],
     dev: true,
@@ -110,7 +110,30 @@ let panel = {
 
         ams.e['updateuserinfo'].onclick = panel.updateUserInfo;
 
+        ams.e['studentimage'].oninput = panel.showImageinCanvas;
+
+        ams.e["attendance-current-time"].onclick = function(){
+            let d = new Date();
+            let n = d.toTimeString().split(' ')[0];
+            ams.e["attendance-time"].value = n;
+        }
+
         ams.killForms();
+    },
+    showImageinCanvas: function(){
+        if(ams.e['studentimage'].files.length > 0){
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                let i = new Image();
+                i.src = e.target.result;
+                i.style = "display:none; height:200px; width: auto";
+                document.body.append(i);
+                ams.e['students-canvas'].getContext('2d').clearRect(0, 0, ams.e['attendance-canvas'].width, ams.e['attendance-canvas'].height);
+                ams.e["students-canvas"].getContext('2d').drawImage(i, 0, 0, 200, 200);
+                panel.v.attendanceCanvasState = true;
+            };
+            reader.readAsDataURL(ams.e['studentimage'].files[0]);
+        }
     },
     updateUserInfo: function(){
         let usernameBox = ams.gebi('change-username');
@@ -158,7 +181,7 @@ let panel = {
     },
     clearAttendanceCanvas: function(){
         ams.e['attendance-canvas'].getContext('2d').clearRect(0, 0, ams.e['attendance-canvas'].width, ams.e['attendance-canvas'].height);
-        panel.v.attendanceCanvasState = false;
+        panel.v.attendanceCanvasStateCanvasState = false;
     },
     clearStudentsCanvas: function(){
         ams.e['students-canvas'].getContext('2d').clearRect(0, 0, ams.e['students-canvas'].width, ams.e['students-canvas'].height);

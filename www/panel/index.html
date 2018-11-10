@@ -107,12 +107,15 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <h6 class="col-md-6 d-block mx-auto text-secondary mb-1">Enter the student's ID</h6>
-                            <input type="text" id="attendance-name" class="d-block mx-auto mb-2 col-md-7 rounded border p-2 shadow" name="attendance-image" placeholder="Student ID" />
+                            <!-- <h6 class="col-md-6 d-block mx-auto text-secondary mb-1">Enter the student's ID</h6>
+                            <input type="text" id="attendance-name" class="d-block mx-auto mb-2 col-md-7 rounded border p-2 shadow" name="attendance-image" placeholder="Student ID" /> -->
                             <h6 class="col-md-6 d-block mx-auto text-secondary mb-1">Enter the course code</h6>
-                            <input type="text" id="attendance-code" class="d-block mx-auto mb-2 col-md-7 rounded border p-2 shadow" name="attendance-image" placeholder="Course Code" />
+                            <input type="text" id="attendance-code" class="d-block mx-auto mb-4 col-md-7 rounded border p-2 shadow" name="attendance-image" placeholder="Course Code" list="" />
                             <h6 class="col-md-6 d-block mx-auto text-secondary mb-1">Marked at (time)</h6>
-                            <input type="time" id="attendance-code" class="d-block mx-auto mb-2 col-md-7 rounded border p-2 shadow" name="attendance-image" placeholder="Course Code" />
+                            <div class="col-md-12 d-block m-0 p-0">
+                                <input type="time" id="attendance-time" class="d-block mx-auto mb-2 col-md-7 rounded border p-2 shadow" name="attendance-image" placeholder="Course Code" />
+                                <button class="btn bg-maroon text-white input-cover-button" id="attendance-current-time"><small>Current time</small></class>
+                            </div>
                             <small class="text-primary mt-2 text-center col-md-12 d-block mx-auto">Click image to capture</small>
                             <div id="attendance-image" class=" d-block mx-auto student-image p-0 cursor-pointer rounded" aria-label="Click to Capture">
                                 <div class="img-cover-dark student-image"></div>

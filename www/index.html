@@ -15,9 +15,15 @@
                 <div class="display-4">AMS</div>
                 <h6>Attendance Management System</h6>
             </div>
-            <form id="login-form" class="col-md-12 mt-5 pt-3">
-                <input type="text" id="username" name="username" placeholder="Username" class="d-block mx-auto mt-5 col-md-3 rounded" />
-                <input type="password" id="password" name="password" placeholder="Password" class="d-block mx-auto mt-4 col-md-3 mb-4 rounded" />
+            <form id="login-form" class="d-block mx-auto bg-dark rounded col-md-4 mt-5 p-4">
+                <div class="form-group position-relative d-block mx-auto col-md-8 p-0">
+                    <input type="text" id="username" name="username" class="d-block mx-auto mt-5 col-md-12 rounded" required autocomplete="off"/>
+                    <label class="text-white">Username</label>
+                </div>
+                <div class="form-group position-relative d-block mx-auto col-md-8 p-0 mt-4">
+                    <input type="password" id="password" name="password" class="d-block mx-auto mt-4 col-md-12 mb-4 rounded" required/>
+                    <label class="text-white">Password</label>
+                </div>
                 <button id="login-button" class="btn btn-primary login-button" class="d-block mx-auto text-white mt-3">Login</button>
             </form>
         </div>
