@@ -55,7 +55,8 @@
                             <div id="student-image" class=" d-block mx-auto student-image p-0 cursor-pointer rounded" aria-label="Click to Capture">
                                 <div class="img-cover-dark student-image"></div>
                                 <div class="back-camera student-image"></div>
-                                <canvas id="students-canvas" class="student-image" />
+                                <canvas id="students-canvas" class="student-image" ></canvas>
+                                <canvas id="students-video-canvas" class="video-canvas active"></canvas>
                             </div>
                             <div class="outer-container d-block mx-auto">
                                 <button id="clear-new-students" class="btn rounded btn-dark mt-2 float-left col-md-5">Clear</button>
@@ -82,8 +83,8 @@
                     <datalist id="studentids"></datalist>
                 </div>
             </div>
-            <div class="modal fade error-modal text-white h-50" id="error-modal" tabindex="-2" role="dialog" aria-labelledby="error-modal-title" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal fade error-modal text-white h-50" id="error-modal" tabindex="-2" role="dialog" aria-labelledby="error-modal-title" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+                <div class="modal-dialog modal-dialog" role="document">
                     <div class="modal-autosize modal-content bg-primary">
                         <div class="modal-header p-1 pl-3 pr-3">
                             <h5 class="modal-title" id="exampleModalLongTitle">Message from AMS</h5>
@@ -97,39 +98,42 @@
                     </div>
                 </div>
             </div>
-            <div class="modal fade" id="attendanceModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
+            <!-- <div class="modal fade bg-white" id="attendanceModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true"> -->
+                <!-- <div class="modal-dialog modal-dialog-centered" role="document"> -->
+                    <!-- <div class="modal-content"> -->
+                    <div id="attendanceModal"  class="attendanceModal bg-white w-100 h-100 position-fixed">
                         <div class="modal-header p-1 pl-3 pr-3">
-                            <h5 class="modal-title" id="exampleModalLongTitle">Manage Attendance</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Attendance Management</h5>
+                            <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
-                            </button>
+                            </button> -->
                         </div>
-                        <div class="modal-body">
+                        <form id="attendance-form" class="d-block modal-body col-md-6 d-block mx-auto">
                             <!-- <h6 class="col-md-6 d-block mx-auto text-secondary mb-1">Enter the student's ID</h6>
                             <input type="text" id="attendance-name" class="d-block mx-auto mb-2 col-md-7 rounded border p-2 shadow" name="attendance-image" placeholder="Student ID" /> -->
                             <h6 class="col-md-6 d-block mx-auto text-secondary mb-1">Enter the course code</h6>
-                            <input type="text" id="attendance-code" class="d-block mx-auto mb-4 col-md-7 rounded border p-2 shadow" name="attendance-image" placeholder="Course Code" list="" />
+                            <input type="text" id="attendance-code" class="d-block mx-auto mb-4 col-md-7 rounded border p-2 shadow" name="attendance-image" placeholder="Course Code" list="coursenames" />
                             <h6 class="col-md-6 d-block mx-auto text-secondary mb-1">Marked at (time)</h6>
                             <div class="col-md-12 d-block m-0 p-0">
-                                <input type="time" id="attendance-time" class="d-block mx-auto mb-2 col-md-7 rounded border p-2 shadow" name="attendance-image" placeholder="Course Code" />
+                                <input type="time" id="attendance-time" class="d-block mx-auto mb-2 col-md-7 rounded border p-2 shadow" name="attendance-image" placeholder="Time" disabled />
                                 <button class="btn bg-maroon text-white input-cover-button" id="attendance-current-time"><small>Current time</small></class>
                             </div>
                             <small class="text-primary mt-2 text-center col-md-12 d-block mx-auto">Click image to capture</small>
                             <div id="attendance-image" class=" d-block mx-auto student-image p-0 cursor-pointer rounded" aria-label="Click to Capture">
                                 <div class="img-cover-dark student-image"></div>
                                 <div class="back-camera student-image"></div>
-                                <canvas id="attendance-canvas" class="student-image" />
+                                <canvas id="attendance-canvas" class="student-image" ></canvas>
+                                <canvas id="attendance-video-canvas" class="video-canvas active"></canvas>
                             </div>
                             <div class="col-md-6 d-block mx-auto mt-2">
                                 <button id="clear-new-attendance" class="btn rounded btn-dark mt-2 float-left col-md-5">Clear</button>
-                                <button id="save-new-attendance" class="btn rounded btn-success mt-2 float-right col-md-5">Check</button>
+                                <button id="check-new-attendance" class="btn rounded btn-success mt-2 float-right col-md-5">Check</button>
                             </div>
-                        </div>
+                        </form>
                     </div>
-                </div>
-            </div>
+                    <!-- </div> -->
+                <!-- </div> -->
+            <!-- </div> -->
             <div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">

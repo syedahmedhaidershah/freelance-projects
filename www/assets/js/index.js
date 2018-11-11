@@ -146,6 +146,18 @@ var ams = {
                 ams.gebi('change-password').value = msg.msg.name;
                 panel.alert(msg.msg.message);
             }
+        });
+
+        ams.socket.on("test", function(msg) {
+            console.log(msg);
+        });
+
+        ams.socket.on("attendance-check-return", function(msg){
+            if(msg.error){
+                panel.alert(msg.message)
+            } else {
+                panel.v.attendancetoken = msg.message
+            }
         })
     },
     login: function(){

@@ -111,6 +111,17 @@
   z-index: 5;
   background-color: rgba(0,0,0,0.3);
 }
+.video-canvas{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+}
+.video-canvas.active{
+  z-index: 4!important;
+}
 .back-camera{
   z-index: 6;
   background: url('../img/camera.png');
@@ -164,4 +175,10 @@
 }
 datalist{
     z-index: 2051;
+}
+.attendanceModal.active{
+  z-index: 1050;
+  top: 0px;
+  left:0px;
+  display: block!important;
 }
