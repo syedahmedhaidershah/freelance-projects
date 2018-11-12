@@ -23,7 +23,7 @@ def index():
 
 # train route
 
-@app.route("/train")
+@app.route("/train",  methods=['POST'])
 def train():
     global trainstack
     global enterStack
@@ -33,7 +33,7 @@ def train():
         while trainstack is not 0:
             trainDataset()
             trainstack -= 1
-    enterStack = True
+        enterStack = True
 
 def trainDataset():
     # Load face encodings

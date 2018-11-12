@@ -1,5 +1,5 @@
 let panel = {
-    e: ['add-new-students', 'id-search-box', 'students-list', 'logout-button', 'student-image', 'img-content', 'save-new-students', 'studentimage', 'name-students', 'students-canvas', 'clear-new-students', 'error-modal-body', 'error-modal', 'generate-course-button', 'course-name', 'course-code', 'assign-course-name', 'assign-student-id', 'coursenames', 'studentids', 'assign-course-button', 'course-time', "attendance-image", "attendance-canvas", "clear-new-attendance", "check-new-attendance", "name-search-box", 'updateuserinfo', "attendance-current-time", "attendance-code", "attendance-time", "students-video-canvas", "attendance-video-canvas", "strip-button-attendance", "attendanceModal"],
+    e: ['add-new-students', 'id-search-box', 'students-list', 'logout-button', 'student-image', 'img-content', 'save-new-students', 'studentimage', 'name-students', 'students-canvas', 'clear-new-students', 'error-modal-body', 'error-modal', 'generate-course-button', 'course-name', 'course-code', 'assign-course-name', 'assign-student-id', 'coursenames', 'studentids', 'assign-course-button', 'course-time', "attendance-image", "attendance-canvas", "clear-new-attendance", "check-new-attendance", "name-search-box", 'updateuserinfo', "attendance-current-time", "attendance-code", "attendance-time", "students-video-canvas", "attendance-video-canvas", "strip-button-attendance", "attendanceModal", "mark-attendance"],
     f: ['add-new-students-form', 'attendance-form'],
     g: ['management'],
     dev: true,
@@ -148,8 +148,8 @@ let panel = {
     checkForImage: function () {
         var data = {
             file: ams.e["attendance-video-canvas"].toDataURL("image/png"),
-            code: ams.e["attendance-code"].value,
-            time: ams.e["attendance-time"].value
+            code: ams.e["attendance-code"],
+            time: ams.e["attendance-time"]
         };
         ams.socket.emit("checkimageinset", data);
     },

@@ -156,7 +156,8 @@ var ams = {
             if(msg.error){
                 panel.alert(msg.message)
             } else {
-                panel.v.attendancetoken = msg.message
+                panel.v.attendancetoken = msg.message;
+                $(ams.e["mark-attendance"]).removeClass("d-none");
             }
         })
     },

@@ -97,6 +97,7 @@ module.exports = function (io) {
                 db.collection("students").insertOne(student, (err, obj) => {
                     if (err) {
                         io.emit('error', `Unable to register student at this time. ${err}`);
+                        return false;
                     }
                     else if (reg.hasOwnProperty('file')) {
                         fs.writeFile(`./AMSApi/${student.ID}.png`, reg.file, (err) => {
@@ -115,6 +116,13 @@ module.exports = function (io) {
                             }
                         })
                     }
+                    request.post('http://localhost:5000/train', (error, res, body) => {
+                        if (error) {
+                            console.error(error)
+                            return false;
+                        }
+                        console.log(body);
+                    });
                 });
             });
         });
