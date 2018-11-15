@@ -373,6 +373,10 @@ module.exports = function (io) {
                         return false;
                     }
                 });
+                if (!trueObj) {
+                    io.emit("attendance-check-return", { error: true, state: 1, message: "You are not registered for this course" });
+                    return false;
+                }
                 let sid = trueObj.split(".")[0];
                 db.collection("students").findOne({ ID: sid }, (err, obj) => {
                     if (err) {
@@ -495,6 +499,8 @@ module.exports = function (io) {
                             } else {
                                 io.emit('attendance-check-return', { error: true, state: 0, message: `You are not registered for this course.` });
                             }
+                        } else {
+                            io.emit('attendance-check-return', { error: true, state: 0, message: `You are not registered for this course.` });
                         }
                     } else {
                         socket.emit("attendance-check-return", { error: true, state: 1, message: "Unable to identify student" });
@@ -547,11 +553,11 @@ module.exports = function (io) {
             let code = msg.code.toUpperCase();
             let from = msg.from;
             let to = msg.to;
-            db.collection("attendance").find({code: code}).toArray().then(function(arr){
-                let students= {};
+            db.collection("attendance").find({ code: code }).toArray().then(function (arr) {
+                let students = {};
                 iterator = 0;
                 max = arr.length;
-                arr.forEach(function(a){
+                arr.forEach(function (a) {
                     let now = nowMinutesToday(null);
                     let then = nowMinutesToday(a.checkin);
                     n = new Date();
@@ -559,12 +565,12 @@ module.exports = function (io) {
                     students[a.ID] = {};
                     students[a.ID].attendance = [];
                     students[a.ID].total = 0;
-                    db.collection("students").findOne({ID: a.ID}, (err, s) => {
+                    db.collection("students").findOne({ ID: a.ID }, (err, s) => {
                         students[a.ID].name = s.name;
-                        if(a.status == 1){
+                        if (a.status == 1) {
                             students[a.ID].attendance.push("P");
                             students[a.ID].total = students[a.ID].total + 1;
-                        } else if(a.status == 2){
+                        } else if (a.status == 2) {
                             students[a.ID].attendance.push("L");
                         } else {
                             students[a.ID].attendance.push("A");
@@ -572,8 +578,8 @@ module.exports = function (io) {
                         iterator++;
                     });
                 });
-                global.reportInterval = setInterval(function(){
-                    if(max >= iterator){
+                global.reportInterval = setInterval(function () {
+                    if (max >= iterator) {
                         var workbook = new Excel.Workbook();
                         workbook.creator = 'sahs';
                         workbook.lastModifiedBy = 'sahs';
@@ -606,7 +612,7 @@ module.exports = function (io) {
                         worksheet.mergeCells('N5:O5');
                         worksheet.getCell("G1").value = "UNIVERSITY OF TURBAT";
                         worksheet.getCell("B3").value = "Course: " + code;
-                        worksheet.getRow(5).values = ["\t\t", "\t\t", "\t\t", "\t\t", "\t\t", "\t\t", "\t\t", "\t\t", "\t\t", "\t\t", "\t\t", "\t\t", "\t\t", "\t\t",  "Date: " + dmyDate()];
+                        worksheet.getRow(5).values = ["\t\t", "\t\t", "\t\t", "\t\t", "\t\t", "\t\t", "\t\t", "\t\t", "\t\t", "\t\t", "\t\t", "\t\t", "\t\t", "\t\t", "Date: " + dmyDate()];
                         worksheet.getRow(6).values = ["S.no", "Roll no", "Student's Name", "Attendance"];
                         worksheet.mergeCells('D6:Q6');
                         worksheet.getCell("R6").value = "Total";
@@ -637,26 +643,31 @@ module.exports = function (io) {
                         var rows = [
                         ];
                         let totals = [];
-                        Object.keys(students).forEach(function(key){
-                            rows[begin] = [(begin-4), key, students[key].name];
-                            students[key].attendance.forEach(function(m){
+                        Object.keys(students).forEach(function (key) {
+                            rows[begin] = [(begin - 4), key, students[key].name];
+                            students[key].attendance.forEach(function (m) {
                                 rows[begin].push(m);
                             });
+                            // var curr = 14 - rows[begin].length;
+                            // console.log(curr);
+                            // for (it = begin; it < curr; it++) {
+                            //     rows[begin].push("A");
+                            // }
                             totals.push(students[key].total);
                             begin++;
                         });
                         worksheet.addRows(rows);
                         let len = totals.length;
-                        for(i=0; i<len; i++){
-                            worksheet.getCell(`R${7+i}`).value = totals[i];
+                        for (i = 0; i < len; i++) {
+                            worksheet.getCell(`R${7 + i}`).value = totals[i];
                         }
                         workbook.xlsx.writeFile("./sandbox/report.xlsx")
                             .then(function () {
-                                io.emit("receivereport",{error:false});
+                                io.emit("receivereport", { error: false });
                             });
                         clearInterval(global.reportInterval);
                     }
-                },500);
+                }, 500);
             });
 
         });

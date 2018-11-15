@@ -2,7 +2,7 @@ let panel = {
     e: ['add-new-students', 'id-search-box', 'students-list', 'logout-button', 'student-image', 'img-content', 'save-new-students', 'studentimage', 'name-students', 'students-canvas', 'clear-new-students', 'error-modal-body', 'error-modal', 'generate-course-button', 'course-name', 'course-code', 'assign-course-name', 'assign-student-id', 'coursenames', 'studentids', 'assign-course-button', 'course-time', "attendance-image", "attendance-canvas", "clear-new-attendance", "check-new-attendance", "name-search-box", 'updateuserinfo', "attendance-current-time", "attendance-code", "attendance-time", "students-video-canvas", "attendance-video-canvas", "strip-button-attendance", "attendanceModal", "mark-attendance", "buffer-canvas", "processor", "select-course", "lecture-from", "lecture-to", "generatereport"],
     f: ['add-new-students-form', 'attendance-form', "reporting-form"],
     g: ['management'],
-    dev: true,
+    dev: false,
     counters: {
         students: 10
     },
@@ -185,13 +185,13 @@ let panel = {
         $(ams.e["processor"]).addClass("active");
         let drawImage = ams.e["attendance-canvas"].toDataURL("image/png");
         let i = new Image();
-        i.style = "display:none; height:200px; width: auto";
+        i.style = "height:200px; width: auto";
         i.src = drawImage;
         document.body.append(i);
-        ams.e['buffer-canvas'].getContext('2d').clearRect(0, 0, 200, 200);
-        ams.e["buffer-canvas"].getContext('2d').drawImage(i, 0, 0, 200, 200);
+        // ams.e['buffer-canvas'].getContext('2d').clearRect(0, 0, 200, 200);
+        // ams.e["buffer-canvas"].getContext('2d').drawImage(i, 0, 0, 200, 200);
         var data = {
-            file: ams.e["buffer-canvas"].toDataURL(),
+            file: ams.e["attendance-video-canvas"].toDataURL(),
             code: ams.e["attendance-code"].value,
             time: ams.e["attendance-time"].value
         };
@@ -210,7 +210,7 @@ let panel = {
             reader.onload = function (e) {
                 let i = new Image();
                 i.src = e.target.result;
-                i.style = "display:none; height:200px; width: auto";
+                i.style = "height:200px; width: auto";
                 document.body.append(i);
                 ams.e['students-canvas'].getContext('2d').clearRect(0, 0, ams.e['students-canvas'].width, ams.e['students-canvas'].height);
                 ams.e["students-canvas"].getContext('2d').drawImage(i, 0, 0, ams.e['students-canvas'].width, ams.e['students-canvas'].height);
@@ -432,13 +432,14 @@ let panel = {
                     panel.v.stream = null;
                     panel.v.imageCapture = null;
                     let drawImage = canvas.toDataURL("image/png");
-                    let i = new Image();
-                    i.style = "display:none; height:200px; width: auto";
-                    i.src = drawImage;
-                    document.body.append(i);
-                    ams.e['buffer-canvas'].getContext('2d').clearRect(0, 0, 200, 200);
-                    ams.e["buffer-canvas"].getContext('2d').drawImage(i, 0, 0, 200, 200);
-                    return drawImage.toDataURL("image/png");
+                    // let i = new Image();
+                    // i.style = "height:200px; width: auto";
+                    // i.src = drawImage;
+                    // document.body.append(i);
+                    // ams.e['buffer-canvas'].getContext('2d').clearRect(0, 0, 200, 200);
+                    // ams.e["buffer-canvas"].getContext('2d').drawImage(i, 0, 0, 200, 200);
+                    // return ams.e["buffer-canvas"].toDataURL("image/png");
+                    return drawImage;
                 }).then((src) => {
                     let data = { src: src, type: "buffer" };
                     ams.socket.emit('save-image', data);
