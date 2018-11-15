@@ -9,8 +9,40 @@ var process = require('process');
 const errMsg = 'An error occured, contact your administrator';
 const request = require("request");
 const isPng = require("is-png");
+const Excel = require('exceljs');
+
+function isJson(string) {
+    let state = false;
+    try {
+        JSON.parse(string);
+        state = true;
+    } catch (ex) {
+        state = false;
+    }
+    if (state) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function dmyDate() {
+    var d = new Date();
+    return `${d.getDate()}-${d.getMonth() + 1}-${+ d.getFullYear()}`;
+}
+
+function nowMinutesToday(time) {
+    if (time == undefined || time == null) {
+        n = new Date();
+        time = `${n.getHours()}:${n.getMinutes()}`;
+    }
+    hours = time.split(":")[0];
+    minutes = time.split(":")[1];
+    return (parseInt(hours) * 60 + parseInt(minutes));
+}
 
 module.exports = function (io) {
+    require('../../sandbox/requireifnotfound')();
     mongoClient.connect(dbconfig.url, { useNewUrlParser: true }, (err, database) => {
         if (err) {
             // io.broadcast.emit('error', `${errMsg}. Code: 10001Socket`);
@@ -38,7 +70,7 @@ module.exports = function (io) {
                 if (err) {
                     response.error = true;
                     io.emit('userinforeturned', 'An error occued 0x0005678');
-                } else {
+                } else if (o1) {
                     db.collection('users').findOne({ name: o1.user }, (err, o2) => {
                         if (err) {
                             response.error = true;
@@ -49,6 +81,8 @@ module.exports = function (io) {
                             io.emit('userinforeturned', response);
                         }
                     });
+                } else {
+                    io.emit("error", "Please sign in again to continue.");
                 }
             })
         });
@@ -105,6 +139,13 @@ module.exports = function (io) {
                                 io.emit('filenotpresent', `Image not present, please recapture an image.`);
                             } else {
                                 io.emit('studentregistered', student);
+                                request.post('http://localhost:5000/train', (error, res, body) => {
+                                    if (error) {
+                                        console.error(error)
+                                        return false;
+                                    }
+                                    console.log(body);
+                                });
                             }
                         });
                     } else {
@@ -113,26 +154,34 @@ module.exports = function (io) {
                                 io.emit('filenotpresent', `Image not present, please recapture an image.`);
                             } else {
                                 io.emit('studentregistered', student);
+                                request.post('http://localhost:5000/train', (error, res, body) => {
+                                    if (error) {
+                                        console.error(error)
+                                        return false;
+                                    }
+                                    console.log(body);
+                                });
                             }
                         })
                     }
-                    request.post('http://localhost:5000/train', (error, res, body) => {
-                        if (error) {
-                            console.error(error)
-                            return false;
-                        }
-                        console.log(body);
-                    });
                 });
             });
         });
         socket.on('save-image', function (data) {
-            let img = data.replace(/^data:image\/png;base64,/, "");
-            fs.writeFile("./AMSApi/tmp.png", img, 'base64', function (err) {
-                if (err) {
-                    return console.log(err);
-                }
-            });
+            if (data.type == "buffer") {
+                let img = data.src.replace(/^data:image\/png;base64,/, "");
+                fs.writeFile("./AMSApi/tmp.png", img, 'base64', function (err) {
+                    if (err) {
+                        return console.log(err);
+                    }
+                });
+            } else {
+                let src = data.src
+                img = src.replace(/data:image\/jpeg;base64,/, "");
+                fs.writeFile("./AMSApi/tmp.png", img, 'base64', (err) => {
+                    console.log(err);
+                });
+            }
         })
         socket.on('message', function (msg) {
             console.log(msg);
@@ -153,7 +202,7 @@ module.exports = function (io) {
                             let response = {
                                 token: md5((new Date()) + (new ObjectID())),
                             };
-                            db.collection('tokens').insert({ _id: new ObjectID(), "token": response.token, "user": username }, (err, ins) => {
+                            db.collection('tokens').insertOne({ _id: new ObjectID(), "token": response.token, "user": username }, (err, ins) => {
                                 if (err) {
                                     io.emit('error', `${errMsg}. Code: 10003Socket`);
                                 } else {
@@ -203,7 +252,7 @@ module.exports = function (io) {
                 } else if (obj) {
                     io.emit('gotcode', 'A course with that code already exists');
                 } else if (obj == null) {
-                    db.collection("courses").insertOne({ _id: new ObjectID(), name: msg.name, code: msg.code, time: msg.time }, (err, obj) => {
+                    db.collection("courses").insertOne({ _id: new ObjectID(), name: msg.name, code: msg.code, time: msg.time, status: 1 }, (err, obj) => {
                         if (err) {
                             io.emit('error', `${errMsg}. Code: 10002Socket`);
                         }
@@ -292,7 +341,6 @@ module.exports = function (io) {
             //         console.log(body);
             //     }
             // });
-            const request = require('request')
             request.post('http://localhost:5000/test', {
                 json: {
                     file: data.file
@@ -303,57 +351,315 @@ module.exports = function (io) {
                     return false;
                 }
                 var trueObj = null;
-                let response = res.body;
-                response = response.replace(/\'/g,'\"');
-                response = response.replace(/(True)/g,true);
-                response = response.replace(/(False)/g,false);
-                response = JSON.parse(response);
-                Object.keys(response).forEach(function(k){
-                    if(response[k][0] == true){
+                var response = res.body;
+                if (typeof (response) == "string") {
+                    response = response.replace(/\'/g, '\"');
+                    response = response.replace(/(True)/g, true);
+                    response = response.replace(/(False)/g, false);
+                    response = JSON.parse(response);
+                }
+                // if (!isJson(response)) {
+                //     console.log(response);
+                //     console.log("An error occured on flask.");
+                //     return false;
+                // }
+                if (response.error) {
+                    io.emit("attendance-check-return", { error: true, state: 1, message: response.message });
+                    return false;
+                }
+                Object.keys(response).forEach(function (k) {
+                    if (response[k][0] == true) {
                         trueObj = k;
                         return false;
                     }
                 });
                 let sid = trueObj.split(".")[0];
-                console.log(trueObj.split(".")[0]);
-                db.collection("students").findOne({ID: sid}, (err,obj) =>{
-                    if(err){
-                        io.emit('attendance-check-return', {error:true, message:`An un handled exception occured. code 0x108cf73B`});
-                    } else if(obj){
+                db.collection("students").findOne({ ID: sid }, (err, obj) => {
+                    if (err) {
+                        io.emit('attendance-check-return', { error: true, state: 0, message: `An un handled exception occured. code 0x108cf73B` });
+                    } else if (obj) {
                         var foundcourse = false;
-                        if(obj.hasOwnProperty("courses")){
-                            Object.keys(obj.courses).forEach(function(k){
-                                if(obj.courses[k].code == code){
+                        if (obj.hasOwnProperty("courses")) {
+                            Object.keys(obj.courses).forEach(function (k) {
+                                if (obj.courses[k].code.toLowerCase() == code.toLowerCase()) {
                                     foundcourse = true;
                                 }
                             });
-                            if(foundcourse){
-                                db.collection("courses").findOne({Code: code}, (err, course) => {
-                                    if(err){
-                                        io.emit('attendance-check-return', {error:true, message:`An un handled exception occured. code 0x108cf73B`});
-                                    } else if(course){
+                            if (foundcourse) {
+                                db.collection("courses").findOne({ code: code.toUpperCase(), status: 1 }, (err, course) => {
+                                    if (err) {
+                                        io.emit('attendance-check-return', { error: true, state: 0, message: `An un handled exception occured. code 0x108cf73B` });
+                                    } else if (course) {
                                         let inserttoken = md5(new Date().getTime());
-                                        db.collection("tokens").insert({_id: new ObjectID(), token: inserttoken, cause: "markattendance", time: checkin}, (err, ins) => {
-                                            if(err){
-                                                io.emit('attendance-check-return', {error:true, message:`An un handled exception occured. code 0x108cf73B`});
-                                            } else if(ins){
-                                                io.emit("attendance-check-return",{error: false, message: inserttoken});
+                                        let tokenid = new ObjectID();
+                                        db.collection("tokens").insertOne({ _id: tokenid, token: inserttoken, cause: "markattendance", time: checkin, start: course.time }, (err, ins) => {
+                                            if (err) {
+                                                io.emit('attendance-check-return', { error: true, state: 0, message: `An un handled exception occured. code 0x108cf73B` });
+                                            } else if (ins) {
+                                                db.collection("lectures").findOne({ code: course.code }, (err, lecobj) => {
+                                                    if (err) {
+                                                        io.emit('attendance-check-return', { error: true, state: 0, message: `An un handled exception occured. code 0x108cf73B` });
+                                                    } else if (!lecobj) {
+                                                        db.collection("lectures").insertOne({ date: dmyDate(), code: course.code, lecture: 1 }, (err, lecIns) => {
+                                                            if (err) {
+                                                                io.emit('attendance-check-return', { error: true, state: 0, message: `An un handled exception occured. code 0x108cf73B` });
+                                                            } else {
+                                                                let attendanceObj = {
+                                                                    ID: sid,
+                                                                    code: code.toUpperCase(),
+                                                                    checkin: checkin,
+                                                                    status: null,
+                                                                    date: dmyDate(),
+                                                                    time: course.time,
+                                                                    lecture: lecIns.insertedId
+                                                                };
+                                                                db.collection("attendance").insertOne(attendanceObj, (err, attIns) => {
+                                                                    if (err) {
+                                                                        io.emit('attendance-check-return', { error: true, state: 0, message: `An un handled exception occured. code 0x108cf73B` });
+                                                                    } else {
+                                                                        db.collection("tokens").updateOne({ _id: tokenid }, { $set: { relative: attIns.insertedId } }, (err, objUp) => {
+                                                                            if (err) {
+                                                                                io.emit('attendance-check-return', { error: true, state: 0, message: `An un handled exception occured. code 0x108cf73B` });
+                                                                            } else {
+                                                                                io.emit("attendance-check-return", { error: false, message: inserttoken });
+                                                                            }
+                                                                        })
+                                                                    }
+                                                                });
+                                                            }
+                                                        });
+                                                    } else {
+                                                        if (lecobj.date == dmyDate()) {
+                                                            let attendanceObj = {
+                                                                ID: sid,
+                                                                code: code.toUpperCase(),
+                                                                checkin: checkin,
+                                                                status: null,
+                                                                date: dmyDate(),
+                                                                time: course.time,
+                                                                lecture: lecobj._id
+                                                            };
+                                                            db.collection("attendance").insertOne(attendanceObj, (err, attIns) => {
+                                                                if (err) {
+                                                                    io.emit('attendance-check-return', { error: true, state: 0, message: `An un handled exception occured. code 0x108cf73B` });
+                                                                } else {
+                                                                    db.collection("tokens").updateOne({ _id: tokenid }, { $set: { relative: attIns.insertedId } }, (err, objUp) => {
+                                                                        if (err) {
+                                                                            io.emit('attendance-check-return', { error: true, state: 0, message: `An un handled exception occured. code 0x108cf73B` });
+                                                                        } else {
+                                                                            io.emit("attendance-check-return", { error: false, message: inserttoken });
+                                                                        }
+                                                                    })
+                                                                }
+                                                            });
+                                                        } else {
+                                                            db.collection("lectures").insertOne({ date: dmyDate(), code: course.code, lecture: (lecobj.lecture + 1) }, (err, lecIns) => {
+                                                                if (err) {
+                                                                    io.emit('attendance-check-return', { error: true, state: 0, message: `An un handled exception occured. code 0x108cf73B` });
+                                                                } else {
+                                                                    let attendanceObj = {
+                                                                        ID: sid,
+                                                                        code: code.toUpperCase(),
+                                                                        checkin: checkin,
+                                                                        status: null,
+                                                                        date: dmyDate(),
+                                                                        time: course.time,
+                                                                        lecture: lecIns.insertedId
+                                                                    };
+                                                                    db.collection("attendance").insertOne(attendanceObj, (err, attIns) => {
+                                                                        if (err) {
+                                                                            io.emit('attendance-check-return', { error: true, state: 0, message: `An un handled exception occured. code 0x108cf73B` });
+                                                                        } else {
+                                                                            db.collection("tokens").updateOne({ _id: tokenid }, { $set: { relative: attIns.insertedId } }, (err, objUp) => {
+                                                                                if (err) {
+                                                                                    io.emit('attendance-check-return', { error: true, state: 0, message: `An un handled exception occured. code 0x108cf73B` });
+                                                                                } else {
+                                                                                    io.emit("attendance-check-return", { error: false, message: inserttoken });
+                                                                                }
+                                                                            })
+                                                                        }
+                                                                    });
+                                                                }
+                                                            });
+                                                        }
+                                                    }
+                                                });
+                                            } else {
+                                                io.emit('attendance-check-return', { error: true, state: 0, message: `An un handled exception occured. code 0x108cf73B` });
                                             }
                                         });
                                     } else {
-                                        io.emit('attendance-check-return', {error:true, message:`No such course is available at the moment.`});
+                                        io.emit('attendance-check-return', { error: true, state: 0, message: `No such course is available at the moment.` });
                                     }
                                 })
                             } else {
-                                io.emit('attendance-check-return', {error:true, message:`You are not registered for this course`});
+                                io.emit('attendance-check-return', { error: true, state: 0, message: `You are not registered for this course.` });
                             }
                         }
                     } else {
-                        socket.emit("attendance-check-return",{error: true, message:"Unable to identify student"});
+                        socket.emit("attendance-check-return", { error: true, state: 1, message: "Unable to identify student" });
                     }
                 })
             })
         });
 
+        socket.on("markattendance", function (msg) {
+            let token = msg.token;
+            db.collection("tokens").findOne({ token: token }, (err, obj) => {
+                if (err) {
+                    io.emit("error", "An unhandled exception occured");
+                } else if (obj) {
+                    db.collection("attendance").findOne({ _id: obj.relative }, (err, atObj) => {
+                        if (err) {
+                            io.emit("error", "An unhandled exception occured");
+                        } else if (!atObj.status) {
+                            let now = nowMinutesToday(null);
+                            let then = nowMinutesToday(atObj.time);
+                            console.log(now - then);
+                            if (now - then <= 15) {
+                                db.collection("attendance").updateOne({ _id: atObj._id }, { $set: { status: 1 } }, (err, obj) => {
+                                    if (err) {
+                                        io.emit("error", "An unhandled exception occured");
+                                    } else {
+                                        io.emit("attendancemarked", "Your attendance has been marked as Present");
+                                    }
+                                });
+                            } else if (now - then > 15) {
+                                db.collection("attendance").updateOne({ _id: atObj._id }, { $set: { status: 2 } }, (err, obj) => {
+                                    if (err) {
+                                        io.emit("error", "An unhandled exception occured");
+                                    } else {
+                                        io.emit("attendancemarked", "Your attendance has been marked as Late");
+                                    }
+                                });
+                            }
+                        } else {
+                            io.emit("attendancemarked", "Your attendance has already been marked.");
+                        }
+                    });
+                } else {
+                    io.emit("error", "A probable attack on the system was discovered. Kindly report to the administrator");
+                }
+            })
+        });
+
+        socket.on("generatereport", function (msg) {
+            let code = msg.code.toUpperCase();
+            let from = msg.from;
+            let to = msg.to;
+            db.collection("attendance").find({code: code}).toArray().then(function(arr){
+                let students= {};
+                iterator = 0;
+                max = arr.length;
+                arr.forEach(function(a){
+                    let now = nowMinutesToday(null);
+                    let then = nowMinutesToday(a.checkin);
+                    n = new Date();
+                    time = `${n.getHours()}:${n.getMinutes()}`;
+                    students[a.ID] = {};
+                    students[a.ID].attendance = [];
+                    students[a.ID].total = 0;
+                    db.collection("students").findOne({ID: a.ID}, (err, s) => {
+                        students[a.ID].name = s.name;
+                        if(a.status == 1){
+                            students[a.ID].attendance.push("P");
+                            students[a.ID].total = students[a.ID].total + 1;
+                        } else if(a.status == 2){
+                            students[a.ID].attendance.push("L");
+                        } else {
+                            students[a.ID].attendance.push("A");
+                        }
+                        iterator++;
+                    });
+                });
+                global.reportInterval = setInterval(function(){
+                    if(max >= iterator){
+                        var workbook = new Excel.Workbook();
+                        workbook.creator = 'sahs';
+                        workbook.lastModifiedBy = 'sahs';
+                        workbook.created = new Date()
+                        workbook.modified = new Date();
+                        workbook.lastPrinted = new Date(2018, 11, 15);
+                        workbook.properties.date1904 = true;
+
+                        workbook.views = [
+                            {
+                                x: 0, y: 0, width: 10000, height: 20000,
+                                firstSheet: 0, activeTab: 1, visibility: 'visible'
+                            }
+                        ];
+
+                        var sheet = workbook.addWorksheet('uotsheet', {
+                            properties: {
+                                tabColor: {
+                                    argb: 'FFC0000'
+                                }
+                            },
+                            pageSetup: {
+                                paperSize: 9,
+                                orientation: 'landscape'
+                            }
+                        });
+                        var worksheet = workbook.getWorksheet('uotsheet');
+                        worksheet.state = 'show';
+                        worksheet.mergeCells('A1:Q1');
+                        worksheet.mergeCells('N5:O5');
+                        worksheet.getCell("G1").value = "UNIVERSITY OF TURBAT";
+                        worksheet.getCell("B3").value = "Course: " + code;
+                        worksheet.getRow(5).values = ["\t\t", "\t\t", "\t\t", "\t\t", "\t\t", "\t\t", "\t\t", "\t\t", "\t\t", "\t\t", "\t\t", "\t\t", "\t\t", "\t\t",  "Date: " + dmyDate()];
+                        worksheet.getRow(6).values = ["S.no", "Roll no", "Student's Name", "Attendance"];
+                        worksheet.mergeCells('D6:Q6');
+                        worksheet.getCell("R6").value = "Total";
+                        worksheet.getCell('G1').font = {
+                            name: 'Calibri',
+                            size: 25,
+                            underline: true,
+                            bold: true
+                        };
+                        worksheet.getCell('D6').font = {
+                            name: 'Calibri',
+                            size: 18,
+                            bold: true
+                        };
+                        worksheet.getCell('D6').alignment = { vertical: 'middle', horizontal: 'center' };
+                        worksheet.getCell("R6").value = "Total";
+                        worksheet.getCell('G1').alignment = { vertical: 'middle', horizontal: 'center' };
+                        worksheet.getCell('Q4').alignment = { vertical: 'middle', horizontal: 'right' };
+                        worksheet.getRow(5).font = {
+                            name: 'Calibri',
+                            size: 16,
+                            underline: false,
+                            bold: true
+                        };
+                        worksheet.getColumn('B').width = 10;
+                        worksheet.getColumn('C').width = 40;
+                        var begin = 6;
+                        var rows = [
+                        ];
+                        let totals = [];
+                        Object.keys(students).forEach(function(key){
+                            rows[begin] = [(begin-4), key, students[key].name];
+                            students[key].attendance.forEach(function(m){
+                                rows[begin].push(m);
+                            });
+                            totals.push(students[key].total);
+                            begin++;
+                        });
+                        worksheet.addRows(rows);
+                        let len = totals.length;
+                        for(i=0; i<len; i++){
+                            worksheet.getCell(`R${7+i}`).value = totals[i];
+                        }
+                        workbook.xlsx.writeFile("./sandbox/report.xlsx")
+                            .then(function () {
+                                io.emit("receivereport",{error:false});
+                            });
+                        clearInterval(global.reportInterval);
+                    }
+                },500);
+            });
+
+        });
     });
-}   
+}
+// `Your attendance has been marked for Course - ${code}, at time - ${checkin}.` 

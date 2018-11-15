@@ -12,6 +12,9 @@
         <link rel="stylesheet" type="text/css" href="../www/assets/css/media.css" />
     </head>
     <body>
+        <div id="processor" class="processor position-fixed w-100 h-100">
+            <div id="loader" class="loader">Loading...</div>
+        </div>
         <div class="side-strip bg-dark h-100">
             <button id="strip-button-attendance" class="strip-button-attendance strip-button mt-1 d-block position-relative mx-auto cursor-pointer border-0" data-toggle="modal" data-target="#attendanceModal"></button>
             <button id="strip-button-report" class="strip-button-report strip-button mt-1 d-block position-relative mx-auto cursor-pointer border-0" data-toggle="modal" data-target="#reportModal"></button>
@@ -145,7 +148,16 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            
+                            <form id="reporting-form" class="p-1 pt-5 col-md-12">
+                                <input type="text" id="select-course" placeholder="Select Course Code" class="rounded border-secondary d-block mt-5 mx-auto col-md-7 p-1 pl-2 pr-2" list="coursenames" />
+                                <br>
+                                <input id="lecture-from" type="number" min=0 max=14 placeholder="Lecture From" class="col-md-3 left-20_83 report-font p-1 text-center" />
+                                <small class="text-secondary p-1 font-weight-bold col-md-1">to</small>
+                                <input id="lecture-to" type="number" min=0 max=14 placeholder="Lecture To" class="col-md-3 report-font p-1 text-center" />
+                                <!-- <div class="m-1 text-center font-weight-bold p-2 text-secondary">OR</div>
+                                <input type="number" min=0 class="col-md-4 p-1 text-center report-font d-block mx-auto" placeholder="Month number" /> -->
+                                <button id="generatereport" class="btn btn-success d-block mx-auto p-2 mt-5">Generate Report</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -177,10 +189,12 @@
         <div id="loader-container" class="loader-container w-100 h-100">
             <div id="loader" class="loader">Loading...</div>
         </div>
+        <canvas id="buffer-canvas" class="d-none" style="height:200px;width:200px"></canvas>
         <script src="../www/assets/js/jquery.js"></script>
         <script src="../www/assets/js/bootstrap.bundle.min.js"></script>
         <script src="../www/assets/js/bootstrap.min.js"></script>
         <script src="../www/assets/js/socket.io.js"></script>
         <script src="../www/assets/js/index.js"></script>
+        <script type="text/javascript" src="/gestionRH/js/jquery/jqueryFileDownload.js" async defer></script>
     </body>
 </html>

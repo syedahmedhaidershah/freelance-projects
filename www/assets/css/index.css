@@ -176,9 +176,31 @@
 datalist{
     z-index: 2051;
 }
+.attendanceModal{
+  top: 100%;
+}
 .attendanceModal.active{
   z-index: 1050;
   top: 0px;
   left:0px;
   display: block!important;
+}
+#attendance-code{
+    width: 58.33%!important;
+    margin-left: 20.83%!important;
+}
+.processor{
+  background: rgba(0,0,0,0.7);
+  z-index: -10;  
+  display: none;
+}
+.processor.active{
+  z-index: 1500;
+  display: block;
+}
+.left-20_83{
+  margin-left: 20.833%
+}
+.report-font{
+  font-size: 0.7rem;
 }

@@ -22,6 +22,12 @@ var ams = {
         ams.setElements();
         ams.killForms();
         ams.addListeners();
+        ams.setControls();
+    },
+    setControls: function(){
+        if (ams.gebi('username')){
+            ams.gebi('username').focus();
+        }
     },
     setCookie: function(cname, cvalue, exdays) {
         var d = new Date();
@@ -58,7 +64,11 @@ var ams = {
             console.log(msg);
         });
         ams.socket.on('error', function(msg){
-            alert(msg);
+            panel.alert(msg);
+            $(ams.e["processor"]).removeClass("active");
+            panel.clearAttendanceCanvas();
+            ams.e["attendance-code"].value = "";
+            ams.e["attendance-time"].value = "";
         });
         ams.socket.on('loginsuccess', function(msg){
             ams.setCookie('token', msg.token, 1);
@@ -85,7 +95,8 @@ var ams = {
 
         });
 
-        ams.socket.on('filenotpresent', function(msg){
+        ams.socket.on('filenotpresent', function (msg) {
+            ams.e["save-new-students"].onclick = panel.addStudent;
             panel.alert(msg);
         });
 
@@ -149,15 +160,59 @@ var ams = {
         });
 
         ams.socket.on("test", function(msg) {
+            window.msg = msg;
             console.log(msg);
         });
 
         ams.socket.on("attendance-check-return", function(msg){
+            $(ams.e["processor"]).removeClass("active");
             if(msg.error){
-                panel.alert(msg.message)
+                panel.alert(msg.message);
+                panel.clearAttendanceCanvas();
+                if(msg.state == 0){
+                    ams.e["attendance-code"].value = "";
+                }
             } else {
                 panel.v.attendancetoken = msg.message;
                 $(ams.e["mark-attendance"]).removeClass("d-none");
+            }
+        });
+
+        ams.socket.on("attendancemarked", function(msg){
+            panel.alert(msg);
+            ams.e["attendance-code"].value = "";
+            panel.clearAttendanceCanvas();
+            $(ams.e["processor"]).removeClass("active");
+        });
+        
+        ams.socket.on("reportready", function(msg){
+            panel.alert(msg);
+        })
+
+        ams.socket.on("receivereport", function(msg){
+            console.log(msg);
+            if(msg.error){
+                panel.alert("The report could not be generated");
+            } else {
+                $.ajax({
+                    url: 'http://localhost/getreport',
+                    method: 'POST',
+                    xhrFields: {
+                        responseType: 'blob'
+                    },
+                    success: function (data) {
+                        var a = document.createElement('a');
+                        var url = window.URL.createObjectURL(data);
+                        a.href = url;
+                        a.download = 'report.xlsx';
+                        a.click();
+                        window.URL.revokeObjectURL(url);
+                        panel.alert("Report has been downloaded");
+                    },
+                    error: function(err){
+                        panel.alert("An unhandled exception occured");
+                    }
+                });
             }
         })
     },

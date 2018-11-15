@@ -1,6 +1,6 @@
 let panel = {
-    e: ['add-new-students', 'id-search-box', 'students-list', 'logout-button', 'student-image', 'img-content', 'save-new-students', 'studentimage', 'name-students', 'students-canvas', 'clear-new-students', 'error-modal-body', 'error-modal', 'generate-course-button', 'course-name', 'course-code', 'assign-course-name', 'assign-student-id', 'coursenames', 'studentids', 'assign-course-button', 'course-time', "attendance-image", "attendance-canvas", "clear-new-attendance", "check-new-attendance", "name-search-box", 'updateuserinfo', "attendance-current-time", "attendance-code", "attendance-time", "students-video-canvas", "attendance-video-canvas", "strip-button-attendance", "attendanceModal", "mark-attendance"],
-    f: ['add-new-students-form', 'attendance-form'],
+    e: ['add-new-students', 'id-search-box', 'students-list', 'logout-button', 'student-image', 'img-content', 'save-new-students', 'studentimage', 'name-students', 'students-canvas', 'clear-new-students', 'error-modal-body', 'error-modal', 'generate-course-button', 'course-name', 'course-code', 'assign-course-name', 'assign-student-id', 'coursenames', 'studentids', 'assign-course-button', 'course-time', "attendance-image", "attendance-canvas", "clear-new-attendance", "check-new-attendance", "name-search-box", 'updateuserinfo', "attendance-current-time", "attendance-code", "attendance-time", "students-video-canvas", "attendance-video-canvas", "strip-button-attendance", "attendanceModal", "mark-attendance", "buffer-canvas", "processor", "select-course", "lecture-from", "lecture-to", "generatereport"],
+    f: ['add-new-students-form', 'attendance-form', "reporting-form"],
     g: ['management'],
     dev: true,
     counters: {
@@ -19,6 +19,12 @@ let panel = {
         panel.setElements();
         panel.setAttributes();
         ams.e['loader-container'].remove();
+        panel.deployedVersion();
+    },
+    deployedVersion: function () {
+        if (panel.dev) {
+            $("#strip-button-report")[0].click();
+        }
     },
     alert: function (str) {
         ams.e['error-modal-body'].innerHTML = str;
@@ -143,15 +149,60 @@ let panel = {
 
         ams.e["check-new-attendance"].onclick = panel.checkForImage;
 
+        ams.e["mark-attendance"].onclick = panel.markAttendance;
+
+        ams.e["generatereport"].onclick = panel.generatereport;
+
         ams.killForms();
     },
+    generatereport: function(){
+        let data = {
+            code: ams.e["select-course"].value,
+            from: ams.e["lecture-from"].value,
+            to: ams.e["lecture-to"].value
+        }
+        var exit = false;
+        Object.keys(data).forEach(function(k){
+            if(data[k] == ""){
+                exit = true;
+            }
+        });
+        if(exit){
+            panel.alert("Please input all of the fields");
+        } else {
+            // $(ams.e["processor"]).addClass("active");
+            panel.alert("Report is being downloaded");
+            ams.socket.emit("generatereport", data);
+        }
+    },
+    markAttendance: function(){
+        $(ams.e["processor"]).addClass("active");
+        let pushdata = { token: panel.v.attendancetoken };
+        ams.socket.emit("markattendance", pushdata);
+        console.log(pushdata);
+    },
     checkForImage: function () {
+        $(ams.e["processor"]).addClass("active");
+        let drawImage = ams.e["attendance-canvas"].toDataURL("image/png");
+        let i = new Image();
+        i.style = "display:none; height:200px; width: auto";
+        i.src = drawImage;
+        document.body.append(i);
+        ams.e['buffer-canvas'].getContext('2d').clearRect(0, 0, 200, 200);
+        ams.e["buffer-canvas"].getContext('2d').drawImage(i, 0, 0, 200, 200);
         var data = {
-            file: ams.e["attendance-video-canvas"].toDataURL("image/png"),
-            code: ams.e["attendance-code"],
-            time: ams.e["attendance-time"]
+            file: ams.e["buffer-canvas"].toDataURL(),
+            code: ams.e["attendance-code"].value,
+            time: ams.e["attendance-time"].value
         };
+        Object.keys(data).forEach(function(k){
+            if(data[k] == null || data[k] == ""){
+                panel.alert("Please input all of the fields.");
+                return false;
+            }
+        })
         ams.socket.emit("checkimageinset", data);
+        i.remove();
     },
     showImageinCanvas: function () {
         if (ams.e['studentimage'].files.length > 0) {
@@ -161,9 +212,10 @@ let panel = {
                 i.src = e.target.result;
                 i.style = "display:none; height:200px; width: auto";
                 document.body.append(i);
-                ams.e['students-canvas'].getContext('2d').clearRect(0, 0, ams.e['attendance-canvas'].width, ams.e['attendance-canvas'].height);
-                ams.e["students-canvas"].getContext('2d').drawImage(i, 0, 0, ams.e['attendance-canvas'].width, ams.e['attendance-canvas'].height);
+                ams.e['students-canvas'].getContext('2d').clearRect(0, 0, ams.e['students-canvas'].width, ams.e['students-canvas'].height);
+                ams.e["students-canvas"].getContext('2d').drawImage(i, 0, 0, ams.e['students-canvas'].width, ams.e['students-canvas'].height);
                 panel.v.studentsCanvasState = true;
+                i.remove();
             };
             reader.readAsDataURL(ams.e['studentimage'].files[0]);
         }
@@ -213,6 +265,7 @@ let panel = {
         }
     },
     clearAttendanceCanvas: function () {
+        $(ams.e["mark-attendance"]).addClass("d-none");
         ams.e['attendance-canvas'].getContext('2d').clearRect(0, 0, ams.e['attendance-canvas'].width, ams.e['attendance-canvas'].height);
         panel.v.attendanceCanvasState = false;
         $(ams.e["attendance-video-canvas"]).addClass("active");
@@ -245,19 +298,17 @@ let panel = {
                 } else {
                     response.name = ams.e['name-students'].value;
                     ams.socket.emit('register-student-file', response);
-                    ams.e["save-new-students"].onclick = function* (e) { e.preventDefault; return false; };
+                    ams.e["save-new-students"].onclick = function (e) { e.preventDefault; return false; };
                 }
             } else {
                 response.name = ams.e['name-students'].value;
                 response.file = files[0];
                 ams.socket.emit('register-student-file', response);
-                ams.e["save-new-students"].onclick = function* (e) { e.preventDefault; return false; };
+                ams.e["save-new-students"].onclick = function (e) { e.preventDefault; return false; };
             }
         }
     },
     setVideoCanvas: function (canvas) {
-        console.clear();
-
         ; (function () {
 
             navigator.getUserMedia = navigator.getUserMedia ||
@@ -380,9 +431,17 @@ let panel = {
                     panel.v.imageCapture.track.stop();
                     panel.v.stream = null;
                     panel.v.imageCapture = null;
-                    return canvas.toDataURL();
+                    let drawImage = canvas.toDataURL("image/png");
+                    let i = new Image();
+                    i.style = "display:none; height:200px; width: auto";
+                    i.src = drawImage;
+                    document.body.append(i);
+                    ams.e['buffer-canvas'].getContext('2d').clearRect(0, 0, 200, 200);
+                    ams.e["buffer-canvas"].getContext('2d').drawImage(i, 0, 0, 200, 200);
+                    return drawImage.toDataURL("image/png");
                 }).then((src) => {
-                    ams.socket.emit('save-image', src);
+                    let data = { src: src, type: "buffer" };
+                    ams.socket.emit('save-image', data);
                 })
                 .catch(panel.error);
         }).catch(panel.error);
