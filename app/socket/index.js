@@ -645,14 +645,16 @@ module.exports = function (io) {
                         let totals = [];
                         Object.keys(students).forEach(function (key) {
                             rows[begin] = [(begin - 4), key, students[key].name];
+                            var len = students[key].attendance;
                             students[key].attendance.forEach(function (m) {
                                 rows[begin].push(m);
                             });
+                            pusha = 14 - len;
                             // var curr = 14 - rows[begin].length;
                             // console.log(curr);
-                            // for (it = begin; it < curr; it++) {
-                            //     rows[begin].push("A");
-                            // }
+                            for (it = 0; it < pusha; it++) {
+                                rows[begin].push("A");
+                            }
                             totals.push(students[key].total);
                             begin++;
                         });
