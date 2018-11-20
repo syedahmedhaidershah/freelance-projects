@@ -73,6 +73,41 @@
     background-size: 60%;
     background-color: #777;
 }
+.strip-button-courses{
+    background: url('../img/list.png');
+    background-repeat: no-repeat;
+    background-position: 60% center;
+    background-size: 60%;
+    background-color: #777;
+}
 .outer-container{
     max-width: 200px;
+}
+.modal-header{
+    min-height: 2.5rem!important;
+}
+.courses-card{
+    height: calc(100% - 2rem);
+}
+.courses-card div{
+    /* height: calc(100% - 3rem); */
+}
+.courses-card div div{
+    height: 110px;
+}
+.course-delete-button{
+    top: calc( 50% - 1.25rem);
+    right: 10px;
+    height: 40px;
+    width: 40px;
+    border-radius: 20px;
+    border: 2px solid #a50101;
+    background: url('../img/trash.png');
+    background-repeat: no-repeat;
+    background-size: 50%;
+    background-position: center;
+    background-color: #fff;
+}
+.course-delete-button:active{
+    background-color: #c52121;
 }

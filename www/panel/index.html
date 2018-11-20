@@ -17,6 +17,7 @@
         </div>
         <div class="side-strip bg-dark h-100">
             <button id="strip-button-attendance" class="strip-button-attendance strip-button mt-1 d-block position-relative mx-auto cursor-pointer border-0" data-toggle="modal" data-target="#attendanceModal"></button>
+            <button id="strip-button-courses" class="strip-button-courses strip-button mt-1 d-block position-relative mx-auto cursor-pointer border-0" data-toggle="modal" data-target="#coursesModal"></button>
             <button id="strip-button-report" class="strip-button-report strip-button mt-1 d-block position-relative mx-auto cursor-pointer border-0" data-toggle="modal" data-target="#reportModal"></button>
             <button id="strip-button-settings" class="strip-button-settings strip-button mt-1 d-block position-relative mx-auto cursor-pointer border-0" data-toggle="modal" data-target="#settingsModal"></button>
         </div>
@@ -178,9 +179,28 @@
                             <h6 class="text-secondary col-md-6 d-block mx-auto">Password</h6>
                             <input type="password" class="col-md-6 rounded p-2 border shadow d-block mx-auto" id="change-password" name="change-password" />
                             <br>
+                            <h6 class="text-secondary col-md-6 d-block mx-auto">Allowed Late period (minutes)</h6>
+                            <input type="number" min=0 class="col-md-6 rounded p-2 border shadow d-block mx-auto" id="change-late" name="change-late" />
+                            <br>
                             <div class="col-md-6 d-block mx-auto">
-                                <button id="updateuserinfo" class="btn btn-primary float-right">Update</button>
+                                <button id="updateuserinfo" class="btn btn-primary d-block mx-auto">Update</button>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="coursesModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header p-1 pl-3 pr-3">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Courses' Management</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body courses-card vertical-scroll">
+                           <div id="courses-card" class="card vertical-scroll w-100 rounded p-2"></div>
                         </div>
                     </div>
                 </div>

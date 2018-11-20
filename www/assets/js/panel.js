@@ -1,5 +1,5 @@
 let panel = {
-    e: ['add-new-students', 'id-search-box', 'students-list', 'logout-button', 'student-image', 'img-content', 'save-new-students', 'studentimage', 'name-students', 'students-canvas', 'clear-new-students', 'error-modal-body', 'error-modal', 'generate-course-button', 'course-name', 'course-code', 'assign-course-name', 'assign-student-id', 'coursenames', 'studentids', 'assign-course-button', 'course-time', "attendance-image", "attendance-canvas", "clear-new-attendance", "check-new-attendance", "name-search-box", 'updateuserinfo', "attendance-current-time", "attendance-code", "attendance-time", "students-video-canvas", "attendance-video-canvas", "strip-button-attendance", "attendanceModal", "mark-attendance", "buffer-canvas", "processor", "select-course", "lecture-from", "lecture-to", "generatereport"],
+    e: ['add-new-students', 'id-search-box', 'students-list', 'logout-button', 'student-image', 'img-content', 'save-new-students', 'studentimage', 'name-students', 'students-canvas', 'clear-new-students', 'error-modal-body', 'error-modal', 'generate-course-button', 'course-name', 'course-code', 'assign-course-name', 'assign-student-id', 'coursenames', 'studentids', 'assign-course-button', 'course-time', "attendance-image", "attendance-canvas", "clear-new-attendance", "check-new-attendance", "name-search-box", 'updateuserinfo', "attendance-current-time", "attendance-code", "attendance-time", "students-video-canvas", "attendance-video-canvas", "strip-button-attendance", "attendanceModal", "mark-attendance", "buffer-canvas", "processor", "select-course", "lecture-from", "lecture-to", "generatereport", 'courses-card'],
     f: ['add-new-students-form', 'attendance-form', "reporting-form"],
     g: ['management'],
     dev: false,
@@ -20,6 +20,10 @@ let panel = {
         panel.setAttributes();
         ams.e['loader-container'].remove();
         panel.deployedVersion();
+        panel.loadData();
+    },
+    loadData: function(){
+        ams.socket.emit("getcourses", null);
     },
     deployedVersion: function () {
         if (panel.dev) {
@@ -223,16 +227,19 @@ let panel = {
     updateUserInfo: function () {
         let usernameBox = ams.gebi('change-username');
         let passwordBox = ams.gebi('change-password');
+        let lateBox = ams.gebi("change-late");
         let req = {
             token: ams.getCookie('token'),
             data: {
                 name: usernameBox.value,
-                pass: passwordBox.value
+                pass: passwordBox.value,
+                late: lateBox.value
             }
         }
         ams.socket.emit('changecreds', req);
         usernameBox.value = "";
         passwordBox.value = "";
+        lateBox.value = "";
     },
     assignCourse: function () {
         let req = {

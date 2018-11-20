@@ -95,8 +95,9 @@ module.exports = function (io) {
                     io.emit('changedinfo', { error: true, msg: "An error occured. Please contact Administrator" });
                 } else {
                     let username = o1.user;
+                    let late = msg.data.late;
                     Object.keys(msg.data).forEach(function (k) {
-                        if (msg.data[k] == null && msg.data[k] == "") {
+                        if (msg.data[k] == null && msg.data[k] == "" || msg.data[k] == 0) {
                             delete msg.data[k];
                         }
                     });
@@ -104,7 +105,18 @@ module.exports = function (io) {
                         if (err) {
                             io.emit('changedinfo', { error: true, msg: "An error occured. Please contact Administrator" });
                         } else {
-                            io.emit('changedinfo', { error: false, msg: { name: o1.user, message: "Your credentials have been updated" } });
+                            let late = msg.data.late;
+                            if(late != "" && late != null && late != 0){
+                                db.collection("preferences").updateOne({type: "late"}, {$set: {value: late}}, (err, belated) => {
+                                    if(err){
+                                        io.emit('changedinfo', { error: true, msg: "An error occured. Please contact Administrator" });
+                                    } else {
+                                        io.emit('changedinfo', { error: false, msg: { name: o1.user, message: "Your settings have been updated" } });
+                                    }
+                                });
+                            } else {
+                                io.emit('changedinfo', { error: false, msg: { name: o1.user, message: "Your settings have been updated" } });
+                            }
                         }
                     });
                 }
@@ -245,7 +257,6 @@ module.exports = function (io) {
 
         socket.on('checkcode', function (msg) {
             msg.code = msg.code.toUpperCase();
-            console.log(msg.code);
             db.collection('courses').findOne({ "code": msg.code }, (err, obj) => {
                 if (err) {
                     io.emit('gotcode', `${errMsg}. Code: 10002Socket`);
@@ -521,24 +532,25 @@ module.exports = function (io) {
                         } else if (!atObj.status) {
                             let now = nowMinutesToday(null);
                             let then = nowMinutesToday(atObj.time);
-                            console.log(now - then);
-                            if (now - then <= 15) {
-                                db.collection("attendance").updateOne({ _id: atObj._id }, { $set: { status: 1 } }, (err, obj) => {
-                                    if (err) {
-                                        io.emit("error", "An unhandled exception occured");
-                                    } else {
-                                        io.emit("attendancemarked", "Your attendance has been marked as Present");
-                                    }
-                                });
-                            } else if (now - then > 15) {
-                                db.collection("attendance").updateOne({ _id: atObj._id }, { $set: { status: 2 } }, (err, obj) => {
-                                    if (err) {
-                                        io.emit("error", "An unhandled exception occured");
-                                    } else {
-                                        io.emit("attendancemarked", "Your attendance has been marked as Late");
-                                    }
-                                });
-                            }
+                            db.collection("preferences").findOne({type: "late"}, (err, pref) => {
+                                if (now - then <= pref.value) {
+                                    db.collection("attendance").updateOne({ _id: atObj._id }, { $set: { status: 1 } }, (err, obj) => {
+                                        if (err) {
+                                            io.emit("error", "An unhandled exception occured");
+                                        } else {
+                                            io.emit("attendancemarked", "Your attendance has been marked as Present");
+                                        }
+                                    });
+                                } else if (now - then > pref.value) {
+                                    db.collection("attendance").updateOne({ _id: atObj._id }, { $set: { status: 2 } }, (err, obj) => {
+                                        if (err) {
+                                            io.emit("error", "An unhandled exception occured");
+                                        } else {
+                                            io.emit("attendancemarked", "Your attendance has been marked as Late");
+                                        }
+                                    });
+                                }
+                            });
                         } else {
                             io.emit("attendancemarked", "Your attendance has already been marked.");
                         }
@@ -607,15 +619,23 @@ module.exports = function (io) {
                             }
                         });
                         var worksheet = workbook.getWorksheet('uotsheet');
+                        var begin = 7;
                         worksheet.state = 'show';
                         worksheet.mergeCells('A1:Q1');
                         worksheet.mergeCells('N5:O5');
                         worksheet.getCell("G1").value = "UNIVERSITY OF TURBAT";
-                        worksheet.getCell("B3").value = "Course: " + code;
+                        worksheet.getCell("B3").value = "Course:  " + code;
                         worksheet.getRow(5).values = ["\t\t", "\t\t", "\t\t", "\t\t", "\t\t", "\t\t", "\t\t", "\t\t", "\t\t", "\t\t", "\t\t", "\t\t", "\t\t", "\t\t", "Date: " + dmyDate()];
-                        worksheet.getRow(6).values = ["S.no", "Roll no", "Student's Name", "Attendance"];
+                        worksheet.getCell("D6").value = "Attendance";
+                        worksheet.getRow(begin).values = ["S.no", "Roll no", "Student's Name", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14"];
+                        worksheet.getRow(begin).font = {
+                            name: 'Calibri',
+                            size: 14,
+                            underline: false,
+                            bold: true
+                        }
+                        worksheet.getRow(begin).alignment = { vertical: 'middle', horizontal: 'center' };
                         worksheet.mergeCells('D6:Q6');
-                        worksheet.getCell("R6").value = "Total";
                         worksheet.getCell('G1').font = {
                             name: 'Calibri',
                             size: 25,
@@ -628,7 +648,7 @@ module.exports = function (io) {
                             bold: true
                         };
                         worksheet.getCell('D6').alignment = { vertical: 'middle', horizontal: 'center' };
-                        worksheet.getCell("R6").value = "Total";
+                        worksheet.getCell("R7").value = "Total";
                         worksheet.getCell('G1').alignment = { vertical: 'middle', horizontal: 'center' };
                         worksheet.getCell('Q4').alignment = { vertical: 'middle', horizontal: 'right' };
                         worksheet.getRow(5).font = {
@@ -639,29 +659,27 @@ module.exports = function (io) {
                         };
                         worksheet.getColumn('B').width = 10;
                         worksheet.getColumn('C').width = 40;
-                        var begin = 6;
                         var rows = [
                         ];
                         let totals = [];
                         Object.keys(students).forEach(function (key) {
                             rows[begin] = [(begin - 4), key, students[key].name];
-                            var len = students[key].attendance;
                             students[key].attendance.forEach(function (m) {
                                 rows[begin].push(m);
                             });
+                            var len = students[key].attendance.length;
                             pusha = 14 - len;
-                            // var curr = 14 - rows[begin].length;
-                            // console.log(curr);
                             for (it = 0; it < pusha; it++) {
                                 rows[begin].push("A");
                             }
+                            console.log(rows[begin]);
                             totals.push(students[key].total);
                             begin++;
                         });
                         worksheet.addRows(rows);
                         let len = totals.length;
                         for (i = 0; i < len; i++) {
-                            worksheet.getCell(`R${7 + i}`).value = totals[i];
+                            worksheet.getCell(`R${begin + i}`).value = totals[i];
                         }
                         workbook.xlsx.writeFile("./sandbox/report.xlsx")
                             .then(function () {
@@ -672,6 +690,43 @@ module.exports = function (io) {
                 }, 500);
             });
 
+        });
+
+        socket.on("getcourses", (msg) => {
+            db.collection("courses").find({}).toArray().then(function(r){
+                io.emit("herecourses", r);
+            })
+        });
+
+        socket.on("togglecourse", (msg) => {
+            let update = 0;
+            if(msg.state == "inactive"){
+                update = 1
+            } else {
+                update = 0;
+            }
+            db.collection("courses").updateOne({code: msg.code}, {$set: {"status": update}}, (err, cupdated) => {
+                if(err){
+                    io.emit("error", "An unhandled exception occured");
+                } else {
+                    io.emit("coursetoggled", {
+                        code: msg.code,
+                        status: update
+                    });
+                }
+            })
+        });
+
+        socket.on("deletecourse", function(msg){
+            db.collection("courses").deleteOne({code: msg}, (err, deleted) => {
+                if (err) {
+                    io.emit("error", "An unhandled exception occured");
+                } else {
+                    io.emit("coursedeleted", {
+                        code: msg.code
+                    });
+                }
+            });
         });
     });
 }
