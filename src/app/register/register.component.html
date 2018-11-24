@@ -1,0 +1,44 @@
+<h3 class="text-primary text-center mt-4 mb-2">Inspectors' Registeration Form</h3>
+<form [formGroup]="registerForm" class="mt-4 col-md-12">
+  <mat-form-field class="d-block mx-auto col-md-4 d-block mx-auto row mt-1">
+    <input matInput placeholder="First Name" formControlName="firstname" required />
+    <mat-error *ngIf="firstname.invalid && firstname.touched">
+      <small>Your firstname cannot contain spaces, numbers or symbols.</small>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="d-block mx-auto col-md-4 d-block mx-auto row mt-1">
+    <input matInput placeholder="Last Name" formControlName="lastname" required />
+    <mat-error *ngIf="lastname.invalid && lastname.touched">
+      <small>Your lastname cannot contain spaces, numbers or symbols.</small>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="d-block mx-auto col-md-4 d-block mx-auto row mt-1">
+    <input matInput placeholder="Company" formControlName="company" />
+  </mat-form-field>
+  <mat-form-field class="d-block mx-auto col-md-4 d-block mx-auto row mt-1">
+    <input matInput placeholder="Email Address" type="email" formControlName="email" required />
+    <mat-error *ngIf="email.invalid && email.touched">
+      <small>Your email does not look right.</small>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="d-block mx-auto col-md-4 d-block mx-auto row mt-1">
+    <input matInput placeholder="Phone Number" type="tel" formControlName="phone" required />
+    <mat-error *ngIf="phone.invalid && phone.touched">
+      <small>Phone number should be in the format <b>+ &lt;country code&gt; &lt;number&gt;</b> e.g. (+92XXXXXXXXXX)</small>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="d-block mx-auto col-md-4 d-block mx-auto row mt-1">
+    <input matInput placeholder="Affiliation" type="text" formControlName="affiliation" />
+  </mat-form-field>
+  <mat-form-field class="d-block mx-auto col-md-4 d-block mx-auto row mt-1">
+    <input matInput placeholder="Password" type="password" formControlName="password" required />
+    <mat-error *ngIf="password.invalid && password.touched">
+      <small>Password must containt 8-24 characters, one uppercase, one lowercase and one digit</small>
+    </mat-error>
+  </mat-form-field>
+  <br>
+  <button (click)="registerInspector()" mat-raised-button color="primary" class="text-white d-block mx-auto">
+    <mat-icon>done</mat-icon>
+    Register
+  </button>
+</form>

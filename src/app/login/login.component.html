@@ -1,0 +1,20 @@
+<h3 class="text-primary text-center mt-4 mb-2">Inspectors' Login</h3>
+<form [formGroup]="loginForm" class="mt-4 col-md-12 pt-4">
+  <mat-form-field class="d-block mx-auto col-md-4 d-block mx-auto row mt-1">
+    <input matInput placeholder="Email" formControlName="email" required autocomplete="off" />
+    <mat-error *ngIf="email.invalid && email.touched">
+      <small>Your email does not seem right</small>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="d-block mx-auto col-md-4 d-block mx-auto row mt-1">
+    <input matInput placeholder="Password" type="password" formControlName="password" required autocomplete="off" />
+    <!-- <mat-error *ngIf="password.errors?.pattern && password.touched">
+      <small>Password must containt 8-24 characters, one uppercase, one lowercase and one digit</small>
+    </mat-error> -->
+  </mat-form-field>
+  <br>
+  <button (click)="loginInspector($event)" mat-raised-button color="primary" class="text-white d-block mx-auto">
+    <mat-icon>done</mat-icon>
+    Login
+  </button>
+</form>

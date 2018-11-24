@@ -1,20 +1,40 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
-
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <img src="../assets/img/logo_white.png" class="header-logo" /><span>Property Inspector Plus</span>
+        <div class="d-inline-block pl-5 ml-5 col-md-8">
+            <span class="p-1 font-weight-light text-dull cursor-pointer extra-small p-1 position-relative">
+                <div class="d-inline-block p-0 m-0 text-center"><a routerLink="/">Home</a></div>
+                <div class="nav-decor position-absolute"></div>
+            </span>
+            &nbsp;&nbsp;
+            <span class="p-1 font-weight-light text-dull cursor-pointer extra-small p-1 position-relative">
+                <div class="d-inline-block p-0 m-0 text-center"><a routerLink="/dashboard">Dashboard</a></div>
+                <div class="nav-decor position-absolute"></div>
+            </span>
+            &nbsp;&nbsp;
+            <span class="p-1 font-weight-light text-dull cursor-pointer extra-small p-1 position-relative">
+                <div class="d-inline-block p-0 m-0 text-center"><a routerLink="/templates">Templates</a></div>
+                <div class="nav-decor position-absolute"></div>
+            </span>
+            &nbsp;&nbsp;
+            <span class="p-1 font-weight-light text-dull cursor-pointer extra-small p-1 position-relative">
+                <div class="d-inline-block p-0 m-0 text-center"><a routerLink="/inspection">Inspection</a></div>
+                <div class="nav-decor position-absolute"></div>
+            </span>
+            <!-- <span class="ml-5 mr-5 pl-5 pr-5 col-md-1"></span> -->
+            <span class="p-1 font-weight-light float-right authorization-links text-dull cursor-pointer extra-small p-1 position-relative">
+                <div class="d-inline-block p-0 m-0 text-center"><a routerLink="/login">Login</a></div>
+                <div class="nav-decor position-absolute"></div>
+            </span>
+            <span class="p-1 font-weight-light float-right authorization-links text-dull cursor-pointer extra-small p-1 position-relative mr-4">
+                <div class="d-inline-block p-0 m-0 text-center"><a routerLink="/register">Register</a></div>
+                <div class="nav-decor position-absolute"></div>
+            </span>
+            <span (click)="logUserOut()" class="p-1 authorized-links d-none font-weight-light float-right text-dull cursor-pointer extra-small p-1 position-relative mr-4">
+                <div class="d-inline-block p-0 m-0 text-center">Logout</div>
+                <div class="nav-decor position-absolute"></div>
+            </span>
+        </div>
+    </mat-toolbar-row>
+</mat-toolbar>
+<router-outlet></router-outlet>
