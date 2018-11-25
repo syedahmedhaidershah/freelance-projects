@@ -12,6 +12,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialogModule } from '@angular/material';
 
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
@@ -29,6 +30,7 @@ import { HomeComponent } from './home/home.component';
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
 import { RegisterService } from './register.service';
+import { ScratchTemplateComponent } from './scratch-template/scratch-template.component';
 
 const appRoutes: Routes = [
   {
@@ -67,7 +69,8 @@ export function tokenGetter() {
     InspectionComponent,
     RegisterComponent,
     TemplatesComponent,
-    HomeComponent
+    HomeComponent,
+    ScratchTemplateComponent
   ],
   imports: [
     BrowserModule,
@@ -77,6 +80,7 @@ export function tokenGetter() {
     MatSidenavModule,
     MatListModule,
     MatInputModule,
+    MatDialogModule,
     MatMenuModule,
     MatIconModule,
     MatToolbarModule,
@@ -99,7 +103,11 @@ export function tokenGetter() {
       }
     })
   ],
+  exports: [
+    MatMenuModule,
+  ],
   providers: [AuthGuard, AuthService, RegisterService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ScratchTemplateComponent]
 })
 export class AppModule { }

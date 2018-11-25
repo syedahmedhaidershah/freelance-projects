@@ -1,3 +1,26 @@
-<p>
-  templates works!
-</p>
+<div class="col-md-12 p-5">
+  <div class="col-md-3 card shadow-gray p-0 rounded">
+    <div class="bg-info w-100 text-white p-2">
+      Templates
+    </div>
+    <button mat-raised-button class="bg-info col-md-10 text-white d-block mt-1 mb-2 mx-auto p-2" [matMenuTriggerFor]="menu">
+      <mat-icon>add</mat-icon>
+      Create New
+    </button>
+    <mat-menu #menu="matMenu">
+      <!-- give local reference and tell this is manu by assigning 'matMenu' -->
+      <button #scratch id="scratch" (click)="createTemplate(scratch)" mat-menu-item>
+        <mat-icon>add</mat-icon>
+        <span>Start from Scratch</span>
+      </button>
+      <button #existing id="existing" (click)="createTemplate(existing)" mat-menu-item>
+        <mat-icon>open_in_new</mat-icon>
+        <span>Use existing</span>
+      </button>
+    </mat-menu>
+    <br>
+    <div (click)="createNewTemplate" class="col-md-12 p-3 text-primary text-left">
+      No templates are available yet.
+    </div>
+  </div>
+</div>
