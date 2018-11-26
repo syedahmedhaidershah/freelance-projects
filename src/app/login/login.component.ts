@@ -4,6 +4,7 @@ import { AuthService } from '../auth.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
+import { CookieService } from 'ngx-cookie-service';
 
 const helper = new JwtHelperService();
 
@@ -25,14 +26,8 @@ export class LoginComponent implements OnInit {
   public timeZoneShift = 18000000;
   public dayMillis = 86400000;
 
-  constructor(private lf: FormBuilder, private Auth: AuthService, private router: Router, private snackBar: MatSnackBar) { }
-
-  private setCookie(cname, cvalue, exdays) {
-    const d = new Date();
-    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-    const expires = 'expires=' + d.toUTCString();
-    document.cookie = cname + '=' + cvalue + ';' + expires + ';path=/';
-  }
+  // tslint:disable-next-line:max-line-length
+  constructor(private lf: FormBuilder, private Auth: AuthService, private router: Router, private snackBar: MatSnackBar, private cookieService: CookieService) { }
 
   private getCookie(cname) {
     const name = cname + '=';
@@ -106,8 +101,8 @@ export class LoginComponent implements OnInit {
             const decodedToken = helper.decodeToken(data.message);
             let user = decodedToken.user;
             delete user.Password;
-            this.setCookie('access_token', data.message, 1);
-            this.setCookie('user', JSON.stringify(user), 1);
+            this.cookieService.set('access_token', data.message, 1);
+            this.cookieService.set('user', JSON.stringify(user), 1);
             this.Auth.setLoggedIn(true);
             this.router.navigate(['dashboard']);
           } else {

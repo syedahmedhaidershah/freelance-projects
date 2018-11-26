@@ -14,7 +14,7 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   public logKey = 'loggedIn';
-  public loggedInStatus = JSON.parse(localStorage.getItem(this.logKey)) || 'false';
+  public loggedInStatus = JSON.parse(localStorage.getItem(this.logKey)); // || 'false';
 
 
   setLoggedIn(value: boolean) {
@@ -23,7 +23,7 @@ export class AuthService {
   }
 
   get isLoggedIn() {
-    return JSON.parse(localStorage.getItem(this.logKey)) || this.loggedInStatus;
+    return JSON.parse(localStorage.getItem(this.logKey)); // || this.loggedInStatus;
   }
 
   getUserDetails(Email, Password) {

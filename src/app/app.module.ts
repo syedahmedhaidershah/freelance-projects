@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
+import { CookieService } from 'ngx-cookie-service';
 
 import { MatButtonModule, MatCheckboxModule, MatSidenavModule, MatListModule, MatInputModule } from '@angular/material';
 import { MatMenuModule } from '@angular/material/menu';
@@ -13,6 +14,8 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material';
+import { MatSelectModule } from '@angular/material/select';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
@@ -31,6 +34,8 @@ import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
 import { RegisterService } from './register.service';
 import { ScratchTemplateComponent } from './scratch-template/scratch-template.component';
+import { ScratchSectionComponent } from './scratch-section/scratch-section.component';
+import { IconsComponent } from './icons/icons.component';
 
 const appRoutes: Routes = [
   {
@@ -70,7 +75,9 @@ export function tokenGetter() {
     RegisterComponent,
     TemplatesComponent,
     HomeComponent,
-    ScratchTemplateComponent
+    ScratchTemplateComponent,
+    ScratchSectionComponent,
+    IconsComponent
   ],
   imports: [
     BrowserModule,
@@ -86,6 +93,8 @@ export function tokenGetter() {
     MatToolbarModule,
     MatFormFieldModule,
     MatSnackBarModule,
+    MatSelectModule,
+    MatGridListModule,
     LayoutModule,
     BsDropdownModule.forRoot(),
     TooltipModule.forRoot(),
@@ -106,8 +115,8 @@ export function tokenGetter() {
   exports: [
     MatMenuModule,
   ],
-  providers: [AuthGuard, AuthService, RegisterService],
+  providers: [AuthGuard, AuthService, RegisterService, CookieService],
   bootstrap: [AppComponent],
-  entryComponents: [ScratchTemplateComponent]
+  entryComponents: [ScratchTemplateComponent, ScratchSectionComponent, IconsComponent]
 })
 export class AppModule { }

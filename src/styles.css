@@ -62,3 +62,22 @@ a, a:focus, a:active, a:visited{
     display: none!important;
     visibility: hidden!important;
 }
+.vertical-scroll {
+    overflow-y: scroll!important;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+::-webkit-scrollbar-track {
+    background: #ccc; 
+}
+::-webkit-scrollbar-thumb {
+    background: #0089cf;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #27a9ef; 
+}
+.textarea-defaults{
+    max-height: 100px!important;
+}

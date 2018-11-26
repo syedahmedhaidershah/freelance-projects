@@ -1,26 +1,50 @@
-<div class="col-md-12 p-5">
-  <div class="col-md-3 card shadow-gray p-0 rounded">
+<div class="col-md-12 p-5 h-75">
+  <div class="col-md-3 card d-inline-block h-75 shadow-gray p-0 rounded">
     <div class="bg-info w-100 text-white p-2">
       Templates
     </div>
-    <button mat-raised-button class="bg-info col-md-10 text-white d-block mt-1 mb-2 mx-auto p-2" [matMenuTriggerFor]="menu">
-      <mat-icon>add</mat-icon>
-      Create New
+    <button mat-raised-button class="bg-info col-md-10 text-white d-block mt-1 mb-2 mx-auto p-2" [matMenuTriggerFor]="menuTemplate">
+      <mat-icon>add</mat-icon>&nbsp;&nbsp;
+      Create New Template
     </button>
-    <mat-menu #menu="matMenu">
+    <mat-menu #menuTemplate="matMenu">
       <!-- give local reference and tell this is manu by assigning 'matMenu' -->
-      <button #scratch id="scratch" (click)="createTemplate(scratch)" mat-menu-item>
+      <button #scratchTemplate id="scratchTemplate" (click)="createTemplate(scratchTemplate)" mat-menu-item>
         <mat-icon>add</mat-icon>
         <span>Start from Scratch</span>
       </button>
-      <button #existing id="existing" (click)="createTemplate(existing)" mat-menu-item>
+      <button #existingTemplate id="existingTemplate" (click)="createTemplate(existing)" mat-menu-item>
         <mat-icon>open_in_new</mat-icon>
         <span>Use existing</span>
       </button>
     </mat-menu>
     <br>
-    <div (click)="createNewTemplate" class="col-md-12 p-3 text-primary text-left">
+    <div class="col-md-12 p-3 text-primary text-left">
       No templates are available yet.
+    </div>
+  </div>
+  <div class="ml-1 col-md-3 card d-inline-block h-75 shadow-gray p-0 rounded">
+    <div class="bg-primary w-100 text-white p-2">
+      Sections
+    </div>
+    <button mat-raised-button class="bg-primary col-md-10 text-white d-block mt-1 mb-2 mx-auto p-2" [matMenuTriggerFor]="menuSection">
+      <mat-icon>add</mat-icon>&nbsp;&nbsp;
+      Create New Section
+    </button>
+    <mat-menu #menuSection="matMenu">
+      <!-- give local reference and tell this is manu by assigning 'matMenu' -->
+      <button #scratchSection id="scratchSection" (click)="createSection(scratchSection)" mat-menu-item>
+        <mat-icon>add</mat-icon>
+        <span>Start from Scratch</span>
+      </button>
+      <button #existingSection id="existingSection" (click)="createSection(existing)" mat-menu-item>
+        <mat-icon>open_in_new</mat-icon>
+        <span>Use existing</span>
+      </button>
+    </mat-menu>
+    <br>
+    <div class="col-md-12 p-3 text-primary text-left">
+      No sections are available yet.
     </div>
   </div>
 </div>
