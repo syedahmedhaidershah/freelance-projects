@@ -14,7 +14,7 @@ export class ScratchSectionComponent implements OnInit {
   public incluseionTypes = [
     { id: 'included', name: 'Included in every report' },
     { id: 'optional', name: 'Optional - add on per-report basis' }
-  ],
+  ];
 
   newSectionForm: FormGroup;
 

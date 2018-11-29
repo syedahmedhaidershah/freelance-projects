@@ -3,6 +3,7 @@ import { MatSnackBar } from '@angular/material';
 import { MatDialog } from '@angular/material';
 import { ScratchTemplateComponent } from '../scratch-template/scratch-template.component';
 import { ScratchSectionComponent } from '../scratch-section/scratch-section.component';
+import { TemplatesService } from '../templates.service';
 
 @Component({
   selector: 'app-templates',
@@ -11,9 +12,38 @@ import { ScratchSectionComponent } from '../scratch-section/scratch-section.comp
 })
 export class TemplatesComponent implements OnInit {
 
-  constructor(private snackBar: MatSnackBar, private matDialog: MatDialog) { }
+  public templatesArray = [];
+
+  private getCookie(cname) {
+    const name = cname + '=';
+    const decodedCookie = decodeURIComponent(document.cookie);
+    const ca = decodedCookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) === ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) === 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return '';
+  }
+
+  constructor(private snackBar: MatSnackBar, private matDialog: MatDialog, private templateService: TemplatesService) { }
 
   ngOnInit() {
+    this.getTemplates();
+  }
+
+  private getTemplates() {
+    this.templateService.getTemplates( this.getCookie('access_token') ).subscribe(data => {
+      if(data.error) {
+        window.alert(data.message);
+      } else {
+        data.message.fo
+      }
+    });
   }
 
   private createTemplate(b) {

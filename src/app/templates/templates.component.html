@@ -19,8 +19,10 @@
       </button>
     </mat-menu>
     <br>
-    <div class="col-md-12 p-3 text-primary text-left">
+    <div *ngIf="!templatesArray || templatesArray.length === 0" class="col-md-12 p-3 text-primary text-left">
       No templates are available yet.
+    </div>
+    <div *ngIf="templatesArray || templatesArray.length > 0">
     </div>
   </div>
   <div class="ml-1 col-md-3 card d-inline-block h-75 shadow-gray p-0 rounded">

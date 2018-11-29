@@ -21,7 +21,27 @@ export class ScratchTemplateComponent implements OnInit {
     { 'id': 'land', 'name': 'Land/Plot' },
   ];
 
-  constructor(private templatesService: TemplatesService, private tf: FormBuilder) { }
+  constructor(private templatesService: TemplatesService, private tf: FormBuilder, private templateService: TemplatesService) { }
+
+  public gebi(id) {
+    return document.getElementById(id);
+  }
+
+  private getCookie(cname) {
+    const name = cname + '=';
+    const decodedCookie = decodeURIComponent(document.cookie);
+    const ca = decodedCookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) === ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) === 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return '';
+  }
 
   ngOnInit() {
     this.newTemplateForm = this.tf.group({
@@ -35,6 +55,19 @@ export class ScratchTemplateComponent implements OnInit {
     });
   }
 
+  pushNewTemplate() {
+    const token = this.getCookie('access_token');
+    const name = this.gebi('templatename').value;
+    const type = this.gebi('property').value;
+    const notes = this.gebi('notes').value;
+    this.templateService.createTemplate(token, name, type, notes).subscribe(data => {
+      if (data.error) {
+        window.alert(data.message);
+      } else {
+        console.log(data);
+      }
+    });
+  }
 
   get templateName() {
     return this.newTemplateForm.get('templateName');

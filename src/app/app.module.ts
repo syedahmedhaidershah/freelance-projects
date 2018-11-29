@@ -36,6 +36,7 @@ import { RegisterService } from './register.service';
 import { ScratchTemplateComponent } from './scratch-template/scratch-template.component';
 import { ScratchSectionComponent } from './scratch-section/scratch-section.component';
 import { IconsComponent } from './icons/icons.component';
+import { TemplatesService } from './templates.service';
 
 const appRoutes: Routes = [
   {
@@ -115,7 +116,7 @@ export function tokenGetter() {
   exports: [
     MatMenuModule,
   ],
-  providers: [AuthGuard, AuthService, RegisterService, CookieService],
+  providers: [AuthGuard, AuthService, RegisterService, CookieService, TemplatesService],
   bootstrap: [AppComponent],
   entryComponents: [ScratchTemplateComponent, ScratchSectionComponent, IconsComponent]
 })
