@@ -1,0 +1,1 @@
+> While registering a studetnt, verify that he/she isn't already registered

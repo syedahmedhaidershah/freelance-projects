@@ -1,0 +1,17 @@
+{
+    "name": "AMS",
+    "description": "Attendance Management System",
+    "version": "0.1",
+    "manifest_version": 2,
+    "app": {
+      "background": {
+        "scripts": [
+            "/assets/js/background.js",
+            "/assets/js/index.js",
+            "/assets/js/background.js",
+            "/assets/js/jquery.js"
+        ]
+      }
+    },
+    "icons": { "16": "16.png", "128": "128.png" }
+  }

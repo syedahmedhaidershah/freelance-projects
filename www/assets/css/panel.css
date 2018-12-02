@@ -1,0 +1,144 @@
+*, *:focus, *:active{
+    touch-action: none;
+    -webkit-touch-callout: none;
+    outline: none!important;
+}
+.main{
+    background: #fff!important;
+}
+.back-light-gray{
+    background: #f5f5f5;
+    box-shadow: 3px 3px 25px -3px #555;
+}
+::-webkit-scrollbar {
+    width: 5px;
+}
+::-webkit-scrollbar-track {
+    background: #ccc; 
+}
+::-webkit-scrollbar-thumb {
+    background: #27a9cf; 
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #0089cf; 
+}
+.manage-boxes{
+    width: 24%;
+}
+.manage-box-wide{
+    width: 48%!important;
+}
+.w-49{
+    width: 49%;
+}
+.logout-button{
+    position: fixed;
+    top: 10px;
+    right: 10px;
+}
+.side-strip{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 5;
+    width: 3rem;
+}
+.strip-button{
+    border-radius: 10px;
+    margin-top: 10%;
+    width: 80%;
+    padding-bottom: 80%;
+}
+.strip-button:active{
+    background-color: #ccc!important;
+}
+.strip-button-attendance{
+    background: url('../img/attendance.png');
+    background-repeat: no-repeat;
+    background-position: 60% center;
+    background-size: 60%;
+    background-color: #777;
+}
+.strip-button-report{
+    background: url('../img/report.png');
+    background-repeat: no-repeat;
+    background-position: 60% center;
+    background-size: 60%;
+    background-color: #777;
+}
+.strip-button-settings{
+    background: url('../img/settings.png');
+    background-repeat: no-repeat;
+    background-position: 60% center;
+    background-size: 60%;
+    background-color: #777;
+}
+.strip-button-courses{
+    background: url('../img/list.png');
+    background-repeat: no-repeat;
+    background-position: 60% center;
+    background-size: 60%;
+    background-color: #777;
+}
+.outer-container{
+    max-width: 200px;
+}
+.modal-header{
+    min-height: 2.5rem!important;
+}
+.courses-card{
+    height: calc(100% - 2rem);
+}
+.courses-card div{
+    /* height: calc(100% - 3rem); */
+}
+.courses-card div div{
+    height: 110px;
+}
+.course-delete-button{
+    top: calc( 50% - 1.25rem);
+    right: 10px;
+    height: 40px;
+    width: 40px;
+    border-radius: 20px;
+    border: 2px solid #a50101;
+    background: url('../img/trash.png');
+    background-repeat: no-repeat;
+    background-size: 50%;
+    background-position: center;
+    background-color: #fff;
+}
+.course-delete-button:active{
+    background-color: #c52121;
+}
+.delete-course-button{
+    position: absolute;
+    right: 10px;
+    width: 80px;
+    bottom: 10px;
+}
+.sb-container{
+    top: 10px;
+    position: relative;
+    right: 10px;
+    /* bottom: 50px; */
+    background: #777;
+    width: 80px;
+    height: 35px!important;
+    border-radius: 18px;
+}
+.sb-container.active {
+    background-color: #00cc00;
+}
+.sb-container .sb-inner{
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    height: 26.5px;
+    width: 26.5px;
+    background-color: rgba(240,240,240,1);
+    border-radius: 15px;
+}
+.sb-container.active .sb-inner {
+    left: calc(100% - 31.5px);    
+}

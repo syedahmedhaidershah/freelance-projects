@@ -1,0 +1,220 @@
+<html>
+    <head>
+        <title>
+            Attendance Management System
+        </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <link rel="stylesheet" type="text/css" href="../www/assets/css/bootstrap-grid.min.css" />
+        <link rel="stylesheet" type="text/css" href="../www/assets/css/bootstrap-reboot.min.css" />
+        <link rel="stylesheet" type="text/css" href="../www/assets/css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="../www/assets/css/index.css" />
+        <link rel="stylesheet" type="text/css" href="../www/assets/css/panel.css" />
+        <link rel="stylesheet" type="text/css" href="../www/assets/css/media.css" />
+    </head>
+    <body>
+        <div id="processor" class="processor position-fixed w-100 h-100">
+            <div id="loader" class="loader">Loading...</div>
+        </div>
+        <div class="side-strip bg-dark h-100">
+            <button id="strip-button-attendance" class="strip-button-attendance strip-button mt-1 d-block position-relative mx-auto cursor-pointer border-0" data-toggle="modal" data-target="#attendanceModal"></button>
+            <button id="strip-button-courses" class="strip-button-courses strip-button mt-1 d-block position-relative mx-auto cursor-pointer border-0" data-toggle="modal" data-target="#coursesModal"></button>
+            <button id="strip-button-report" class="strip-button-report strip-button mt-1 d-block position-relative mx-auto cursor-pointer border-0" data-toggle="modal" data-target="#reportModal"></button>
+            <button id="strip-button-settings" class="strip-button-settings strip-button mt-1 d-block position-relative mx-auto cursor-pointer border-0" data-toggle="modal" data-target="#settingsModal"></button>
+        </div>
+        <div id="main" class="d-inline-block main w-100 h-100 pt-2 pb-5 pl-5 pr-5"> 
+            <button id="logout-button" class="btn btn-dark logout-button bring-forth">Logout</button>
+            <div class="text-primary text-center col-md-12">
+                <div class="display-4">AMS</div>
+                <h6>Attendance Management System</h6>
+            </div>
+            <!-- <div class="col-md-12 pl-5">
+                <button id="m-courses" class='management btn btn-primary mt-3 col-md-2'>Manage Courses</button>
+                <button id="m-assign" class='management btn btn-primary mt-3 col-md-2'>Assign Courses</button>
+                <button id="m-reports" class='management btn btn-primary mt-3 col-md-2'>Generate Reports</button>
+                <button id="m-settings" class='management btn btn-primary mt-3 col-md-2'>Settings</button>
+            </div> -->
+            <div class='row pt-2 pb-5 pl-5 pr-5 h-auto position-relative'>
+                <div class="col-md-3 ml-2 rounded back-light-gray p-3 m-0">
+                    <h3 class="text-secondary mb-4">Search for Students</h3>
+                    <input id="id-search-box" type="text" class="rounded col-md-12 mb-2 border" placeholder="Search by ID" />
+                    <input id="name-search-box" type="text" class="rounded col-md-12 mb-2 border" placeholder="Search by Name" />
+                    <ul id="students-list" class="management-list pt-1 pb-1 pl-0">
+                        <div class="text-secondary h5">Enter an ID or Name above, to search for a student</div>
+                    </ul>
+                </div>
+                <div class="ml-2 manage-boxes manage-box-wide rounded back-light-gray p-3 m-0">
+                    <h3 class="text-secondary mb-4 position-relative d-block">Register Students</h3>
+                    <!-- <button id="add-new-students" class='btn btn-success mb-3 float-right'>Add New</button> -->
+                    <form id="add-new-students-form" class="col-md-12 p-3 mt-1 mb-1 position-relative d-block">
+                        <div class="d-inline-block m-0 w-49">
+                            <input type="text" placeholder="Student's name" name="name" id="name-students" class="p-1 pl-3 pr-3 rounded" autocomplete="off" />
+                            <br><br>
+                            <small><b>Student's Image:</b></small>
+                            <input id='studentimage' type="file" name="studentimage" accept="image/*">
+                            <!-- <br><br> -->
+                        </div>
+                        <div class="d-inline-block m-0 w-50">
+                            <b>OR <small class="text-primary">&nbsp;&nbsp;( click - below - to capture )</small></b>
+                            <br>
+                            <div id="student-image" class=" d-block mx-auto student-image p-0 cursor-pointer rounded" aria-label="Click to Capture">
+                                <div class="img-cover-dark student-image"></div>
+                                <div class="back-camera student-image"></div>
+                                <canvas id="students-canvas" class="student-image" ></canvas>
+                                <canvas id="students-video-canvas" class="video-canvas active"></canvas>
+                            </div>
+                            <div class="outer-container d-block mx-auto">
+                                <button id="clear-new-students" class="btn rounded btn-dark mt-2 float-left col-md-5">Clear</button>
+                                <button id="save-new-students" class="btn rounded btn-primary mt-2 float-right col-md-5">Save</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="ml-2 manage-boxes rounded back-light-gray p-3 m-0">
+                    <h3 class="text-secondary mb-4">Generate a Course</h3>
+                    <input id="course-name" type="text" class="rounded col-md-12 mb-2 border" placeholder="Course Name" />
+                    <input id="course-code" type="text" class="rounded col-md-12 mb-2 border" placeholder="Course Code" />
+                    <input id="course-time" type="time" class="rounded col-md-12 mb-2 border" placeholder="Time" />
+                    <div class="col-md-12">
+                        <button id="generate-course-button" class="btn btn-primary mb-5 mt-1">Generate</button>
+                    </div>
+                    <h3 class="text-secondary mb-4">Assign a Course</h3>
+                    <input id="assign-course-name" type="text" class="rounded col-md-12 mb-2 border" placeholder="Course Code" list="coursenames" />
+                    <input id="assign-student-id" type="text" class="rounded col-md-12 mb-2 border" placeholder="Student ID" list="studentids" />
+                    <div class="col-md-12">
+                        <button id="assign-course-button" class="btn btn-info mb-5 mt-1">Assign</button>
+                    </div>
+                    <datalist id="coursenames"></datalist>
+                    <datalist id="studentids"></datalist>
+                </div>
+            </div>
+            <div class="modal fade error-modal text-white h-50" id="error-modal" tabindex="-2" role="dialog" aria-labelledby="error-modal-title" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+                <div class="modal-dialog modal-dialog" role="document">
+                    <div class="modal-autosize modal-content bg-primary">
+                        <div class="modal-header p-1 pl-3 pr-3">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Message from AMS</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true" class="text-white">&times;</span>
+                            </button>
+                        </div>
+                        <div id="error-modal-body" class="modal-body">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="modal fade bg-white" id="attendanceModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true"> -->
+                <!-- <div class="modal-dialog modal-dialog-centered" role="document"> -->
+                    <!-- <div class="modal-content"> -->
+                    <div id="attendanceModal"  class="attendanceModal bg-white w-100 h-100 position-fixed">
+                        <div class="modal-header p-1 pl-3 pr-3">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Attendance Management</h5>
+                            <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button> -->
+                        </div>
+                        <form id="attendance-form" class="d-block modal-body col-md-6 d-block mx-auto">
+                            <!-- <h6 class="col-md-6 d-block mx-auto text-secondary mb-1">Enter the student's ID</h6>
+                            <input type="text" id="attendance-name" class="d-block mx-auto mb-2 col-md-7 rounded border p-2 shadow" name="attendance-image" placeholder="Student ID" /> -->
+                            <h6 class="col-md-6 d-block mx-auto text-secondary mb-1">Enter the course code</h6>
+                            <input type="text" id="attendance-code" class="d-block mx-auto mb-4 col-md-7 rounded border p-2 shadow" name="attendance-image" placeholder="Course Code" list="coursenames" />
+                            <h6 class="col-md-6 d-block mx-auto text-secondary mb-1">Marked at (time)</h6>
+                            <div class="col-md-12 d-block m-0 p-0">
+                                <input type="time" id="attendance-time" class="d-block mx-auto mb-2 col-md-7 rounded border p-2 shadow" name="attendance-image" placeholder="Time" disabled />
+                                <button class="btn bg-maroon text-white input-cover-button" id="attendance-current-time"><small>Current time</small></class>
+                            </div>
+                            <small class="text-primary mt-2 text-center col-md-12 d-block mx-auto">Click image to capture</small>
+                            <div id="attendance-image" class=" d-block mx-auto student-image p-0 cursor-pointer rounded" aria-label="Click to Capture">
+                                <div class="img-cover-dark student-image"></div>
+                                <div class="back-camera student-image"></div>
+                                <canvas id="attendance-canvas" class="student-image" ></canvas>
+                                <canvas id="attendance-video-canvas" class="video-canvas active"></canvas>
+                            </div>
+                            <div class="col-md-6 d-block mx-auto mt-2">
+                                <button id="clear-new-attendance" class="btn rounded btn-dark mt-2 float-left col-md-5">Clear</button>
+                                <button id="check-new-attendance" class="btn rounded btn-success mt-2 float-right col-md-5">Check</button>
+                                <button id="mark-attendance" class="btn btn-primary rounded mt-2 col-md-12 d-none"><small>Mark Attendance</small></button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- </div> -->
+                <!-- </div> -->
+            <!-- </div> -->
+            <div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header p-1 pl-3 pr-3">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Reporting</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="reporting-form" class="p-1 pt-5 col-md-12">
+                                <input type="text" id="select-course" placeholder="Select Course Code" class="rounded border-secondary d-block mt-5 mx-auto col-md-7 p-1 pl-2 pr-2" list="coursenames" />
+                                <br>
+                                <input id="lecture-from" type="number" min=0 max=14 placeholder="Lecture From" class="col-md-3 left-20_83 report-font p-1 text-center" />
+                                <small class="text-secondary p-1 font-weight-bold col-md-1">to</small>
+                                <input id="lecture-to" type="number" min=0 max=14 placeholder="Lecture To" class="col-md-3 report-font p-1 text-center" />
+                                <!-- <div class="m-1 text-center font-weight-bold p-2 text-secondary">OR</div>
+                                <input type="number" min=0 class="col-md-4 p-1 text-center report-font d-block mx-auto" placeholder="Month number" /> -->
+                                <button id="generatereport" class="btn btn-success d-block mx-auto p-2 mt-5">Generate Report</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="settingsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header p-1 pl-3 pr-3">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Settings</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <h6 class="text-secondary col-md-6 d-block mx-auto">Username</h6>
+                            <input type="text" class="col-md-6 rounded p-2 border shadow d-block mx-auto" id="change-username" name="change-username" />
+                            <br>
+                            <h6 class="text-secondary col-md-6 d-block mx-auto">Password</h6>
+                            <input type="password" class="col-md-6 rounded p-2 border shadow d-block mx-auto" id="change-password" name="change-password" />
+                            <br>
+                            <h6 class="text-secondary col-md-6 d-block mx-auto">Allowed Late period (minutes)</h6>
+                            <input type="number" min=0 class="col-md-6 rounded p-2 border shadow d-block mx-auto" id="change-late" name="change-late" />
+                            <br>
+                            <div class="col-md-6 d-block mx-auto">
+                                <button id="updateuserinfo" class="btn btn-primary d-block mx-auto">Update</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="coursesModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header p-1 pl-3 pr-3">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Courses' Management</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body courses-card vertical-scroll">
+                           <div id="courses-card" class="card vertical-scroll w-100 rounded p-2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="loader-container" class="loader-container w-100 h-100">
+            <div id="loader" class="loader">Loading...</div>
+        </div>
+        <canvas id="buffer-canvas" class="d-none" style="height:200px;width:200px"></canvas>
+        <script src="../www/assets/js/jquery.js"></script>
+        <script src="../www/assets/js/bootstrap.bundle.min.js"></script>
+        <script src="../www/assets/js/bootstrap.min.js"></script>
+        <script src="../www/assets/js/socket.io.js"></script>
+        <script src="../www/assets/js/index.js"></script>
+        <script type="text/javascript" src="/gestionRH/js/jquery/jqueryFileDownload.js" async defer></script>
+    </body>
+</html>
