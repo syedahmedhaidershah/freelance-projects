@@ -204,3 +204,7 @@ datalist{
 .report-font{
   font-size: 0.7rem;
 }
+.del-button{
+  position: absolute;
+  right: 10px;
+}

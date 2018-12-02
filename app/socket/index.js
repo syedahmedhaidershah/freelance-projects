@@ -730,6 +730,19 @@ module.exports = function (io) {
                 }
             });
         });
+
+        socket.on('delstudent', function(msg) {
+            db.collection("students").deleteOne({ID: msg}, (err, obj) => {
+                if (err) {
+                    console.log(err);
+                    io.emit("error", "An unhandled exception occured");
+                } else {
+                    io.emit("studentdeleted", {
+                        id: msg
+                    });
+                }
+            });
+        })
     });
 }
 // `Your attendance has been marked for Course - ${code}, at time - ${checkin}.` 
