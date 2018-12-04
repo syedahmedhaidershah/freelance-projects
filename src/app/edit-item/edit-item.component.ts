@@ -6,11 +6,11 @@ import { MatSnackBar } from '@angular/material';
 import { ItemsService } from '../items.service';
 
 @Component({
-  selector: 'app-scratch-item',
-  templateUrl: './scratch-item.component.html',
-  styleUrls: ['./scratch-item.component.css']
+  selector: 'app-edit-item',
+  templateUrl: './edit-item.component.html',
+  styleUrls: ['./edit-item.component.css']
 })
-export class ScratchItemComponent implements OnInit {
+export class EditItemComponent implements OnInit {
 
   sectionId;
   sectionsArray = [];
@@ -19,19 +19,9 @@ export class ScratchItemComponent implements OnInit {
     { id: 'optional', name: 'Optional - add on per-report basis' }
   ];
 
-  newItemForm: FormGroup;
+  editItemForm: FormGroup;
 
   private inclusion;
-
-  public gebi(id) {
-    const el = (<HTMLInputElement>document.getElementById(id));
-    return el;
-  }
-
-  public gebiv(id) {
-    const el = (<HTMLInputElement>document.getElementById(id));
-    return el.value;
-  }
 
   private getCookie(cname) {
     const name = cname + '=';
@@ -63,10 +53,10 @@ export class ScratchItemComponent implements OnInit {
   }
 
   // tslint:disable-next-line:max-line-length
-  constructor(private sectionsSevice: SectionsService, private itemf: FormBuilder, private matDialog: MatDialog, private matSnackBar: MatSnackBar, private itemsService: ItemsService) { }
+  constructor(private sectionsSevice: SectionsService, private eif: FormBuilder, private matDialog: MatDialog, private matSnackBar: MatSnackBar, private itemsService: ItemsService) { }
 
   ngOnInit() {
-    this.newItemForm = this.itemf.group({
+    this.editItemForm = this.eif.group({
       itemName: ['', [
         Validators.required
       ]],
@@ -89,21 +79,16 @@ export class ScratchItemComponent implements OnInit {
     this.inclusion = $e.value;
   }
 
-  private pushNewItem() {
-    if (this.newItemForm.valid) {
-      const val = this.newItemForm.value;
-      val.sectionId = this.sectionId;
-      this.itemsService.createItem(this.getCookie('access_token'), val).subscribe((data) => {
-        if (!data.error) {
-          this.newItemForm.reset();
-          this.matSnackBar.open('Your item has been saved', 'close');
-        } else {
-          this.matSnackBar.open('An error occured while saving the new item', 'close');
-        }
-      });
-    } else {
-      this.matSnackBar.open('Please input all of the fields correctly', 'close');
-    }
+  private editItem() {
+    const val = this.editItemForm.value;
+    val.sectionId = this.sectionId;
+    this.itemsService.editItem(this.getCookie('access_token'), val).subscribe((data) => {
+      if (!data.error) {
+        this.matSnackBar.open('Your item has been updated', 'close');
+      } else {
+        this.matSnackBar.open('An error occured while updating the new item', 'close');
+      }
+    });
   }
 
 }

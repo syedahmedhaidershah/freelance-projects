@@ -52,7 +52,7 @@ export class ScratchSectionComponent implements OnInit {
   }
 
   private getTemplates() {
-    this.sectionsSevice.getTemplates(this.getCookie('access_token')).subscribe(data => {
+    this.sectionsService.getTemplates(this.getCookie('access_token')).subscribe(data => {
       if (data.error) {
         const message = data.message.toString() || String(data.message);
         this.matSnackBar.open(message, 'close');
@@ -73,7 +73,7 @@ export class ScratchSectionComponent implements OnInit {
   }
 
   // tslint:disable-next-line:max-line-length
-  constructor(private sectionsSevice: SectionsService, private sf: FormBuilder, private matDialog: MatDialog, private matSnackBar: MatSnackBar) { }
+  constructor(private sectionsService: SectionsService, private sf: FormBuilder, private matDialog: MatDialog, private matSnackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.newSectionForm = this.sf.group({
@@ -115,7 +115,7 @@ export class ScratchSectionComponent implements OnInit {
   private pushNewSection() {
     if (this.newSectionForm.valid) {
       const val = this.newSectionForm.value;
-      this.sectionsSevice.createService(this.getCookie('access_token'), val).subscribe((data) => {
+      this.sectionsService.createService(this.getCookie('access_token'), val).subscribe((data) => {
         if (!data.error) {
           this.newSectionForm.reset();
           this.matSnackBar.open('Your section has been saved', 'close');

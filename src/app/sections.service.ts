@@ -11,6 +11,12 @@ interface ArrayResponse {
   message: Array<any>;
 }
 
+interface AnyResponse {
+  error: boolean;
+  message: any;
+}
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -45,6 +51,17 @@ export class SectionsService {
     });
   }
 
+  getSection(token, id) {
+    return this.http.post<AnyResponse>('/api/sections/getbyid', {
+      id
+    }, {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Authorization': token
+        })
+      });
+  }
+
   getSections(token) {
     return this.http.post<ArrayResponse>('/api/sections/getall', {
       creator: JSON.parse(this.getCookie('user'))._id
@@ -59,6 +76,24 @@ export class SectionsService {
   createService(token, secData) {
     secData.creator = JSON.parse(this.getCookie('user'))._id;
     return this.http.post<NormalResponse>('/api/sections/create', secData, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': token
+      })
+    });
+  }
+
+  editSection(token, data) {
+    return this.http.post<NormalResponse>('/api/sections/edit', data, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': token
+      })
+    });
+  }
+
+  deleteSection(token, data) {
+    return this.http.post<NormalResponse>('/api/sections/delete', data, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': token

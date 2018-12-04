@@ -14,7 +14,7 @@ interface ArrayResponse {
 @Injectable({
   providedIn: 'root'
 })
-export class ItemsService {
+export class CommentsService {
 
   private getCookie(cname) {
     const name = cname + '=';
@@ -34,9 +34,9 @@ export class ItemsService {
 
   constructor(private http: HttpClient) { }
 
-  createItem(token, itemData) {
-    itemData.creator = JSON.parse(this.getCookie('user'))._id;
-    return this.http.post<NormalResponse>('/api/items/create', itemData, {
+  createComment(token, commentData) {
+    commentData.creator = JSON.parse(this.getCookie('user'))._id;
+    return this.http.post<NormalResponse>('/api/comments/create', commentData, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': token
@@ -44,33 +44,14 @@ export class ItemsService {
     });
   }
 
-  getItems(token) {
-    return this.http.post<ArrayResponse>('/api/items/getall', {
+  getComments(token) {
+    return this.http.post<ArrayResponse>('/api/comments/getall', {
       creator: JSON.parse(this.getCookie('user'))._id
     }, {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': token
-      })
-    });
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Authorization': token
+        })
+      });
   }
-
-  editItem(token, itemData) {
-    return this.http.post<NormalResponse>('/api/items/edit', itemData, {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': token
-      })
-    });
-  }
-
-  deleteItem(token, data) {
-    return this.http.post<NormalResponse>('/api/sections/delete', data, {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': token
-      })
-    });
-  }
-
 }
