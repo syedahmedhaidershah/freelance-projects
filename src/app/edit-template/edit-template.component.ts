@@ -52,7 +52,6 @@ export class EditTemplateComponent implements OnInit {
       notes: ['']
     });
     this.templatesService.getTemplate(this.getCookie('access_token'), this.data).subscribe(data => {
-      console.log(data.message);
       this.editTemplateForm.patchValue({
         name: data.message.name,
         type: data.message.type,

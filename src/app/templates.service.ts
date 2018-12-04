@@ -11,6 +11,10 @@ interface ArrayResponse {
   message: Array<any>;
 }
 
+interface AnyResponse {
+  error: boolean;
+  message: any;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -36,7 +40,7 @@ export class TemplatesService {
   constructor(private http: HttpClient) { }
 
   getTemplate(token, id) {
-    return this.http.post<ArrayResponse>('/api/templates/getbyid', {
+    return this.http.post<AnyResponse>('/api/templates/getbyid', {
       id
     }, {
         headers: new HttpHeaders({
