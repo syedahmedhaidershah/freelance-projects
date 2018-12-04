@@ -1,5 +1,5 @@
 <mat-grid-list cols="10" rowHeight="50px" class="p-2">
-  <mat-grid-tile *ngFor="let icon of icons" [colspan]="1" [rowspan]="1" [style.background]="white">
+  <mat-grid-tile *ngFor="let icon of icons" [colspan]="1" [rowspan]="1" [style.background]="white" class="cursor-pointer get-key-from-icon" (click)="selectIcon($event)" id="{{icon}}" >
     <mat-icon>{{icon}}</mat-icon>
   </mat-grid-tile>
 </mat-grid-list>

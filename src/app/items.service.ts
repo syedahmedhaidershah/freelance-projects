@@ -14,7 +14,7 @@ interface ArrayResponse {
 @Injectable({
   providedIn: 'root'
 })
-export class SectionsService {
+export class ItemsService {
 
   private getCookie(cname) {
     const name = cname + '=';
@@ -34,10 +34,9 @@ export class SectionsService {
 
   constructor(private http: HttpClient) { }
 
-  getTemplates(token) {
-    return this.http.post<ArrayResponse>('/api/templates/getall', {
-      creator: JSON.parse(this.getCookie('user'))._id
-    }, {
+  createItem(token, itemData) {
+    itemData.creator = JSON.parse(this.getCookie('user'))._id;
+    return this.http.post<NormalResponse>('/api/items/create', itemData, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': token
@@ -45,20 +44,10 @@ export class SectionsService {
     });
   }
 
-  getSections(token) {
-    return this.http.post<ArrayResponse>('/api/sections/getall', {
+  getItems(token) {
+    return this.http.post<ArrayResponse>('/api/items/getall', {
       creator: JSON.parse(this.getCookie('user'))._id
     }, {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': token
-      })
-    });
-  }
-
-  createService(token, secData) {
-    secData.creator = JSON.parse(this.getCookie('user'))._id;
-    return this.http.post<NormalResponse>('/api/sections/create', secData, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': token

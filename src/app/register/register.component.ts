@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RegisterService } from '../register.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-register',
@@ -16,7 +17,7 @@ export class RegisterComponent implements OnInit {
   phonePattern1 = '[0-9]{11}';
   phonePattern2 = '[+]{1}[0-9]{12}';
 
-  constructor(private rf: FormBuilder, private reg: RegisterService, private router: Router) { }
+  constructor(private rf: FormBuilder, private reg: RegisterService, private router: Router, private matSnackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.registerForm = this.rf.group({
@@ -78,10 +79,11 @@ export class RegisterComponent implements OnInit {
             const alertMsg = 'Congratulations, you have successfully registered as an Inspector. Login to access your dashboard.';
             this.router.navigate(['login'], { queryParams: { alert: encodeURIComponent(alertMsg) }});
           } else {
-            window.alert(data.message);
+            this.matSnackBar.open(data.message, 'close');
           }
         } catch (ex) {
-          window.alert(data.message);
+          this.matSnackBar.open('An unhandled exception occured', 'close');
+          console.log(ex);
         }
       });
     } catch (ex) {

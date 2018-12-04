@@ -1,4 +1,5 @@
-<div class="col-md-12 p-5 h-75">
+<div class="col-md-12 p-5 h-75 row">
+  <!------------------------------------------------ TEMPLATES BOX -------------------------------------------------------------------------->
   <div class="col-md-3 card d-inline-block h-75 shadow-gray p-0 rounded">
     <div class="bg-info w-100 text-white p-2">
       Templates
@@ -13,18 +14,38 @@
         <mat-icon>add</mat-icon>
         <span>Start from Scratch</span>
       </button>
-      <button #existingTemplate id="existingTemplate" (click)="createTemplate(existing)" mat-menu-item>
+      <button #existingTemplate id="existingTemplate" (click)="createTemplate(existingTemplate)" mat-menu-item>
         <mat-icon>open_in_new</mat-icon>
         <span>Use existing</span>
       </button>
     </mat-menu>
-    <br>
     <div *ngIf="!templatesArray || templatesArray.length === 0" class="col-md-12 p-3 text-primary text-left">
       No templates are available yet.
     </div>
-    <div *ngIf="templatesArray || templatesArray.length > 0">
+    <div *ngIf="templatesArray || templatesArray.length > 0" class="vertical-scroll relative" style="max-height: 65%">
+      <div *ngFor="let t of templatesArray" class="container p-0 pb-1 pl-2 pr-2 m-0 col-md-12">
+        <div class="card col-md-12 border-secondary p-2 pl-4 pr-4 text-info">
+          <h5 class="m-0 font-weight-bold">{{t.name}}</h5>
+          <div><small>{{capitalize(t.type)}}</small></div>
+          <button mat-icon-button [matMenuTriggerFor]="editTemplateMenu" class="right-top-but position-absolute">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #editTemplateMenu="matMenu" class="p-0">
+            <button mat-menu-item (click)="editTemplate(t._id)">
+              <mat-icon>edit</mat-icon>
+              <span>Edit Template</span>
+            </button>
+            <button mat-menu-item (click)="deleteTemplate(t._id)">
+              <mat-icon>delete</mat-icon>
+              <span>Delete Template</span>
+            </button>
+          </mat-menu>
+        </div>
+      </div>
     </div>
   </div>
+  <!-- ----------------------------------------------------------------------------------------------------------------------------------------- -->
+  <!------------------------------------------------------------------- SECTIONS BOX --------------------------------------------------------------->
   <div class="ml-1 col-md-3 card d-inline-block h-75 shadow-gray p-0 rounded">
     <div class="bg-primary w-100 text-white p-2">
       Sections
@@ -39,14 +60,56 @@
         <mat-icon>add</mat-icon>
         <span>Start from Scratch</span>
       </button>
-      <button #existingSection id="existingSection" (click)="createSection(existing)" mat-menu-item>
+      <button #existingSection id="existingSection" (click)="createSection(existingSection)" mat-menu-item>
         <mat-icon>open_in_new</mat-icon>
         <span>Use existing</span>
       </button>
     </mat-menu>
-    <br>
-    <div class="col-md-12 p-3 text-primary text-left">
+    <div *ngIf="!sectionsArray || sectionsArray.length === 0" class="col-md-12 p-3 text-primary text-left">
       No sections are available yet.
+    </div>
+    <div *ngIf="sectionsArray || sectionsArray.length > 0" class="vertical-scroll relative" style="max-height: 65%">
+      <div *ngFor="let s of sectionsArray" class="container p-0 pb-1 pl-2 pr-2 m-0 col-md-12">
+        <div class="card col-md-12 border-secondary p-2 pl-4 pr-4 text-info">
+          <div><b class="mr-2"><mat-icon>{{s.icon.toLowerCase()}}</mat-icon></b> {{s.sectionName}}</div>
+          <div><small class="text-primary">Template - {{s.templateName}}</small></div>
+          <!-- <div><b> </b>:{{s.notes}}</div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!---------------------------------------------------------------------------------------------------------------------------------------------------------->
+  <!--------------------------------------------------------------------- ITEMS BOX --------------------------------------------------------------------------->
+  <div class="ml-1 col-md-3 card d-inline-block h-75 shadow-gray p-0 rounded">
+    <div class="bg-orange w-100 text-white p-2">
+     Items
+    </div>
+    <button mat-raised-button class="bg-orange col-md-10 text-white d-block mt-1 mb-2 mx-auto p-2" [matMenuTriggerFor]="menuItem">
+      <mat-icon>add</mat-icon>&nbsp;&nbsp;
+      Create New Item
+    </button>
+    <mat-menu #menuItem="matMenu">
+      <!-- give local reference and tell this is manu by assigning 'matMenu' -->
+      <button #scratchItem id="scratchItem" (click)="createItem(scratchItem)" mat-menu-item>
+        <mat-icon>add</mat-icon>
+        <span>Start from Scratch</span>
+      </button>
+      <button #existingItem id="existingItem" (click)="createItem(existingItem)" mat-menu-item>
+        <mat-icon>open_in_new</mat-icon>
+        <span>Use existing</span>
+      </button>
+    </mat-menu>
+    <div *ngIf="!itemsArray || itemsArray.length === 0" class="col-md-12 p-3 text-orange text-left">
+      No items are available yet.
+    </div>
+    <div *ngIf="itemsArray || itemsArray.length > 0" class="vertical-scroll relative" style="max-height: 65%">
+      <div *ngFor="let i of itemsArray" class="container p-0 pb-1 pl-2 pr-2 m-0 col-md-12">
+        <div class="card col-md-12 border-secondary p-2 pl-4 pr-4 text-orange">
+          <div><b>{{i.itemName}}</b></div>
+          <div><small class="text-orange">Section - {{i.sectionName}}</small></div>
+          <!-- <div><b> </b>:{{s.notes}}</div> -->
+        </div>
+      </div>
     </div>
   </div>
 </div>

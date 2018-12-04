@@ -6,17 +6,24 @@
     <input matInput placeholder="Section Name" formControlName="sectionName" required />
   </mat-form-field>
   <mat-form-field class="d-block mx-auto col-md-9 d-block mx-auto row mt-1">
-    <input matInput placeholder="Template Name" formControlName="templateName" required />
+    <mat-select formControlName="templateName" placeholder="Template Name" required id="templateName" (selectionChange)="setTemplateName($event)">
+      <mat-option *ngFor="let t of templatesArray" [value]="t._id">{{t.name}}</mat-option>
+    </mat-select>
   </mat-form-field>
   <mat-form-field class="d-block mx-auto col-md-9 d-block mx-auto row mt-1">
-    <mat-select formControlName="inclusion" placeholder="Property Type" required>
+    <mat-select formControlName="inclusion" placeholder="Property Type" required (selectionChange)="setInclusion($event)">
       <mat-option *ngFor="let i of incluseionTypes" [value]="i.id">{{i.name}}</mat-option>
     </mat-select>
   </mat-form-field>
   <mat-form-field class="d-block mx-auto col-md-9 d-block mx-auto row mt-1">
-    <input matInput placeholder="Icon" formControlName="icon" (click)="chooseIcon()" />
+    <input matInput placeholder="Click to choose an icon" formControlName="icon" (click)="chooseIcon()" id="icon" class="blue-placeholder" />
   </mat-form-field>
-  
+  <mat-form-field class="d-block mx-auto col-md-9 d-block mx-auto row mt-1">
+    <textarea matInput placeholder="Standards of Practice" formControlName="standards" id="standards" ></textarea>
+  </mat-form-field>
+  <mat-form-field class="d-block mx-auto col-md-9 d-block mx-auto row mt-1">
+    <textarea matInput placeholder="Reminders" formControlName="reminders" id="reminders"></textarea>
+  </mat-form-field>
   <br>
   <button (click)="pushNewSection()" mat-raised-button color="primary" class="text-white d-block mx-auto p-2 pl-5 pr-5">
     <mat-icon>save</mat-icon>&nbsp;&nbsp;

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { TemplatesService } from '../templates.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-scratch-template',
@@ -10,6 +11,8 @@ import { TemplatesService } from '../templates.service';
 export class ScratchTemplateComponent implements OnInit {
 
   newTemplateForm: FormGroup;
+
+  public property = null;
 
   public propertyTypes = [
     { 'id': 'residential', 'name': 'Residential' },
@@ -21,10 +24,16 @@ export class ScratchTemplateComponent implements OnInit {
     { 'id': 'land', 'name': 'Land/Plot' },
   ];
 
-  constructor(private templatesService: TemplatesService, private tf: FormBuilder, private templateService: TemplatesService) { }
+  // tslint:disable-next-line:max-line-length
+  constructor(private templatesService: TemplatesService, private tf: FormBuilder, private templateService: TemplatesService, private matSnackBar: MatSnackBar) { }
 
   public gebi(id) {
     return document.getElementById(id);
+  }
+
+  public gebiv(id) {
+    const el = (<HTMLInputElement>document.getElementById(id));
+    return el.value;
   }
 
   private getCookie(cname) {
@@ -55,18 +64,27 @@ export class ScratchTemplateComponent implements OnInit {
     });
   }
 
+  setPropertyType($e) {
+    this.property = $e.value;
+  }
+
   pushNewTemplate() {
     const token = this.getCookie('access_token');
-    const name = this.gebi('templatename').value;
-    const type = this.gebi('property').value;
-    const notes = this.gebi('notes').value;
-    this.templateService.createTemplate(token, name, type, notes).subscribe(data => {
-      if (data.error) {
-        window.alert(data.message);
-      } else {
-        console.log(data);
-      }
-    });
+    const name = this.gebiv('templatename');
+    const type = this.property;
+    const notes = this.gebiv('notes');
+    if (this.newTemplateForm.valid) {
+      this.templateService.createTemplate(token, name, type, notes).subscribe(data => {
+        if (data.error) {
+          this.matSnackBar.open(data.message, 'close');
+        } else {
+          this.newTemplateForm.reset();
+          this.matSnackBar.open(`Your template, '${name}', has been created.`, 'close');
+        }
+      });
+    } else {
+      this.matSnackBar.open('Please input all of the fields, correctly', 'close');
+    }
   }
 
   get templateName() {

@@ -37,6 +37,8 @@ import { ScratchTemplateComponent } from './scratch-template/scratch-template.co
 import { ScratchSectionComponent } from './scratch-section/scratch-section.component';
 import { IconsComponent } from './icons/icons.component';
 import { TemplatesService } from './templates.service';
+import { ScratchItemComponent } from './scratch-item/scratch-item.component';
+import { EditTemplateComponent } from './edit-template/edit-template.component';
 
 const appRoutes: Routes = [
   {
@@ -78,7 +80,9 @@ export function tokenGetter() {
     HomeComponent,
     ScratchTemplateComponent,
     ScratchSectionComponent,
-    IconsComponent
+    IconsComponent,
+    ScratchItemComponent,
+    EditTemplateComponent
   ],
   imports: [
     BrowserModule,
@@ -118,6 +122,12 @@ export function tokenGetter() {
   ],
   providers: [AuthGuard, AuthService, RegisterService, CookieService, TemplatesService],
   bootstrap: [AppComponent],
-  entryComponents: [ScratchTemplateComponent, ScratchSectionComponent, IconsComponent]
+  entryComponents: [
+    ScratchTemplateComponent,
+    ScratchSectionComponent,
+    IconsComponent,
+    ScratchItemComponent,
+    EditTemplateComponent
+  ]
 })
 export class AppModule { }

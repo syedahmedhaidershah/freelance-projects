@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-icons',
@@ -30,9 +32,24 @@ export class IconsComponent implements OnInit {
     'school'
   ];
 
-  constructor() { }
+  private getKey(el, it) {
+    const e = el[it.toString()];
+    it++;
+    if ($(e).hasClass('get-key-from-icon')) {
+      return e.id;
+    } else {
+      return (this.getKey(el, it));
+    }
+  }
 
+  constructor(private dialogRef: MatDialogRef<IconsComponent>) { }
   ngOnInit() {
   }
 
+
+  selectIcon($e, t) {
+    const iterator = 0;
+    const key = this.getKey($e.path, iterator);
+    this.dialogRef.close(key);
+  }
 }

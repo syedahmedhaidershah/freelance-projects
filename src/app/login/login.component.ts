@@ -106,12 +106,13 @@ export class LoginComponent implements OnInit {
             this.Auth.setLoggedIn(true);
             this.router.navigate(['dashboard']);
           } else {
-            window.alert(data.message);
+            this.snackBar.open(data.message, 'close');
             this.Auth.setLoggedIn(false);
             // this.router.navigate(['']);
           }
         } catch (ex) {
-          window.alert(data.message);
+          this.snackBar.open('An unhandled exception occured', 'close');
+          console.log(ex);
         }
       });
     } catch (ex) {

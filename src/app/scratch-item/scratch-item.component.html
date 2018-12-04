@@ -1,0 +1,26 @@
+<h3 class="col-md-12 text-center p-3 text-info">
+  New Item
+</h3>
+<form [formGroup]="newItemForm" class="mt-4 col-md-12">
+  <mat-form-field class="d-block mx-auto col-md-9 d-block mx-auto row mt-1">
+    <input matInput placeholder="Item Name" formControlName="itemName" required />
+  </mat-form-field>
+  <mat-form-field class="d-block mx-auto col-md-9 d-block mx-auto row mt-1">
+    <mat-select formControlName="sectionName" placeholder="Section Name" required id="sectionName" (selectionChange)="setItemName($event)">
+      <mat-option *ngFor="let s of sectionsArray" [value]="s._id">{{s.sectionName}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field class="d-block mx-auto col-md-9 d-block mx-auto row mt-1">
+    <mat-select formControlName="inclusion" placeholder="Property Type" required (selectionChange)="setInclusion($event)">
+      <mat-option *ngFor="let i of incluseionTypes" [value]="i.id">{{i.name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field class="d-block mx-auto col-md-9 d-block mx-auto row mt-1">
+    <textarea matInput placeholder="Reminders" formControlName="reminders" id="reminders"></textarea>
+  </mat-form-field>
+  <br>
+  <button (click)="pushNewItem()" mat-raised-button color="primary" class="text-white d-block mx-auto p-2 pl-5 pr-5">
+    <mat-icon>save</mat-icon>&nbsp;&nbsp;
+    Save New Item
+  </button>
+</form>

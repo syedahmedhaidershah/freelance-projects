@@ -81,3 +81,10 @@ a, a:focus, a:active, a:visited{
 .textarea-defaults{
     max-height: 100px!important;
 }
+.blue-placeholder::-webkit-input-placeholder, .blue-placeholder::-moz-placeholder, .blue-placeholder::-ms-placeholder, .blue-placeholder:-moz-placeholder, ::-webkit-placeholder, ::placeholder{
+    color: #0089cf;
+}
+.right-top-but{
+    top: 10px;
+    right: 10px;
+}
