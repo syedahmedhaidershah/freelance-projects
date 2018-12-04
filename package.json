@@ -1,0 +1,28 @@
+{
+  "name": "inspectofy-api",
+  "version": "1.0.0",
+  "description": "Inspectofy Backend Routes.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "pm2 start server.js",
+    "stop": "pm2 stop server.js",
+    "dev": "nodemon server.js"
+  },
+  "author": "Sameer Iqbal",
+  "license": "ISC",
+  "dependencies": {
+    "atob": "^2.1.2",
+    "body-parser": "^1.18.3",
+    "es6-map": "^0.1.5",
+    "express": "^4.16.3",
+    "jsonwebtoken": "^8.4.0",
+    "jwt-login": "0.0.3",
+    "md5": "^2.2.1",
+    "mongodb": "^3.1.9",
+    "pm2": "^3.2.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.7"
+  }
+}
