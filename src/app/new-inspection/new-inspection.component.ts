@@ -6,14 +6,14 @@ import { InspectionsService } from '../inspections.service';
 import { TemplatesService } from '../templates.service';
 
 @Component({
-  selector: 'app-new-inspection';
-  service: null;
+  selector: 'app-new-inspection',
   templateUrl: './new-inspection.component.html',
   styleUrls: ['./new-inspection.component.css']
 })
 export class NewInspectionComponent implements OnInit {
 
   paymentCheckbox = false;
+  service: null;
   servicesArray = [];
   newInspectionForm: FormGroup;
   momentRegex = /[0-9]{1,2}[\/][0-9]{1,2}[\/][0-9]{4}/;
