@@ -45,4 +45,36 @@ module.exports = function (router, db, config) {
         });
     });
 
+    router.post('/items/edit', auth.verifyToken, (req, res) => {
+        var query = { _id: new ObjectId(req.body._id) };
+        var update = req.body;
+        delete update._id;
+        db.collection("items").updateOne(query, { $set: update }, (err, item) => {
+            if (err) {
+                res.send({
+                    error: true,
+                    message: err
+                });
+            } else {
+                res.send({
+                    error: false,
+                    message: item
+                });
+            }
+        })
+    });
+
+
+    router.post('/items/delete', auth.verifyToken, (req, res) => {
+        var useid = new ObjectId(req.body._id);
+        var query = { _id: useid };
+        db.collection("comments").deleteMany({ itemId: i._id }, (err, obj) => { });
+        db.collection("items").deleteOne(query, (err, item) => {
+            res.send({
+                error: false,
+                message: item
+            });
+        })
+    });
+
 }

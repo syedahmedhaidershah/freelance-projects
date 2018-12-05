@@ -26,6 +26,7 @@ MongoDB.MongoClient.connect(config.dburl, { useNewUrlParser: true }, (err, datab
         const templatesRouter = require('./routes/templatesRouter')(router, database, config);
         const sectionsRouter = require('./routes/sectionsRouter')(router, database, config);
         const itemsRouter = require('./routes/itemsRouter')(router, database, config);
+        const commentsRouter = require('./routes/commentsRouter')(router, database, config);
         //////////////////////////////////////////////////////////////////////////////////////
         app.listen(port, () => {
             console.log('We are live on ' + port);

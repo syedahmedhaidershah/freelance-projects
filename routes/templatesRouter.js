@@ -53,9 +53,15 @@ module.exports = function (router, db, config) {
             } else {
                 db.collection('sections').find({ templateId: useid }).toArray().then((arr) => {
                     arr.forEach((s) => {
+                        let sectiontoLookFor = { sectionId: new ObjectId(s._id) };
                         db.collection("sections").deleteOne({_id: ObjectId(s._id)}, (err, deleted) => {
-                            db.collection("items").deleteMany({ sectionId: new ObjectId(s._id) }, (err, del) => { });
+                            db.collection("items").find(sectiontoLookFor).toArray().then(i => {
+                                i.forEach(item => {
+                                    db.collection("comments").deleteMany({ itemId: i._id }, (err, obj) => { });
+                                });
+                            });
                         });
+                        db.collection("items").deleteMany(sectiontoLookFor, (err, obj) => {});
                     });
                     res.send({
                         error: false,
