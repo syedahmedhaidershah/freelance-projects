@@ -75,7 +75,8 @@ const appRoutes: Routes = [
     path: 'login', component: LoginComponent
   },
   {
-    path: 'new-inspection', component: NewInspectionComponent
+    path: 'new-inspection', component: NewInspectionComponent,
+    canActivate: [AuthGuard]
   }
 ];
 
