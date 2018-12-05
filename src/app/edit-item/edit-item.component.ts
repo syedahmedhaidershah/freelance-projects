@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SectionsService } from '../sections.service';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material';
 import { ItemsService } from '../items.service';
 
@@ -53,7 +53,7 @@ export class EditItemComponent implements OnInit {
   }
 
   // tslint:disable-next-line:max-line-length
-  constructor(private sectionsSevice: SectionsService, private eif: FormBuilder, private matDialog: MatDialog, private matSnackBar: MatSnackBar, private itemsService: ItemsService) { }
+  constructor( private dialogRef: MatDialogRef<EditItemComponent>, private sectionsSevice: SectionsService, private eif: FormBuilder, private matDialog: MatDialog, private matSnackBar: MatSnackBar, private itemsService: ItemsService) { }
 
   ngOnInit() {
     this.editItemForm = this.eif.group({
@@ -89,6 +89,10 @@ export class EditItemComponent implements OnInit {
         this.matSnackBar.open('An error occured while updating the new item', 'close');
       }
     });
+  }
+
+  closeItem() {
+    this.dialogRef.close();
   }
 
 }

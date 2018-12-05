@@ -27,8 +27,14 @@
     <textarea matInput placeholder="Reminders" formControlName="reminders" id="reminders"></textarea>
   </mat-form-field>
   <br>
-  <button (click)="editSection()" mat-raised-button color="primary" class="text-white d-block mx-auto p-2 pl-5 pr-5">
-    <mat-icon>save</mat-icon>&nbsp;&nbsp;
-    Edit Section
-  </button>
+  <div class="container row justify-content-center m-0">
+    <button (click)="editSection()" mat-raised-button color="primary" class="text-white col-md-3 d-block mr-1 p-2 pl-5 pr-5">
+      <mat-icon>save</mat-icon>&nbsp;&nbsp;
+      Edit Section
+    </button>
+    <button (click)="closeSection()" mat-raised-button class="text-white col-md-3 bg-warning d-block ml-1 p-2 pl-5 pr-5">
+      <mat-icon>close</mat-icon>&nbsp;&nbsp;
+      Close
+    </button>
+  </div>
 </form>

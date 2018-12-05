@@ -12,6 +12,7 @@ import { EditSectionComponent } from '../edit-section/edit-section.component';
 import { ScratchCommentComponent } from '../scratch-comment/scratch-comment.component';
 import { CommentsService } from '../comments.service';
 import { ViewTemplateComponent } from '../view-template/view-template.component';
+import { EditItemComponent } from '../edit-item/edit-item.component';
 
 @Component({
   selector: 'app-templates',
@@ -204,7 +205,7 @@ export class TemplatesComponent implements OnInit {
   }
 
   editItem(id) {
-    const dialogRef = this.matDialog.open(EditSectionComponent, {
+    const dialogRef = this.matDialog.open(EditItemComponent, {
       height: (window.innerHeight - 100).toString() + 'px',
       width: (window.innerWidth - 100).toString() + 'px',
       data: id
@@ -225,7 +226,8 @@ export class TemplatesComponent implements OnInit {
     const dialogRef = this.matDialog.open(ViewTemplateComponent, {
       height: (window.innerHeight - 40).toString() + 'px',
       width: (window.innerWidth - 40).toString() + 'px',
-      data: id
+      data: id,
+      panelClass: 'custom-dialog-container'
     });
   }
 

@@ -1,0 +1,81 @@
+<mat-toolbar class="bg-info text-white">
+  <mat-toolbar-row>
+    <div class="pl-5 pr-5 text-capitalize font-weight-light">
+      <div class="pl-5 pr-5">New Inspection</div>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+<form [formGroup]="newInspectionForm" class="mt-4 col-md-12 pl-5 pr-5 pb-5">
+  <h3 class="text-info col-md-12 m-0 p-0">
+    <mat-icon>date_range</mat-icon> Date / Time
+  </h3>
+  <mat-form-field class="d-inline-block col-md-2 row mt-1">
+    <input matInput formControlName="date" [matDatepicker]="inspectionDatepicker" placeholder="Date" #date />
+    <mat-datepicker-toggle matSuffix [for]="inspectionDatepicker"></mat-datepicker-toggle>
+    <mat-datepicker #inspectionDatepicker></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field class="d-inline-block col-md-2 row mt-1 ml-1">
+    <input required id="inspectionTime" matInput type="inspectionTime" formControlName="inspectionTime" placeholder="Time"
+      atp-time-picker value="9:00" theme="dark" locale='en' arrowStyle="{'background': '#0089cf', 'color': 'white'}" />
+  </mat-form-field>
+  <mat-form-field class="d-inline-block col-md-2 row mt-1 ml-1">
+    <input required id="inspectionDuration" matInput type="inspectionDuration" formControlName="inspectionDuration"
+      placeholder="Duration (hours)" type="number" min="0" max="100" />
+  </mat-form-field>
+  <h3 class="text-info col-md-12 mt-5 m-0 p-0">
+    <mat-icon>place</mat-icon> Location
+  </h3>
+  <mat-form-field class="d-inline-block col-md-3 row mt-1">
+    <input required id="address" matInput type="address" formControlName="address" placeholder="Address" type="text"
+      class="p-0 m-0" />
+  </mat-form-field>
+  <mat-form-field class="d-inline-block col-md-3 row mt-1 ml-1">
+    <input required id="zipcode" matInput type="zipcode" formControlName="zipcode" placeholder="ZIP Code" type="number"
+      min="0" max="99999" class="p-0 m-0" />
+  </mat-form-field>
+  <h3 class="text-info col-md-12 mt-5 m-0 p-0">
+    <mat-icon>home</mat-icon> Client
+  </h3>
+  <mat-form-field class="d-inline-block col-md-3 row mt-1">
+    <input required id="firstname" matInput type="firstname" formControlName="firstname" placeholder="First Name" type="text"
+      class="p-0 m-0" />
+  </mat-form-field>
+  <mat-form-field class="d-inline-block col-md-3 row mt-1 ml-1">
+    <input required id="lastname" matInput type="lastname" formControlName="lastname" placeholder="Last Name" type="text"
+      class="p-0 m-0" />
+  </mat-form-field>
+  <br>
+  <mat-form-field class="d-inline-block col-md-3 row mt-1">
+    <input required id="email" matInput type="email" formControlName="email" placeholder="Email" type="email" class="p-0 m-0" />
+  </mat-form-field>
+  <mat-form-field class="d-inline-block col-md-3 row mt-1 ml-1">
+    <input id="email2" matInput type="email2" formControlName="email2" placeholder="Email2" type="email" class="p-0 m-0" />
+  </mat-form-field>
+  <h3 class="text-info col-md-12 mt-5 m-0 p-0">
+    <mat-icon>note</mat-icon> Services
+  </h3>
+  <mat-form-field class="d-inline-block col-md-3 row mt-1">
+    <mat-select formControlName="service" placeholder="" id="service" (selectionChange)="setService($event)">
+      <mat-option *ngFor="let s of servicesArray" [value]="s._id">{{s.name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <h3 class="text-info col-md-12 mt-5 m-0 p-0">
+    <mat-icon>attach_money</mat-icon> Payment
+  </h3>
+  <div class="d-block col-md-4 row mt-2 p-1 pl-3 pr-3">
+    <mat-checkbox color="primary" (change)="toggleCheckbox()">
+      Require payment to release Report
+    </mat-checkbox>
+  </div>
+  <div class="d-block col-md-8 row mt-1">
+    <mat-form-field class="col-md-9 p-0 m-0">
+      <textarea matInput formControlName="paymentnotes" placeholder="Payment Notes" class="p-0 m-0" style="max-height:70px"></textarea>
+    </mat-form-field>
+  </div>
+  <div class="container row m-0 pt-5 pr-5 pb-5 justify-content-center">
+    <button (click)="saveInspection()" mat-raised-button color="primary" class="text-white d-block mr-1 ml-5 p-2 pl-5 pr-5">
+      <mat-icon>save</mat-icon>&nbsp;&nbsp;
+      Save Inspection
+    </button>
+  </div>
+</form>

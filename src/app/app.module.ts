@@ -6,7 +6,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
 import { CookieService } from 'ngx-cookie-service';
 
-import { MatButtonModule, MatCheckboxModule, MatSidenavModule, MatListModule, MatInputModule } from '@angular/material';
+// tslint:disable-next-line:max-line-length
+import { MatButtonModule, MatCheckboxModule, MatSidenavModule, MatListModule, MatInputModule, MatNativeDateModule } from '@angular/material';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -16,7 +17,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material';
 import { MatSelectModule } from '@angular/material/select';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
+import { AmazingTimePickerModule } from 'amazing-time-picker';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ModalModule } from 'ngx-bootstrap/modal';
@@ -43,6 +46,11 @@ import { EditSectionComponent } from './edit-section/edit-section.component';
 import { ScratchCommentComponent } from './scratch-comment/scratch-comment.component';
 import { EditItemComponent } from './edit-item/edit-item.component';
 import { ViewTemplateComponent } from './view-template/view-template.component';
+import { NewInspectionComponent } from './new-inspection/new-inspection.component';
+import { ItemsService } from './items.service';
+import { CommentsService } from './comments.service';
+import { SectionsService } from './sections.service';
+import { AmazingTimePickerService } from 'amazing-time-picker';
 
 const appRoutes: Routes = [
   {
@@ -65,6 +73,9 @@ const appRoutes: Routes = [
   },
   {
     path: 'login', component: LoginComponent
+  },
+  {
+    path: 'new-inspection', component: NewInspectionComponent
   }
 ];
 
@@ -90,7 +101,8 @@ export function tokenGetter() {
     EditSectionComponent,
     ScratchCommentComponent,
     EditItemComponent,
-    ViewTemplateComponent
+    ViewTemplateComponent,
+    NewInspectionComponent
   ],
   imports: [
     BrowserModule,
@@ -108,6 +120,8 @@ export function tokenGetter() {
     MatSnackBarModule,
     MatSelectModule,
     MatGridListModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     LayoutModule,
     BsDropdownModule.forRoot(),
     TooltipModule.forRoot(),
@@ -123,12 +137,23 @@ export function tokenGetter() {
         tokenGetter: tokenGetter,
         whitelistedDomains: ['localhost:9999']
       }
-    })
+    }),
+    AmazingTimePickerModule
   ],
   exports: [
     MatMenuModule,
   ],
-  providers: [AuthGuard, AuthService, RegisterService, CookieService, TemplatesService],
+  // tslint:disable-next-line:max-line-length
+  providers: [AuthGuard,
+    AuthService,
+    RegisterService,
+    CookieService,
+    TemplatesService,
+    ItemsService,
+    CommentsService,
+    SectionsService,
+    AmazingTimePickerService
+  ],
   bootstrap: [AppComponent],
   entryComponents: [
     ScratchTemplateComponent,

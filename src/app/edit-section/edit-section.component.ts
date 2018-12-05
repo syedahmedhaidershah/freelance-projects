@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatDialogRef } from '@angular/material';
 import { MAT_DIALOG_DATA } from '@angular/material';
 import { SectionsService } from '../sections.service';
 
@@ -51,7 +51,7 @@ export class EditSectionComponent implements OnInit {
   }
 
   // tslint:disable-next-line:max-line-length
-  constructor(@Inject(MAT_DIALOG_DATA) public injectedData: any, private sectionsService: SectionsService, private sf: FormBuilder, private matSnackBar: MatSnackBar) { }
+  constructor(private dialogRef: MatDialogRef<EditSectionComponent>, @Inject(MAT_DIALOG_DATA) public injectedData: any, private sectionsService: SectionsService, private sf: FormBuilder, private matSnackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.data = this.injectedData;
@@ -93,6 +93,10 @@ export class EditSectionComponent implements OnInit {
         this.matSnackBar.open('Your section has been edited', 'close');
       }
     });
+  }
+
+  closeSection() {
+    this.dialogRef.close();
   }
 
 }

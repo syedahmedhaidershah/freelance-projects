@@ -51,6 +51,17 @@ export class SectionsService {
     });
   }
 
+  getSectionsByTemplate(token, id) {
+    return this.http.post<AnyResponse>('/api/sections/getbytemplate', {
+      id
+    }, {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Authorization': token
+        })
+      });
+  }
+
   getSection(token, id) {
     return this.http.post<AnyResponse>('/api/sections/getbyid', {
       id

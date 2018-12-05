@@ -6,7 +6,7 @@
     font-family: proximaNova;
 }
 
-*{
+*, h1, h2, h3, h4, h5, input, button{
     font-family: proximaNova;
 }
 *, *:active, *:focus{
@@ -87,4 +87,20 @@ a, a:focus, a:active, a:visited{
 .right-top-but{
     top: 10px;
     right: 10px;
+}
+.custom-dialog-container{
+    padding: 0px!important
+}
+.bg-orange {
+    background-color: #c97902;
+}
+.text-orange{
+    color: #c97902;
+}
+.border-orange{
+    border: 1px solid #c97902;
+}
+app-new-inspection {
+    overflow-y: scroll!important;
+    max-height: calc(100% - 128px);
 }

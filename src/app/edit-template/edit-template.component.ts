@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatDialogRef } from '@angular/material';
 import { MAT_DIALOG_DATA } from '@angular/material';
 import { TemplatesService } from '../templates.service';
 
@@ -42,7 +42,7 @@ export class EditTemplateComponent implements OnInit {
   }
 
   // tslint:disable-next-line:max-line-length
-  constructor(@Inject(MAT_DIALOG_DATA) public injectedData: any, private templatesService: TemplatesService, private tf: FormBuilder, private matSnackBar: MatSnackBar) { }
+  constructor(private dialogRef: MatDialogRef<EditTemplateComponent>, @Inject(MAT_DIALOG_DATA) public injectedData: any, private templatesService: TemplatesService, private tf: FormBuilder, private matSnackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.data = this.injectedData;
@@ -70,6 +70,10 @@ export class EditTemplateComponent implements OnInit {
         this.matSnackBar.open('Your template has been edited', 'close');
       }
     });
+  }
+
+  closeTemplate() {
+    this.dialogRef.close();
   }
 
 }

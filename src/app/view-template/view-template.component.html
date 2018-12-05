@@ -1,3 +1,62 @@
-<h3 class="col-md-12 p-5 col-md-12 text-center text-info">
-  Viewing templates is currently unavailable.
+<h3 class="text-secondary col-md-12" *ngIf="template">
+  <div>
+    {{template.name}}
+    <h6 class="float-right text-primary d-inline-block">{{capitalize(template.type)}}</h6>
+    <h6>{{template.notes}}</h6>
+  </div>
 </h3>
+<div class="container row pt-2 m-0 col-md-12">
+  <div class="col-md-4 m-0 p-1">
+    <h5 class="col-md-12 text-center text-info p-1 m-0 border-bottom font-weight-bold">
+      Sections
+    </h5>
+    <div *ngIf="sectionsArray.length == 0" class="text-info">
+      No sections present in this template
+    </div>
+    <div *ngIf="sectionsArray.length > 0" class="text-info vertical-scroll" style="max-height: 75%">
+      <div class="container p-1 m-0" *ngFor="let s of sectionsArray">
+        <div class="card cursor-pointer col-md-12 p-3 pb-4 border-info rounded shadow-gray row m-0">
+          <span class="col-md-7">
+            {{s.sectionName}}
+          </span>
+          <div class="position-absolute right-top-but">
+            <button mat-mini-fab class="float-right ml-1 text-white" color="primary" (click)="editSection(s._id)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-mini-fab class="float-right mr-1 bg-warning text-white">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 m-0 p-1">
+    <h5 class="col-md-12 text-center text-orange p-1 m-0 border-bottom font-weight-bold">
+      Items
+    </h5>
+    <div *ngIf="section == false" class="text-orange">
+      Please select a section to retreive items
+    </div>
+    <div *ngIf="section == true && itemsArray.length == 0" class="text-orange">
+      No items present in this template
+    </div>
+    <div *ngIf="itemsArray.length > 0" class="text-orange vertical-scroll" style="max-height: 75%">
+      <div class="container p-1 m-0" *ngFor="let i of itemsArray">
+        <div class="card cursor-pointer col-md-12 p-3 pb-4 border-orange rounded shadow-gray row m-0">
+          <span class="col-md-7">
+            {{i.itemName}}
+          </span>
+          <div class="position-absolute right-top-but">
+            <button mat-mini-fab class="float-right ml-1 text-white" color="primary">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-mini-fab class="float-right mr-1 bg-warning text-white">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -23,4 +23,8 @@ export class AppComponent {
     // };
     // return cleared;
   }
+  
+  goToHome() {
+    this.router.navigate(['']);
+  }
 }
