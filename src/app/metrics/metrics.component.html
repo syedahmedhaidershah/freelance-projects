@@ -1,0 +1,44 @@
+<div class="row m-0">
+  <div *ngIf="inspectionChart" class="m-0 col-md-4 p-1">
+    <div class="card rounded col-md-12 p-0 m-0 shadow-gray">
+      <mat-toolbar class="bg-info text-white">
+        <mat-toolbar-row>
+          <mat-icon class="mr-2">insert_chart</mat-icon> INSPECTIONS
+        </mat-toolbar-row>
+      </mat-toolbar>
+      <div class="p-3 col-md-12 m-0">
+        <canvas #canvas id="canvas" class="col-md-12 p-0 m-0 h-25">
+          {{chart}}
+        </canvas>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="referalChart" class="m-0 col-md-4 p-1">
+    <div class="card rounded col-md-12 p-0 m-0 shadow-gray">
+      <mat-toolbar class="bg-info text-white">
+        <mat-toolbar-row>
+          <mat-icon class="mr-2">pie_chart</mat-icon> REFERAL SOURCES
+        </mat-toolbar-row>
+      </mat-toolbar>
+      <div class="p-3 col-md-12 m-0">
+        <canvas #pieCanvas id="pieCanvas" class="col-md-12 p-0 m-0 h-25">
+          {{referalchart}}
+        </canvas>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="agentsChart" class="m-0 col-md-4 p-1">
+    <div class="card rounded col-md-12 p-0 m-0 shadow-gray">
+      <mat-toolbar class="bg-info text-white">
+        <mat-toolbar-row>
+          <mat-icon class="mr-2">vpn_key</mat-icon> TOP AGENTS
+        </mat-toolbar-row>
+      </mat-toolbar>
+      <div class="p-3 col-md-12 m-0">
+        <canvas #pieCanvas id="pieCanvas" class="col-md-12 p-0 m-0 h-25">
+          {{agentsChart}}
+        </canvas>
+      </div>
+    </div>
+  </div>
+</div>

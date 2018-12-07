@@ -15,6 +15,19 @@ export class NewInspectionComponent implements OnInit {
   paymentCheckbox = false;
   service: null;
   servicesArray = [];
+  inspectorsArray = [];
+  selectedInspector = {
+    Firstname: 'PLEASE SELECT AN INSPECTOR',
+    Lastname: ''
+  };
+  referalsource = '';
+  referalsArray = [
+    { id: 'fb', name: 'Facebook' },
+    { id: 'tw', name: 'Twitter' },
+    { id: 'news', name: 'Newspaper' },
+    {id: 'tvc', name: 'TV Commercials'},
+    {id: 'sign', name: 'Signage / Billboards'}
+  ];
   newInspectionForm: FormGroup;
   momentRegex = /[0-9]{1,2}[\/][0-9]{1,2}[\/][0-9]{4}/;
 
@@ -37,6 +50,10 @@ export class NewInspectionComponent implements OnInit {
     return '';
   }
 
+  public capitalize(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+
   getTemplates() {
     this.templatesService.getTemplates(this.getCookie('access_token')).subscribe(res => {
       if (res.error) {
@@ -47,7 +64,6 @@ export class NewInspectionComponent implements OnInit {
           s.name = usename;
           return s;
         });
-        console.log(this.servicesArray);
       }
     });
   }
@@ -70,6 +86,7 @@ export class NewInspectionComponent implements OnInit {
   ngOnInit() {
     this.getCurrentTime();
     this.newInspectionForm = this.insf.group({
+      inspectors: [''],
       date: [moment().toDate(), [
         Validators.required
       ]],
@@ -96,15 +113,21 @@ export class NewInspectionComponent implements OnInit {
         Validators.email
       ]],
       email2: ['', [
-        Validators.required,
         Validators.email
       ]],
+      phone: [''],
+      referalsource: [''],
       checkPayment: [true],
       paymentnotes: [''],
       service: ['']
     });
+    this.getInspectors();
     this.newInspectionForm.patchValue({ inspectionTime: this.getCurrentTime() });
     this.getTemplates();
+  }
+
+  getInspectors() {
+    this.inspectorsArray.push(JSON.parse(this.getCookie('user')));
   }
 
   toggleCheckbox() {
@@ -117,18 +140,27 @@ export class NewInspectionComponent implements OnInit {
 
   saveInspection() {
     if (this.newInspectionForm.valid) {
-      this.matSnackBar.open('This option is currently unavailable', 'close'); return false;
       const val = this.newInspectionForm.value;
       val.checkPayment = this.paymentCheckbox;
+      val.referalsource = this.referalsource;
       this.inspectionsService.createInspection(this.getCookie('access_token'), val).subscribe(res => {
         if (res.error) {
           this.matSnackBar.open('An unhandled exception occured', 'close');
         } else {
           this.matSnackBar.open('Your inspection has been saved', 'close');
+          this.newInspectionForm.reset();
         }
       });
     } else {
       this.matSnackBar.open('Please input all of the fields, correctly', 'close');
     }
+  }
+
+  selectInspector($e) {
+    this.selectedInspector = $e.value;
+  }
+
+  setReferal($e) {
+    this.referalsource = $e.value;
   }
 }

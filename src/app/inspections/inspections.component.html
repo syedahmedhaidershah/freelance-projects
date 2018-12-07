@@ -1,0 +1,68 @@
+<mat-toolbar class="bg-info text-white">
+  <mat-toolbar-row>
+    <div class="pl-5 pr-5 text-capitalize font-weight-light">
+      <div class="pl-5 pr-5">Inspections</div>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+<mat-paginator [pageSizeOptions]="[10, 25, 50, 100]" showFirstLastButtons class="text-secondary"></mat-paginator>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 p-2 mt-2 col-md-12 d-block mx-auto">
+  <ng-container matColumnDef="date">
+    <th mat-header-cell *matHeaderCellDef class="pl-2 pr-2 text-center text-info font-weight-bold"> <h6 class="m-0 d-inline-block text-capitalize">Date</h6> </th>
+    <td mat-cell class="pl-2 pr-2" *matCellDef="let element"> {{element.date}} </td>
+  </ng-container>
+  
+  <ng-container matColumnDef="inspectors">
+    <th mat-header-cell *matHeaderCellDef class="pl-2 pr-2 text-center text-info font-weight-bold"> <h6 class="m-0 d-inline-block text-capitalize">Inspector</h6> </th>
+    <td mat-cell class="pl-2 pr-2" *matCellDef="let element"> {{element.inspectors}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="service">
+    <th mat-header-cell *matHeaderCellDef class="pl-2 pr-2 text-center text-info font-weight-bold">
+      <h6 class="m-0 d-inline-block text-capitalize">Service</h6>
+    </th>
+    <td mat-cell class="pl-2 pr-2" *matCellDef="let element"> {{element.template.name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="inspectionTime">
+    <th mat-header-cell *matHeaderCellDef class="pl-2 pr-2 text-center text-info font-weight-bold"> <h6 class="m-0 d-inline-block text-capitalize">Time</h6> </th>
+    <td mat-cell class="pl-2 pr-2" *matCellDef="let element"> {{element.inspectionTime}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="inspectionDuration">
+    <th mat-header-cell *matHeaderCellDef class="pl-2 pr-2 text-center text-info font-weight-bold"> <h6 class="m-0 d-inline-block text-capitalize">Duration</h6> </th>
+    <td mat-cell class="pl-2 pr-2" *matCellDef="let element"> {{element.inspectionDuration}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="address">
+    <th mat-header-cell *matHeaderCellDef class="pl-2 pr-2 text-center text-info font-weight-bold"> <h6 class="m-0 d-inline-block text-capitalize">Address</h6> </th>
+    <td mat-cell class="pl-2 pr-2" *matCellDef="let element"> {{element.address}} </td>
+  </ng-container>
+  
+  <ng-container matColumnDef="zipcode">
+    <th mat-header-cell *matHeaderCellDef class="pl-2 pr-2 text-center text-info font-weight-bold"> <h6 class="m-0 d-inline-block text-capitalize">ZIP</h6> </th>
+    <td mat-cell class="pl-2 pr-2" *matCellDef="let element"> {{element.zipcode}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="client">
+    <th mat-header-cell *matHeaderCellDef class="pl-2 pr-2 text-center text-info font-weight-bold"> <h6 class="m-0 d-inline-block text-capitalize">Client</h6> </th>
+    <td mat-cell class="pl-2 pr-2" *matCellDef="let element"> {{element.firstname}} {{element.lastname}} </td>
+  </ng-container>
+  
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef class="pl-2 pr-2 text-center text-info font-weight-bold"> <h6 class="m-0 d-inline-block text-capitalize">Actions</h6> </th>
+    <td mat-cell class="pl-2 pr-2" *matCellDef="let element">
+      <div class="p-1 pt-2 pb-2">
+        <button mat-mini-fab color="primary" class="text-white ml-2">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-mini-fab class="text-white bg-warning ml-1">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

@@ -105,6 +105,7 @@ export class LoginComponent implements OnInit {
             this.cookieService.set('user', JSON.stringify(user), 1);
             this.Auth.setLoggedIn(true);
             this.router.navigate(['dashboard']);
+            window.location.reload();
           } else {
             this.snackBar.open(data.message, 'close');
             this.Auth.setLoggedIn(false);

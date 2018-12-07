@@ -1,0 +1,49 @@
+<mat-paginator [pageSizeOptions]="[10, 25, 50, 100]" showFirstLastButtons class="text-secondary"></mat-paginator>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 card p-2 mt-2 w-100 d-block mx-auto">
+  <ng-container matColumnDef="firstname">
+    <th mat-header-cell *matHeaderCellDef class="pl-2 pr-2 text-center text-info font-weight-bold">
+      <h6 class="m-0 d-inline-block text-capitalize">FIRSTNAME</h6>
+    </th>
+    <td mat-cell class="pl-2 pr-2" *matCellDef="let element"> {{element.firstname}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="lastname">
+    <th mat-header-cell *matHeaderCellDef class="pl-2 pr-2 text-center text-info font-weight-bold">
+      <h6 class="m-0 d-inline-block text-capitalize">LASTNAME</h6>
+    </th>
+    <td mat-cell class="pl-2 pr-2" *matCellDef="let element"> {{element.lastname}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="phone">
+    <th mat-header-cell *matHeaderCellDef class="pl-2 pr-2 text-center text-info font-weight-bold">
+      <h6 class="m-0 d-inline-block text-capitalize">PHONE</h6>
+    </th>
+    <td mat-cell class="pl-2 pr-2" *matCellDef="let element"> {{element.phone}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="email">
+    <th mat-header-cell *matHeaderCellDef class="pl-2 pr-2 text-center text-info font-weight-bold">
+      <h6 class="m-0 d-inline-block text-capitalize">EMAIL</h6>
+    </th>
+    <td mat-cell class="pl-2 pr-2" *matCellDef="let element"> {{element.email}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef class="pl-2 pr-2 text-center text-info font-weight-bold">
+      <h6 class="m-0 d-inline-block text-capitalize">Actions</h6>
+    </th>
+    <td mat-cell class="pl-2 pr-2" *matCellDef="let element">
+      <div class="p-1 pt-2 pb-2">
+        <button mat-mini-fab color="primary" class="text-white ml-2">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-mini-fab class="text-white bg-warning ml-1">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

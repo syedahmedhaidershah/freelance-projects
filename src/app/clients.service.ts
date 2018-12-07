@@ -16,11 +16,10 @@ interface AnyResponse {
   message: any;
 }
 
-
 @Injectable({
   providedIn: 'root'
 })
-export class InspectionsService {
+export class ClientsService {
 
   private getCookie(cname) {
     const name = cname + '=';
@@ -40,21 +39,10 @@ export class InspectionsService {
 
   constructor(private http: HttpClient) { }
 
-  createInspection(token, inspection) {
-    return this.http.post<NormalResponse>('/api/inspections/save', inspection, {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': token
-      })
-    });
-  }
-
-  getInspections(token, limit) {
-    const userId = JSON.parse(this.getCookie('user'))._id;
-    return this.http.post<AnyResponse>('/api/inspections/getall', {
-      token,
-      userId,
-      limit
+  getClients(token) {
+    const user = JSON.parse(this.getCookie('user'))._id;
+    return this.http.post<AnyResponse>('/api/clients/getall', {
+      user
     }, {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import 'rxjs/add/operator/map';
 
 interface NormalResponse {
   error: boolean;
@@ -16,11 +17,10 @@ interface AnyResponse {
   message: any;
 }
 
-
 @Injectable({
   providedIn: 'root'
 })
-export class InspectionsService {
+export class MetricsService {
 
   private getCookie(cname) {
     const name = cname + '=';
@@ -40,8 +40,8 @@ export class InspectionsService {
 
   constructor(private http: HttpClient) { }
 
-  createInspection(token, inspection) {
-    return this.http.post<NormalResponse>('/api/inspections/save', inspection, {
+  getInspectionMetrics(token) {
+    return this.http.post<AnyResponse>('/api/metrics/inspections/getall', {}, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': token
@@ -49,12 +49,10 @@ export class InspectionsService {
     });
   }
 
-  getInspections(token, limit) {
-    const userId = JSON.parse(this.getCookie('user'))._id;
-    return this.http.post<AnyResponse>('/api/inspections/getall', {
-      token,
-      userId,
-      limit
+  getReferalMetrics(token) {
+    const UserId = JSON.parse(this.getCookie('user'))._id;
+    return this.http.post<AnyResponse>('/api/metrics/referals/getall', {
+      UserId
     }, {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
@@ -62,4 +60,5 @@ export class InspectionsService {
         })
       });
   }
+
 }

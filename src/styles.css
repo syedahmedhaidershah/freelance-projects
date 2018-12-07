@@ -28,7 +28,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     color: #fff;
 }
 .cursor-pointer{
-    cursor: pointer;
+    cursor: pointer!important;
 }
 .extra-small{
     font-size: 1rem;
@@ -103,4 +103,18 @@ a, a:focus, a:active, a:visited{
 app-new-inspection {
     overflow-y: scroll!important;
     max-height: calc(100% - 128px);
+}
+.bg-theme {
+    background-color: #03a9f4;
+}
+.text-theme {
+    color: #03a9f4;
+}
+.mat-tab-label{
+    padding: 0px;
+    width: 50%!important;
+    min-width: 50%!important;
+}
+.w-20 {
+    width: 20%!important;
 }

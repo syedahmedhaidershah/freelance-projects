@@ -1,6 +1,7 @@
 <mat-toolbar color="primary">
     <mat-toolbar-row>
-        <img src="../assets/img/logo_white.png" class="header-logo cursor-pointer" (click)="goToHome()" /><span (click)="goToHome()" class="cursor-pointer">INSPECTOFY</span>
+        <img src="../assets/img/logo_white.png" class="header-logo cursor-pointer" (click)="goToHome()" /><span (click)="goToHome()"
+            class="cursor-pointer">INSPECTOFY</span>
         <div class="d-inline-block pl-5 ml-5 col-md-8">
             <span class="p-1 font-weight-light text-dull cursor-pointer extra-small p-1 position-relative">
                 <div class="d-inline-block p-0 m-0 text-center"><a routerLink="/">Home</a></div>
@@ -18,9 +19,19 @@
             </span>
             &nbsp;&nbsp;
             <span class="p-1 font-weight-light text-dull cursor-pointer extra-small p-1 position-relative">
-                <div class="d-inline-block p-0 m-0 text-center"><a routerLink="/inspection">Inspection</a></div>
+                <div class="d-inline-block p-0 m-0 text-center"><a routerLink="/contacts">Contacts</a></div>
                 <div class="nav-decor position-absolute"></div>
             </span>
+            &nbsp;&nbsp;
+            <span class="p-1 font-weight-light text-dull cursor-pointer extra-small p-1 position-relative">
+                <div class="d-inline-block p-0 m-0 text-center"><a routerLink="/metrics">Metrics</a></div>
+                <div class="nav-decor position-absolute"></div>
+            </span>
+            <!-- &nbsp;&nbsp;
+            <span class="p-1 font-weight-light text-dull cursor-pointer extra-small p-1 position-relative">
+                <div class="d-inline-block p-0 m-0 text-center"><a routerLink="/inspection">Inspection</a></div>
+                <div class="nav-decor position-absolute"></div>
+            </span> -->
             <!-- <span class="ml-5 mr-5 pl-5 pr-5 col-md-1"></span> -->
             <span class="p-1 font-weight-light float-right authorization-links text-dull cursor-pointer extra-small p-1 position-relative">
                 <div class="d-inline-block p-0 m-0 text-center"><a routerLink="/login">Login</a></div>
@@ -30,11 +41,46 @@
                 <div class="d-inline-block p-0 m-0 text-center"><a routerLink="/register">Register</a></div>
                 <div class="nav-decor position-absolute"></div>
             </span>
-            <span (click)="logUserOut()" class="p-1 authorized-links d-none font-weight-light float-right text-dull cursor-pointer extra-small p-1 position-relative mr-4">
+            <!-- <span (click)="logUserOut()" class="p-1 authorized-links d-none font-weight-light float-right text-dull cursor-pointer extra-small p-1 position-relative mr-4">
                 <div class="d-inline-block p-0 m-0 text-center">Logout</div>
                 <div class="nav-decor position-absolute"></div>
-            </span>
+            </span> -->
         </div>
     </mat-toolbar-row>
 </mat-toolbar>
+<mat-menu #userMenu="matMenu" class="text-info">
+    <button mat-menu-item class="text-secondary font-weight-light p-1 pl-2 pr-2" (click)="gotoDashboard()">
+        <mat-icon class="text-info">dashboard</mat-icon> Dashboard
+    </button>
+    <button mat-menu-item class="text-secondary font-weight-light p-1 pl-2 pr-2" (click)="gotoNewInspection()">
+        <mat-icon class="text-info">add_box</mat-icon> New Inspection
+    </button>
+    <button mat-menu-item class="text-secondary font-weight-light p-1 pl-2 pr-2" (click)="gotoInspections()">
+        <mat-icon class="text-info">search</mat-icon> Inspections
+    </button>
+    <button mat-menu-item class="text-secondary font-weight-light p-1 pl-2 pr-2" (click)="gotoTemplatesEditor()">
+        <mat-icon class="text-info">event_note</mat-icon> Template Editor
+    </button>
+    <button mat-menu-item class="text-secondary font-weight-light p-1 pl-2 pr-2" (click)="gotoContacts()">
+        <mat-icon class="text-info">perm_identity</mat-icon> Contacts
+    </button>
+    <button mat-menu-item class="text-secondary font-weight-light p-1 pl-2 pr-2" (click)="gotoMetrics()">
+        <mat-icon class="text-info">insert_chart</mat-icon> Metrics
+    </button>
+    <button mat-menu-item class="text-secondary font-weight-light p-1 pl-2 pr-2" (click)="logUserOut()">
+        <mat-icon class="text-info">exit_to_app</mat-icon> Logout
+    </button>
+</mat-menu>
+
+<!-- <button>
+  <mat-icon>more_vert</mat-icon>
+</button> -->
+<div class="text-white text-right p-2 pr-4 bg-theme" *ngIf="user">
+    <div class="text-theme d-inline-block">I</div>
+    <mat-icon class="d-block float-right cursor-pointer" mat-icon-button [matMenuTriggerFor]="userMenu">expand_more</mat-icon>
+    <div class="d-block float-right cursor-pointer font-weight-bold" mat-icon-button [matMenuTriggerFor]="userMenu">
+        <span class="font-weight-light">Welcome</span>
+        {{user.Firstname}} {{user.Lastname}}
+    </div>
+</div>
 <router-outlet></router-outlet>

@@ -18,6 +18,9 @@ import { MatDialogModule } from '@angular/material';
 import { MatSelectModule } from '@angular/material/select';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTabsModule } from '@angular/material/tabs';
 
 import { AmazingTimePickerModule } from 'amazing-time-picker';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -29,7 +32,6 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NgComponent } from './ng/ng.component';
-import { InspectionComponent } from './inspection/inspection.component';
 import { RegisterComponent } from './register/register.component';
 import { TemplatesComponent } from './templates/templates.component';
 import { HomeComponent } from './home/home.component';
@@ -51,6 +53,13 @@ import { ItemsService } from './items.service';
 import { CommentsService } from './comments.service';
 import { SectionsService } from './sections.service';
 import { AmazingTimePickerService } from 'amazing-time-picker';
+import { InspectionsComponent } from './inspections/inspections.component';
+import { ContactsComponent } from './contacts/contacts.component';
+import { ClientsInfoComponent } from './clients-info/clients-info.component';
+import { MetricsComponent } from './metrics/metrics.component';
+import { ClientsService } from './clients.service';
+import { InspectionsService } from './inspections.service';
+import { MetricsService } from './metrics.service';
 
 const appRoutes: Routes = [
   {
@@ -65,7 +74,7 @@ const appRoutes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'inspection', component: InspectionComponent,
+    path: 'inspections', component: InspectionsComponent,
     canActivate: [AuthGuard]
   },
   {
@@ -76,6 +85,14 @@ const appRoutes: Routes = [
   },
   {
     path: 'new-inspection', component: NewInspectionComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'contacts', component: ContactsComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'metrics', component: MetricsComponent,
     canActivate: [AuthGuard]
   }
 ];
@@ -90,7 +107,7 @@ export function tokenGetter() {
     LoginComponent,
     DashboardComponent,
     NgComponent,
-    InspectionComponent,
+    InspectionsComponent,
     RegisterComponent,
     TemplatesComponent,
     HomeComponent,
@@ -103,7 +120,10 @@ export function tokenGetter() {
     ScratchCommentComponent,
     EditItemComponent,
     ViewTemplateComponent,
-    NewInspectionComponent
+    NewInspectionComponent,
+    ContactsComponent,
+    ClientsInfoComponent,
+    MetricsComponent
   ],
   imports: [
     BrowserModule,
@@ -123,6 +143,9 @@ export function tokenGetter() {
     MatGridListModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatTabsModule,
     LayoutModule,
     BsDropdownModule.forRoot(),
     TooltipModule.forRoot(),
