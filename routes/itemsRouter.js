@@ -22,6 +22,23 @@ module.exports = function (router, db, config) {
         })
     });
 
+    router.post('/items/getbyid', auth.verifyToken, (req, res) => {
+        query = {_id : ObjectId(req.body.id)};
+        db.collection("items").findOne(query, (err, item) => {
+            if (err) {
+                res.send({
+                    error: true,
+                    message: err
+                });
+            } else {
+                res.send({
+                    error: false,
+                    message: item
+                });
+            }
+        });
+    });
+
 
     router.post('/items/create', auth.verifyToken, (req, res) => {
         const temp = ObjectId(req.body.sectionName);

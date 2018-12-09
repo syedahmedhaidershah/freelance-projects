@@ -5,6 +5,9 @@ const app = express();
 const config = require('./config/default');
 const port = 9999;
 const router = express.Router();
+const ioPort = 9898;
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
 
 var jsonParser = bodyParser.json({ limit: 1024 * 1024 * 20, type: 'application/json' });
 var urlencodedParser = bodyParser.urlencoded({ extended: true, limit: 1024 * 1024 * 20, type: 'application/x-www-form-urlencoding' });
@@ -31,8 +34,13 @@ MongoDB.MongoClient.connect(config.dburl, { useNewUrlParser: true }, (err, datab
         const clientsRouter = require('./routes/clientsRouter')(router, database, config);
         const metricsRouter = require('./routes/metricsRouter')(router, database, config);
         //////////////////////////////////////////////////////////////////////////////////////
+        const appSocket = require("./socket/templatesComponent")(io, database, config);
+        //////////////////////////////////////////////////////////////////////////////////////
+        server.listen(ioPort, () => {
+            console.log(`Socket is live on ${port}`);
+        });
         app.listen(port, () => {
-            console.log('We are live on ' + port);
+            console.log('API is live on ' + port);
         });
     }
 })
