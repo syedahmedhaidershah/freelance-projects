@@ -37,7 +37,7 @@ MongoDB.MongoClient.connect(config.dburl, { useNewUrlParser: true }, (err, datab
         const appSocket = require("./socket/templatesComponent")(io, database, config);
         //////////////////////////////////////////////////////////////////////////////////////
         server.listen(ioPort, () => {
-            console.log(`Socket is live on ${port}`);
+            console.log(`Socket is live on ${ioPort}`);
         });
         app.listen(port, () => {
             console.log('API is live on ' + port);

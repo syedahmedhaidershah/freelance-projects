@@ -85,7 +85,7 @@ module.exports = function (router, db, config) {
     router.post('/items/delete', auth.verifyToken, (req, res) => {
         var useid = new ObjectId(req.body._id);
         var query = { _id: useid };
-        db.collection("comments").deleteMany({ itemId: i._id }, (err, obj) => { });
+        db.collection("comments").deleteMany({ itemId: useid }, (err, obj) => { });
         db.collection("items").deleteOne(query, (err, item) => {
             res.send({
                 error: false,
