@@ -1,0 +1,72 @@
+<div class="container panel-main col-md-12 p-0 h-100 row">
+  <div class="card col-md-3 p-1 m-2 notifications-area shadow-lighter d-inline-block">
+    <h5 class="text-primary text-center p-2 font-weight-bold m-0">
+      Announcements
+    </h5>
+    <div>
+      <button (click)="openCreateNotifDialog()" mat-raised-button color="primary" class="text-white float-right">
+        <mat-icon>add</mat-icon>
+        <span class="pl-1 pr-1">Create</span>
+      </button>
+    </div>
+    <div id="notifications-section" class="notifications w-100 vertical-scroll p-1 mt-5">
+      <div class="text-warning p-2 font-weight-bold" *ngIf="notifications.length == 0">No notifications are available
+        at the moment</div>
+      <div class="col-md-12 p-1" *ngIf="notifications.length > 0">
+        <div class="col-md-12 p-3 mb-2 card bg-info text-white shadow-lighter" *ngFor="let n of notifications">
+          <button mat-icon-button [matMenuTriggerFor]="announcementControls" class="right-top-but position-absolute">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #announcementControls="matMenu" class="p-0">
+            <button mat-menu-item (click)="editNotifications(n._id)">
+              <mat-icon>edit</mat-icon>
+              <span>Edit</span>
+            </button>
+            <button mat-menu-item (click)="deleteNotifications(n._id)">
+              <mat-icon>delete</mat-icon>
+              <span>Delete</span>
+            </button>
+          </mat-menu>
+          <div class="font-weight-bold">
+            {{n.announcement}}
+          </div>
+          <div>
+            <small>{{n.body}}</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="mt-2 m-0 right-section shadow-lighter card d-inline-block">
+    <div class="bg-info text-white p-2 ob-3 pl-4 pr-4">
+      Carousel Controls
+    </div>
+    <mat-list class="col-md-6 p-1 card min_50_2 max_50_2 border shadow-lighter vertical-scroll">
+      <button mat-mini-fab color="primary" class="add-mew-carousel position-absolute">
+        <mat-icon class="text-white" (click)="openNewCarousel()">add</mat-icon>
+      </button>
+      <div class="m-0 p-0 col-md-12" *ngIf="carouselImages.length > 0">
+        <div mat-list-item *ngFor="let c of carouselImages" class="card shadow-lighter p-0 pl-1 mb-1 mat-list-item">
+          <button mat-icon-button [matMenuTriggerFor]="carouselControls" class="d-inline-block pr-2 text-secondary">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #carouselControls="matMenu" class="p-0">
+            <button mat-menu-item (click)="editCarousel(c._id)">
+              <mat-icon>edit</mat-icon>
+              <span>Edit</span>
+            </button>
+            <button mat-menu-item (click)="deleteCarousel(c._id)">
+              <mat-icon>delete</mat-icon>
+              <span>Delete</span>
+            </button>
+          </mat-menu>
+          <img src="http://localhost:9899/api/{{c._id}}.{{c.ext}}" class="carousel-image d-inline-block" />
+          <span class="d-inline-block col-md-8 pl-3">{{c.name}}</span>
+        </div>
+      </div>
+      <div class="col-md-9 text-primary p-1 pl-3" *ngIf="carouselImages.length == 0">
+        No carousel images have been saved yet.
+      </div>
+    </mat-list>
+  </div>
+</div>

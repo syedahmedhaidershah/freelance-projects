@@ -1,0 +1,67 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+@font-face{
+    src: url('./assets/fonts/proximaNovaLight.ttf');
+    font-family: proximaNova;
+}
+
+*{
+    font-family: proximaNova;
+}
+*, *:active, *:focus{
+    -webkit-touch-callout: none!important;
+    user-select: none!important;
+    outline: none!important;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.header-logo{
+    width: 100px;
+    padding-right: 10px;
+}
+.text-dull{
+    color: rgba(255,255,255,0.6);
+    transition: color 500ms;
+}
+.text-dull:hover, .text-dull:focus{
+    color: #fff;
+}
+.cursor-pointer{
+    cursor: pointer;
+}
+.extra-small{
+    font-size: 1rem;
+}
+span .nav-decor{
+    top: calc(100% - 2px);
+    width: 0px;
+    height:0px;
+    left: 50%;
+    border-bottom: 1px solid #fff;
+    transition: left 500ms, width 500ms;
+}
+span:hover .nav-decor{
+    width: 90%;
+    left: 10%;
+}
+a, a:focus, a:active, a:visited{
+    text-decoration: none!important;
+    color: inherit!important
+}
+.shadow-gray{
+    box-shadow: 2px 2px 35px -3px #999;
+}
+.text-warning{
+    color: #ff9800!important;
+}
+.bg-warning{
+    background-color: #ff9800!important;
+}
+textarea{
+    max-height: 100px;
+}
+.right-top-but {
+    top: 0.25rem;
+    right: 0rem;
+}

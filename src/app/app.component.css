@@ -1,0 +1,9 @@
+.logout-button{
+    right: 0px;
+}
+#logoutbutton{
+    display: none!important;
+}
+#logoutbutton.active{
+    display: block!important;
+}

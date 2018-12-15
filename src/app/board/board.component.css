@@ -1,0 +1,5 @@
+@import "../panel/panel.component.css";
+
+.notifications{
+    height: calc(100% - 1.5rem);
+}
