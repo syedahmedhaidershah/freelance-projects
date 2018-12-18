@@ -6,12 +6,14 @@ const config = require('./config/default');
 const port = 9999;
 const router = express.Router();
 const ioPort = 9898;
+const cors = require('cors');
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 
 var jsonParser = bodyParser.json({ limit: 1024 * 1024 * 20, type: 'application/json' });
 var urlencodedParser = bodyParser.urlencoded({ extended: true, limit: 1024 * 1024 * 20, type: 'application/x-www-form-urlencoding' });
 
+router.use(cors());
 app.use(jsonParser);
 app.use(urlencodedParser);
 app.use('/api', router);
@@ -33,13 +35,19 @@ MongoDB.MongoClient.connect(config.dburl, { useNewUrlParser: true }, (err, datab
         const inspectionsRouter = require('./routes/inspectionsRouter')(router, database, config);
         const clientsRouter = require('./routes/clientsRouter')(router, database, config);
         const metricsRouter = require('./routes/metricsRouter')(router, database, config);
+        router.get('*', (req, res) => {
+            res.send('systemok');
+        });
+        router.post('*', (req, res) => {
+            res.send('systemok');
+        });
         //////////////////////////////////////////////////////////////////////////////////////
         const appSocket = require("./socket/templatesComponent")(io, database, config);
         //////////////////////////////////////////////////////////////////////////////////////
         server.listen(ioPort, () => {
             console.log(`Socket is live on ${ioPort}`);
         });
-        app.listen(port, () => {
+        app.listen(process.env.PORT || port, () => {
             console.log('API is live on ' + port);
         });
     }

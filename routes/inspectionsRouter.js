@@ -51,4 +51,14 @@ module.exports = function (router, db, config) {
             })
         });
     });
+
+    router.post('/inspections/getall/today', auth.verifyToken, (req, res) => {
+        db.collection("inspections").find({ UserId: req.body.userId, date: ((new Date()).toISOString()).split('T')[0] }).toArray().then(array => {
+            res.send({
+                error: false,
+                message: array
+            })
+        });
+    });
+    
 }
