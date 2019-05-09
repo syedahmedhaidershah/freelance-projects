@@ -4,23 +4,129 @@
     <title>
         Shapes Game
     </title>
+    <link rel="stylesheet" type="text/css" href="week6a.css" />
 </head>
 
 <body>
+    <div class="w-49 d-inline-block">
+        <br>
+        <div id="square" class="px-3 draggableShape">
+            <?xml version="1.0" encoding="iso-8859-1"?>
+            <!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+            <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+            <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                x="0px" y="0px" width="100px" height="100px" viewBox="0 0 401.998 401.998"
+                style="enable-background:new 0 0 401.998 401.998;" xml:space="preserve" class="shadowed-svg">
+                <g>
+                    <path
+                        d="M377.87,24.126C361.786,8.042,342.417,0,319.769,0H82.227C59.579,0,40.211,8.042,24.125,24.126
+                        C8.044,40.212,0.002,59.576,0.002,82.228v237.543c0,22.647,8.042,42.014,24.123,58.101c16.086,16.085,35.454,24.127,58.102,24.127
+                        h237.542c22.648,0,42.011-8.042,58.102-24.127c16.085-16.087,24.126-35.453,24.126-58.101V82.228
+                        C401.993,59.58,393.951,40.212,377.87,24.126z M365.448,319.771c0,12.559-4.47,23.314-13.415,32.264
+                        c-8.945,8.945-19.698,13.411-32.265,13.411H82.227c-12.563,0-23.317-4.466-32.264-13.411c-8.945-8.949-13.418-19.705-13.418-32.264
+                        V82.228c0-12.562,4.473-23.316,13.418-32.264c8.947-8.946,19.701-13.418,32.264-13.418h237.542
+                        c12.566,0,23.319,4.473,32.265,13.418c8.945,8.947,13.415,19.701,13.415,32.264V319.771L365.448,319.771z" />
+                </g>
+            </svg>
+        </div>
+        <br>
+        <div id="triangle" class="px-3 draggableShape">
+            <?xml version="1.0" encoding="iso-8859-1"?>
+            <!-- Generator: Adobe Illustrator 18.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+            <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+            <svg class="shadowed-svg" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 60.001 60.001"
+                style="enable-background:new 0 0 60.001 60.001;" height="100px" width="100px" xml:space="preserve">
+                <path d="M59.895,58.531l-29-58c-0.34-0.678-1.449-0.678-1.789,0l-29,58c-0.155,0.31-0.139,0.678,0.044,0.973
+                C0.332,59.798,0.654,59.978,1,59.978h58c0.347,0,0.668-0.18,0.851-0.474C60.033,59.209,60.05,58.841,59.895,58.531z M2.618,57.978
+                L30,3.214l27.382,54.764H2.618z" />
+            </svg>
+        </div>
+        <br>
+        <div id="circle" class="px-3 draggableShape">
+            <?xml version="1.0" encoding="iso-8859-1"?>
+            <!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+            <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+            <svg class="shadowed-svg" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="100px" height="100px"
+                viewBox="0 0 438.533 438.533" style="enable-background:new 0 0 438.533 438.533;" xml:space="preserve">
+                <g>
+                    <path d="M409.133,109.203c-19.608-33.592-46.205-60.189-79.798-79.796C295.736,9.801,259.058,0,219.273,0
+                    c-39.781,0-76.47,9.801-110.063,29.407c-33.595,19.604-60.192,46.201-79.8,79.796C9.801,142.8,0,179.489,0,219.267
+                    c0,39.78,9.804,76.463,29.407,110.062c19.607,33.592,46.204,60.189,79.799,79.798c33.597,19.605,70.283,29.407,110.063,29.407
+                    s76.47-9.802,110.065-29.407c33.593-19.602,60.189-46.206,79.795-79.798c19.603-33.596,29.403-70.284,29.403-110.062
+                    C438.533,179.485,428.732,142.795,409.133,109.203z M353.742,297.208c-13.894,23.791-32.736,42.633-56.527,56.534
+                    c-23.791,13.894-49.771,20.834-77.945,20.834c-28.167,0-54.149-6.94-77.943-20.834c-23.791-13.901-42.633-32.743-56.527-56.534
+                    c-13.897-23.791-20.843-49.772-20.843-77.941c0-28.171,6.949-54.152,20.843-77.943c13.891-23.791,32.738-42.637,56.527-56.53
+                    c23.791-13.895,49.772-20.84,77.943-20.84c28.173,0,54.154,6.945,77.945,20.84c23.791,13.894,42.634,32.739,56.527,56.53
+                    c13.895,23.791,20.838,49.772,20.838,77.943C374.58,247.436,367.637,273.417,353.742,297.208z" />
+                </g>
+            </svg>
+        </div>
+    </div>
+
+    <div class="w-49 d-inline-block">
+        <div class="squares-container m-3">
+            <br>
+            <div class="position-absolute w-80px text first">
+                <small class="w-100px text-center">
+                    Square
+                </small>
+            </div>
+            <div class="p-10px position-absolute square-container first">
+            </div>
+            <br>
+            <div class="position-absolute w-80px text second">
+                <small class="w-100px text-center">
+                    Triangle
+                </small>
+            </div>
+            <div class="p-10px position-absolute square-container second">
+            </div>
+            <br>
+            <div class="position-absolute w-80px text third">
+                <small class="w-100px text-center">
+                    Circle
+                </small>
+            </div>
+            <div class="p-10px position-absolute square-container third">
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
     <div>
         <div>Icons made by <a href="https://www.flaticon.com/authors/dave-gandy" title="Dave Gandy">Dave Gandy</a> from
-            <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC
+            <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a
+                href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC
                 3.0
                 BY</a></div>
         <div>Icons made by <a href="https://www.flaticon.com/authors/dave-gandy" title="Dave Gandy">Dave Gandy</a> from
-            <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC
+            <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a
+                href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC
                 3.0
                 BY</a></div>
         <div>Icons made by <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from
-            <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC
+            <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a
+                href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC
                 3.0
                 BY</a></div>
     </div>
+    <script src="js/week6a.js" type="text/javascript"></script>
 </body>
 
 </html>
