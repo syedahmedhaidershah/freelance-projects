@@ -38,6 +38,7 @@ window.onload = function () {
         let el = document.createElement('button');
         el.id = b;
         el.innerText = b[0].toUpperCase().concat(b.substr(1));
+        el.style = ' background-color:'.concat(b).concat('; color: #fff; border: none; padding: 5px;');
         document.body.innerHTML += '<br><br>';
         el.className += ' fixed-colors'
         document.body.append(el);
