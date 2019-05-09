@@ -52,6 +52,7 @@ const wsix = {
         });
         wsix.g['square-container'].forEach((v) => {
             try {
+                ///////////// DROP EVENT HANDLER CODE ///////////////////////////////////////////////////////////////////
                 v.ondrop = ($e) => {
                     if (wsix.v.dragTemp == null) return;
                     let receivingElement = wsix.getShapeSetEl(event.target);
@@ -91,6 +92,7 @@ const wsix = {
                     }
                     event.preventDefault();
                 }
+                ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 v.touchend = ($e) => {
                     if (wsix.v.dragTemp == null) return;
                     let receivingElement = wsix.getShapeSetEl(event.target);
