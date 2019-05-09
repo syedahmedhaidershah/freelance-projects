@@ -27,6 +27,13 @@ const wsix = {
             } catch (exc) { }
         });
     },
+    getShapeSetEl(el) {
+        if(el.hasAttribute('shapeset')) {
+            return el;
+        } else {
+            return wsix.getShapeSetEl(el.parentElement);
+        }
+    },
     setListeners() {
         wsix.g.draggableShape.forEach((v) => {
             try {
@@ -39,13 +46,18 @@ const wsix = {
             try {
                 v.ondrop = ($e) => {
                     if (wsix.v.dragTemp == null) return;
-                    var receivingElement = event.target;
+                    let receivingElement = wsix.getShapeSetEl(event.target);
                     let rAttr = receivingElement.getAttribute('shapeset');
                     let dtAttr = wsix.v.dragTemp.getAttribute('shapeset');
                     if(rAttr == dtAttr) {
+                        const useClass = receivingElement.children[0].className;
+                        receivingElement.children[0].className += ' d-none';
                         wsix.v.dragTemp.className += ' d-none';
                         document.querySelector('.final-container.'.concat(rAttr)).className = rAttr.concat(' final-container');
                         wsix.v.inPlace += 1;
+                    } else {
+                        const useClass = receivingElement.children[0].className;
+                        receivingElement.children[0].className = useClass.replace(/(d-none)/g,'');
                     }
                     if(wsix.v.inPlace > 2) {
                         setTimeout(() => {
