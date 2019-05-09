@@ -90,3 +90,35 @@ div.px-3 {
 .text-center {
     text-align: center;
 }
+.d-none {
+    display: none!important;
+}
+@keyframes fadeToGreen {
+    0% {
+        background-color: auto;
+        color: auto;
+        fill: auto;
+        border: auto;
+    }
+    100% {
+        background-color: #008800;
+        color: #008800;
+        fill: #008800;
+        border: 1px solid #008800!important;
+    }
+}
+.fade-to-green {
+    animation: fadeToGreen;
+    animation-iteration-count: 1;
+    animation-duration: 3s;
+    animation-fill-mode: forwards;
+}
+.text-danger {
+    color: #a50101;
+}
+h1.wrong-choice {    
+    font-family: arial;
+    text-align: center;
+    font-size: 6rem;
+    margin: 0px;
+}
