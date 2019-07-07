@@ -1,0 +1,62 @@
+<mat-toolbar color="primary">
+  <span>Refunds / Adjustments</span>
+</mat-toolbar>
+<div class="col-md-12 py-3 d-flex justify-content-center">
+  <mat-form-field class="col-md-4">
+    <mat-select #actionSelect placeholder="Select an Action" (selectionChange)="changeAction(actionSelect)">
+      <mat-option value="r">Refund</mat-option>
+      <mat-option value="a">Adjust</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<div class="col-md-12 p-3 d-flex justify-content-center">
+  <form class="col-md-5 p-1 d-block mr-2 border-right" [formGroup]="refundForm" *ngIf="actionType === 'r'">
+    <h3 class="px-3 text-secondary text-center">
+      REFUND FORM
+    </h3>
+    <mat-form-field class="col-md-12">
+      <input type="text" placeholder="Select MS no." aria-label="Number" matInput formControlName="msno"
+        [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectFile($event)">
+        <mat-option *ngFor="let f of showFilesList" [value]="f.msno">
+          File# {{ f.msno }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    <div class="col-md-12 row m-0 p-0">
+      <div class="col-md-6 h-100 bg-info text-center text-white">
+        <div class="col-md-12 text-right">
+          <small class="text-white text-right">
+            Paid
+          </small>
+        </div>
+        <h3 class="col-md-12 text-center mt-2">
+          {{getPaid}}
+        </h3>
+      </div>
+      <div class="col-md-6 h-100 bg-secondary text-center text-white">
+        <div class="col-md-12 text-right">
+          <small class="text-white text-right">
+            Balance
+          </small>
+        </div>
+        <h3 class="col-md-12 text-center mt-2">
+          {{getBalance}}
+        </h3>
+      </div>
+    </div>
+    <mat-form-field class="col-md-12 mt-2">
+      <input matInput placeholder="Deduction (10%)" type="number" formControlName="deduction" autocomplete="off" min=0
+        [max]=deducMax />
+    </mat-form-field>
+    <mat-form-field class="col-md-12 mt-2">
+      <input matInput placeholder="Amount" type="number" formControlName="amount" autocomplete="off" min=0 [max]=payableMax />
+    </mat-form-field>
+    <div class="col-md-12 d-flex py-2 justify-content-center">
+      <button mat-raised-button class="px-4 text-white" color="accent" (click)="refund()" [disabled]="getRefundState">
+        Refund
+      </button>
+    </div>
+  </form>
+  <app-adjustment *ngIf="actionType === 'a'" class="col-md-12 p-0"></app-adjustment>
+</div>

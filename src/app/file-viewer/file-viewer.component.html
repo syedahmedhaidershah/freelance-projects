@@ -1,0 +1,340 @@
+<mat-toolbar class="text-secondary bg-white font-weight-bold">
+  <span>File: MS# {{f.msno}}&nbsp;&nbsp;&nbsp;&nbsp;(<span class="text-info" *ngIf="f.allotted === 0">Un-allotted</span><span
+      class="text-info" *ngIf="f.allotted === 1">Allotted</span>)</span>
+</mat-toolbar>
+<div class="col-md-12 container py-2 h-100_64px vertical-scroll">
+  <div class="col-md-12 py-1 px-3 row m-0">
+    <div class="col-md-4 vertical-align-middle">
+      Allottee Record
+    </div>
+  </div>
+  <form [formGroup]="allotteeDetails" class="col-md-12 py-1">
+    <div class="col-md-12 px-4 py-1 row m-0">
+      <div class="col-md-4 px-2">
+        <mat-form-field class="col-md-12">
+          <input matInput class="px-3 py-1" placeholder="Name" formControlName="name" type="text" autocomplete="off" />
+        </mat-form-field>
+      </div>
+      <div class="col-md-4 px-2">
+        <mat-form-field class="col-md-12">
+          <input matInput class="px-3 py-1" placeholder="CNIC" formControlName="cnic" type="number" min=0 max=9999999999999
+            autocomplete="off" />
+        </mat-form-field>
+      </div>
+      <div class="col-md-4 px-2">
+        <mat-form-field class="col-md-12">
+          <input matInput class="px-3 py-1" placeholder="S/o. W/o. D/o." formControlName="sowodo" type="text"
+            autocomplete="off" />
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="col-md-12 px-4 py-1 row m-0">
+      <div class="col-md-3 px-2">
+        <mat-form-field class="col-md-12">
+          <input matInput class="px-3 py-1" placeholder="Phone" formControlName="phone" type="number" min=0 max=99999999999999
+            autocomplete="off" />
+        </mat-form-field>
+      </div>
+      <div class="col-md-9 px-2">
+        <mat-form-field class="col-md-12">
+          <input matInput class="px-3 py-1" placeholder="Address" formControlName="address" type="text" autocomplete="off" />
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="col-md-12 px-4 py-1 row m-0">
+      <div class="col-md-4 px-2">
+        <mat-form-field class="col-md-12">
+          <input matInput class="px-3 py-1" placeholder="Plot no." formControlName="plot_no" type="text" autocomplete="off" />
+        </mat-form-field>
+      </div>
+      <div class="col-md-4 px-2">
+        <mat-form-field class="col-md-12">
+          <input matInput class="px-3 py-1" placeholder="Category" formControlName="category" type="number" min=0 autocomplete="off" />
+        </mat-form-field>
+      </div>
+      <div class="col-md-4 px-2">
+        <mat-form-field class="col-md-12">
+          <input matInput class="px-3 py-1" placeholder="Phase" formControlName="phase" type="text" autocomplete="off" />
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+  <div class="col-md-12 pt-1 pb-3 px-5 row mx-0 mt-0 mb-1">
+    <div class="col-md-12 px-3 d-flex justify-content-end m-0">
+      <span class="text-white">I</span>
+      <button mat-raised-button color="accent" (click)="editAllotteeDetails()" class="text-white mr-1">
+        <mat-icon *ngIf="getAllotteeState" class="mr-1 vertical-align-middle">
+          edit
+        </mat-icon>
+        <mat-icon *ngIf="!getAllotteeState" class="mr-1 vertical-align-middle">
+          add
+        </mat-icon>
+        <span *ngIf="getAllotteeState" class="vertical-align-middle">
+          EDIT
+        </span>
+        <span *ngIf="!getAllotteeState" class="vertical-align-middle">
+          UPDATE
+        </span>
+      </button>
+      <button mat-raised-button (click)="transferFile()" class="text-white mr-1" color="primary" >
+        <!-- [disabled]="getTransferState || checkBalance" -->
+        <mat-icon class="mr-1 vertical-align-middle">
+          redo
+        </mat-icon>
+        <span class="vertical-align-middle">
+          TRANSFER
+        </span>
+      </button>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="col-md-12 text-secondary px-4 py-2">
+    BALANCE
+  </div>
+  <!-- <div *ngIf="f.allotted === 1" class="px-5 py-2 col-md-12 text-secondary">
+    This file has already been allotted therefore there isn't any balance pending.
+  </div> -->
+  <!-- <form *ngIf="f.allotted === 0" [formGroup]="balanceAmounts" class="col-md-12 py-1 row m-0"> -->
+  <form [formGroup]="balanceAmounts" class="col-md-12 py-1 row m-0">
+    <table class="col-md-6">
+      <tr>
+        <th class="px-2 bg-secondary text-white py-1 w-100p text-center" colspan="1">TYPE</th>
+        <th class="px-2 bg-secondary text-white py-1 w-100p text-center" colspan="1">
+          <span class="vertical-align-middle">
+            AMOUNT
+          </span>
+          <button mat-mini-fab color="accent" class="vertical-align-middle ml-3 position-absolute r-1r text-white"
+            (click)="updateAmount($event)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <mat-divider></mat-divider>
+          <div class="col-md-12">
+            <table class="col-md-12 border-0">
+              <tbody class="col-md-12">
+                <tr class="col-md-12 border-0">
+                  <th class="px-2 bg-transparent font-weight-light text-white py-1 w-100p text-center border-0" colspan="1">
+                    Total Cost
+                  </th>
+                  <th class="px-2 bg-transparent font-weight-light text-white py-1 w-100p text-center border-0" colspan="1">
+                    Paid
+                  </th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </th>
+      </tr>
+      <tr>
+        <td class="px-2 pt-1 pb-0 w-100p text-center" colspan="1">C/L</td>
+        <td class="px-2 pt-1 pb-0 w-100p text-center" colspan="1">
+          <div class="col-md-12 row m-0">
+            <div class="px-2 pt-1 pb-0 col-md-5">
+              <mat-form-field class="col-md-12">
+                <input matInput class="px-3 py-1" placeholder="C/L" type="number" [value]="f.cl" formControlName="cl"
+                  autocomplete="pff" />
+              </mat-form-field>
+            </div>
+            <div class="px-2 pt-1 pb-0 col-md-5 text-center text-secondary">
+              <small class="text-info">PKR</small>
+              <span class="text-secondary ml-2 font-weight-bold">{{getPaid('cl')}}</span>
+            </div>
+            <div class="col-md-2">
+              <button mat-raised-button color="accent" class="text-white vertical-align-middle" (click)="leadToPayout('cl')">
+                PAY
+              </button>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="px-2 pt-1 pb-0 w-100p text-center" colspan="1">Miscellaneous</td>
+        <td class="px-2 pt-1 pb-0 w-100p text-center" colspan="1">
+          <div class="col-md-12 row m-0">
+            <div class="px-2 pt-1 pb-0 col-md-5">
+              <mat-form-field class="col-md-12">
+                <input matInput class="px-3 py-1" placeholder="Miscellaneous" type="number" [value]="f.misc"
+                  formControlName="misc" autocomplete="pff" />
+              </mat-form-field>
+            </div>
+            <div class="px-2 pt-1 pb-0 col-md-5 text-center text-secondary">
+              <small class="text-info">PKR</small>
+              <span class="text-secondary ml-2 font-weight-bold">{{getPaid('misc')}}</span>
+            </div>
+            <div class="col-md-2">
+              <button mat-raised-button color="accent" class="text-white vertical-align-middle" (click)="leadToPayout('misc')">
+                PAY
+              </button>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="px-2 pt-1 pb-0 w-100p text-center" colspan="1">M/C</td>
+        <td class="px-2 pt-1 pb-0 w-100p text-center" colspan="1">
+          <div class="col-md-12 row m-0">
+            <div class="px-2 pt-1 pb-0 col-md-5">
+              <mat-form-field class="col-md-12">
+                <input matInput class="px-3 py-1" placeholder="M/C" type="number" [value]="f.mc" formControlName="mc"
+                  autocomplete="pff" />
+              </mat-form-field>
+            </div>
+            <div class="px-2 pt-1 pb-0 col-md-5 text-center text-secondary">
+              <small class="text-info">PKR</small>
+              <span class="text-secondary ml-2 font-weight-bold">{{getPaid('mc')}}</span>
+            </div>
+            <div class="col-md-2">
+              <button mat-raised-button color="accent" class="text-white vertical-align-middle" (click)="leadToPayout('mc')">
+                PAY
+              </button>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="px-2 pt-1 pb-0 w-100p text-center" colspan="1">Surcharge</td>
+        <td class="px-2 pt-1 pb-0 w-100p text-center" colspan="1">
+          <div class="col-md-12 row m-0">
+            <div class="px-2 pt-1 pb-0 col-md-5">
+              <mat-form-field class="col-md-12">
+                <input matInput class="px-3 py-1" placeholder="Surcharge" type="number" [value]="f.surcharge"
+                  formControlName="surcharge" autocomplete="pff" />
+              </mat-form-field>
+            </div>
+            <div class="px-2 pt-1 pb-0 col-md-5 text-center text-secondary">
+              <small class="text-info">PKR</small>
+              <span class="text-secondary ml-2 font-weight-bold">{{getPaid('surcharge')}}</span>
+            </div>
+            <div class="col-md-2">
+              <button mat-raised-button color="accent" class="text-white vertical-align-middle" (click)="leadToPayout('surcharge')">
+                PAY
+              </button>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="px-2 pt-1 pb-0 w-100p text-center" colspan="1">Int/Dev</td>
+        <td class="px-2 pt-1 pb-0 w-100p text-center" colspan="1">
+          <div class="col-md-12 row m-0">
+            <div class="px-2 pt-1 pb-0 col-md-5">
+              <mat-form-field class="col-md-12">
+                <input matInput class="px-3 py-1" placeholder="Int/Dev" type="number" [value]="f.int_dev"
+                  formControlName="int_dev" autocomplete="pff" />
+              </mat-form-field>
+            </div>
+            <div class="px-2 pt-1 pb-0 col-md-5 text-center text-secondary">
+              <small class="text-info">PKR</small>
+              <span class="text-secondary ml-2 font-weight-bold">{{getPaid('int_dev')}}</span>
+            </div>
+            <div class="col-md-2">
+              <button mat-raised-button color="accent" class="text-white vertical-align-middle" (click)="leadToPayout('int_dev')">
+                PAY
+              </button>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="px-2 pt-1 pb-0 w-100p text-center" colspan="1">Out/Dev</td>
+        <td class="px-2 pt-1 pb-0 w-100p text-center" colspan="1">
+          <div class="col-md-12 row m-0">
+            <div class="px-2 pt-1 pb-0 col-md-5">
+              <mat-form-field class="col-md-12">
+                <input matInput class="px-3 py-1" placeholder="Out/Dev" type="number" [value]="f.out_dev"
+                  formControlName="out_dev" autocomplete="pff" />
+              </mat-form-field>
+            </div>
+            <div class="px-2 pt-1 pb-0 col-md-5 text-center text-secondary">
+              <small class="text-info">PKR</small>
+              <span class="text-secondary ml-2 font-weight-bold">{{getPaid('out_dev')}}</span>
+            </div>
+            <div class="col-md-2">
+              <button mat-raised-button color="accent" class="text-white vertical-align-middle" (click)="leadToPayout('out_dev')">
+                PAY
+              </button>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="px-2 pt-1 pb-0 w-100p text-center" colspan="1">Lease Documentation Charge</td>
+        <td class="px-2 pt-1 pb-0 w-100p text-center" colspan="1">
+          <div class="col-md-12 row m-0">
+            <div class="px-2 pt-1 pb-0 col-md-5">
+              <mat-form-field class="col-md-12">
+                <input matInput class="px-3 py-1" placeholder="Lease Documentation Charge" type="number" [value]="f.lease_doc"
+                  formControlName="lease_doc" autocomplete="pff" />
+              </mat-form-field>
+            </div>
+            <div class="px-2 pt-1 pb-0 col-md-5 text-center text-secondary">
+              <small class="text-info">PKR</small>
+              <span class="text-secondary ml-2 font-weight-bold">{{getPaid('lease_doc')}}</span>
+            </div>
+            <div class="col-md-2">
+              <button mat-raised-button color="accent" class="text-white vertical-align-middle" (click)="leadToPayout('lease_doc')">
+                PAY
+              </button>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="px-2 pt-1 pb-0 w-100p text-center" colspan="1">West-open / Corner / Park-facing / Road-side</td>
+        <td class="px-2 pt-1 pb-0 w-100p text-center" colspan="1">
+          <div class="col-md-12 row m-0">
+            <div class="px-2 pt-1 pb-0 col-md-5">
+              <mat-form-field class="col-md-12">
+                <input matInput class="px-3 py-1" placeholder="West-open / Corner / Park-facing / Road-side" type="number"
+                  [value]="f.wcpr" formControlName="wcpr" autocomplete="pff" />
+              </mat-form-field>
+            </div>
+            <div class="px-2 pt-1 pb-0 col-md-5 text-center text-secondary">
+              <small class="text-info">PKR</small>
+              <span class="text-secondary ml-2 font-weight-bold">{{getPaid('wcpr')}}</span>
+            </div>
+            <div class="col-md-2">
+              <button mat-raised-button color="accent" class="text-white vertical-align-middle" (click)="leadToPayout('wcpr')">
+                PAY
+              </button>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </table>
+    <div class="col-md-6 d-flex justify-content-end">
+      <div>
+        <button *ngIf="f.allotted === 0" mat-raised-button class="px-5 py-3 text-white" color="accent" [disabled]="checkBalanceOnly"
+          (click)="allotFile()">
+          <mat-icon class="vertical-align-middle mr-1">done</mat-icon>
+          <span class="vertical-align-middle font-weight-bold fs-2r">Allot</span>
+        </button>
+        <!-- <button *ngIf="f.allotted === 1" mat-raised-button class="px-5 py-3 text-white" color="primary" [disabled]="checkBalance">
+          <mat-icon class="vertical-align-middle mr-1">done</mat-icon>
+          <span class="vertical-align-middle font-weight-bold fs-2r">Allot</span>
+        </button> -->
+      </div>
+    </div>
+  </form>
+  <mat-divider></mat-divider>
+  <div class="col-md-12 text-secondary px-4 py-2">
+    PREVIOUS OWNERS
+  </div>
+  <div class="col-md-12 px-4 py-2">
+    <table class="col-md-12">
+      <tr>
+        <th class="px-2 bg-secondary text-white py-1 w-100p text-center" colspan="1">Name</th>
+        <th class="px-2 bg-secondary text-white py-1 w-100p text-center" colspan="1">CNIC</th>
+        <th class="px-2 bg-secondary text-white py-1 w-100p text-center" colspan="1">So./Wo./Do.</th>
+        <th class="px-2 bg-secondary text-white py-1 w-100p text-center" colspan="1">Phone</th>
+        <th class="px-2 bg-secondary text-white py-1 w-100p text-center" colspan="2">Address</th>
+      </tr>
+      <tr *ngFor="let p of prevOwners">
+        <td class="px-2 py-1 w-100p text-center" colspan="1">{{p.name}}</td>
+        <td class="px-2 py-1 w-100p text-center" colspan="1">{{p.cnic}}</td>
+        <td class="px-2 py-1 w-100p text-center" colspan="1">{{p.sowodo}}</td>
+        <td class="px-2 py-1 w-100p text-center" colspan="1">{{p.phone}}</td>
+        <td class="px-2 py-1 w-100p text-center" colspan="2">{{p.address}}</td>
+      </tr>
+    </table>
+  </div>
+</div>

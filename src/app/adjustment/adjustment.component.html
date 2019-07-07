@@ -1,0 +1,56 @@
+<div class="col-md-12 d-flex justify-content-center">
+  <form class="col-md-5 p-1 d-block ml-2" [formGroup]="adjustForm">
+    <h3 class="px-3 text-secondary text-center">
+      ADJUSTMENT FORM
+    </h3>
+    <mat-form-field class="col-md-12">
+      <input type="text" placeholder="Select MS no. of Adjustment From" aria-label="Number" matInput formControlName="msno"
+        [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectFileFrom($event)">
+        <mat-option *ngFor="let f of showFilesList" [value]="f.msno">
+          File# {{ f.msno }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    <mat-form-field class="col-md-12">
+      <input type="text" placeholder="MS no. of file to be adjusted" aria-label="Number" matInput formControlName="toMsno"
+        [matAutocomplete]="autoTo">
+      <mat-autocomplete #autoTo="matAutocomplete" (optionSelected)="selectFileTo($event)">
+        <mat-option *ngFor="let f of showFilesListTo" [value]="f.msno">
+          File# {{ f.msno }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    <div class="col-md-12 py-2 text-center bg-info">
+      <div class="col-md-12 text-white mb-2 text-right">
+        <small>Paid</small>
+      </div>
+      <h3 class="text-white col-md-12 mb-3">
+        {{getPaid}}
+      </h3>
+    </div>
+    <!-- <div class="text-info text-right">
+      <small>Deduction ( 10% ): {{getDeduction}}</small>
+    </div> -->
+    <div class="text-info text-right">
+      <small>Adjust (Remaining): {{getToAdjust}}</small>
+    </div>
+    <mat-form-field class="col-md-12">
+      <input matInput placeholder="Deduction" type="number" min=0 formControlName="deduction" />
+    </mat-form-field>
+    <mat-form-field class="col-md-12">
+      <input matInput placeholder="Cost of Land" type="number" min=0 formControlName="cl" />
+    </mat-form-field>
+    <mat-form-field class="col-md-12">
+      <input matInput placeholder="Miscellaneous" type="number" min=0 formControlName="misc" />
+    </mat-form-field>
+    <mat-form-field class="col-md-12">
+      <input matInput placeholder="Internal Development" type="number" min=0 formControlName="int_dev" />
+    </mat-form-field>
+    <div class="col-md-12 d-flex justify-content-center">
+      <button mat-raised-button (click)="adjust()" color="accent" class="text-white">
+        Adjust
+      </button>
+    </div>
+  </form>
+</div>

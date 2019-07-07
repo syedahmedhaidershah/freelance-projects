@@ -1,0 +1,27 @@
+<mat-toolbar color="primary" class="col-md-12">
+  <span>HASERP</span>
+  <div *ngIf="renderComponent" class="position-absolute r-1r px-5 ">
+    <button mat-icon-button color="accent" class="vertical-align-middle" [matMenuTriggerFor]="repMenu">
+      <mat-icon class="vertical-align-middle text-white">receipt</mat-icon>
+    </button>
+    <button mat-icon-button color="accent" class="vertical-align-middle" [matMenuTriggerFor]="settMenu">
+      <mat-icon class="vertical-align-middle text-white">settings</mat-icon>
+    </button>
+    <mat-menu #repMenu="matMenu">
+      <button mat-menu-item (click)="openTable('members')">Members' List</button>
+      <button mat-menu-item (click)="openTable('balance')">Members' Balance</button>
+      <button mat-menu-item (click)="openTable('issued')">Issued Allotments</button>
+      <button mat-menu-item (click)="openTable('transfers')">Transfers</button>
+      <button mat-menu-item (click)="openTable('refunds')">Refunds</button>
+      <button mat-menu-item (click)="openTable('adjustments')">Adjustments</button>
+    </mat-menu>
+    <mat-menu #settMenu="matMenu">
+      <button mat-menu-item (click)="backupDatabase()">Backup Database</button>
+      <!-- <button mat-menu-item (click)="importDatabase()">Import Database</button> -->
+    </mat-menu>
+    <input #xorseverse type="file" class="d-none" />
+  </div>
+</mat-toolbar>
+<div class="col-md-12 container h-100_64px">
+  <app-dashboard></app-dashboard>
+</div>

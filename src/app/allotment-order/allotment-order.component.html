@@ -1,0 +1,314 @@
+<div class="col-md-12 h-100 px-2 total-container border-double">
+  <h3 class="col-md-12 pt-2 pb-1 m-0 text-center font-weight-bold">
+    <span class="font-weight-bold">
+      <b>
+        ALL PAKISTAN TEACHERS CO-OPERATIVE HOUSING SOCIETY Ltd.
+      </b>
+    </span>
+    <div class="position-absolute hide-print r-1r t-1r">
+      <button mat-icon-button class="mr-1" (click)="close()">
+        <mat-icon>clear</mat-icon>
+      </button>
+      <button mat-icon-button class="mr-1" (click)="print()">
+        <mat-icon>print</mat-icon>
+      </button>
+    </div>
+  </h3>
+  <div class="col-md-12 pb-0 text-center text-uppercase">
+    <small>
+      Office No-8, Second Floor, Bazar-e-Faisal, Karimabad,
+    </small>
+  </div>
+  <div class="col-md-12 pb-1 text-center text-uppercase">
+    <small>
+      F.B.Area., Block-1, Karachi
+    </small>
+  </div>
+  <br>
+  <br>
+  <div class="col-md-12 px-2 pt-2 pb-0">
+    <div class="col-md-12 p-0 row m-0">
+      <div class="col-md-2 row m-0 p-2 border-dark">
+        <div class="col-md-6 text-center">
+          <span>No.</span>
+        </div>
+        <div class="col-md-6 text-center">
+          <span>{{data.aid}}</span>
+        </div>
+      </div>
+      <h3 class="col-md-6 border-bottom-dark p-2 text-center m-0">
+        ALLOTMENT ORDER
+      </h3>
+      <div class="col-md-4 border-dark p-0 text-center row m-0">
+        <div class="col-md-6 text-center border-dark p-2">
+          Dated: {{dateToday}}
+        </div>
+        <div class="col-md-2 text-center border-dark p-2">
+          M/s.
+        </div>
+        <div class="col-md-4 text-center border-dark p-2">
+          {{data.msno}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12 row m-0">
+    <div class="col-md-8 p-0">
+      <div class="col-md-12 container py-2 row m-0 h-200p">
+        <div class="col-md-1 p-1 hide-print">
+          <div class="col-md-12 h-100 border-dark"></div>
+        </div>
+        <div class="col-md-2 p-1 d-print">
+          <div class="col-md-12 h-100 border-dark"></div>
+        </div>
+        <div class="hide-print col-md-11">
+          <div class="text-center col-md-12">
+            <span>
+              <small>Name & Address of Allottee</small>
+            </span>
+          </div>
+          <h3 class="col-md-12 font-weight-bold text-center py-2">
+            <div class="col-md-12">{{data.name}}</div>
+            <br><div class="col-md-12">
+              <span>
+                <small>S/o. W/o. D/o.</small>
+              </span>
+            </div>
+            <br><div class="col-md-12">
+              <span>
+                {{data.sowodo}}
+              </span>
+            </div>
+          </h3>
+          <h4 class="col-md-12 text-center">
+            {{data.address}}
+          </h4>
+        </div>
+        <div class="d-print col-md-10">
+          <div class="text-center col-md-12">
+            <span>
+              <small>Name & Address of Allottee</small>
+            </span>
+          </div>
+          <h3 class="col-md-12 font-weight-bold text-center py-2">
+            <div class="col-md-12">{{data.name}}</div>
+            <div class="col-md-12">
+              <span>
+                <small>S/o. W/o. D/o.</small>
+              </span>
+              <span>
+                {{data.sowodo}}
+              </span>
+            </div>
+          </h3>
+          <h4 class="col-md-12 text-center">
+            {{data.address}}
+          </h4>
+        </div>
+      </div>
+      <div class="col-md-12 p-0 h-50p d-flex justify-content-end">
+        <div class="border-dark p-1">C.N.I.C No.</div>
+        <div class="border-dark px-2">{{getDigStr(data.cnic,0)}}</div>
+        <div class="border-dark px-2">{{getDigStr(data.cnic,1)}}</div>
+        <div class="border-dark px-2">{{getDigStr(data.cnic,2)}}</div>
+        <div class="border-dark px-2">{{getDigStr(data.cnic,3)}}</div>
+        <div class="border-dark px-2">{{getDigStr(data.cnic,4)}}</div>
+        <div class="border-dark px-2">-</div>
+        <div class="border-dark px-2">{{getDigStr(data.cnic,5)}}</div>
+        <div class="border-dark px-2">{{getDigStr(data.cnic,6)}}</div>
+        <div class="border-dark px-2">{{getDigStr(data.cnic,7)}}</div>
+        <div class="border-dark px-2">{{getDigStr(data.cnic,8)}}</div>
+        <div class="border-dark px-2">{{getDigStr(data.cnic,9)}}</div>
+        <div class="border-dark px-2">{{getDigStr(data.cnic,10)}}</div>
+        <div class="border-dark px-2">{{getDigStr(data.cnic,11)}}</div>
+        <div class="border-dark px-2">-</div>
+        <div class="border-dark px-2">{{getDigStr(data.cnic,12)}}</div>
+      </div>
+    </div>
+    <div class="col-md-4 p-0 h-250p">
+      <div class="h-61_25p col-md-12 p-0 row m-0">
+        <div class="border-dark py-2 col-md-4 text-center">
+          <span class="vertical-align-middle">
+            <small>Category</small>
+          </span>
+        </div>
+        <div class="border-dark py-2 col-md-4 text-center">
+          <span class="vertical-align-middle">
+            <small>Plot No.</small>
+          </span>
+        </div>
+        <div class="border-dark py-2 col-md-4 text-center">
+          <span class="vertical-align-middle">
+            <small>Block No.</small>
+          </span>
+        </div>
+      </div>
+      <div class="h-61_25p col-md-12 p-0 row m-0">
+        <h4 class="m-0 border-dark py-2 col-md-4 text-center">
+          <span class="vertical-align-middle">
+            {{data.category}}
+          </span>
+        </h4>
+        <h4 class="m-0 border-dark py-2 col-md-4 text-center">
+          <span class="vertical-align-middle">
+            {{data.plot_no}}
+          </span>
+        </h4>
+        <h4 class="m-0 border-dark py-2 col-md-4 text-center">
+          <span class="vertical-align-middle">
+            {{data.phase}}
+          </span>
+        </h4>
+      </div>
+      <div class="h-61_25p col-md-12 p-0 row m-0">
+        <div class="border-dark py-2 col-md-6 text-center">
+          <span class="vertical-align-middle">
+            <small class="font-weight-bold">Approx. Area of Plot In Sq. Yds.</small>
+          </span>
+        </div>
+        <div class="border-dark py-2 col-md-6 text-center">
+          <span class="vertical-align-middle">
+            <small class="font-weight-bold">Nature of Plot</small>
+          </span>
+        </div>
+      </div>
+      <div class="h-61_25p col-md-12 p-0 row m-0">
+        <h4 class="m-0 border-dark py-2 col-md-6 text-center">
+          <span class="vertical-align-middle">
+            <small class="font-weight-bold">{{getSize(data.category)}}</small>
+          </span>
+        </h4>
+        <h4 class="m-0 border-dark py-2 col-md-6 text-center">
+          <span class="vertical-align-middle">
+            <small class="font-weight-bold">RES.</small>
+          </span>
+        </h4>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="col-md-12 py-2">
+    <b>
+      <span class="fs-1-2r">
+        The management committee of the society has been pleased to allot a residential / commercial Plot No.:&nbsp;
+      </span>
+      <span class="fs-1-5r px-2"><u>{{data.plot_no}}</u></span>
+      <span class="fs-1-2r">
+        &nbsp;Category&nbsp;
+      </span>
+      <span class="fs-1-5r px-2"><u>{{data.category}}</u></span>
+      <span class="fs-1-2r">
+        , in Block&nbsp;
+      </span>
+      <span class="fs-1-5r px-2"><u>{{data.phase}}</u></span>
+      <span class="fs-1-2r">
+        , Measuring&nbsp;
+      </span>
+      <span class="fs-1-5r px-2"><u>{{getSize(data.category)}}</u></span>
+      <span class="fs-1-2r">
+        Sq. Yards to Allot in All Pakistan Teachers Co-operative Housing Society Ltd. Situated in Survey No. 125 Deh
+        Shahi Chhib, Gadap Town, Karachi.
+      </span>
+    </b>
+  </div>
+  <div class="col-md-12 py-2 mt-3">
+    <ul class="col-md-12">
+      <li>
+        The said Allottee will be entitiled to hold the possession of the said plot subject to the provision of the
+        Registered Bye-Laws, Rules and Regulations of the said Society and the Terms and Conditions of Lease to be
+        executed between the Society and the Allottee.
+      </li>
+      <li>
+        That the Allottee is also bound to pay the internal development of the Society as well as external development
+        charges of M,D,A,m C,D,G,K, K.B.C.A, K.W. & S.B., K.E.S.C., S.S.G.C and other concerned authorities and
+        government departments as and when demands.
+      </li>
+      <li>
+        The right of cancellation of this Allotment Order is hereby reserved and vest this society.
+      </li>
+      <li>
+        No any construction will be allowed on the said plot without approval of Building plan as well as prior
+        permission of the Society
+      </li>
+      <li>
+        The Society has reserved the right to cancelled the said allotment, if the allottee breach the terms and
+        conditions of said allotment.
+      </li>
+    </ul>
+  </div>
+  <br>
+  <br>
+  <br>
+  <br>
+  <div class="col-md-12 row mx-0 mb-0 mt-5">
+    <div class="col-md-4 text-center">
+      <div>
+        <span>
+          <small>
+            <b>CHAIRMAN</b>
+          </small>
+        </span>
+      </div>
+      <div>
+        <span>
+          <small>
+            ALL PAKISTAN TEACHERS
+          </small>
+        </span>
+      </div>
+      <div>
+        <span>
+          <small>
+            CO-OPERATIVE HOUSING SOCIETY LTD.
+          </small>
+        </span>
+      </div>
+    </div>
+    <div class="col-md-4 text-center">
+      <div>
+        <span>
+          <small>
+            <b>ALLOTTEE REPRESENTATIVE</b>
+          </small>
+        </span>
+      </div>
+    </div>
+    <div class="col-md-4 text-center">
+      <div>
+        <span>
+          <small>
+            <b>HONORARY SECRATORY</b>
+          </small>
+        </span>
+      </div>
+      <div>
+        <span>
+          <small>
+            ALL PAKISTAN TEACHERS
+          </small>
+        </span>
+      </div>
+      <div>
+        <span>
+          <small>
+            CO-OPERATIVE HOUSING SOCIETY LTD.
+          </small>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="copyrights d-print position-absolute text-center py-4">
+  <div>
+    HASERP &copy; Copyrights 2019. Software and Management System is Powered by Pulsate Technologies
+  </div>
+  <div>
+    website: www.pulsatechs.com
+  </div>
+  <div>
+    email: outreach@pulsatechs.com
+  </div>
+  <div>
+    tel: 03340279837, 03343254171, 03003573769
+  </div>
+</div>

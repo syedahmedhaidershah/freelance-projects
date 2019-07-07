@@ -1,0 +1,54 @@
+<mat-toolbar color="primary">
+  <span>New Allottee</span>
+</mat-toolbar>
+<form [formGroup]="newAllottee" class="col-md-12 px-3 py-4">
+  <!-- <div class="col-md-12 px-4 py-1 row m-0"> -->
+  <div class="col-md-12 px-2">
+    <mat-form-field class="col-md-12">
+      <input type="text" placeholder="Select MS no." aria-label="Number" matInput formControlName="msno"
+        [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let f of showFilesList" [value]="f.msno">
+          File# {{ f.msno }} <span *ngIf="isAssigned(f)">
+            <small class="text-info">&nbsp;(ASSIGNED)</small>
+          </span>
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
+  <div class="col-md-12 px-2">
+    <mat-form-field class="col-md-12">
+      <input matInput class="px-3 py-1" placeholder="Name" formControlName="name" type="text" autocomplete="off" />
+    </mat-form-field>
+  </div>
+  <div class="col-md-12 px-2">
+    <mat-form-field class="col-md-12">
+      <input matInput class="px-3 py-1" placeholder="CNIC" formControlName="cnic" type="number" min=0 max=9999999999999
+        autocomplete="off" />
+    </mat-form-field>
+  </div>
+  <div class="col-md-12 px-2">
+    <mat-form-field class="col-md-12">
+      <input matInput class="px-3 py-1" placeholder="S/o. W/o. D/o." formControlName="sowodo" type="text" autocomplete="off" />
+    </mat-form-field>
+  </div>
+  <!-- </div> -->
+  <!-- <div class="col-md-12 px-4 py-1 row m-0"> -->
+  <div class="col-md-12 px-2">
+    <mat-form-field class="col-md-12">
+      <input matInput class="px-3 py-1" placeholder="Phone" formControlName="phone" type="number" min=0 max=99999999999999
+        autocomplete="off" />
+    </mat-form-field>
+  </div>
+  <div class="col-md-12 px-2">
+    <mat-form-field class="col-md-12">
+      <input matInput class="px-3 py-1" placeholder="Address" formControlName="address" type="text" autocomplete="off" />
+    </mat-form-field>
+  </div>
+  <!-- </div> -->
+  <div class="col-md-12 d-flex justify-content-center p-1 mb-3">
+    <button mat-raised-button class="d-block px-5 text-white text-center" color="accent" (click)="updateFileNew()">
+      Assign
+    </button>
+  </div>
+</form>

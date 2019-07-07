@@ -1,0 +1,364 @@
+@font-face {
+    src: url('./assets/fonts/proximaNovaLight.ttf');
+    font-family: proximaNova;
+}
+
+.font-proxima-nova {
+    font-family: proximaNova!important;
+}
+
+h1, h2, h3, h4, h5, input, button, span {
+    font-family: proximaNova!important;
+}
+
+*, *:active, *:focus {
+    -webkit-touch-callout: none!important;
+    user-select: none!important;
+    outline: none!important;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: proximaNova, Roboto, "Helvetica Neue", sans-serif;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.no-decor, .no-decor:active, .no-decor:visited, .no-decor:focus {
+    text-decoration: none!important;
+}
+
+.vertical-align-middle {
+    vertical-align: middle!important;
+}
+
+.md-p-0 mat-dialog-container {
+    padding: 0px!important;
+}
+
+.vertical-scroll {
+    overflow-y: auto!important;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: #ccc;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #447507;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #5ca209;
+}
+
+.hoverableItem:hover, .hoverableItem:hover mat-expansion-panel-header mat-panel-title, .hoverableItem:hover mat-expansion-panel-header mat-panel-description, .hoverableItem:hover mat-expansion-panel-header span {
+    background-color: #607d8b;
+    color: #ffffff!important;
+}
+
+.h-24_5r {
+    height: 24.5rem;
+}
+
+.r-1r {
+    right: 1rem;
+}
+
+.h-40r {
+    height: 40rem!important;
+}
+
+.h-100_64px {
+    height: calc(100% - 64px)!important;
+}
+
+.r-0_2r {
+    right: 0.2rem;
+}
+
+@media screen {
+    .only-print-view {
+        display: none!important;
+    }
+}
+
+@media print {
+    .only-print-view {
+        display: auto!important;
+    }
+}
+
+.dashboard-block {
+    height: calc(50% - 3rem);
+}
+
+.dashboard-inner-search-block {
+    height: calc(100% - 128px)!important;
+}
+
+.h-64px {
+    height: 64px;
+}
+
+.fs-2r {
+    font-size: 2rem;
+}
+
+.h-50_32px {
+    height: calc(50% - 32px);
+}
+
+.bg-themep {
+    background-color: #607d8b;
+}
+
+.t-1r {
+    top: 1rem;
+}
+
+.border-double {
+    border: 1px solid #000;
+    border-style: double;
+}
+
+.border-dark {
+    border: 1px solid #000;
+}
+
+.border-bottom-dark {
+    border-bottom: 1px solid #000;
+}
+
+.fs-1-5r {
+    font-size: 1.5rem;
+}
+
+.fs-1-2r {
+    font-size: 1.2rem;
+}
+
+.ti-2r {
+    text-indent: 2rem;
+}
+
+.copyrights {
+    bottom: 10px;
+    left: 0px;
+    width: 100%;
+}
+
+.h-200p {
+    height: 200px;
+}
+
+.h-50p {
+    height: 50px;
+}
+
+.h-250p {
+    height: 250px;
+}
+
+.h-61_25p {
+    height: 61.25px!important;
+}
+
+.z-1000 {
+    z-index: 1000;
+}
+
+.loader-wrapper {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+/*Loader 1- Spinning */
+
+#loader-1 #loader {
+    position: relative;
+    left: 50%;
+    top: 50%;
+    height: 20vw;
+    width: 20vw;
+    margin: -10vw 0 0 -10vw;
+    border: 3px solid transparent;
+    border-top-color: #3498db;
+    border-bottom-color: #3498db;
+    border-radius: 50%;
+    z-index: 2;
+    -webkit-animation: spin 2s linear infinite;
+    -moz-animation: spin 2s linear infinite;
+    -o-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+
+#loader-1 #loader:before {
+    content: "";
+    position: absolute;
+    top: 2%;
+    bottom: 2%;
+    left: 2%;
+    right: 2%;
+    border: 3px solid transparent;
+    z-index: 2;
+    border-top-color: #db213a;
+    border-radius: 50%;
+    -webkit-animation: spin 3s linear infinite;
+    -moz-animation: spin 3s linear infinite;
+    -o-animation: spin 3s linear infinite;
+    animation: spin 3s linear infinite;
+}
+
+#loader-1 #loader:after {
+    content: "";
+    position: absolute;
+    top: 5%;
+    bottom: 5%;
+    left: 5%;
+    right: 5%;
+    border: 3px solid transparent;
+    border-top-color: #dec52d;
+    z-index: 2;
+    border-radius: 50%;
+    -webkit-animation: spin 1.5s linear infinite;
+    -moz-animation: spin 1.5s linear infinite;
+    -o-animation: spin 1.5s linear infinite;
+    animation: spin 1.5s linear infinite;
+}
+
+/*Keyframes for spin animation */
+
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        /* Chrome, Opera 15+, Safari 3.1+ */
+        -ms-transform: rotate(0deg);
+        /* IE 9 */
+        transform: rotate(0deg);
+        /* Firefox 16+, IE 10+, Opera */
+    }
+    50% {
+        -webkit-transform: rotate(360deg);
+        /* Chrome, Opera 15+, Safari 3.1+ */
+        -ms-transform: rotate(360deg);
+        /* IE 9 */
+        transform: rotate(180deg);
+        /* Firefox 16+, IE 10+, Opera */
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        /* Chrome, Opera 15+, Safari 3.1+ */
+        -ms-transform: rotate(360deg);
+        /* IE 9 */
+        transform: rotate(360deg);
+        /* Firefox 16+, IE 10+, Opera */
+    }
+}
+
+@-moz-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        /* Chrome, Opera 15+, Safari 3.1+ */
+        -ms-transform: rotate(0deg);
+        /* IE 9 */
+        transform: rotate(0deg);
+        /* Firefox 16+, IE 10+, Opera */
+    }
+    50% {
+        -webkit-transform: rotate(360deg);
+        /* Chrome, Opera 15+, Safari 3.1+ */
+        -ms-transform: rotate(360deg);
+        /* IE 9 */
+        transform: rotate(180deg);
+        /* Firefox 16+, IE 10+, Opera */
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        /* Chrome, Opera 15+, Safari 3.1+ */
+        -ms-transform: rotate(360deg);
+        /* IE 9 */
+        transform: rotate(360deg);
+        /* Firefox 16+, IE 10+, Opera */
+    }
+}
+
+@-o-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        /* Chrome, Opera 15+, Safari 3.1+ */
+        -ms-transform: rotate(0deg);
+        /* IE 9 */
+        transform: rotate(0deg);
+        /* Firefox 16+, IE 10+, Opera */
+    }
+    50% {
+        -webkit-transform: rotate(360deg);
+        /* Chrome, Opera 15+, Safari 3.1+ */
+        -ms-transform: rotate(360deg);
+        /* IE 9 */
+        transform: rotate(180deg);
+        /* Firefox 16+, IE 10+, Opera */
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        /* Chrome, Opera 15+, Safari 3.1+ */
+        -ms-transform: rotate(360deg);
+        /* IE 9 */
+        transform: rotate(360deg);
+        /* Firefox 16+, IE 10+, Opera */
+    }
+}
+
+@keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        /* Chrome, Opera 15+, Safari 3.1+ */
+        -ms-transform: rotate(0deg);
+        /* IE 9 */
+        transform: rotate(0deg);
+        /* Firefox 16+, IE 10+, Opera */
+    }
+    50% {
+        -webkit-transform: rotate(360deg);
+        /* Chrome, Opera 15+, Safari 3.1+ */
+        -ms-transform: rotate(360deg);
+        /* IE 9 */
+        transform: rotate(180deg);
+        /* Firefox 16+, IE 10+, Opera */
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        /* Chrome, Opera 15+, Safari 3.1+ */
+        -ms-transform: rotate(360deg);
+        /* IE 9 */
+        transform: rotate(360deg);
+        /* Firefox 16+, IE 10+, Opera */
+    }
+}
+
+.d-inherit {
+    display: inherit;
+}
+
+.loader-text {
+    background-color: transparent;
+    top: calc(50% - 32px);
+}
+
+.loader-text+div {
+    top: calc(50% + 15vw);
+}

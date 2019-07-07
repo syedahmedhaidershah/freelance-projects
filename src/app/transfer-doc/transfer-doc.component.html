@@ -1,0 +1,208 @@
+<div class="col-md-12 h-100 px-2 total-container border-double">
+  <h3 class="col-md-12 pt-2 pb-1 m-0 text-center font-weight-bold">
+    ALL PAKISTAN TEACHERS CO-OPERATIVE HOUSING SOCIETY LTD. <small>(Regd.)</small>
+    <div class="position-absolute hide-print r-1r t-1r">
+      <button mat-icon-button class="mr-1" (click)="close()">
+        <mat-icon>clear</mat-icon>
+      </button>
+      <button mat-icon-button class="mr-1" (click)="print()">
+        <mat-icon>print</mat-icon>
+      </button>
+    </div>
+  </h3>
+  <div class="col-md-12 pb-0 text-center">
+    <small>
+      Office No-8, Second Floor, Bazar-e-Faisal, Karimabad,
+    </small>
+  </div>
+  <div class="col-md-12 pb-1 text-center">
+    <small>
+      F.B.Area., Block-1, Karachi
+    </small>
+  </div>
+  <div class="col-md-12 py-2 vertical-scroll">
+    <div class="col-md-12 row m-0">
+      <div class="col-md-10 p-0">
+        <div class="col-md-12 pb-2">
+          No. A.P.T.S / {{data.tid}} / {{getYear}}
+        </div>
+        <div class="col-md-12 py-4">
+          <h3 class="col-md-12 text-center">
+            <b>
+              <div class="col-md-12 py-2">
+                <u>
+                  TRANSFER ORDER
+                </u>
+              </div>
+              <div class="col-md-12 py-2">
+                {{data.tType}}
+              </div>
+            </b>
+          </h3>
+        </div>
+      </div>
+      <div class="col-md-1 p-1 hide-print">
+        <div class="col-md-12 h-100 border-dark"></div>
+      </div>
+      <div class="col-md-2 p-1 d-print">
+        <div class="col-md-12 h-100 border-dark"></div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12 row m-0 py-2 mb-2">
+    <div class="col-md-6">
+      <span class="mr-1">Member Ship No.</span>
+      <span class="px-4 py-1 border-bottom-dark font-weight-bold fs-1-5r">
+        {{data.msno}}
+      </span>
+    </div>
+    <div class="col-md-6 text-right">
+      <span class="mr-1">Dated.</span>
+      <span class="px-4 py-1 border-bottom-dark font-weight-bold fs-1-5r">
+        {{getDate(data.dt)}}
+      </span>
+    </div>
+  </div>
+  <div class="col-md-12">
+    To.
+  </div>
+  <div class="col-md-12 pt-2 row m-0 text-center">
+    <div class="col-md-1 pt-2">
+      Mr.</div>
+    <div class="col-md-4 px-4 py-1 border-bottom-dark font-weight-bold fs-1-5r text-uppercase">
+      {{data.transferto.name}}
+    </div>
+    <div class="col-md-2 pt-2">
+      S/o. D/o. W/o.</div>
+    <div class="col-md-5 px-4 py-1 border-bottom-dark font-weight-bold fs-1-5r text-uppercase">
+      {{data.transferto.sowodo}}
+    </div>
+  </div>
+  <div class="col-md-12 pt-2 row m-0 text-center">
+    <div class="col-md-2 pt-2">
+      C.N.I.C. No.
+    </div>
+    <div class="col-md-10 px-5 py-1 border-bottom-dark fs-1-5r text-uppercase text-left">
+      {{data.transferto.cnic}}
+    </div>
+  </div>
+  <div class="col-md-12 pt-2 row m-0 text-center">
+    <div class="col-md-1 pt-2">
+      Address
+    </div>
+    <div class="col-md-11 px-5 py-1 border-bottom-dark fs-1-5r text-uppercase text-left">
+      {{data.transferto.address}}
+    </div>
+  </div>
+  <br>
+  <div class="col-md-12 py-4 row m-0">
+    <h4 class="col-md-1">
+      <span>
+        SUBJECT:
+      </span>
+    </h4>
+    <h4 class="col-md-11 px-5">
+      <div class="col-md-12 py-1">
+        <span class="py-1">
+          TRANSFER OF PLOT NO.
+        </span>
+        <span  class=" px-2 py-1 border-bottom-dark fs-1-5r text-uppercase text-left">
+          {{data.transferto.plot_no}}
+        </span>
+        <span class="py-1">
+          SECTOR
+        </span>
+        <span  class=" px-2 py-1 border-bottom-dark fs-1-5r text-uppercase text-left">
+          {{data.transferto.phase}}
+        </span>
+        <span class="py-1">
+          MEASURING
+        </span>
+        <span  class=" px-2 py-1 border-bottom-dark fs-1-5r text-uppercase text-left">
+          {{getSize(data.transferto.category)}}
+        </span>
+        <span class="py-1">
+          SQ.YDS.
+        </span>
+      </div>
+      <div class="col-md-12 py-1">
+        <span class="py-1">
+          IN ALL PAKISTAN TEACHERS CO-OPERATIVE HOUSING SOCIETY LTD.
+        </span>
+      </div>
+      <div class="col-md-12 py-1">
+        <span class="py-1">
+          (REGD.) NEAR NORTHERN BYPASS, GADAP TOWN, KARACHI
+        </span>
+      </div>
+    </h4>
+  </div>
+  <h4 class="col-md-12 py-2">
+    <p class="ti-2r">
+      <span>It is to inform you that your name as the holder of occupancy right on Plot. No.</span>
+      <span class="fs-1-5r mx-1">
+        <u class="px-2 py-1">{{data.transferto.plot_no}}</u>
+      </span>
+      <span>
+        Sector
+      </span>
+      <span class="fs-1-5r mx-1">
+        <u class="px-2 py-1">{{data.transferto.phase}}</u>
+      </span>
+      <span>
+        Measuring
+      </span>
+      <span class="fs-1-5r mx-1">
+        <u class="px-2 py-1">{{getSize(data.transferto.category)}}</u>
+      </span>
+      <span>
+        Sq. Yds. in ALL PAKISTAN TEACHERS CO-OPERATIVE HOUSING SOCIETY LTD. (REGD.) NEAR NORTHERN BY PASS GADAP TOWN KARACHI.
+      </span>
+      <br>
+      <span>
+        Has substituted in our record and Transfer of the plot effected.
+      </span>
+      <br>
+      <span>
+        Has substituted in our record and Transfer of the Plot via Sale Agreement.
+      </span>
+    </p>
+    <p class="ti-2r">
+      <span>
+        The Terms and condition on which the plot is question was allotted to the Original Allotment will remain same.
+      </span>
+    </p>
+  </h4>
+  <div class="col-md-12 py-3 mb-5 container">
+    <div class="col-md-12 py-4 px-5 d-flex justify-content-end">
+      <div class="col-md-5">
+        <div class="col-md-12 pt-1 pb-4 mb-2 text-center">
+          <span>
+            <i>Honey Secretary</i>
+          </span>
+        </div>
+        <div class="col-md-12 pt-1 text-center">
+          <span>
+            ALL PAKISTAN TEACHERS CO-OPERATIVE<br>
+            HOUSING SOCIETY LTD. (REGD.)<br>
+            KARACHI
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="copyrights d-print position-absolute text-center py-4">
+  <div>
+    HASERP &copy; Copyrights 2019. Software and Management System is Powered by Pulsate Technologies
+  </div>
+  <div>
+    website: www.pulsatechs.com
+  </div>
+  <div>
+    email: outreach@pulsatechs.com
+  </div>
+  <div>
+    tel: 03340279837, 03343254171, 03003573769
+  </div>
+</div>

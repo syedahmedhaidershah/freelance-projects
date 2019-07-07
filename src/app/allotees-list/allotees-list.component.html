@@ -1,0 +1,44 @@
+<div class="h-100 border rounded p-0 shadow">
+    <mat-toolbar color="primary">
+        <span>
+            Files / Allotments
+        </span>
+    </mat-toolbar>
+    <form [formGroup]="searchForm" class="col-md-12 py-1 h-64px row m-0">
+        <input class="border-0 border-bottom col-md-8 p-2" placeholder="Search by MS No." formControlName="msno" />
+    </form>
+    <mat-divider></mat-divider>
+    <div class="col-md-12 p-1 dashboard-inner-search-block vertical-scroll">
+        <div *ngIf="filesList.length === 0">No one has been allotted a file as of yet.</div>
+        <div *ngFor="let f of showFilesList" class="col-md-12 p-1">
+            <div class="col-md-12 row m-0 p-1 py-3 border rounded shadow">
+                <div class="col-md-3 py-3 font-weight-bold">
+                    <span class="vertical-align-middle">
+                        MS# {{f.msno}}
+                    </span>
+                </div>
+                <div class="col-md-3 p-0">
+                    <div *ngIf="f.allotted === 1" class="col-md-12 p-0 text-info">
+                        <div class="col-md-12 p-0 vertical-align-middle text-center">
+                            <b>STATUS:</b>&nbsp;<small>Allotted</small>
+                        </div>
+                    </div>
+                    <div *ngIf="f.allotted === 0" class="col-md-12 p-0 text-secondary">
+                        <div class="col-md-12 p-0 vertical-align-middle text-center">
+                            <b>STATUS:</b>&nbsp;<small>Un-Allotted</small>
+                        </div>
+                    </div>
+                </div>
+                <button mat-raised-button color="accent" class="ml-3 vertical-align-middle text-white px-5 position-absolute r-1r"
+                    (click)="viewFile(f)">
+                    <mat-icon class="vertical-align-middle mr-1">
+                        visibility
+                    </mat-icon>
+                    <span class="vertical-align-middle">
+                        View
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

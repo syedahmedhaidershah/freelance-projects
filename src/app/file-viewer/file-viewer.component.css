@@ -1,0 +1,28 @@
+td {
+    /* font-size: 0.7rem; */
+}
+tr#border-0 {
+    border: 1px solid white!important;
+}
+tr, th, td {
+    border: 1px solid #222;
+    border-collapse: collapse;
+}
+.bottom-row {
+    bottom: 0px;
+}
+@media print {
+    #print-button-container {
+        display: none!important;
+    }
+    .print-container {
+        position: absolute!important;
+        top: 0px;
+        left: 0px;
+        height: 100%;
+        width: 100%;
+    }
+}
+.w-100p {
+    width: 100px!important;
+}

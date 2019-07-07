@@ -1,0 +1,34 @@
+<mat-toolbar color="primary">
+  <span>Receive Payment</span>
+</mat-toolbar>
+<div class="col-md-8 d-block mx-auto px-0 py-5">
+  <form [formGroup]="paymentForm" class="col-md-12 py-1 row m-0">
+    <mat-form-field class="col-md-12">
+      <input type="text" placeholder="Select MS no." aria-label="Number" matInput formControlName="msno"
+        [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectFile($event)">
+        <mat-option *ngFor="let f of showFilesList" [value]="f.msno">
+          File# {{ f.msno }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    <mat-form-field class="col-md-12">
+      <mat-select #typeSelect placeholder="Select payment type" [disabled]="isTypeDisabled" (selectionChange)="setType(typeSelect)">
+        <mat-option *ngFor="let p of payments" [value]="p.value">{{p.label}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="col-md-12">
+      <input type="text" placeholder="Amount" type="number" min=0 aria-label="Number" matInput formControlName="amount" />
+    </mat-form-field>
+    <div *ngIf="showPending" class="col-md-12 text-right text-info mb-3">
+      <small class="text-info">
+        Pending: PKR {{pending}}
+      </small>
+    </div>
+    <div class="col-md-12 py-2 d-flex justify-content-center text-white">
+      <button mat-raised-button (click)="receivePayment()" class="px-4 text-white" color="accent" [disabled]="receiveDisabled">
+        Receive
+      </button>
+    </div>
+  </form>
+</div>

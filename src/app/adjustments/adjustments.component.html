@@ -1,0 +1,119 @@
+<div class="col-md-12 p-0 total-container">
+  <div class="col-md-12 py-3 text-center font-weight-bold">
+    LIST OF DEPOSIT REFUNDS ALL PAKISTAN TEACHERS CO-OPERATIVE HOUSING SOCIETY LIMITED KARACHI
+    {{getDateToday}}
+    <div class="position-absolute hide-print r-1r t-1r">
+      <button mat-icon-button class="mr-1" (click)="close()">
+        <mat-icon>clear</mat-icon>
+      </button>
+      <button mat-icon-button class="mr-1" (click)="print()">
+        <mat-icon>print</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="col-md-12 row m-0 vertical-scroll">
+    <div class="col-md-6 p-1">
+      <div class="col-md-12 py-2 px-0">
+        <div class="col-md-12 text-center py-1 bg-secondary text-white border">
+          List of Adjustment
+        </div>
+        <mat-paginator #mp1 class="hide-print" [pageSizeOptions]="[40]" showFirstLastButtons></mat-paginator>
+        <table mat-table [dataSource]="dtsa" class="mat-elevation-z8">
+      
+          <!--- Note that these columns can be defined in any order.
+                  The actual rendered columns are set as a property on the row definition" -->
+      
+          <ng-container matColumnDef="sno">
+            <th class="text-center py-0" mat-header-cell *matHeaderCellDef> S.No. </th>
+            <td class="text-center py-0" mat-cell *matCellDef="let i = index;"> {{i+1}} </td>
+          </ng-container>
+      
+          <ng-container matColumnDef="msno">
+            <th class="text-center py-0" mat-header-cell *matHeaderCellDef> M/S No. </th>
+            <td class="text-center py-0" mat-cell *matCellDef="let element"> {{element.msno}} </td>
+          </ng-container>
+      
+          <ng-container matColumnDef="name">
+            <th class="text-center py-0" mat-header-cell *matHeaderCellDef> Name </th>
+            <td class="text-center py-0" mat-cell *matCellDef="let element"> {{element.name}} </td>
+          </ng-container>
+      
+          <ng-container matColumnDef="sowodo">
+            <th class="text-center py-0" mat-header-cell *matHeaderCellDef> S/o.W/o.D/o. </th>
+            <td class="text-center py-0" mat-cell *matCellDef="let element"> {{element.sowodo}} </td>
+          </ng-container>
+      
+          <ng-container matColumnDef="amount">
+            <th class="text-center py-0" mat-header-cell *matHeaderCellDef> Amount </th>
+            <td class="text-center py-0" mat-cell *matCellDef="let element"> {{element.amount}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="deduc">
+            <th class="text-center py-0" mat-header-cell *matHeaderCellDef> Deduction </th>
+            <td class="text-center py-0" mat-cell *matCellDef="let element"> {{element.deduc}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="sp">
+            <th class="text-center py-0" mat-header-cell *matHeaderCellDef> Share Capital </th>
+            <td class="text-center py-0" mat-cell *matCellDef="let element"> {{element.sp}} </td>
+          </ng-container>
+      
+          <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns1;"></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="col-md-6 p-1">
+      <div class="col-md-12 py-2 px-0">
+        <div class="col-md-12 text-center py-1 bg-secondary text-white border">
+          List of Adjusted To
+        </div>
+        <mat-paginator #mp2 class="hide-print" [pageSizeOptions]="[40]" showFirstLastButtons></mat-paginator>
+        <table mat-table [dataSource]="dtsb" class="mat-elevation-z8">
+    
+          <!--- Note that these columns can be defined in any order.
+                      The actual rendered columns are set as a property on the row definition" -->
+    
+          <ng-container matColumnDef="msno">
+            <th class="text-center py-0" mat-header-cell *matHeaderCellDef> M/S No. </th>
+            <td class="text-center py-0" mat-cell *matCellDef="let element"> {{element.msno}} </td>
+          </ng-container>
+    
+          <ng-container matColumnDef="name">
+            <th class="text-center py-0" mat-header-cell *matHeaderCellDef> Name </th>
+            <td class="text-center py-0" mat-cell *matCellDef="let element"> {{element.name}} </td>
+          </ng-container>
+    
+          <ng-container matColumnDef="sowodo">
+            <th class="text-center py-0" mat-header-cell *matHeaderCellDef> S/o.W/o.D/o. </th>
+            <td class="text-center py-0" mat-cell *matCellDef="let element"> {{element.sowodo}} </td>
+          </ng-container>
+    
+          <ng-container matColumnDef="cl">
+            <th class="text-center py-0" mat-header-cell *matHeaderCellDef> Cost of Land </th>
+            <td class="text-center py-0" mat-cell *matCellDef="let element"> {{element.cl}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="misc">
+            <th class="text-center py-0" mat-header-cell *matHeaderCellDef> Misc. </th>
+            <td class="text-center py-0" mat-cell *matCellDef="let element"> {{element.misc}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="int_dev">
+            <th class="text-center py-0" mat-header-cell *matHeaderCellDef> Internal Dev. </th>
+            <td class="text-center py-0" mat-cell *matCellDef="let element"> {{element.int_dev}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="dt">
+            <th class="text-center py-0" mat-header-cell *matHeaderCellDef> Dated </th>
+            <td class="text-center py-0" mat-cell *matCellDef="let element"> {{element.dt}} </td>
+          </ng-container>
+    
+          <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

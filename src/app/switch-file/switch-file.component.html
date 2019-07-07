@@ -1,0 +1,13 @@
+<mat-toolbar color="primary">
+  <span>Switch plot to a Different File</span>
+</mat-toolbar>
+<form class="col-md-12 px-5 py-2">
+  <mat-form-field>
+    <mat-select #fileSelect [value]="data.file.aid" (selectionChange)="getNewFile(fileSelect)">
+      <mat-option *ngFor="let f of data.all" [value]="f.aid">File# {{f.msno}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button mat-raised-button color="accent" class="ml-3 px-3 text-white" (click)="switchPlot($event)">
+    Switch
+  </button>
+</form>

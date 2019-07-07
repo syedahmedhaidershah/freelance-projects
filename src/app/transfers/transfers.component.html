@@ -1,0 +1,104 @@
+<div class="col-md-12 p-0 total-container">
+  <div class="col-md-12 py-3 text-center font-weight-bold">
+    LIST OF TRANSFERS ALL PAKISTAN TEACHERS CO-OPERATIVE HOUSING SOCIETY LIMITED KARACHI
+    {{getDateToday}}
+    <div class="position-absolute hide-print r-1r t-1r">
+      <button mat-icon-button class="mr-1" (click)="close()">
+        <mat-icon>clear</mat-icon>
+      </button>
+      <button mat-icon-button class="mr-1" (click)="print()">
+        <mat-icon>print</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="col-md-12 py-2 vertical-scroll">
+    <!-- <table class="col-md-12">
+      <tr>
+        <th class="px-2 bg-secondary text-white py-1 w-100p text-center">S.No.</th>
+        <th class="px-2 bg-secondary text-white py-1 w-100p text-center">M/S No.</th>
+        <th class="px-2 bg-secondary text-white py-1 text-center" [style.width]="getWidthForMid">Name</th>
+        <th class="px-2 bg-secondary text-white py-1 text-center" [style.width]="getWidthForMid">Father's / Husband's Name</th>
+        <th class="px-2 bg-secondary text-white py-1 text-center" [style.width]="getWidthForMid">Address</th>
+        <th class="px-2 bg-secondary text-white py-1 w-100p text-center">Date of Enrollment as Member</th>
+      </tr>
+      <tr *ngFor="let f of showFiles">
+        <td class="px-2 text-secondary py-0 w-100p text-center">{{getSno(f)}}</td>
+        <td class="px-2 text-secondary py-0 w-100p text-center">{{f.msno}}</td>
+        <td class="px-2 text-secondary py-0 text-center" [style.width]="getWidthForMid">{{f.name}}</td>
+        <td class="px-2 text-secondary py-0 text-center" [style.width]="getWidthForMid">{{f.sowodo}}</td>
+        <td class="px-2 text-secondary py-0 text-center" [style.width]="getWidthForMid">{{f.address}}</td>
+        <td class="px-2 text-secondary py-0 w-100p text-center">{{f.doe}}</td>
+      </tr>
+    </table> -->
+    <mat-paginator class="hide-print" [pageSizeOptions]="[40]" showFirstLastButtons></mat-paginator>
+    <table mat-table [dataSource]="dts" class="mat-elevation-z8">
+
+      <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+
+      <ng-container matColumnDef="sno">
+        <th class="text-center py-0" mat-header-cell *matHeaderCellDef> S.No. </th>
+        <td class="text-center py-0" mat-cell *matCellDef="let element; let i = index;">
+          <div class="col-md-12 row p-0">
+            <div class="px-1 vertical-align-middle text-secondary hide-print">
+              <button mat-icon-button class=" text-secondary vertical-align-middle" (click)="openTransfer(element)">
+                <mat-icon>
+                  open_in_new
+                </mat-icon>
+              </button>
+            </div>
+            <div class="px-1 vertical-align-middle">{{i+1}}</div>
+          </div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="msno">
+        <th class="text-center py-0" mat-header-cell *matHeaderCellDef> M/S No. </th>
+        <td class="text-center py-0" mat-cell *matCellDef="let element"> {{element.msno}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="plot">
+        <th class="text-center py-0" mat-header-cell *matHeaderCellDef> Plot No. </th>
+        <td class="text-center py-0" mat-cell *matCellDef="let element"> {{element.transferto.plot_no}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th class="text-center py-0" mat-header-cell *matHeaderCellDef> Name of Transfer </th>
+        <td class="text-center py-0" mat-cell *matCellDef="let element"> {{element.transferfrom.name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="sowodo">
+        <th class="text-center py-0" mat-header-cell *matHeaderCellDef> S/o. W/o. D/o. </th>
+        <td class="text-center py-0" mat-cell *matCellDef="let element"> {{element.transferfrom.sowodo}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="dt">
+        <th class="text-center py-0" mat-header-cell *matHeaderCellDef> Date of Transfer </th>
+        <td class="text-center py-0" mat-cell *matCellDef="let element"> {{getDate(element.dt)}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="nametee">
+        <th class="text-center py-0" mat-header-cell *matHeaderCellDef> Name of Transferee </th>
+        <td class="text-center py-0" mat-cell *matCellDef="let element"> {{element.transferto.name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="sowodotee">
+        <th class="text-center py-0" mat-header-cell *matHeaderCellDef> S/o. W/o. D/o. </th>
+        <td class="text-center py-0" mat-cell *matCellDef="let element"> {{element.transferto.sowodo}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="nictee">
+        <th class="text-center py-0" mat-header-cell *matHeaderCellDef> N.I.C. No. </th>
+        <td class="text-center py-0" mat-cell *matCellDef="let element"> {{element.transferto.cnic}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="addresstee">
+        <th class="text-center py-0" mat-header-cell *matHeaderCellDef> Address </th>
+        <td class="text-center py-0" mat-cell *matCellDef="let element"> {{element.transferto.address}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+</div>

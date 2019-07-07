@@ -1,0 +1,42 @@
+<div class="col-md-12 m-0 p-1 h-100">
+  <div *ngIf="renderComponent" class="col-md-12 row m-0 p-1 h-100">
+    <div class="col-md-4 p-1 h-100">
+      <div class="col-md-12 p-1 h-100">
+        <app-allotees-list></app-allotees-list>
+      </div>
+    </div>
+    <div class="col-md-4 h-100 p-0">
+      <div class="col-md-12 p-1 h-50_32px">
+        <div class="col-md-12 p-1 h-100">
+          <app-plots></app-plots>
+        </div>
+      </div>
+      <div class="col-md-12 p-1 h-50_32px">
+        <div class="col-md-12 p-1 h-100">
+          <div matRipple class="col-md-12 p-0 h-100 d-table rounded bg-info text-white shadow cursor-pointer" (click)="openPaymentDialog()">
+            <h3 class="col-md-12 text-center d-table-cell vertical-align-middle">
+              Receive Payment
+            </h3>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 p-1 h-100">
+      <div class="col-md-12 p-1 h-50_32px">
+        <app-allotment></app-allotment>
+      </div>
+      <div class="col-md-12 p-1 h-50_32px">
+        <div class="col-md-12 p-0 h-100 d-table rounded bg-themep text-white shadow cursor-pointer" (click)="openRefundAdjust()">
+          <h3 class="col-md-12 text-center d-table-cell vertical-align-middle">
+            Refund / Adjust
+          </h3>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!renderComponent">
+    <div class="container py-4">
+      The 5-year license for this system has expired. Please contact our support team for license renewal.
+    </div>
+  </div>
+</div>
