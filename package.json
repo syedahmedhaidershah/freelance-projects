@@ -1,0 +1,30 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "async-mysql": "^1.0.1",
+    "atob": "^2.1.2",
+    "body-parser": "^1.19.0",
+    "btoa": "^1.2.1",
+    "cors": "^2.8.5",
+    "cryptr": "^4.0.2",
+    "express": "^4.16.4",
+    "file-encryptor": "^0.1.1",
+    "md5": "^2.2.1",
+    "mongodb": "^3.2.4",
+    "mysql-import": "^2.0.2",
+    "mysqldump": "^3.0.0",
+    "node-machine-id": "^1.1.12"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.0"
+  }
+}

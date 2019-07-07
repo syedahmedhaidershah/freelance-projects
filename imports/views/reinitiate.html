@@ -1,0 +1,39 @@
+<html>
+
+<head>
+    <title>Re-intialize system</title>
+</head>
+
+<body>
+    <div style="padding:25px;">
+        <div style="padding:25px;">
+            <input id="pass" type="password" placeholder="Enter password: " />
+        </div>
+        <div style="padding:25px;">
+            <button id="reset">Reset</button>
+        </div>
+    </div>
+    <script>
+        const x = new XMLHttpRequest();
+        x.onreadystatechange = () => {
+            if (x.readyState === 4 && x.status === 200) {
+                alert(x.responseText);
+            }
+        }
+
+        function reset() {
+            const val = {
+                password: document.getElementById('pass').value
+            }
+            x.open('POST','http://localhost:9899/reinitiatebypass',true);
+            x.setRequestHeader('Content-type','application/json');
+            x.send(JSON.stringify(val));
+        }
+
+        window.onload = () => {
+            document.getElementById('reset').onclick = reset;
+        }
+    </script>
+</body>
+
+</html>
