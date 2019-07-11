@@ -1,0 +1,36 @@
+{
+  \"id\": \"7498cf9b-17b3-4b64-a923-40422b8a98d7-5b26cf67\",
+  \"lang\": \"en\",
+  \"sessionId\": \"ndni9q1r80f0srtfjf362qki5o\",
+  \"timestamp\": \"2019-07-11T02:43:23.634Z\",
+  \"result\": {
+    \"source\": \"agent\",
+    \"resolvedQuery\": \"asd\",
+    \"action\": \"input.unknown\",
+    \"actionIncomplete\": false,
+    \"score\": 1.0,
+    \"parameters\": {},
+    \"contexts\": [],
+    \"metadata\": {
+      \"intentId\": \"c15f2b4b-7750-43de-bab6-be241ea438d1\",
+      \"intentName\": \"Default Fallback Intent\",
+      \"webhookUsed\": \"false\",
+      \"webhookForSlotFillingUsed\": \"false\",
+      \"isFallbackIntent\": \"true\"
+    },
+    \"fulfillment\": {
+      \"speech\": \"I didn\u0027t get that. Can you repeat?\",
+      \"messages\": [
+        {
+          \"lang\": \"en\",
+          \"type\": 0,
+          \"speech\": \"I didn\u0027t get that. Can you repeat?\"
+        }
+      ]
+    }
+  },
+  \"status\": {
+    \"code\": 200,
+    \"errorType\": \"success\"
+  }
+}
