@@ -77,42 +77,43 @@ public class PanelActivity extends AppCompatActivity {
 //            }
 //        });
 
+        Button bluetoothAddress = (Button) findViewById(R.id.button6);
 
-        try {
-            //if you are using a phone device you should connect to same local network as your laptop and disable your pubic firewall as well
-            socket = IO.socket("http://192.168.0.101:9897");
-            //create connection
-            socket.connect();
-            // emit the event join along side with the nickname
-//            socket.emit("join",Nickname);
-            if (socket.connected()){
-                JSONObject jsonObject = new JSONObject();
-                try {
-                    jsonObject.put("username", sp.getString("username", "admin"));
-                    jsonObject.put("uid", sp.getString("uid", "0"));
-                    socket.emit("register", jsonObject);
-                } catch (JSONException e) {}
-                socket.on(sp.getString("uid", "0"), new Emitter.Listener() {
-                    @Override
-                    public void call(Object... args) {
-                        JSONObject obj = (JSONObject)args[0];
-                        try {
-                            Toast.makeText(PanelActivity.this, obj.getString("message"), Toast.LENGTH_LONG).show();
-                        } catch (JSONException e) {}
-                    }
-                });
-                socket.on(Socket.EVENT_DISCONNECT, new Emitter.Listener() {
-
-                    @Override
-                    public void call(Object... args) {
-                        socket.connect();
-                    }
-
-                });
+        bluetoothAddress.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+                Intent mainIntent = new Intent(PanelActivity.this, BluetoothAddress.class);
+                startActivity(mainIntent);
             }
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
+        });
+
+
+//        try {
+//            //if you are using a phone device you should connect to same local network as your laptop and disable your pubic firewall as well
+//            socket = IO.socket("http://192.168.0.101:9897");
+//            //create connection
+//            socket.connect();
+//            // emit the event join along side with the nickname
+////            socket.emit("join",Nickname);
+//            if (socket.connected()){
+//                JSONObject jsonObject = new JSONObject();
+//                try {
+//                    jsonObject.put("username", sp.getString("username", "admin"));
+//                    jsonObject.put("uid", sp.getString("uid", "0"));
+//                    socket.emit("register", jsonObject);
+//                } catch (JSONException e) {}
+//                socket.on(sp.getString("uid", "0"), new Emitter.Listener() {
+//                    @Override
+//                    public void call(Object... args) {
+//                        JSONObject obj = (JSONObject)args[0];
+//                        try {
+//                            Toast.makeText(PanelActivity.this, obj.getString("message"), Toast.LENGTH_LONG).show();
+//                        } catch (JSONException e) {}
+//                    }
+//                });
+//            }
+//        } catch (URISyntaxException e) {
+//            e.printStackTrace();
+//        }
 
 //        Intent backSocketIntent = new Intent(PanelActivity.this, BackSocket.class);
 //        startService(backSocketIntent);
