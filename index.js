@@ -5,6 +5,7 @@ var io = require('socket.io')(http);
 const bp = require('body-parser');
 const cors = require('cors');
 const router = express.Router();
+const process = require('process');
 
 const defs = require('./imports/defs');
 
@@ -13,8 +14,8 @@ app.use(bp.urlencoded({ extended: true }));
 app.use(cors());
 app.use('/', router);
 
-const ioPort = 9898;
-const appPort = 9899;
+const ioPort =  process.env.PORT || 9898;
+const appPort = process.env.PORT || 9899;
 
 require('./imports/socket')(io);
 require('./imports/router')(router);
