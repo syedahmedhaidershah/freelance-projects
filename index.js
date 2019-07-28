@@ -14,8 +14,8 @@ app.use(bp.urlencoded({ extended: true }));
 app.use(cors());
 app.use('/', router);
 
-const ioPort =  9898;
-const appPort = 25062;
+const ioPort = process.env.PORT || 9898;
+const appPort = process.env.PORT || 9899;
 
 require('./imports/socket')(io);
 require('./imports/router')(router);
