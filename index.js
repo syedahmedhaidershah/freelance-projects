@@ -15,7 +15,7 @@ app.use(cors());
 app.use('/', router);
 
 const ioPort =  9898;
-const appPort = process.env.PORT || 25062;
+const appPort = 80;
 
 require('./imports/socket')(io);
 require('./imports/router')(router);
