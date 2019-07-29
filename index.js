@@ -86,8 +86,14 @@ require('./imports/socket')(io);
 require('./imports/router')(router);
 
 
-app.all('*', (req, res) => res.send(defs.errRes));
-router.all('*', (req, res) => res.send(defs.errRes));
+app.all('*', (req, res) => {
+    res.send(defs.errRes);
+    console.log('misfired request');
+});
+router.all('*', (req, res) => {
+    res.send(defs.errRes);
+    console.log('misfired request');
+});
 
 http.listen(ioPort, function () {
     console.log(`listening on *:${ioPort}`);
