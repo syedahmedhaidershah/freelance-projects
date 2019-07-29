@@ -12,17 +12,17 @@ module.exports = (io) => {
             console.log(`connected Users: ${connectedUsers}`);
         });
 
-        socket.on('image', (data) => {
-            let ext = '';
+        // socket.on('image', (data) => {
+        //     let ext = '';
 
-            const pngReg = 'data:image/png;base64,';
-            const jpReg = 'data:image/jpg;base64,';
-            const jpReg2 = 'data:image/jpeg;base64,';
+        //     const pngReg = 'data:image/png;base64,';
+        //     const jpReg = 'data:image/jpg;base64,';
+        //     const jpReg2 = 'data:image/jpeg;base64,';
 
-            ext = ((new RegExp(pngReg)).test(data.image)) ? 'png' : ext;
-            ext = ((new RegExp(jpReg)).test(data.image)) ? 'jpg' : ext;
-            ext = ((new RegExp(jpReg2)).test(data.image)) ? 'jpeg' : ext;
-        });
+        //     ext = ((new RegExp(pngReg)).test(data.image)) ? 'png' : ext;
+        //     ext = ((new RegExp(jpReg)).test(data.image)) ? 'jpg' : ext;
+        //     ext = ((new RegExp(jpReg2)).test(data.image)) ? 'jpeg' : ext;
+        // });
 
         socket.on('image', (data) => {
             // console.log(data);
