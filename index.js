@@ -13,6 +13,7 @@ const TOKEN_PATH = './cloud/token.json';
 
 global.drive = null;
 global.reading = 1024;
+global.userpresent = false;
 
 const defs = require('./imports/defs');
 

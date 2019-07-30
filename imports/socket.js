@@ -40,7 +40,11 @@ module.exports = (io) => {
         });
 
         socket.on('userpresent', (data) => {
-            console.log(data);
+            global.userpresent = data;
+
+            if(global.userpresent && global.reading < 59) {
+                socket.emit('alert', {});
+            }
         })
     });
 }
