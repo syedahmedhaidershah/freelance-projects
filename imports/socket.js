@@ -42,7 +42,7 @@ module.exports = (io) => {
         socket.on('userpresent', (data) => {
             global.userpresent = data;
 
-            if(global.userpresent && global.reading < 59) {
+            if(global.userpresent && global.reading > 900) {
                 socket.emit('alert', {});
             }
         })
