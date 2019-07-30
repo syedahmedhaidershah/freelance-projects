@@ -12,18 +12,6 @@ module.exports = (io) => {
             console.log(`connected Users: ${connectedUsers}`);
         });
 
-        // socket.on('image', (data) => {
-        //     let ext = '';
-
-        //     const pngReg = 'data:image/png;base64,';
-        //     const jpReg = 'data:image/jpg;base64,';
-        //     const jpReg2 = 'data:image/jpeg;base64,';
-
-        //     ext = ((new RegExp(pngReg)).test(data.image)) ? 'png' : ext;
-        //     ext = ((new RegExp(jpReg)).test(data.image)) ? 'jpg' : ext;
-        //     ext = ((new RegExp(jpReg2)).test(data.image)) ? 'jpeg' : ext;
-        // });
-
         socket.on('image', (data) => {
             // console.log(data);
             const folderId = '17_a6ALC6a2dVk06Dcgb_lwk_J-CEgoVg'
@@ -49,6 +37,10 @@ module.exports = (io) => {
                     console.log('File Id: ', file.id);
                 }
             });
+        });
+
+        socket.on('userpresent', (data) => {
+            console.log(data);
         })
     });
 }
