@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Vidulum</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="google_maps_key">AIzaSyADHQqeN4hQNgWw7Oy9kocjpDf2bbs9toM</string>
+</resources>
