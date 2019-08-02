@@ -22,7 +22,6 @@ public class BluetoothAddress extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bluetooth_address);
 
-
         try {
             socket = IO.socket("http://192.168.0.101:9897");
             socket.connect();
@@ -41,6 +40,6 @@ public class BluetoothAddress extends AppCompatActivity {
             }
         });
 
-        socket.on(socket.)
+//        socket.on(socket.EVENT_DISCONNECT, sock)
     }
 }

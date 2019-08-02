@@ -40,7 +40,8 @@ public class VideoActivity extends Activity {
         });
 
         ipCamView = findViewById(R.id.ip_cam_view);
-        ipCamView.setUrl("http://192.168.0.105:8888/out.jpg?q=30&id=0.9479069705501526");
+//        ipCamView.setUrl("http://192.168.0.101:8888/out.jpg?q=30&id=0.9479069705501526");
+        ipCamView.setUrl("http://192.168.0.101:9896/img");
         ipCamView.setInterval(16); // In milliseconds, default 1000
         ipCamView.start();
     }

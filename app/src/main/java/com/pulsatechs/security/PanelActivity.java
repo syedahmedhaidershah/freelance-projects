@@ -28,6 +28,15 @@ public class PanelActivity extends AppCompatActivity {
     SharedPreferences sp;
     private Socket socket;
     String uid;
+    {
+        try {
+            socket = IO.socket("http://192.168.0.101:9897");
+            socket.connect();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +67,7 @@ public class PanelActivity extends AppCompatActivity {
 
         gate.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
+                socket.emit("opengate", "opensesame");
             }
         });
 
