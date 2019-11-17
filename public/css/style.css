@@ -1,0 +1,31 @@
+body
+{
+	margin: 0;
+	padding: 0;
+}
+
+.sign-up-form
+{
+	width: calc(15% + 100px);
+	box-shadow: 0 0 3px 0 rgba(0,0,0,0.3);
+	background: #fff;
+	padding: 15px 20px;
+	margin: 0% auto 0;
+	text-align: center;
+}
+
+.min-h-64 {
+	min-height: 64px!important;
+}
+
+/*.min-h-body {
+	min-height: calc(100% - 128px)!important;
+}*/
+
+.border-light-gray {
+	border: 1px solid #aaa!important;
+}
+
+.bg-lightest-gray {
+	background-color: #f1f3f6;
+}
