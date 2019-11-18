@@ -1,31 +1,71 @@
-body
-{
-	margin: 0;
-	padding: 0;
+@font-face {
+    src: url('../fonts/HarmoniaSansMonoStd-Bold.otf') format("opentype");
+    font-family: harmoniaBold;
 }
 
-.sign-up-form
-{
-	width: calc(15% + 100px);
-	box-shadow: 0 0 3px 0 rgba(0,0,0,0.3);
-	background: #fff;
-	padding: 15px 20px;
-	margin: 0% auto 0;
-	text-align: center;
+@font-face {
+    src: url('../fonts/HarmoniaSansProCyr-SemiBd.otf') format("opentype");
+    font-family: harmoniaSemiBd;
+}
+
+@font-face {
+    src: url('../fonts/HarmoniaSansProCyr-Light.otf') format("opentype");
+    font-family: harmoniaLight;
+}
+
+@font-face {
+    src: url('../fonts/HarmoniaSansProCyr-Black.otf') format("opentype");
+    font-family: harmoniaRegular;
+}
+
+@font-face {
+    src: url('../fonts/HarmoniaSansMonoStd-Regular.otf') format("opentype");
+    font-family: harmoniaBlack;
+}
+
+* {
+    font-family: harmoniaLight!important;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.sign-up-form {
+    /* width: calc(15% + 100px); */
+    box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.3);
+    background: #fff;
+    padding: 15px 20px;
+    margin: 0% auto 0;
+    text-align: center;
 }
 
 .min-h-64 {
-	min-height: 64px!important;
+    min-height: 64px!important;
 }
 
+
 /*.min-h-body {
-	min-height: calc(100% - 128px)!important;
+min-height: calc(100% - 128px)!important;
 }*/
 
 .border-light-gray {
-	border: 1px solid #aaa!important;
+    border: 1px solid #aaa!important;
 }
 
 .bg-lightest-gray {
-	background-color: #f1f3f6;
+    background-color: #f1f3f6;
+}
+
+.b-0 {
+    bottom: 0px;
+}
+
+.l-0 {
+    left: 0px;
+}
+
+.font-weight-bold {
+    font-weight: 800!important;
 }

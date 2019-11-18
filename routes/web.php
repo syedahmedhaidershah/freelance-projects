@@ -20,10 +20,10 @@ Route::get('/signup', function () {
 Route::get('/welcome', function () {
     return view('welcome');
 });
-
 Route::get('/signin',  function () {
     return view('signin');
 });
+Route::post('/signupprocess', function() { return view('signup_process'); });
 
 
 
