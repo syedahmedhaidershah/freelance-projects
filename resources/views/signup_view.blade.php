@@ -45,12 +45,12 @@
                 <div class="col-6 pr-2 pl-0">
                     <select class="px-3 py-2 small rounded border-light-gray col-12" name="addresscity" placeholder="City">
                         <option value="" selected disabled>Select a City</option>
-                        <option value="">Karachi</option>
-                        <option value="">Lahore</option>
-                        <option value="">Islamabad</option>
-                        <option value="">Quetta</option>
-                        <option value="">Peshawar</option>
-                        <option value="">NYC</option>
+                        <option value="1">Karachi</option>
+                        <option value="2">Lahore</option>
+                        <option value="3">Islamabad</option>
+                        <option value="4">Quetta</option>
+                        <option value="5">Peshawar</option>
+                        <option value="6">NYC</option>
                     </select>
                     <!-- <input class="px-3 py-2 small rounded border-light-gray col-12" type="text" name="Address" placeholder="City"> -->
                 </div>
