@@ -1,6 +1,6 @@
 @extends('common') @section('contents')
-<div class="col-12 px-0 py-5">
-    <h4 class="col-12 text-center py-3 mb-2 text-center">
+<div class="col-12 px-0 py-3">
+    <h4 class="col-12 text-center py-5 mb-2 text-center">
         Create your Account
     </h4>
     <div class="col-md-4 col-sm-8 col-xs-10 sign-up-form bg-white">

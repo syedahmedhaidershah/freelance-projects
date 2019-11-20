@@ -26,5 +26,3 @@ Route::get('/signin',  function () {
 Route::post('/signupprocess', function() { return view('signup_process'); });
 
 
-
-
