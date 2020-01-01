@@ -32,7 +32,19 @@ app.get('/check', (req, res) => {
     });
 
 });
-
+app.post("/add_product", (req, res) => {
+ 
+    //read product information from request
+    // let product = new Product(req.body.prd_name, req.body.prd_price);
+ 
+    connection.query(`INSERT INTO PRODUCTS(description,price) \
+    VALUES('${req.body.description}',${req.body.price})`, (err, data)=> {
+        res.status(200).json({
+            message:"Product added.",
+            productId: data
+        });
+    });
+});
 
 // make the server listen to requests
 app.listen(PORT, () => {
