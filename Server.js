@@ -15,6 +15,11 @@ const connection = mysql.createConnection({
     port: 3306
 });
 
+app.configure(function(){
+    app.use(express.bodyParser());
+    app.use(app.router);
+  });
+
 connection.connect((err) => {
     if (err) throw err;
     console.log('Connected!');
@@ -36,7 +41,7 @@ app.post("/add_product", (req, res) => {
  
     //read product information from request
     // let product = new Product(req.body.prd_name, req.body.prd_price);
- console.log("add_product: ",req)
+ console.log("add_product: ",req.body)
     connection.query(`INSERT INTO PRODUCTS(description,price) \
     VALUES('${req.body.description}',${req.body.price})`, (err, data)=> {
         res.status(200).json({
