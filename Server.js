@@ -43,6 +43,7 @@ app.post("/add_product", (req, res) => {
  console.log("add_product: ",req.body)
     connection.query(`INSERT INTO PRODUCTS(description,price) \
     VALUES('${req.body.description}',${req.body.price})`, (err, data)=> {
+        console.log(err);
         res.status(200).json({
             message:"Product added.",
             productId: data
