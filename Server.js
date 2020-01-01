@@ -8,10 +8,11 @@ const mysql = require('mysql');
 
 const connection = mysql.createConnection({
     // localhost
-    host: '209.188.88.14',
-    user: 'kingstonantiques_1',
-    password: 'k=2]KRXJ9faP',
-    database: 'kingstonantiques_1'
+    host: 'localhost',
+    user: 'kingstonantiques_haider',
+    password: 'woulzmvu54fz',
+    database: 'kingstonantiques_1',
+    port: 3306
 });
 
 connection.connect((err) => {
