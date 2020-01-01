@@ -24,7 +24,7 @@ connection.connect((err) => {
 const PORT = 9999;
 
 // create a route for the app
-app.get('/', (req, res) => {
+app.get('/check', (req, res) => {
     connection.query('SELECT * FROM Authentication', (err, rows) => {
         if (err) throw err;
         console.log('Data received from Db:\n');
