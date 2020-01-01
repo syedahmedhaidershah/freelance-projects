@@ -3,7 +3,7 @@ const express = require('express');
 
 // create new express app and save it as "app"
 const app = express();
-
+const bodyParser = require('body-parser');
 const mysql = require('mysql');
 
 const connection = mysql.createConnection({
@@ -15,10 +15,9 @@ const connection = mysql.createConnection({
     port: 3306
 });
 
-app.configure(function(){
-    app.use(express.bodyParser());
-    app.use(app.router);
-  });
+
+    app.use(bodyParser.json());
+  
 
 connection.connect((err) => {
     if (err) throw err;
