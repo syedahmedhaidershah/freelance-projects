@@ -41,7 +41,7 @@ app.post("/add_product", (req, res) => {
     //read product information from request
     // let product = new Product(req.body.prd_name, req.body.prd_price);
  console.log("add_product: ",req.body)
-    connection.query(`INSERT INTO PRODUCTS(description,price) \
+    connection.query(`INSERT INTO Products(description,price) \
     VALUES('${req.body.description}',${req.body.price})`, (err, data)=> {
         console.log(err);
         res.status(200).json({
