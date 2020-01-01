@@ -51,6 +51,51 @@ app.post("/add_product", (req, res) => {
     });
 });
 
+app.post("/add_invoice", (req, res) => {
+ 
+    //read product information from request
+    // let product = new Product(req.body.prd_name, req.body.prd_price);
+ console.log("add_product: ",req.body)
+    connection.query(`INSERT INTO Products(id,
+        stallId,
+        productId,
+        description,
+        price,
+        finalPrice,
+        salesPersonId,
+        stallHolderId,
+        dateTime,
+        paymentMethod,
+        total,
+        customerId,
+        quantity
+        ) \
+    VALUES('${req.body.id}'
+    ,${req.body.stallId}
+    ,${req.body.productId}
+    ,${req.body.description}
+    ,${req.body.price}
+    ,${req.body.finalPrice}
+    ,${req.body.salesPersonId}
+    ,${req.body.stallHolderId}
+    ,${req.body.dateTime}
+    ,${req.body.paymentMethod}
+    ,${req.body.total}
+    ,${req.body.customerId}
+    ,${req.body.quantity})`, (err, data)=> {
+        if(!err){
+        res.status(200).json({
+            message:"Invoice added.",
+            productId: data
+        });
+    } else {
+        res.status(400).json({
+            message:err
+        });
+    }
+    });
+});
+
 // make the server listen to requests
 app.listen(PORT, () => {
     console.log(`Server running at: http://localhost:${PORT}/`);
