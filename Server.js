@@ -57,7 +57,7 @@ app.post("/add_invoice", (req, res) => {
     // let product = new Product(req.body.prd_name, req.body.prd_price);
  console.log("add_product: ",req.body)
     connection.query(`INSERT INTO Invoices(id,stallId,productId,description,price,finalPrice,salesPersonId,stallHolderId,dateTime,paymentMethod,total,customerId,quantity) \
-    VALUES('${req.body.id}',${req.body.stallId},${req.body.productId},'${req.body.description}',${req.body.price},${req.body.finalPrice},${req.body.salesPersonId},${req.body.stallHolderId},'${req.body.dateTime}','${req.body.paymentMethod}',${req.body.total},${req.body.customerId},${req.body.quantity})`, (err, data)=> {
+    VALUES(${req.body.id},${req.body.stallId},${req.body.productId},'${req.body.description}',${req.body.price},${req.body.finalPrice},${req.body.salesPersonId},${req.body.stallHolderId},'${req.body.dateTime}','${req.body.paymentMethod}',${req.body.total},${req.body.customerId},${req.body.quantity})`, (err, data)=> {
         if(!err){
         res.status(200).json({
             message:"Invoice added.",
