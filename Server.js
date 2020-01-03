@@ -36,6 +36,14 @@ app.get('/check', (req, res) => {
     });
 
 });
+app.get('/get_invoices', (req, res) => {
+    connection.query('SELECT * FROM Invoices', (err, rows) => {
+        if (err) throw err;
+        console.log('Data received from Db:\n');
+        res.send(rows);
+    });
+
+});
 app.post("/add_product", (req, res) => {
  
     //read product information from request
