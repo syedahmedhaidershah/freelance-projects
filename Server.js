@@ -247,14 +247,33 @@ app.post("/add_invoice", (req, res) => {
     console.log("add_product: ", req.body)
     var error = null
     var body = req.body
-    body.items.map(v => {
-        connection.query(`INSERT INTO Invoices(id,stallId,productId,description,price,finalPrice,salesPersonId,stallHolderId,dateTime,paymentMethod,total,customerId,quantity) \
-    VALUES(${v.id},'${v.stallId}',${v.productId},'${v.description}',${v.price},${v.finalPrice},'${v.salesPersonId}','${v.stallHolderId}','${v.dateTime}','${v.paymentMethod}',${body.total},${body.customerId},${v.quantity})`, (err, data) => {
+    var dateTime = Date.now();
+    connection.query(`INSERT INTO Invoices(stallId,salesPersonId,stallHolderId,dateTime,paymentMethod,total,customerId) \
+    VALUES('${body.stallId}','${body.salesPersonId}','${body.stallHolderId}','${dateTime}','${body.paymentMethod}',${body.total},${body.customerId})`, (err, data) => {
             if (err) {
                 error = err;
+            } else {
+
+                connection.query(`SELECT id FROM Invoices where customerId = ${body.customerId} AND dateTime = '${dateTime}'`, (err, rows) => {
+                    if (err) throw err;
+                    console.log('Data received from Db:\n');
+                    // res.send(rows);
+                    body.items.map(v => {
+                        connection.query(`INSERT INTO InvoiceDetails(id,productId,description,price,finalPrice,quantity) \
+                    VALUES(${rows},${v.productId},'${v.description}',${v.price},${v.finalPrice},${v.quantity})`, (err, data) => {
+                            if (err) {
+                                error = err;
+                            }
+                        });
+                    }) 
+                });
+
+                
             }
         });
-    })
+    // })
+
+    
     if (error == null) {
         res.status(200).json({
             message: "Invoice added.",
