@@ -126,8 +126,8 @@ app.post("/add_product", (req, res) => {
 
     var code = Math.floor(Math.random() * (99999 - 10000 + 1)) + min;
 
-    connection.query(`INSERT INTO Products(description,price,barcode) \
-    VALUES('${req.body.description}',${req.body.price},'${code}')`, (err, data) => {
+    connection.query(`INSERT INTO Products(description,price,barcode,quantity) \
+    VALUES('${req.body.description}',${req.body.price},'${code}',${req.body.quantity})`, (err, data) => {
 
         if (!err) {
             res.status(200).json({
@@ -260,7 +260,7 @@ app.post("/add_invoice", (req, res) => {
                     // res.send(rows);
                     body.items.map(v => {
                         connection.query(`INSERT INTO InvoiceDetails(id,productId,description,price,finalPrice,quantity) \
-                    VALUES(${rows},${v.productId},'${v.description}',${v.price},${v.finalPrice},${v.quantity})`, (err, data) => {
+                    VALUES(${rows},'${v.productId}','${v.description}',${v.price},${v.finalPrice},${v.quantity})`, (err, data) => {
                             if (err) {
                                 error = err;
                             }
