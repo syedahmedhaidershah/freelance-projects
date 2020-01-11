@@ -60,7 +60,7 @@ app.get('/get_products', (req, res) => {
     });
 
 });
-app.get('/get_products_id/:id', (req, res) => {
+app.get('/get_products_id', (req, res) => {
     console.log(req.query.id);
 
     connection.query(`SELECT * FROM Products WHERE id = ${req.query.id}`, (err, rows) => {
