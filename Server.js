@@ -71,8 +71,47 @@ app.get('/get_products_id', (req, res) => {
     });
 
 });
+app.get('/get_products_code', (req, res) => {
+    console.log(req.query.code);
+
+    connection.query(`SELECT * FROM Products WHERE barcode = '${req.query.code}'`, (err, rows) => {
+        if (err) throw err;
+        
+        console.log('Data received from Db:\n');
+        res.send(rows);
+    });
+
+});
+app.get('/get_stall_id', (req, res) => {
+    console.log(req.query.id);
+
+    connection.query(`SELECT * FROM Stall WHERE id = '${req.query.id}'`, (err, rows) => {
+        if (err) throw err;
+        
+        console.log('Data received from Db:\n');
+        res.send(rows);
+    });
+
+});
+
 app.get('/get_stalls', (req, res) => {
     connection.query('SELECT * FROM Stall', (err, rows) => {
+        if (err) throw err;
+        console.log('Data received from Db:\n');
+        res.send(rows);
+    });
+
+});
+app.get('/get_stall_holders', (req, res) => {
+    connection.query('SELECT * FROM StallHolder', (err, rows) => {
+        if (err) throw err;
+        console.log('Data received from Db:\n');
+        res.send(rows);
+    });
+
+});
+app.get('/get_stall_holder_id', (req, res) => {
+    connection.query(`SELECT * FROM StallHolder where id = ${req.query.id}`, (err, rows) => {
         if (err) throw err;
         console.log('Data received from Db:\n');
         res.send(rows);
@@ -94,6 +133,83 @@ app.post("/add_product", (req, res) => {
             res.status(200).json({
                 message: "Product added.",
                 productId: data
+            });
+        } else {
+            console.log(err);
+            res.status(400).json({
+                message: err
+            });
+        }
+    });
+});
+
+app.post("/add_customer", (req, res) => {
+
+    //read product information from request
+    // let product = new Product(req.body.prd_name, req.body.prd_price);
+    console.log("add_product: ", req.body)
+
+    // var code = Math.floor(Math.random() * (99999 - 10000 + 1)) + min;
+
+    connection.query(`INSERT INTO Customers( name, address, number, email) VALUES ('${req.body.name}','${req.body.address}','${req.body.number}','${req.body.email}')`, (err, data) => {
+
+        if (!err) {
+            res.status(200).json({
+                message: "Customer added.",
+                customerId: data
+            });
+        } else {
+            console.log(err);
+            res.status(400).json({
+                message: err
+            });
+        }
+    });
+});
+
+
+
+
+app.post("/edit_customer", (req, res) => {
+
+    //read product information from request
+    // let product = new Product(req.body.prd_name, req.body.prd_price);
+    console.log("add_product: ", req.body)
+
+    // var code = Math.floor(Math.random() * (99999 - 10000 + 1)) + min;
+
+    connection.query(`UPDATE Customers SET name='${req.body.name}',address='${req.body.address}',number='${req.body.number}',email='${req.body.email}' WHERE id = ${req.body.id}`, 
+     (err, data) => {
+
+        if (!err) {
+            res.status(200).json({
+                message: "Customer editted.",
+                customerId: data
+            });
+        } else {
+            console.log(err);
+            res.status(400).json({
+                message: err
+            });
+        }
+    });
+});
+
+app.post("/edit_stall", (req, res) => {
+
+    //read product information from request
+    // let product = new Product(req.body.prd_name, req.body.prd_price);
+    console.log("edit_stall: ", req.body)
+
+    // var code = Math.floor(Math.random() * (99999 - 10000 + 1)) + min;
+
+    connection.query(`UPDATE Stall SET stallHolderId=${req.body.stallHolderId}  WHERE id = ${req.body.id}`, 
+     (err, data) => {
+
+        if (!err) {
+            res.status(200).json({
+                message: "Stall editted.",
+                stallId: data
             });
         } else {
             console.log(err);
