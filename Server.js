@@ -45,13 +45,65 @@ app.get('/check', (req, res) => {
 
 });
 app.get('/get_invoices', (req, res) => {
+    var invoices = '';
     connection.query('SELECT * FROM Invoices', (err, rows) => {
         if (err) throw err;
         console.log('Data received from Db:\n');
-        res.send(rows);
+        invoices = rows
+        rows.map((v,i)=> {
+            connection.query(`SELECT * FROM InvoiceDetails where id = ${v.id}`, (err, rows1) => {
+                if (err) throw err;
+                console.log('Data received from Db:\n');
+                rows1.map(w=> {
+                    invoices[i].items.push(w)
+                })
+                // res.send(rows);
+            });
+            connection.query(`SELECT * FROM Refund where invoiceId = ${v.id}`, (err, rows2) => {
+                if (err) throw err;
+                console.log('Data received from Db:\n');
+                rows2.map(r=> {
+                    invoices[i].refunds.push(r);
+                })
+                // res.send(rows);
+            });
+        })
+        res.send(invoices);
+        // res.send(rows); 
     });
 
 });
+
+app.get('/get_invoice_id', (req, res) => {
+    var invoices = '';
+    connection.query(`SELECT * FROM Invoices where id = ${req.query.id}`, (err, rows) => {
+        if (err) throw err;
+        console.log('Data received from Db:\n');
+        invoices = rows
+        
+            connection.query(`SELECT * FROM InvoiceDetails where id = ${req.query.id}`, (err, rows1) => {
+                if (err) throw err;
+                console.log('Data received from Db:\n');
+                rows1.map(w=> {
+                    invoices[i].items.push(w)
+                })
+                // res.send(rows);
+            });
+            connection.query(`SELECT * FROM Refund where invoiceId = ${req.query.id}`, (err, rows2) => {
+                if (err) throw err;
+                console.log('Data received from Db:\n');
+                rows2.map(r=> {
+                    invoices[i].refunds.push(r);
+                })
+                // res.send(rows);
+            });
+        
+        res.send(invoices);
+        // res.send(rows); 
+    });
+
+});
+
 app.get('/get_products', (req, res) => {
     connection.query('SELECT * FROM Products', (err, rows) => {
         if (err) throw err;
@@ -142,6 +194,40 @@ app.post("/add_product", (req, res) => {
         }
     });
 });
+
+app.post("/refund", (req, res) => {
+
+    //read product information from request
+    // let product = new Product(req.body.prd_name, req.body.prd_price);
+    console.log("refund: ", req.body)
+
+    var refund = req.body
+    // var code = Math.floor(Math.random() * (99999 - 10000 + 1)) + min;
+var error = null;
+    refund.items.map(v=> {
+        connection.query(`INSERT INTO Refund(invoiceId, productId, dateTime, reason, cash, card, salesPersonId)
+        VALUES (${req.body.invoiceId},${v.productId},'${req.body.dateTime}','${req.body.reason}',${req.body.cash},${req.body.card},${req.body.salesPersonId})`, (err, data) => {
+   
+           if(err){
+               error = err
+           }
+       });
+       if (error == null) {
+        res.status(200).json({
+            message: "Product refunded.",
+            productId: data
+        });
+    } else {
+        console.log(error);
+        res.status(400).json({
+            message: error
+        });
+    }
+    })    
+
+    
+});
+
 
 app.post("/add_customer", (req, res) => {
 
