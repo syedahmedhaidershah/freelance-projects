@@ -215,7 +215,7 @@ var error = null;
        if (error == null) {
         res.status(200).json({
             message: "Product refunded.",
-            productId: data
+            // productId: data
         });
     } else {
         console.log(error);
@@ -363,7 +363,7 @@ app.post("/add_invoice", (req, res) => {
     if (error == null) {
         res.status(200).json({
             message: "Invoice added.",
-            productId: data
+            // productId: data
         });
     } else {
         res.status(400).json({
