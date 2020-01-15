@@ -154,6 +154,7 @@ app.get('/get_stalls', (req, res) => {
         new Promise((resolve, reject) => {
             let stall = []
             rows.map((v,i)=> {
+                stall.push(11)
                 connection.query(`SELECT * FROM StallHolder where id = ${v.stallHolderId}`, (err, rows2) => {
                     if (err) throw err;
                     console.log('Data received from Db:\n');
