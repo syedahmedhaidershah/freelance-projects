@@ -152,15 +152,18 @@ app.get('/get_stalls', (req, res) => {
     connection.query('SELECT * FROM Stall', (err, rows) => {
         if (err) throw err;
         new Promise((resolve, reject) => {
-            rows.map(v=> {
+            rows.map((v,i)=> {
                 connection.query(`SELECT * FROM StallHolder where id = ${v.stallHolderId}`, (err, rows2) => {
                     if (err) throw err;
                     console.log('Data received from Db:\n');
                     // res.send(rows);
                     stall.push({id:v.id,stallHolder:rows2[0]});
                 });
+                if(i == (rows.length -1)){
+                    resolve();
+                }
           })
-            resolve();
+            
             }
             /* do something that takes time, and then call resolve/reject */
         
