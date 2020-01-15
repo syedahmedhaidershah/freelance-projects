@@ -148,10 +148,11 @@ app.get('/get_stall_id', (req, res) => {
 
 
 app.get('/get_stalls', (req, res) => {
-    let stall = [];
+    // let stall = [];
     connection.query('SELECT * FROM Stall', (err, rows) => {
         if (err) throw err;
         new Promise((resolve, reject) => {
+            let stall = []
             rows.map((v,i)=> {
                 connection.query(`SELECT * FROM StallHolder where id = ${v.stallHolderId}`, (err, rows2) => {
                     if (err) throw err;
@@ -160,15 +161,15 @@ app.get('/get_stalls', (req, res) => {
                     stall.push({id:v.id,stallHolder:rows2[0]});
                 });
                 if(i == (rows.length -1)){
-                    resolve();
+                    resolve(stall);
                 }
           })
             
             }
             /* do something that takes time, and then call resolve/reject */
         
-        ).then(()=> {
-            res.send(stall)
+        ).then((s)=> {
+            res.send(s)
         })
         
         console.log('Data received from Db:\n');
