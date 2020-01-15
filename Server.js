@@ -146,20 +146,22 @@ app.get('/get_stall_id', (req, res) => {
 
 });
 
+
 app.get('/get_stalls', (req, res) => {
     var stall = [];
     connection.query('SELECT * FROM Stall', (err, rows) => {
         if (err) throw err;
         rows.map(v=> {
-            connection.query(`SELECT * FROM StallHolder  where id = ${v.stallHolderId}`, (err, rows2) => {
+            connection.query(`SELECT * FROM StallHolder where id = ${v.stallHolderId}`, (err, rows2) => {
                 if (err) throw err;
                 console.log('Data received from Db:\n');
                 // res.send(rows);
                 stall.push({id:v.id,stallHolder:rows2[0]})
             });
-        })
+        },
+        res.send(stall)
+        )
         console.log('Data received from Db:\n');
-        res.send(stall);
     });
 
 });
