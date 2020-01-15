@@ -156,10 +156,11 @@ app.get('/get_stalls', (req, res) => {
                 if (err) throw err;
                 console.log('Data received from Db:\n');
                 // res.send(rows);
+                res.send({id:v.id,stallHolder:rows2[0]})
                 stall.push({id:v.id,stallHolder:rows2[0]})
             });
         },
-        res.send(stall)
+        
         )
         console.log('Data received from Db:\n');
     });
