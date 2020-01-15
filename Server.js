@@ -346,7 +346,7 @@ app.post("/add_invoice", (req, res) => {
                     // res.send(rows);
                     body.items.map(v => {
                         connection.query(`INSERT INTO InvoiceDetails(id,productId,description,price,finalPrice,quantity) \
-                    VALUES(${rows.id},'${v.productId}','${v.description}',${v.price},${v.finalPrice},${v.quantity})`, (err, data) => {
+                    VALUES(${rows[0].id},'${v.productId}','${v.description}',${v.price},${v.finalPrice},${v.quantity})`, (err, data) => {
                             if (err) {
                                 error = err;
                             }
