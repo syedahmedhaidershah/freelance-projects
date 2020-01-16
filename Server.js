@@ -544,7 +544,7 @@ app.post("/edit_stall", (req, res) => {
 
     // var code = Math.floor(Math.random() * (99999 - 10000 + 1)) + min;
 
-    connection.query(`UPDATE Stall SET stallHolderId=${req.body.stallHolderId}  WHERE id = ${req.body.id}`, 
+    connection.query(`UPDATE Stall SET stallHolderId=${req.body.stallHolderId}  WHERE id = '${req.body.id}'`, 
      (err, data) => {
 
         if (!err) {
