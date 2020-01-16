@@ -82,7 +82,7 @@ app.get('/get_invoices', (req, res) => {
                                 }
                             })
                         } else {
-                            res.send(invoices);
+                            return
                         }
                             // res.send(rows);
                         });
