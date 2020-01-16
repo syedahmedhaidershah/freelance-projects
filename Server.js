@@ -410,6 +410,16 @@ app.post("/add_sales_person", (req, res) => {
         }
     });
 });
+
+app.get('/get_customers', (req, res) => {
+    connection.query('SELECT * FROM Customers', (err, rows) => {
+        if (err) throw err;
+        console.log('Data received from Db:\n');
+        res.send(rows);
+    });
+
+});
+
 app.get('/get_sales_persons', (req, res) => {
     connection.query('SELECT * FROM SalesPerson', (err, rows) => {
         if (err) throw err;
