@@ -236,10 +236,16 @@ app.get('/get_stalls', (req, res) => {
 
 });
 app.get('/get_stall_holders', (req, res) => {
-    connection.query('SELECT * FROM StallHolder', (err, rows) => {
+    
+    connection.query('SELECT commission FROM Authentication', (err, rows) => {
+        if (err) throw err;
+        console.log('Data received from Db: commission', rows);
+        // res.send(rows);
+    });
+    connection.query('SELECT * FROM StallHolder', (err, rows1) => {
         if (err) throw err;
         console.log('Data received from Db:\n');
-        res.send(rows);
+        res.send(rows1);
     });
 
 });
