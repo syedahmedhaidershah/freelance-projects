@@ -37,14 +37,14 @@ connection.connect((err) => {
 const PORT = 9999;
 
 // create a route for the app
-app.get('/check', (req, res) => {
-    connection.query('SELECT * FROM Authentication', (err, rows) => {
-        if (err) throw err;
-        console.log('Data received from Db:\n');
-        res.send(rows);
-    });
+// app.get('/check', (req, res) => {
+//     connection.query('SELECT * FROM Authentication', (err, rows) => {
+//         if (err) throw err;
+//         console.log('Data received from Db:\n');
+//         res.send(rows);
+//     });
 
-});
+// });
 
 
 
@@ -281,6 +281,28 @@ app.post("/add_product", (req, res) => {
         }
     });
 });
+
+app.post("/login", (req, res) => {
+
+    //read product information from request
+    // let product = new Product(req.body.prd_name, req.body.prd_price);
+
+    connection.query(`Select * from Authentication Where userName='${req.body.userName}' AND password='${req.body.password}' ` , (err, data) => {
+
+        if (data.length > 0) {
+            res.status(200).json({
+                message: "Logged in",
+                credentials: data
+            });
+        } else {
+            console.log(err);
+            res.status(400).json({
+                message: "Invalid Credentials"
+            });
+        }
+    });
+});
+
 
 app.post("/refund", (req, res) => {
 
