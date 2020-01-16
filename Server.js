@@ -61,7 +61,8 @@ app.get('/get_invoices', (req, res) => {
         //    year =date.getFullYear
             //  invoices[i].dateTime = day  + "/" + month + "/" + year
             invoices[i].dateTime = date
-
+            invoices[i].items = []
+            invoices[i].refunds = []
             connection.query(`SELECT * FROM InvoiceDetails where id = ${v.id}`, (err, rows1) => {
                 if (err) throw err;
                 console.log('Data received from Db:\n');
