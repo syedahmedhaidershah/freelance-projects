@@ -152,7 +152,7 @@ app.get('/get_invoice_items_id', (req, res) => {
         //     invoices[i].items.push(w)
         // })
         
-        res.send(rows);
+        res.send(rows1);
     });
 
 });
@@ -166,7 +166,7 @@ app.get('/get_refund_items_id', (req, res) => {
         //     invoices[i].items.push(w)
         // })
         
-        res.send(rows);
+        res.send(rows1);
     });
 
 });
