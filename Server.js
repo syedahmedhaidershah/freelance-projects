@@ -45,13 +45,16 @@ app.get('/check', (req, res) => {
     });
 
 });
+
+
+
 app.get('/get_invoices', (req, res) => {
     var invoices = '';
     connection.query('SELECT * FROM Invoices', (err, rows) => {
         if (err) throw err;
         console.log('Data received from Db:\n');
         invoices = rows
-        await new Promise((resolve,reject)=>rows.map((v,i)=> {
+        setInterval(rows.map((v,i)=> {
             // var date = invoices[i].dateTime
            var  date = new Date(parseInt(invoices[i].dateTime));
         //    var date = moment(invoices[i].dateTime,"DD/MM/YYYY");
@@ -63,7 +66,7 @@ app.get('/get_invoices', (req, res) => {
             invoices[i].dateTime = moment(date).format("DD/MM/YYYY")
             invoices[i].items = []
             invoices[i].refunds = []
-            await new Promise((resolve1,reject)=>connection.query(`SELECT * FROM InvoiceDetails where id = ${v.id}`, (err, rows1) => {
+            connection.query(`SELECT * FROM InvoiceDetails where id = ${v.id}`, (err, rows1) => {
                 if (err) throw err;
                 console.log('Data received from Db:\n');
                
@@ -73,38 +76,25 @@ app.get('/get_invoices', (req, res) => {
                        
                     
                 })
-                if(invoices[i].items.length == rows1.length){
-                    resolve1()
-                }
                 // res.send(rows);
-            })).then(() => {
-                await new Promise((resolve2,reject)=>connection.query(`SELECT * FROM Refund where invoiceId = ${v.id}`, (err, rows2) => {
-                    if (err) throw err;
-                    console.log('Data received from Db:\n');
-                    
-                    rows2.map(r=> {
-    
-                        invoices[i].refunds.push(r);
-                        if(rows2.length == invoices[i].refunds.length){
-                            resolve2()
-                        }
-                    })
-                    // res.send(rows);
-                })).then(()=> {
-                    return
-                })
-            }
-
-            )
-
-            if(rows.length == (i+1)){
-                resolve()
-            }
+            });
             
-        })).then(()=> {
-            res.send(invoices);
-        })
-        
+            connection.query(`SELECT * FROM Refund where invoiceId = ${v.id}`, (err, rows2) => {
+                if (err) throw err;
+                console.log('Data received from Db:\n');
+                
+                rows2.map(r=> {
+
+                    invoices[i].refunds.push(r);
+                    if(rows2.length == invoices[i].refunds.length){
+                    }
+                })
+                // res.send(rows);
+            });
+            
+        }),500)
+        res.send(invoices);
+
         
         // res.send(rows); 
     });
