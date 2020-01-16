@@ -53,7 +53,7 @@ app.get('/get_invoices', (req, res) => {
         invoices = rows
         rows.map((v,i)=> {
             // var date = invoices[i].dateTime
-           var  date = new Date(invoices[i].dateTime);
+           var  date = new Date(parseInt(invoices[i].dateTime));
         //    var date = moment(invoices[i].dateTime,"DD/MM/YYYY");
            
         //    day = date.getDate
