@@ -66,12 +66,14 @@ app.get('/get_invoices', (req, res) => {
             connection.query(`SELECT * FROM InvoiceDetails where id = ${v.id}`, (err, rows1) => {
                 if (err) throw err;
                 console.log('Data received from Db:\n');
-                rows1.map(w=> {
+                if(rows1.length > 0){
+                    rows1.map(w=> {
                     invoices[i].items.push(w)
                     if(rows1.length == invoices[i].items.length){
                         connection.query(`SELECT * FROM Refund where invoiceId = ${v.id}`, (err, rows2) => {
                             if (err) throw err;
                             console.log('Data received from Db:\n');
+                            if(rows2.length > 0){
                             rows2.map(r=> {
 
                                 invoices[i].refunds.push(r);
@@ -79,10 +81,15 @@ app.get('/get_invoices', (req, res) => {
                                     res.send(invoices);
                                 }
                             })
+                        } else {
+                            res.send(invoices);
+                        }
                             // res.send(rows);
                         });
                     }
-                })
+                })} else {
+                    res.send(invoices);
+                }
                 // res.send(rows);
             });
             
