@@ -324,7 +324,7 @@ app.post("/add_sales_person", (req, res) => {
     // var code = Math.floor(Math.random() * (99999 - 10000 + 1)) + min;
 
     connection.query(`INSERT INTO SalesPerson( firstName, lastName, address, number, dallasKeyCode, userName, password)
-     VALUES ('${req.body.firstName}','${req.body.lastName}','${req.body.address}','${req.body.number}','${req.body.dallasKeyCode}','${req.body.userName}','${req.body.password}'))`, (err, data) => {
+     VALUES ('${req.body.firstName}','${req.body.lastName}','${req.body.address}','${req.body.number}','${req.body.dallasKeyCode}','${req.body.userName}','${req.body.password}')`, (err, data) => {
 
         if (!err) {
             res.status(200).json({
