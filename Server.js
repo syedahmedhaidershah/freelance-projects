@@ -53,7 +53,10 @@ app.get('/get_invoices', (req, res) => {
         rows.map((v,i)=> {
             // var date = invoices[i].dateTime
            var  date = new Date(invoices[i].dateTime);
-             invoices[i].dateTime = date.getDate + "/" + date.getMonth + "/" + date.getFullYear
+           day = date.getDate
+           month=date.getMonth
+           year =date.getFullYear
+             invoices[i].dateTime = day  + "/" + month + "/" + year
             connection.query(`SELECT * FROM InvoiceDetails where id = ${v.id}`, (err, rows1) => {
                 if (err) throw err;
                 console.log('Data received from Db:\n');
