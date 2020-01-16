@@ -5,6 +5,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
+const moment = require('moment');
 
 const connection = mysql.createConnection({
     // localhost
@@ -52,11 +53,15 @@ app.get('/get_invoices', (req, res) => {
         invoices = rows
         rows.map((v,i)=> {
             // var date = invoices[i].dateTime
-           var  date = new Date(invoices[i].dateTime);
-           day = date.getDate
-           month=date.getMonth
-           year =date.getFullYear
-             invoices[i].dateTime = day  + "/" + month + "/" + year
+        //    var  date = new Date(invoices[i].dateTime);
+           var  date = moment(invoices[i].dateTime,"DD/MM/YYYY");
+           
+        //    day = date.getDate
+        //    month=date.getMonth
+        //    year =date.getFullYear
+            //  invoices[i].dateTime = day  + "/" + month + "/" + year
+            invoices[i].dateTime = date
+
             connection.query(`SELECT * FROM InvoiceDetails where id = ${v.id}`, (err, rows1) => {
                 if (err) throw err;
                 console.log('Data received from Db:\n');
