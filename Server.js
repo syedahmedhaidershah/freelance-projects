@@ -525,7 +525,7 @@ app.post("/edit_product", (req, res) => {
         if (!err) {
             res.status(200).json({
                 message: "Product editted.",
-                stallId: data
+                product: data[0]
             });
         } else {
             console.log(err);
