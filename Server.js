@@ -265,8 +265,8 @@ app.post("/add_product", (req, res) => {
 
     var code = Math.floor(Math.random() * (99999 - 10000 + 1)) + "";
 
-    connection.query(`INSERT INTO Products(description,price,barcode,quantity) \
-    VALUES('${req.body.description}','${req.body.price}','${code}','${req.body.quantity}')`, (err, data) => {
+    connection.query(`INSERT INTO Products(description,price,barcode,quantity,stallId) \
+    VALUES('${req.body.description}','${req.body.price}','${code}','${req.body.quantity}','${req.body.stallId}')`, (err, data) => {
 
         if (!err) {
             res.status(200).json({
@@ -469,6 +469,31 @@ app.post("/edit_customer", (req, res) => {
             res.status(200).json({
                 message: "Customer editted.",
                 customerId: data
+            });
+        } else {
+            console.log(err);
+            res.status(400).json({
+                message: err
+            });
+        }
+    });
+});
+
+app.post("/edit_product", (req, res) => {
+
+    //read product information from request
+    // let product = new Product(req.body.prd_name, req.body.prd_price);
+    console.log("edit_product: ", req.body)
+
+    // var code = Math.floor(Math.random() * (99999 - 10000 + 1)) + min;
+
+    connection.query(`UPDATE Products SET description='${req.body.description}',price='${req.body.price}',barcode='${req.body.barcode}',quantity=${req.body.quantity},stallId='${req.body.stallId}'  WHERE id = ${req.body.id}`, 
+     (err, data) => {
+
+        if (!err) {
+            res.status(200).json({
+                message: "Product editted.",
+                stallId: data
             });
         } else {
             console.log(err);
