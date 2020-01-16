@@ -335,6 +335,30 @@ app.get('/get_sales_person_id', (req, res) => {
     });
 
 });
+app.post("/edit_sales_person", (req, res) => {
+
+    //read product information from request
+    // let product = new Product(req.body.prd_name, req.body.prd_price);
+    console.log("edit_sales_person: ", req.body)
+
+    // var code = Math.floor(Math.random() * (99999 - 10000 + 1)) + min;
+
+    connection.query(`UPDATE SalesPerson SET firstName='${req.body.firstName}',lastName='${req.body.lastName}',address='${req.body.address}',number='${req.body.number}',dallasKeyCode='${req.body.dallasKeyCode}',userName='${req.body.userName}',password='${req.body.password}'  WHERE id = ${req.body.id}`, 
+     (err, data) => {
+
+        if (!err) {
+            res.status(200).json({
+                message: "Stall editted.",
+                stallId: data
+            });
+        } else {
+            console.log(err);
+            res.status(400).json({
+                message: err
+            });
+        }
+    });
+});
 app.post("/edit_stall_holder", (req, res) => {
 
     //read product information from request
