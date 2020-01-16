@@ -194,7 +194,7 @@ app.post("/add_product", (req, res) => {
     // let product = new Product(req.body.prd_name, req.body.prd_price);
     console.log("add_product: ", req.body)
 
-    var code = Math.floor(Math.random() * (99999 - 10000 + 1)) + min;
+    var code = Math.floor(Math.random() * (99999 - 10000 + 1)) + "";
 
     connection.query(`INSERT INTO Products(description,price,barcode,quantity) \
     VALUES('${req.body.description}','${req.body.price}','${code}','${req.body.quantity}')`, (err, data) => {
