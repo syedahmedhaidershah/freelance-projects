@@ -295,30 +295,46 @@ app.post("/add_stall_holder", (req, res) => {
     });
 });
 
-// app.post("/add_stall_holder", (req, res) => {
+app.post("/add_sales_person", (req, res) => {
 
-//     //read product information from request
-//     // let product = new Product(req.body.prd_name, req.body.prd_price);
-//     console.log("add_stall_holder: ", req.body)
+    //read product information from request
+    // let product = new Product(req.body.prd_name, req.body.prd_price);
+    console.log("add_sales_person: ", req.body)
 
-//     // var code = Math.floor(Math.random() * (99999 - 10000 + 1)) + min;
+    // var code = Math.floor(Math.random() * (99999 - 10000 + 1)) + min;
 
-//     connection.query(`INSERT INTO StallHolder(name, address, number, rent) VALUES ('${req.body.name}','${req.body.address}','${req.body.number}',${req.body.rent})`, (err, data) => {
+    connection.query(`INSERT INTO SalesPerson( firstName, lastName, address, number, dallasKeyCode, userName, password)
+     VALUES ('${req.body.firstName}','${req.body.lastName}','${req.body.address}','${req.body.number}','${req.body.dallasKeyCode}','${req.body.userName}','${req.body.password}'))`, (err, data) => {
 
-//         if (!err) {
-//             res.status(200).json({
-//                 message: "Stall Holder added.",
-//                 customerId: data
-//             });
-//         } else {
-//             console.log(err);
-//             res.status(400).json({
-//                 message: err
-//             });
-//         }
-//     });
-// });
+        if (!err) {
+            res.status(200).json({
+                message: "Sales Person added.",
+                customerId: data
+            });
+        } else {
+            console.log(err);
+            res.status(400).json({
+                message: err
+            });
+        }
+    });
+});
+app.get('/get_sales_persons', (req, res) => {
+    connection.query('SELECT * FROM SalesPerson', (err, rows) => {
+        if (err) throw err;
+        console.log('Data received from Db:\n');
+        res.send(rows);
+    });
 
+});
+app.get('/get_sales_person_id', (req, res) => {
+    connection.query(`SELECT * FROM SalesPerson where id = ${req.query.id}`, (err, rows) => {
+        if (err) throw err;
+        console.log('Data received from Db:\n');
+        res.send(rows);
+    });
+
+});
 app.post("/edit_stall_holder", (req, res) => {
 
     //read product information from request
