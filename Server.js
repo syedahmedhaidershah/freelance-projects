@@ -51,6 +51,7 @@ app.get('/get_invoices', (req, res) => {
         console.log('Data received from Db:\n');
         invoices = rows
         rows.map((v,i)=> {
+            invoices[i].dateTime = new Date(invoices[i].dateTime);
             connection.query(`SELECT * FROM InvoiceDetails where id = ${v.id}`, (err, rows1) => {
                 if (err) throw err;
                 console.log('Data received from Db:\n');
@@ -265,7 +266,78 @@ app.post("/add_customer", (req, res) => {
     });
 });
 
+app.post("/add_stall_holder", (req, res) => {
 
+    //read product information from request
+    // let product = new Product(req.body.prd_name, req.body.prd_price);
+    console.log("add_stall_holder: ", req.body)
+
+    // var code = Math.floor(Math.random() * (99999 - 10000 + 1)) + min;
+
+    connection.query(`INSERT INTO StallHolder(name, address, number, rent) VALUES ('${req.body.name}','${req.body.address}','${req.body.number}',${req.body.rent})`, (err, data) => {
+
+        if (!err) {
+            res.status(200).json({
+                message: "Stall Holder added.",
+                customerId: data
+            });
+        } else {
+            console.log(err);
+            res.status(400).json({
+                message: err
+            });
+        }
+    });
+});
+
+// app.post("/add_stall_holder", (req, res) => {
+
+//     //read product information from request
+//     // let product = new Product(req.body.prd_name, req.body.prd_price);
+//     console.log("add_stall_holder: ", req.body)
+
+//     // var code = Math.floor(Math.random() * (99999 - 10000 + 1)) + min;
+
+//     connection.query(`INSERT INTO StallHolder(name, address, number, rent) VALUES ('${req.body.name}','${req.body.address}','${req.body.number}',${req.body.rent})`, (err, data) => {
+
+//         if (!err) {
+//             res.status(200).json({
+//                 message: "Stall Holder added.",
+//                 customerId: data
+//             });
+//         } else {
+//             console.log(err);
+//             res.status(400).json({
+//                 message: err
+//             });
+//         }
+//     });
+// });
+
+app.post("/edit_stall_holder", (req, res) => {
+
+    //read product information from request
+    // let product = new Product(req.body.prd_name, req.body.prd_price);
+    console.log("edit_stall_holder: ", req.body)
+
+    // var code = Math.floor(Math.random() * (99999 - 10000 + 1)) + min;
+
+    connection.query(`UPDATE StallHolder SET name='${req.body.name}',address='${req.body.address}',number='${req.body.number}',rent=${req.body.rent} WHERE id = ${req.body.id} `, 
+     (err, data) => {
+
+        if (!err) {
+            res.status(200).json({
+                message: "Stall editted.",
+                stallId: data
+            });
+        } else {
+            console.log(err);
+            res.status(400).json({
+                message: err
+            });
+        }
+    });
+});
 
 
 app.post("/edit_customer", (req, res) => {
