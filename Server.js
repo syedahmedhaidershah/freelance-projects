@@ -379,6 +379,31 @@ app.post("/add_customer", (req, res) => {
     });
 });
 
+
+app.post("/add_stall", (req, res) => {
+
+    //read product information from request
+    // let product = new Product(req.body.prd_name, req.body.prd_price);
+    console.log("add_stall: ", req.body)
+
+    // var code = Math.floor(Math.random() * (99999 - 10000 + 1)) + min;
+
+    connection.query(`INSERT INTO Stall(id) VALUES ('${req.body.id}')`, (err, data) => {
+
+        if (!err) {
+            res.status(200).json({
+                message: "Stall added.",
+                customerId: data
+            });
+        } else {
+            console.log(err);
+            res.status(400).json({
+                message: err
+            });
+        }
+    });
+});
+
 app.post("/add_stall_holder", (req, res) => {
 
     //read product information from request
