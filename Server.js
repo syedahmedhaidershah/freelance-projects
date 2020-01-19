@@ -259,7 +259,7 @@ app.get('/get_stall_holders', (req, res) => {
 app.get('/get_available_stall_holders', (req, res) => {
 
     var empty = null;
-    connection.query(`SELECT * FROM StallHolder WHERE stallId = ${empty}`, (err, rows1) => {
+    connection.query(`SELECT * FROM StallHolder WHERE stallId IS NULL`, (err, rows1) => {
         if (err) throw err;
         console.log('Data received from Db:\n');
         res.send(rows1);
