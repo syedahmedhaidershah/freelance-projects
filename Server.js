@@ -412,7 +412,7 @@ app.post("/add_stall_holder", (req, res) => {
 
     // var code = Math.floor(Math.random() * (99999 - 10000 + 1)) + min;
 
-    connection.query(`INSERT INTO StallHolder(name, address, number, rent,bankName, accountNumber, sortCode, stallId) VALUES ('${req.body.name}','${req.body.address}','${req.body.number}',${req.body.rent},'${req.body.bankNumber}','${req.body.accountNumber}','${req.body.sortCode}','${req.body.stallId}')`, (err, data) => {
+    connection.query(`INSERT INTO StallHolder(name, address, number, rent,bankName, accountNumber, sortCode, stallId,email) VALUES ('${req.body.name}','${req.body.address}','${req.body.number}',${req.body.rent},'${req.body.bankNumber}','${req.body.accountNumber}','${req.body.sortCode}','${req.body.stallId}','${req.body.email}')`, (err, data) => {
 
         if (!err) {
             res.status(200).json({
