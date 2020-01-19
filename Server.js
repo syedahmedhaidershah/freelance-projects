@@ -560,7 +560,9 @@ app.post("/edit_stall", (req, res) => {
     console.log("edit_stall: ", req.body)
     var empty = null;
     // var code = Math.floor(Math.random() * (99999 - 10000 + 1)) + min;
-
+    connection.query(`UPDATE Stall SET stallHolderId=${empty}  WHERE stallHolderId=${req.body.stallHolderId}`,
+    (err, data) => {
+    });
     connection.query(`UPDATE Stall SET stallHolderId=${req.body.stallHolderId}  WHERE id = '${req.body.id}'`,
         (err, data) => {
             connection.query(`UPDATE StallHolder SET stallId=${empty}  WHERE stallId = '${req.body.id}'`,
