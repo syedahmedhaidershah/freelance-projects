@@ -225,7 +225,9 @@ app.get('/get_stalls', (req, res) => {
                 if (err) throw err;
                 console.log('Data received from Db:\n');
                 // res.send(rows);
-                stall.push({id:v.id,stallHolder:rows2[0]});
+                var stallHolder = ""
+                stallHolder = rows2[0];
+                stall.push({id:v.id,stallHolder:stallHolder});
                 if(stall.length == rows.length){
                     res.send(stall)
                 }
@@ -541,12 +543,17 @@ app.post("/edit_stall", (req, res) => {
     //read product information from request
     // let product = new Product(req.body.prd_name, req.body.prd_price);
     console.log("edit_stall: ", req.body)
-
+    var empty = null;
     // var code = Math.floor(Math.random() * (99999 - 10000 + 1)) + min;
 
     connection.query(`UPDATE Stall SET stallHolderId=${req.body.stallHolderId}  WHERE id = '${req.body.id}'`, 
      (err, data) => {
-
+        connection.query(`UPDATE StallHolder SET stallId=${empty}  WHERE stallId = '${req.body.id}'`, 
+        (err, data) => {
+       });
+       connection.query(`UPDATE StallHolder SET stallId=${req.body.id}  WHERE id = '${req.body.stallHolderId}'`, 
+        (err, data) => {
+       });
         if (!err) {
             res.status(200).json({
                 message: "Stall editted.",
