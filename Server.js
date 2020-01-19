@@ -510,7 +510,7 @@ app.post("/edit_stall_holder", (req, res) => {
 
     // var code = Math.floor(Math.random() * (99999 - 10000 + 1)) + min;
 
-    connection.query(`UPDATE StallHolder SET name='${req.body.name}',address='${req.body.address}',number='${req.body.number}',rent=${req.body.rent} WHERE id = ${req.body.id} `,
+    connection.query(`UPDATE StallHolder SET name='${req.body.name}',address='${req.body.address}',number='${req.body.number}',email='${req.body.email}',rent=${req.body.rent},bankName='${req.body.bankName}', accountNumber='${req.body.accountNumber}', sortCode='${req.body.sortCode}', stallId='${req.body.stallId}' WHERE id = ${req.body.id} `,
         (err, data) => {
 
             if (!err) {
