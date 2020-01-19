@@ -256,6 +256,16 @@ app.get('/get_stall_holders', (req, res) => {
     });
 
 });
+app.get('/get_available_stall_holders', (req, res) => {
+
+    
+    connection.query('SELECT * FROM StallHolder WHERE stallId = null', (err, rows1) => {
+        if (err) throw err;
+        console.log('Data received from Db:\n');
+        res.send(rows1);
+    });
+
+});
 app.get('/get_stall_holder_id', (req, res) => {
     connection.query(`SELECT * FROM StallHolder where id = ${req.query.id}`, (err, rows) => {
         if (err) throw err;
