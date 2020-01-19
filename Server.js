@@ -54,14 +54,14 @@ app.get('/get_invoices', (req, res) => {
         if (err) throw err;
         console.log('Data received from Db:\n');
         invoices = rows
-        rows.map((v,i)=> {
+        rows.map((v, i) => {
             // var date = invoices[i].dateTime
-           var  date = new Date(parseInt(invoices[i].dateTime));
-        //    var date = moment(invoices[i].dateTime,"DD/MM/YYYY");
-           
-        //    day = date.getDate
-        //    month=date.getMonth
-        //    year =date.getFullYear
+            var date = new Date(parseInt(invoices[i].dateTime));
+            //    var date = moment(invoices[i].dateTime,"DD/MM/YYYY");
+
+            //    day = date.getDate
+            //    month=date.getMonth
+            //    year =date.getFullYear
             //  invoices[i].dateTime = day  + "/" + month + "/" + year
             invoices[i].dateTime = moment(date).format("DD/MM/YYYY")
             // invoices[i].items = []
@@ -69,33 +69,33 @@ app.get('/get_invoices', (req, res) => {
             connection.query(`SELECT * FROM InvoiceDetails where id = ${v.id}`, (err, rows1) => {
                 if (err) throw err;
                 console.log('Data received from Db:\n');
-               
-                    rows1.map(w=> {
+
+                rows1.map(w => {
                     invoices[i].items.push(w)
-                   
-                       
-                    
+
+
+
                 })
                 // res.send(rows);
             });
-            
+
             connection.query(`SELECT * FROM Refund where invoiceId = ${v.id}`, (err, rows2) => {
                 if (err) throw err;
                 console.log('Data received from Db:\n');
-                
-                rows2.map(r=> {
+
+                rows2.map(r => {
 
                     invoices[i].refunds.push(r);
-                    if(rows2.length == invoices[i].refunds.length){
+                    if (rows2.length == invoices[i].refunds.length) {
                     }
                 })
                 // res.send(rows);
             });
-            
+
         })
         res.send(invoices);
 
-        
+
         // res.send(rows); 
     });
 
@@ -107,26 +107,26 @@ app.get('/get_invoice_id', (req, res) => {
         if (err) throw err;
         console.log('Data received from Db:\n');
         invoices = rows
-        var  date = new Date(parseInt(invoices[i].dateTime));
+        var date = new Date(parseInt(invoices[i].dateTime));
         invoices.dateTime = moment(date).format("DD/MM/YYYY")
 
-            connection.query(`SELECT * FROM InvoiceDetails where id = ${req.query.id}`, (err, rows1) => {
-                if (err) throw err;
-                console.log('Data received from Db:\n');
-                rows1.map(w=> {
-                    invoices[i].items.push(w)
-                })
-                // res.send(rows);
-            });
-            connection.query(`SELECT * FROM Refund where invoiceId = ${req.query.id}`, (err, rows2) => {
-                if (err) throw err;
-                console.log('Data received from Db:\n');
-                rows2.map(r=> {
-                    invoices[i].refunds.push(r);
-                })
-                // res.send(rows);
-            });
-        
+        connection.query(`SELECT * FROM InvoiceDetails where id = ${req.query.id}`, (err, rows1) => {
+            if (err) throw err;
+            console.log('Data received from Db:\n');
+            rows1.map(w => {
+                invoices[i].items.push(w)
+            })
+            // res.send(rows);
+        });
+        connection.query(`SELECT * FROM Refund where invoiceId = ${req.query.id}`, (err, rows2) => {
+            if (err) throw err;
+            console.log('Data received from Db:\n');
+            rows2.map(r => {
+                invoices[i].refunds.push(r);
+            })
+            // res.send(rows);
+        });
+
         res.send(invoices);
         // res.send(rows); 
     });
@@ -151,7 +151,7 @@ app.get('/get_invoice_items_id', (req, res) => {
         // rows1.map(w=> {
         //     invoices[i].items.push(w)
         // })
-        
+
         res.send(rows1);
     });
 
@@ -165,7 +165,7 @@ app.get('/get_refund_items_id', (req, res) => {
         // rows1.map(w=> {
         //     invoices[i].items.push(w)
         // })
-        
+
         res.send(rows1);
     });
 
@@ -176,7 +176,7 @@ app.get('/get_products_id', (req, res) => {
 
     connection.query(`SELECT * FROM Products WHERE id = ${req.query.id}`, (err, rows) => {
         if (err) throw err;
-        
+
         console.log('Data received from Db:\n');
         res.send(rows);
     });
@@ -187,7 +187,7 @@ app.get('/get_products_code', (req, res) => {
 
     connection.query(`SELECT * FROM Products WHERE barcode = '${req.query.code}'`, (err, rows) => {
         if (err) throw err;
-        
+
         console.log('Data received from Db:\n');
         res.send(rows);
     });
@@ -198,13 +198,13 @@ app.get('/get_stall_id', (req, res) => {
 
     connection.query(`SELECT * FROM Stall WHERE id = '${req.query.id}'`, (err, rows) => {
         if (err) throw err;
-        rows.map(v=> {
+        rows.map(v => {
             connection.query(`SELECT * FROM StallHolder where id = ${v.stallHolderId}`, (err, rows2) => {
                 if (err) throw err;
                 console.log('Data received from Db:\n');
                 // res.send(rows);
-                stall.push({id:v.id,stallHolder:rows2[0]});
-                if(stall.length == rows.length){
+                stall.push({ id: v.id, stallHolder: rows2[0] });
+                if (stall.length == rows.length) {
                     res.send(stall)
                 }
             });
@@ -220,15 +220,20 @@ app.get('/get_stalls', (req, res) => {
     let stall = [];
     connection.query('SELECT * FROM Stall', (err, rows) => {
         if (err) throw err;
-        rows.map(v=> {
+        rows.map(v => {
             connection.query(`SELECT * FROM StallHolder where id = ${v.stallHolderId}`, (err, rows2) => {
                 if (err) throw err;
                 console.log('Data received from Db:\n');
                 // res.send(rows);
-                var stallHolder = ""
-                stallHolder = rows2[0];
-                stall.push({id:v.id,stallHolder:stallHolder});
-                if(stall.length == rows.length){
+                // var stallHolder = ""
+                // stallHolder = rows2[0];
+                if (rows2[0]) {
+                    stall.push({ id: v.id, stallHolder: rows2[0] });
+                } else {
+                    stall.push({ id: v.id, stallHolder: "" });
+                }
+
+                if (stall.length == rows.length) {
                     res.send(stall)
                 }
             });
@@ -238,7 +243,7 @@ app.get('/get_stalls', (req, res) => {
 
 });
 app.get('/get_stall_holders', (req, res) => {
-    
+
     connection.query('SELECT commission FROM Authentication', (err, rows) => {
         if (err) throw err;
         console.log('Data received from Db: commission', rows);
@@ -289,7 +294,7 @@ app.post("/login", (req, res) => {
     //read product information from request
     // let product = new Product(req.body.prd_name, req.body.prd_price);
 
-    connection.query(`Select * from Authentication Where userName='${req.body.userName}' AND password='${req.body.password}' ` , (err, data) => {
+    connection.query(`Select * from Authentication Where userName='${req.body.userName}' AND password='${req.body.password}' `, (err, data) => {
 
         if (data.length > 0) {
             res.status(200).json({
@@ -314,29 +319,29 @@ app.post("/refund", (req, res) => {
 
     var refund = req.body
     // var code = Math.floor(Math.random() * (99999 - 10000 + 1)) + min;
-var error = null;
-    refund.items.map(v=> {
+    var error = null;
+    refund.items.map(v => {
         connection.query(`INSERT INTO Refund(invoiceId, productId, dateTime, reason, cash, card, salesPersonId)
         VALUES (${req.body.invoiceId},${v.productId},'${req.body.dateTime}','${req.body.reason}',${req.body.cash},${req.body.card},${req.body.salesPersonId})`, (err, data) => {
-   
-           if(err){
-               error = err
-           }
-       });
-       if (error == null) {
-        res.status(200).json({
-            message: "Product refunded.",
-            // productId: data
-        });
-    } else {
-        console.log(error);
-        res.status(400).json({
-            message: error
-        });
-    }
-    })    
 
-    
+            if (err) {
+                error = err
+            }
+        });
+        if (error == null) {
+            res.status(200).json({
+                message: "Product refunded.",
+                // productId: data
+            });
+        } else {
+            console.log(error);
+            res.status(400).json({
+                message: error
+            });
+        }
+    })
+
+
 });
 
 
@@ -446,21 +451,21 @@ app.post("/edit_sales_person", (req, res) => {
 
     // var code = Math.floor(Math.random() * (99999 - 10000 + 1)) + min;
 
-    connection.query(`UPDATE SalesPerson SET firstName='${req.body.firstName}',lastName='${req.body.lastName}',address='${req.body.address}',number='${req.body.number}',dallasKeyCode='${req.body.dallasKeyCode}',userName='${req.body.userName}',password='${req.body.password}'  WHERE id = ${req.body.id}`, 
-     (err, data) => {
+    connection.query(`UPDATE SalesPerson SET firstName='${req.body.firstName}',lastName='${req.body.lastName}',address='${req.body.address}',number='${req.body.number}',dallasKeyCode='${req.body.dallasKeyCode}',userName='${req.body.userName}',password='${req.body.password}'  WHERE id = ${req.body.id}`,
+        (err, data) => {
 
-        if (!err) {
-            res.status(200).json({
-                message: "Stall editted.",
-                stallId: data
-            });
-        } else {
-            console.log(err);
-            res.status(400).json({
-                message: err
-            });
-        }
-    });
+            if (!err) {
+                res.status(200).json({
+                    message: "Stall editted.",
+                    stallId: data
+                });
+            } else {
+                console.log(err);
+                res.status(400).json({
+                    message: err
+                });
+            }
+        });
 });
 app.post("/edit_stall_holder", (req, res) => {
 
@@ -470,21 +475,21 @@ app.post("/edit_stall_holder", (req, res) => {
 
     // var code = Math.floor(Math.random() * (99999 - 10000 + 1)) + min;
 
-    connection.query(`UPDATE StallHolder SET name='${req.body.name}',address='${req.body.address}',number='${req.body.number}',rent=${req.body.rent} WHERE id = ${req.body.id} `, 
-     (err, data) => {
+    connection.query(`UPDATE StallHolder SET name='${req.body.name}',address='${req.body.address}',number='${req.body.number}',rent=${req.body.rent} WHERE id = ${req.body.id} `,
+        (err, data) => {
 
-        if (!err) {
-            res.status(200).json({
-                message: "Stall editted.",
-                stallId: data
-            });
-        } else {
-            console.log(err);
-            res.status(400).json({
-                message: err
-            });
-        }
-    });
+            if (!err) {
+                res.status(200).json({
+                    message: "Stall editted.",
+                    stallId: data
+                });
+            } else {
+                console.log(err);
+                res.status(400).json({
+                    message: err
+                });
+            }
+        });
 });
 
 
@@ -496,21 +501,21 @@ app.post("/edit_customer", (req, res) => {
 
     // var code = Math.floor(Math.random() * (99999 - 10000 + 1)) + min;
 
-    connection.query(`UPDATE Customers SET name='${req.body.name}',address='${req.body.address}',number='${req.body.number}',email='${req.body.email}' WHERE id = ${req.body.id}`, 
-     (err, data) => {
+    connection.query(`UPDATE Customers SET name='${req.body.name}',address='${req.body.address}',number='${req.body.number}',email='${req.body.email}' WHERE id = ${req.body.id}`,
+        (err, data) => {
 
-        if (!err) {
-            res.status(200).json({
-                message: "Customer editted.",
-                customerId: data
-            });
-        } else {
-            console.log(err);
-            res.status(400).json({
-                message: err
-            });
-        }
-    });
+            if (!err) {
+                res.status(200).json({
+                    message: "Customer editted.",
+                    customerId: data
+                });
+            } else {
+                console.log(err);
+                res.status(400).json({
+                    message: err
+                });
+            }
+        });
 });
 
 app.post("/edit_product", (req, res) => {
@@ -521,21 +526,21 @@ app.post("/edit_product", (req, res) => {
 
     // var code = Math.floor(Math.random() * (99999 - 10000 + 1)) + min;
 
-    connection.query(`UPDATE Products SET description='${req.body.description}',price='${req.body.price}',barcode='${req.body.barcode}',quantity=${req.body.quantity},stallId='${req.body.stallId}'  WHERE id = ${req.body.id}`, 
-     (err, data) => {
+    connection.query(`UPDATE Products SET description='${req.body.description}',price='${req.body.price}',barcode='${req.body.barcode}',quantity=${req.body.quantity},stallId='${req.body.stallId}'  WHERE id = ${req.body.id}`,
+        (err, data) => {
 
-        if (!err) {
-            res.status(200).json({
-                message: "Product editted.",
-                product: data[0]
-            });
-        } else {
-            console.log(err);
-            res.status(400).json({
-                message: err
-            });
-        }
-    });
+            if (!err) {
+                res.status(200).json({
+                    message: "Product editted.",
+                    product: data[0]
+                });
+            } else {
+                console.log(err);
+                res.status(400).json({
+                    message: err
+                });
+            }
+        });
 });
 
 app.post("/edit_stall", (req, res) => {
@@ -546,26 +551,26 @@ app.post("/edit_stall", (req, res) => {
     var empty = null;
     // var code = Math.floor(Math.random() * (99999 - 10000 + 1)) + min;
 
-    connection.query(`UPDATE Stall SET stallHolderId=${req.body.stallHolderId}  WHERE id = '${req.body.id}'`, 
-     (err, data) => {
-        connection.query(`UPDATE StallHolder SET stallId=${empty}  WHERE stallId = '${req.body.id}'`, 
+    connection.query(`UPDATE Stall SET stallHolderId=${req.body.stallHolderId}  WHERE id = '${req.body.id}'`,
         (err, data) => {
-       });
-       connection.query(`UPDATE StallHolder SET stallId=${req.body.id}  WHERE id = '${req.body.stallHolderId}'`, 
-        (err, data) => {
-       });
-        if (!err) {
-            res.status(200).json({
-                message: "Stall editted.",
-                stallId: data
-            });
-        } else {
-            console.log(err);
-            res.status(400).json({
-                message: err
-            });
-        }
-    });
+            connection.query(`UPDATE StallHolder SET stallId=${empty}  WHERE stallId = '${req.body.id}'`,
+                (err, data) => {
+                });
+            connection.query(`UPDATE StallHolder SET stallId=${req.body.id}  WHERE id = '${req.body.stallHolderId}'`,
+                (err, data) => {
+                });
+            if (!err) {
+                res.status(200).json({
+                    message: "Stall editted.",
+                    stallId: data
+                });
+            } else {
+                console.log(err);
+                res.status(400).json({
+                    message: err
+                });
+            }
+        });
 });
 
 // app.post("/add_invoice", (req, res) => {
@@ -598,30 +603,30 @@ app.post("/add_invoice", (req, res) => {
     var dateTime = Date.now();
     connection.query(`INSERT INTO Invoices(stallId,salesPersonId,stallHolderId,dateTime,paymentMethod,total,customerId) \
     VALUES('${body.stallId}','${body.salesPersonId}','${body.stallHolderId}','${dateTime}','${body.paymentMethod}','${body.total}',${body.customerId})`, (err, data) => {
-            if (err) {
-                error = err;
-            } else {
+        if (err) {
+            error = err;
+        } else {
 
-                connection.query(`SELECT id FROM Invoices where customerId = ${body.customerId} AND dateTime = '${dateTime}'`, (err, rows) => {
-                    if (err) throw err;
-                    console.log('Data received from Db:\n');
-                    // res.send(rows);
-                    body.items.map(v => {
-                        connection.query(`INSERT INTO InvoiceDetails(id,productId,description,price,finalPrice,quantity) \
+            connection.query(`SELECT id FROM Invoices where customerId = ${body.customerId} AND dateTime = '${dateTime}'`, (err, rows) => {
+                if (err) throw err;
+                console.log('Data received from Db:\n');
+                // res.send(rows);
+                body.items.map(v => {
+                    connection.query(`INSERT INTO InvoiceDetails(id,productId,description,price,finalPrice,quantity) \
                     VALUES(${rows[0].id},'${v.productId}','${v.description}','${v.price}','${v.finalPrice}','${v.quantity}')`, (err, data) => {
-                            if (err) {
-                                error = err;
-                            }
-                        });
-                    }) 
-                });
+                        if (err) {
+                            error = err;
+                        }
+                    });
+                })
+            });
 
-                
-            }
-        });
+
+        }
+    });
     // })
 
-    
+
     if (error == null) {
         res.status(200).json({
             message: "Invoice added.",
