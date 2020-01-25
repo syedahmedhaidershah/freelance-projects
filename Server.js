@@ -631,7 +631,7 @@ app.post("/edit_stall", (req, res) => {
 // });
 
 app.get('/get_daily_report', (req, res) => {
-   get = { stallId: "0", stallHolderName: "Smith", description:"Some Product", salesPersonName: "Australia", productId: "33",invoiceId:"23",price:"300",card:"200",total:"500" }
+//    get = { stallId: "0", stallHolderName: "Smith", description:"Some Product", salesPersonName: "Australia", productId: "33",invoiceId:"23",price:"300",card:"200",total:"500" }
 
     // connection.query('SELECT commission FROM Authentication', (err, rows) => {
     //     if (err) throw err;
