@@ -56,14 +56,14 @@ app.get('/get_invoices', (req, res) => {
         invoices = rows
         rows.map((v, i) => {
             // var date = invoices[i].dateTime
-            var date = new Date(parseInt(invoices[i].dateTime));
+            // var date = new Date(parseInt(invoices[i].dateTime));
             //    var date = moment(invoices[i].dateTime,"DD/MM/YYYY");
 
             //    day = date.getDate
             //    month=date.getMonth
             //    year =date.getFullYear
             //  invoices[i].dateTime = day  + "/" + month + "/" + year
-            invoices[i].dateTime = moment(date).format("DD/MM/YYYY")
+            // invoices[i].dateTime = moment(date).format("DD/MM/YYYY")
             // invoices[i].items = []
             // invoices[i].refunds = []
             connection.query(`SELECT * FROM InvoiceDetails where id = ${v.id}`, (err, rows1) => {
