@@ -630,6 +630,35 @@ app.post("/edit_stall", (req, res) => {
 //     });
 // });
 
+app.get('/get_daily_report', (req, res) => {
+   get = { stallId: "0", stallHolderName: "Smith", description:"Some Product", salesPersonName: "Australia", productId: "33",invoiceId:"23",price:"300",card:"200",total:"500" }
+
+    // connection.query('SELECT commission FROM Authentication', (err, rows) => {
+    //     if (err) throw err;
+    //     console.log('Data received from Db: commission', rows);
+    //     // res.send(rows);
+    // });
+    var data = []
+    connection.query('SELECT * FROM InvoiceDetails', (err, rows1) => {
+        if (err) throw err;
+        data = rows1
+        rows1.map((v,i)=> {
+            connection.query(`SELECT * FROM Invoices WHERE id = '${v.id}'`, (err, rows) => {
+        if (err) throw err;
+        data[i].invoice = rows[0]
+        console.log('Data received from Db: commission', rows);
+        if((i-1)==rows1.length){
+            res.send(data);
+
+        }
+        // res.send(rows);
+    });
+        })
+        console.log('Data received from Db:\n');
+    });
+
+});
+
 app.post("/add_invoice", (req, res) => {
 
     //read product information from request
@@ -637,26 +666,26 @@ app.post("/add_invoice", (req, res) => {
     console.log("add_product: ", req.body)
     var error = null
     var body = req.body
-    var dateTime = Date.now();
-    connection.query(`INSERT INTO Invoices(stallId,salesPersonId,stallHolderId,dateTime,paymentMethod,total,customerId) \
-    VALUES('${body.stallId}','${body.salesPersonId}','${body.stallHolderId}','${dateTime}','${body.paymentMethod}','${body.total}',${body.customerId})`, (err, data) => {
+    // var dateTime = Date.now();
+    connection.query(`INSERT INTO Invoices(id,stallId,salesPersonId,stallHolderId,dateTime,paymentMethod,total,customerId) \
+    VALUES('${body.id}','${body.stallId}','${body.salesPersonId}','${body.stallHolderId}','${body.dateTime}','${body.paymentMethod}','${body.total}',${body.customerId})`, (err, data) => {
         if (err) {
             error = err;
         } else {
 
-            connection.query(`SELECT id FROM Invoices where customerId = ${body.customerId} AND dateTime = '${dateTime}'`, (err, rows) => {
-                if (err) throw err;
-                console.log('Data received from Db:\n');
+            // connection.query(`SELECT id FROM Invoices where customerId = ${body.customerId} AND dateTime = '${dateTime}'`, (err, rows) => {
+            //     if (err) throw err;
+            //     console.log('Data received from Db:\n');
                 // res.send(rows);
                 body.items.map(v => {
                     connection.query(`INSERT INTO InvoiceDetails(id,productId,description,price,finalPrice,quantity) \
-                    VALUES(${rows[0].id},'${v.productId}','${v.description}','${v.price}','${v.finalPrice}','${v.quantity}')`, (err, data) => {
+                    VALUES('${body.id}','${v.productId}','${v.description}','${v.price}','${v.finalPrice}','${v.quantity}')`, (err, data) => {
                         if (err) {
                             error = err;
                         }
                     });
                 })
-            });
+            // });
 
 
         }
