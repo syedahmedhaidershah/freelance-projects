@@ -145,7 +145,7 @@ app.get('/get_products', (req, res) => {
 app.get('/get_invoice_items_id', (req, res) => {
     console.log(req.query.id);
 
-    connection.query(`SELECT * FROM InvoiceDetails where id = ${req.query.id}`, (err, rows1) => {
+    connection.query(`SELECT * FROM InvoiceDetails where id = '${req.query.id}'`, (err, rows1) => {
         if (err) throw err;
         console.log('Data received from Db:\n');
         // rows1.map(w=> {
