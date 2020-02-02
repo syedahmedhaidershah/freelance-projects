@@ -690,8 +690,8 @@ app.post("/add_invoice", (req, res) => {
     var error = null
     var body = req.body
     // var dateTime = Date.now();
-    connection.query(`INSERT INTO Invoices(id,stallId,salesPersonId,stallHolderId,dateTime,paymentMethod,total,customerId) \
-    VALUES('${body.id}','${body.stallId}','${body.salesPersonId}','${body.stallHolderId}','${body.dateTime}','${body.paymentMethod}','${body.total}',${body.customerId})`, (err, data) => {
+    connection.query(`INSERT INTO Invoices(id,stallId,salesPersonId,stallHolderId,dateTime,paymentMethod,total,customerId,card,cash) \
+    VALUES('${body.id}','${body.stallId}','${body.salesPersonId}','${body.stallHolderId}','${body.dateTime}','${body.paymentMethod}','${body.total}',${body.customerId},'${body.card}','${body.cash}')`, (err, data) => {
         if (err) {
             error = err;
         } else {
@@ -701,8 +701,8 @@ app.post("/add_invoice", (req, res) => {
             //     console.log('Data received from Db:\n');
                 // res.send(rows);
                 body.items.map(v => {
-                    connection.query(`INSERT INTO InvoiceDetails(id,productId,description,price,finalPrice,quantity) \
-                    VALUES('${body.id}','${v.productId}','${v.description}','${v.price}','${v.finalPrice}','${v.quantity}')`, (err, data) => {
+                    connection.query(`INSERT INTO InvoiceDetails(id,productId,description,price,finalPrice,quantity,card,cash) \
+                    VALUES('${body.id}','${v.productId}','${v.description}','${v.price}','${v.finalPrice}','${v.quantity}','${body.card}','${body.cash}')`, (err, data) => {
                         if (err) {
                             error = err;
                         }
