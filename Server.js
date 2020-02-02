@@ -648,7 +648,7 @@ app.get('/get_daily_report', (req, res) => {
         data[i].invoice = rows[0]
         console.log('Data received from Db: commission', rows);
         if((i+1) == rows1.length){
-            res.send(data.sort())
+            res.send(data.sort((function(a, b){return b.id-a.id})))
 
         }
         // res.send(rows);
