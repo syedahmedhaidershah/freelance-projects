@@ -592,9 +592,15 @@ app.post("/edit_stall", (req, res) => {
         (err, data) => {
             connection.query(`UPDATE StallHolder SET stallId=${empty}  WHERE stallId = '${req.body.id}'`,
                 (err, data) => {
+                    console.log("edit_stall empty err",err);
+                    console.log("edit_stall empty",data);
+
+                    
                 });
             connection.query(`UPDATE StallHolder SET stallId=${req.body.id}  WHERE id = '${req.body.stallHolderId}'`,
                 (err, data) => {
+                    console.log("edit_stall  err",err);
+                    console.log("edit_stall ",data);
                 });
             if (!err) {
                 res.status(200).json({
