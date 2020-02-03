@@ -597,7 +597,7 @@ app.post("/edit_stall", (req, res) => {
 
                     
                 });
-            connection.query(`UPDATE StallHolder SET stallId=${req.body.id}  WHERE id = '${req.body.stallHolderId}'`,
+            connection.query(`UPDATE StallHolder SET stallId='${req.body.id}'  WHERE id = '${req.body.stallHolderId}'`,
                 (err, data) => {
                     console.log("edit_stall  err",err);
                     console.log("edit_stall ",data);
