@@ -696,7 +696,7 @@ app.get('/get_weekly_report_date', (req, res) => {
         //     // res.send(rows);
         // });
         var data = []
-        connection.query(`SELECT * FROM Invoices WHERE  (dateTime BETWEEN '${moment("12/02/2020","DD/MM/YYYY").weekday(0)}' AND '${moment().weekday(0).subtract(6,'d')}') AND stallId ='${req.query.id}'`, (err, rows1) => {
+        connection.query(`SELECT * FROM Invoices WHERE  (dateTime BETWEEN '${moment("12/02/2020","DD/MM/YYYY").weekday(0)}' AND '${moment("12/02/2020","DD/MM/YYYY").weekday(0).subtract(6,'d')}') AND stallId ='${req.query.id}'`, (err, rows1) => {
             if (err) throw err;
             data = rows1
             rows1.map((v,i)=> {
