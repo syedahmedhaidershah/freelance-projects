@@ -705,11 +705,9 @@ app.get('/getBACS', (req, res) => {
          
             // res.send(rows);
         });
-            })
-            console.log('Data received from Db:\n');
-        });
-    
-    });
+        console.log('Data received from Db:\n');
+    })
+        
 
 app.get('/get_weekly_report_date', (req, res) => {
     //    get = { stallId: "0", stallHolderName: "Smith", description:"Some Product", salesPersonName: "Australia", productId: "33",invoiceId:"23",price:"300",card:"200",total:"500" }
