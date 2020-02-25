@@ -687,6 +687,30 @@ app.get('/get_daily_report', (req, res) => {
     });
 
 });
+ 
+
+app.get('/getBACS', (req, res) => {
+    //    get = { stallId: "0", stallHolderName: "Smith", description:"Some Product", salesPersonName: "Australia", productId: "33",invoiceId:"23",price:"300",card:"200",total:"500" }
+    
+        // connection.query('SELECT commission FROM Authentication', (err, rows) => {
+        //     if (err) throw err;
+        //     console.log('Data received from Db: commission', rows);
+        //     // res.send(rows);
+        // });
+        // var data = []
+        connection.query(`SELECT Stall.id , StallHolder.name , SUM( CAST(Invoices.total AS UNSIGNED ) ) AS total FROM Stall ,StallHolder , Invoices WHERE Stall.stallHolderId = StallHolder.id AND Stall.id = Invoices.stallId AND (DATE(Invoices.dateTime) BETWEEN '${moment("12/02/2020","DD/MM/YYYY").weekday(0).subtract(6,'d').format("YYYY-MM-DD")}' AND '${moment("12/02/2020","DD/MM/YYYY").weekday(0).format("YYYY-MM-DD")}' GROUP BY Stall.id )`, (err, rows1) => {
+            if (err) throw err;
+          
+                res.send(rows1)
+         
+            // res.send(rows);
+        });
+            })
+            console.log('Data received from Db:\n');
+        });
+    
+    });
+
 app.get('/get_weekly_report_date', (req, res) => {
     //    get = { stallId: "0", stallHolderName: "Smith", description:"Some Product", salesPersonName: "Australia", productId: "33",invoiceId:"23",price:"300",card:"200",total:"500" }
     
