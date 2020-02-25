@@ -701,7 +701,7 @@ app.get('/getBACS', (req, res) => {
         connection.query(`SELECT Stall.id , StallHolder.bankName , SUM( CAST(Invoices.total AS UNSIGNED ) ) AS total FROM Stall ,StallHolder , Invoices WHERE Stall.stallHolderId = StallHolder.id AND Stall.id = Invoices.stallId AND (DATE(Invoices.dateTime) BETWEEN '${moment("12/02/2020","DD/MM/YYYY").weekday(0).subtract(6,'d').format("YYYY-MM-DD")}' AND '${moment("12/02/2020","DD/MM/YYYY").weekday(0).format("YYYY-MM-DD")}') GROUP BY Stall.id`, (err, rows1) => {
             if (err) throw err;
           
-                res.send(rows1)
+                res.send(rows1.sort(compareValues('bankName')))
          
             // res.send(rows);
         });
