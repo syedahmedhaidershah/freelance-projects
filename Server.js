@@ -702,7 +702,8 @@ app.get('/getBACS', (req, res) => {
             if (err) throw err;
                 if(rows1){
                  data = rows1.filter(v=> {
-                     v.total = v.total * 0.1
+                     total = v.total
+                     v.total = total * 0.9
                      return v
                  })
                 res.send(data.sort(compareValues('bankName')))
