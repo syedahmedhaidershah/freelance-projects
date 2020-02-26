@@ -704,7 +704,7 @@ app.get('/getBACS', (req, res) => {
                  data = rows1.filter(v=> {
                      total = v.total
                      v.total = total * 0.9
-                     v.total = parseInt(v.total.toFixed(2))
+                     v.total = parseFloat(v.total.toFixed(2))
                      return v
                  })
                 res.send(data.sort(compareValues('bankName')))
