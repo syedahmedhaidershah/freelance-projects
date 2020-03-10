@@ -798,7 +798,7 @@ app.post("/add_invoice", (req, res) => {
 
     //read product information from request
     // let product = new Product(req.body.prd_name, req.body.prd_price);
-    console.log("add_product: ", req.body)
+    console.log("add_invoice: ", req.body)
     var error = null
     var body = req.body
     // var dateTime = Date.now();
@@ -806,6 +806,8 @@ app.post("/add_invoice", (req, res) => {
     VALUES('${body.id}','${body.stallId}','${body.salesPersonId}','${body.stallHolderId}','${body.dateTime}','${body.paymentMethod}','${body.total}',${body.customerId},'${body.card}','${body.cash}')`, (err, data) => {
         if (err) {
             error = err;
+            console.log("invoice table error: ",error);
+            
         } else {
 
             // connection.query(`SELECT id FROM Invoices where customerId = ${body.customerId} AND dateTime = '${dateTime}'`, (err, rows) => {
@@ -817,6 +819,8 @@ app.post("/add_invoice", (req, res) => {
                     VALUES('${body.id}','${v.productId}','${v.description}','${v.price}','${v.finalPrice}','${v.quantity}','${body.card}','${body.cash}')`, (err, data) => {
                         if (err) {
                             error = err;
+            console.log("invoiceDetails table error: ",error);
+
                         }
                     });
                 })
