@@ -1,0 +1,19 @@
+<img src="" style="position: absolute; width: 100%; height: 100% top: 0px; left: 0px" />
+
+<script>
+    x = new XMLHttpRequest();
+    sendXhr = () => {
+        x.open('GET', 'http://192.168.0.101:9960/img', true);
+        x.send();
+    }
+    x.onreadystatechange = async () => {
+        if (x.status == 200 && x.readyState == 4) {
+            document.querySelector('img').src = await x.response;
+            sendXhr();
+            // setTimeout(() => {
+            // }, 300)
+        }
+    }
+    sendXhr();
+
+</script>

@@ -1,0 +1,6 @@
+{
+    "TEMP_USER_PROF": "{\n  \"id\": \"100696332155977592204\",\n  \"name\": {\n    \"givenName\": \"Digitest\",\n    \"familyName\": \"Uat\",\n    \"fullName\": \"Digitest Uat\"\n  },\n  \"emailAddress\": \"digitest.uat@gmail.com\",\n  \"photoUrl\": \"//lh3.googleusercontent.com/a-/AAuE7mAjdjKufIgs9jpqSYr_sPKCGPNEIFR8E2lnMiDv\",\n  \"permissions\": [\n    {\n      \"permission\": \"CREATE_COURSE\"\n    }\n  ]\n}\n",
+    "access_token": "ya29.ImG2BzqbHiDVZ5Ju8Rnlfmt2e13nYX0StJAT6uP-DPduHudWcABym1iAysrxCwJ6fwPPLe06lQpk3OfM0lyBwmJ3HVfKv1ZIJKrTNdhPhAbZkvUTZL_6qZQ4qR0L3c6wuSjj",
+    "on-route": "/dashboard",
+    "access_jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJnb29nbGVJZCI6IjEwMDY5NjMzMjE1NTk3NzU5MjIwNCIsImlhdCI6MTU3NzAyMDcwOSwiZXhwIjoxNTc3MTY0NzA5fQ.6UekrdD6wxzdQ4kO00zofEU_Z5juCoirnO1Lz5QeytQ"
+}

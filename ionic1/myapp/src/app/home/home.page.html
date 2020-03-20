@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Test App
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div>
+    Watching live location
+  </div>
+  <div *ngIf="!initialized">
+    Getting location ...
+  </div>
+  <br>
+  <b>Latitude: </b> {{coords.latitude}}
+  <br>
+  <b>Longitude: </b> {{coords.longitude}}
+</ion-content>

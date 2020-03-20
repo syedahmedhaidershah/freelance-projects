@@ -1,0 +1,17 @@
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+    -ms-appearance: none;
+    background: url('../../assets/icons/expand_more.svg');
+    background-size: 10px auto;
+    background-position: 90% center;
+    background-repeat: no-repeat;
+    background-color: #f5f9fc;
+}
+
+.border-light-gray {
+    border: 1px solid #d1d5d8;
+}
+

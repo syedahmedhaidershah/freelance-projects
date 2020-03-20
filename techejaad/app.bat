@@ -1,0 +1,1 @@
+cd Techejaad && code . && npm start

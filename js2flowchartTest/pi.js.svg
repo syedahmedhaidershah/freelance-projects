@@ -1,0 +1,1650 @@
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+                width="830" height="3741" shape-rendering="optimizeSpeed">
+                
+                <g>
+                   <rect x="50" y="65"
+            width="357.59999999999997" height="30"
+            rx="3" ry="3"
+            style="fill:#90caf9; stroke:#444; stroke-width:1" />
+                   <title>const picam = require(&apos;pi-camera-connect&apos;)</title>
+            <text x="65" y="85"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="65" y="85">const picam = require(&apos;pi-camera-connect&apos;)</tspan>
+            </text>
+                   
+                   
+                </g>
+                <g>
+                   <rect x="50" y="113.5"
+            width="357.59999999999997" height="30"
+            rx="3" ry="3"
+            style="fill:#90caf9; stroke:#444; stroke-width:1" />
+                   <title>const config = require(&apos;./imports/config&apos;)</title>
+            <text x="65" y="133.5"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="65" y="133.5">const config = require(&apos;./imports/config&apos;)</tspan>
+            </text>
+                   
+                   
+                </g>
+                <g>
+                   <rect x="50" y="162"
+            width="357.59999999999997" height="30"
+            rx="3" ry="3"
+            style="fill:#90caf9; stroke:#444; stroke-width:1" />
+                   <title>const client = require(&apos;socket.io-client&apos;)</title>
+            <text x="65" y="182"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="65" y="182">const client = require(&apos;socket.io-client&apos;)</tspan>
+            </text>
+                   
+                   
+                </g>
+                <g>
+                   <rect x="50" y="210.5"
+            width="443.4" height="30"
+            rx="3" ry="3"
+            style="fill:#90caf9; stroke:#444; stroke-width:1" />
+                   <title>const StillCamera = require(&quot;pi-camera-connect&quot;).StillCamera</title>
+            <text x="65" y="230.5"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="65" y="230.5">const StillCamera = require(&quot;pi-camera-connect&quot;).S...</tspan>
+            </text>
+                   
+                   
+                </g>
+                <g>
+                   <rect x="50" y="259"
+            width="217.2" height="30"
+            rx="3" ry="3"
+            style="fill:#90caf9; stroke:#444; stroke-width:1" />
+                   <title>const fs = require(&apos;fs&apos;)</title>
+            <text x="65" y="279"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="65" y="279">const fs = require(&apos;fs&apos;)</tspan>
+            </text>
+                   
+                   
+                </g>
+                <g>
+                   <rect x="50" y="307.5"
+            width="295.2" height="30"
+            rx="3" ry="3"
+            style="fill:#90caf9; stroke:#444; stroke-width:1" />
+                   <title>const express = require(&apos;express&apos;)</title>
+            <text x="65" y="327.5"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="65" y="327.5">const express = require(&apos;express&apos;)</tspan>
+            </text>
+                   
+                   
+                </g>
+                <g>
+                   <rect x="50" y="356"
+            width="193.79999999999998" height="30"
+            rx="3" ry="3"
+            style="fill:#90caf9; stroke:#444; stroke-width:1" />
+                   <title>const app = express()</title>
+            <text x="65" y="376"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="65" y="376">const app = express()</tspan>
+            </text>
+                   
+                   
+                </g>
+                <g>
+                   <rect x="50" y="404.5"
+            width="248.4" height="30"
+            rx="3" ry="3"
+            style="fill:#90caf9; stroke:#444; stroke-width:1" />
+                   <title>const http = require(&apos;http&apos;)</title>
+            <text x="65" y="424.5"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="65" y="424.5">const http = require(&apos;http&apos;)</tspan>
+            </text>
+                   
+                   
+                </g>
+                <g>
+                   <rect x="50" y="453"
+            width="326.4" height="30"
+            rx="3" ry="3"
+            style="fill:#90caf9; stroke:#444; stroke-width:1" />
+                   <title>const httpIns = http.createServer(app)</title>
+            <text x="65" y="473"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="65" y="473">const httpIns = http.createServer(app)</tspan>
+            </text>
+                   
+                   
+                </g>
+                <g>
+                   <rect x="50" y="501.5"
+            width="381" height="30"
+            rx="3" ry="3"
+            style="fill:#90caf9; stroke:#444; stroke-width:1" />
+                   <title>global.ioHost = require(&apos;socket.io&apos;)(httpIns)</title>
+            <text x="65" y="521.5"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="65" y="521.5">global.ioHost = require(&apos;socket.io&apos;)(httpIns)</tspan>
+            </text>
+                   
+                   
+                </g>
+                <g>
+                   <rect x="50" y="550"
+            width="209.4" height="30"
+            rx="3" ry="3"
+            style="fill:#90caf9; stroke:#444; stroke-width:1" />
+                   <title>const socketPort = 9897</title>
+            <text x="65" y="570"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="65" y="570">const socketPort = 9897</tspan>
+            </text>
+                   
+                   
+                </g>
+                <g>
+                   <rect x="50" y="598.5"
+            width="334.2" height="30"
+            rx="3" ry="3"
+            style="fill:#90caf9; stroke:#444; stroke-width:1" />
+                   <title>const {...} = require(&apos;worker_threads&apos;)</title>
+            <text x="65" y="618.5"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="65" y="618.5">const {...} = require(&apos;worker_threads&apos;)</tspan>
+            </text>
+                   
+                   
+                </g>
+                <g>
+                   <rect x="87" y="647"
+            width="76.8" height="30"
+            rx="2" ry="2"
+            style="fill:#90caf9; stroke:#444; stroke-width:1" />
+                   <title>Worker</title>
+            <text x="102" y="667"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="102" y="667">Worker</tspan>
+            </text>
+                   
+                   
+                </g>
+                <g>
+                   <rect x="87" y="695.5"
+            width="123.6" height="30"
+            rx="2" ry="2"
+            style="fill:#90caf9; stroke:#444; stroke-width:1" />
+                   <title>isMainThread</title>
+            <text x="102" y="715.5"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="102" y="715.5">isMainThread</tspan>
+            </text>
+                   
+                   
+                </g>
+                <g>
+                   <rect x="87" y="744"
+            width="108" height="30"
+            rx="2" ry="2"
+            style="fill:#90caf9; stroke:#444; stroke-width:1" />
+                   <title>parentPort</title>
+            <text x="102" y="764"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="102" y="764">parentPort</tspan>
+            </text>
+                   
+                   
+                </g>
+                <g>
+                   <rect x="50" y="792.5"
+            width="443.4" height="30"
+            rx="3" ry="3"
+            style="fill:#90caf9; stroke:#444; stroke-width:1" />
+                   <title>const worker = Worker(&apos;/home/pi/vidulum/worker.js&apos;)</title>
+            <text x="65" y="812.5"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="65" y="812.5">const worker = Worker(&apos;/home/pi/vidulum/worker.js&apos;...</tspan>
+            </text>
+                   
+                   
+                </g>
+                <g>
+                   <rect x="50" y="841"
+            width="147" height="30"
+            rx="3" ry="3"
+            style="fill:#90caf9; stroke:#444; stroke-width:1" />
+                   <title>global.sps = []</title>
+            <text x="65" y="861"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="65" y="861">global.sps = []</tspan>
+            </text>
+                   
+                   
+                </g>
+                <g>
+                   <rect x="50" y="889.5"
+            width="162.6" height="30"
+            rx="3" ry="3"
+            style="fill:#90caf9; stroke:#444; stroke-width:1" />
+                   <title>global.saved = []</title>
+            <text x="65" y="909.5"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="65" y="909.5">global.saved = []</tspan>
+            </text>
+                   
+                   
+                </g>
+            <g>
+                <rect x="50" y="953"
+            width="213.79999999999998" height="30"
+            style="fill:#a5d6a7; stroke:#444; stroke-width:1" />
+                    
+                <line x1="60" y1="953" x2="60" y2="983"
+                style="fill:#a5d6a7; stroke:#444; stroke-width:1" />
+                <line x1="253.79999999999995" y1="953" x2="253.79999999999995" y2="983"
+                style="fill:#a5d6a7; stroke:#444; stroke-width:1" />
+             
+                <title>global.runApp = () =&gt;</title>
+            <text x="75" y="973"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="75" y="973">global.runApp = () =&gt;</tspan>
+            </text>
+                
+            </g>
+                <g>
+                   <rect x="87" y="1001.5"
+            width="318.59999999999997" height="30"
+            rx="3" ry="3"
+            style="fill:#90caf9; stroke:#444; stroke-width:1" />
+                   <title>const stillCamera = new StillCamera()</title>
+            <text x="102" y="1021.5"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="102" y="1021.5">const stillCamera = new StillCamera()</tspan>
+            </text>
+                   
+                   
+                </g>
+                <g>
+                   <rect x="87" y="1050"
+            width="365.4" height="30"
+            rx="3" ry="3"
+            style="fill:#90caf9; stroke:#444; stroke-width:1" />
+                   <title>const image = await stillCamera.takeImage()</title>
+            <text x="102" y="1070"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="102" y="1070">const image = await stillCamera.takeImage()</tspan>
+            </text>
+                   
+                   
+                </g>
+                <g>
+                   <rect x="87" y="1098.5"
+            width="443.4" height="30"
+            rx="2" ry="2"
+            style="fill:#C5E1A5; stroke:#444; stroke-width:1" />
+                   <title>fs.writeFileSync(&apos;/home/pi/vidulum/still-image.jpg&apos;, image)</title>
+            <text x="102" y="1118.5"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="102" y="1118.5">fs.writeFileSync(&apos;/home/pi/vidulum/still-image.jpg...</tspan>
+            </text>
+                   
+                   
+                </g>
+                <g>
+                   <rect x="50" y="1147"
+            width="248.4" height="30"
+            rx="2" ry="2"
+            style="fill:#C5E1A5; stroke:#444; stroke-width:1" />
+                   <title>ioHost.on(&apos;connection&apos;, *())</title>
+            <text x="65" y="1167"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="65" y="1167">ioHost.on(&apos;connection&apos;, *())</tspan>
+            </text>
+                   
+                   
+                </g>
+            <g>
+                <rect x="87" y="1195.5"
+            width="120.2" height="30"
+            style="fill:#a5d6a7; stroke:#444; stroke-width:1" />
+                    
+                <line x1="97" y1="1195.5" x2="97" y2="1225.5"
+                style="fill:#a5d6a7; stroke:#444; stroke-width:1" />
+                <line x1="197.2" y1="1195.5" x2="197.2" y2="1225.5"
+                style="fill:#a5d6a7; stroke:#444; stroke-width:1" />
+             
+                <title>(sock) =&gt;</title>
+            <text x="112" y="1215.5"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="112" y="1215.5">(sock) =&gt;</tspan>
+            </text>
+                
+            </g>
+                <g>
+                   <rect x="124" y="1244"
+            width="271.79999999999995" height="30"
+            rx="2" ry="2"
+            style="fill:#C5E1A5; stroke:#444; stroke-width:1" />
+                   <title>console.log(&apos;worker connected&apos;)</title>
+            <text x="139" y="1264"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="139" y="1264">console.log(&apos;worker connected&apos;)</tspan>
+            </text>
+                   
+                   
+                </g>
+                <g>
+                   <rect x="124" y="1292.5"
+            width="193.79999999999998" height="30"
+            rx="2" ry="2"
+            style="fill:#C5E1A5; stroke:#444; stroke-width:1" />
+                   <title>sock.on(&apos;alert&apos;, *())</title>
+            <text x="139" y="1312.5"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="139" y="1312.5">sock.on(&apos;alert&apos;, *())</tspan>
+            </text>
+                   
+                   
+                </g>
+            <g>
+                <rect x="161" y="1341"
+            width="120.2" height="30"
+            style="fill:#a5d6a7; stroke:#444; stroke-width:1" />
+                    
+                <line x1="171" y1="1341" x2="171" y2="1371"
+                style="fill:#a5d6a7; stroke:#444; stroke-width:1" />
+                <line x1="271.2" y1="1341" x2="271.2" y2="1371"
+                style="fill:#a5d6a7; stroke:#444; stroke-width:1" />
+             
+                <title>(data) =&gt;</title>
+            <text x="186" y="1361"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="186" y="1361">(data) =&gt;</tspan>
+            </text>
+                
+            </g>
+                <g>
+                   <rect x="198" y="1389.5"
+            width="178.2" height="30"
+            rx="2" ry="2"
+            style="fill:#C5E1A5; stroke:#444; stroke-width:1" />
+                   <title>console.log(&apos;here&apos;)</title>
+            <text x="213" y="1409.5"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="213" y="1409.5">console.log(&apos;here&apos;)</tspan>
+            </text>
+                   
+                   
+                </g>
+                <g>
+                   <rect x="198" y="1438"
+            width="147" height="30"
+            rx="2" ry="2"
+            style="fill:#C5E1A5; stroke:#444; stroke-width:1" />
+                   <title>global.runApp()</title>
+            <text x="213" y="1458"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="213" y="1458">global.runApp()</tspan>
+            </text>
+                   
+                   
+                </g>
+                <g>
+                   <rect x="198" y="1486.5"
+            width="108" height="30"
+            rx="2" ry="2"
+            style="fill:#C5E1A5; stroke:#444; stroke-width:1" />
+                   <title>.then(*())</title>
+            <text x="213" y="1506.5"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="213" y="1506.5">.then(*())</tspan>
+            </text>
+                   <circle cx="204" cy="1510.5" r="4"
+        style="fill:#ede7f6; stroke:#444; stroke-width:1" />
+                   
+                </g>
+            <g>
+                <rect x="235" y="1535"
+            width="89" height="30"
+            style="fill:#a5d6a7; stroke:#444; stroke-width:1" />
+                    
+                <line x1="245" y1="1535" x2="245" y2="1565"
+                style="fill:#a5d6a7; stroke:#444; stroke-width:1" />
+                <line x1="314" y1="1535" x2="314" y2="1565"
+                style="fill:#a5d6a7; stroke:#444; stroke-width:1" />
+             
+                <title>() =&gt;</title>
+            <text x="260" y="1555"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="260" y="1555">() =&gt;</tspan>
+            </text>
+                
+            </g>
+                <g>
+                   <rect x="272" y="1583.5"
+            width="443.4" height="30"
+            rx="2" ry="2"
+            style="fill:#C5E1A5; stroke:#444; stroke-width:1" />
+                   <title>fs.readFile(&apos;/home/pi/vidulum/still-image.jpg&apos;, *())</title>
+            <text x="287" y="1603.5"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="287" y="1603.5">fs.readFile(&apos;/home/pi/vidulum/still-image.jpg&apos;, *(...</tspan>
+            </text>
+                   
+                   
+                </g>
+            <g>
+                <rect x="309" y="1632"
+            width="151.39999999999998" height="30"
+            style="fill:#a5d6a7; stroke:#444; stroke-width:1" />
+                    
+                <line x1="319" y1="1632" x2="319" y2="1662"
+                style="fill:#a5d6a7; stroke:#444; stroke-width:1" />
+                <line x1="450.4" y1="1632" x2="450.4" y2="1662"
+                style="fill:#a5d6a7; stroke:#444; stroke-width:1" />
+             
+                <title>(err, dat) =&gt;</title>
+            <text x="334" y="1652"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="334" y="1652">(err, dat) =&gt;</tspan>
+            </text>
+                
+            </g><g>
+            <rect x="376" y="1695.5"
+            width="99" height="30"
+            rx="3" ry="3"
+            style="fill:#ce93d8; stroke:#444; stroke-width:1" />                
+            <polygon points="346,1710.5 376,1680.5 406,1710.5 376,1740.5"
+            style="fill:#ce93d8; stroke:#444; stroke-width:1" />
+            <title>(err)</title>
+            <text x="421" y="1715.5"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="421" y="1715.5">(err)</tspan>
+            </text>
+            
+            <text x="368.2" y="1715.5"
+        font-family="monospace" font-size="13" fill="#222">if</text> <text x="383.8" y="1742.45"
+        font-family="monospace" font-size="13" fill="#222">+</text> 
+        </g>
+            <g>
+                <rect x="396" y="1750.5"
+            width="209.4" height="30"
+            rx="3" ry="3"
+            style="fill:#90caf9; stroke:#444; stroke-width:1" />
+                
+                <line x1="605.4" y1="1760.5" x2="610.4" y2="1760.5"
+                style="fill:#a5d6a7; stroke:#444; stroke-width:1" />
+                
+                <line x1="605.4" y1="1770.5" x2="610.4" y2="1770.5"
+                style="fill:#a5d6a7; stroke:#444; stroke-width:1" />
+
+                <path d="M610.4, 1754.5 L626.4, 1765.5 L610.4, 1776.5 Z" 
+        fill="#a5d6a7" stroke="#444" stroke-width="1" />
+                             
+                <title>return console.log(err)</title>
+            <text x="411" y="1770.5"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="411" y="1770.5">return console.log(err)</tspan>
+            </text>
+                
+            </g>
+                <g>
+                   <rect x="346" y="1800.5"
+            width="279.6" height="30"
+            rx="2" ry="2"
+            style="fill:#C5E1A5; stroke:#444; stroke-width:1" />
+                   <title>global.ioHost.emit(&apos;image&apos;, dat)</title>
+            <text x="361" y="1820.5"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="361" y="1820.5">global.ioHost.emit(&apos;image&apos;, dat)</tspan>
+            </text>
+                   
+                   
+                </g>
+                <g>
+                   <rect x="50" y="1849"
+            width="248.4" height="30"
+            rx="2" ry="2"
+            style="fill:#C5E1A5; stroke:#444; stroke-width:1" />
+                   <title>ioHost.on(&apos;disconnect&apos;, *())</title>
+            <text x="65" y="1869"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="65" y="1869">ioHost.on(&apos;disconnect&apos;, *())</tspan>
+            </text>
+                   
+                   
+                </g>
+            <g>
+                <rect x="87" y="1897.5"
+            width="120.2" height="30"
+            style="fill:#a5d6a7; stroke:#444; stroke-width:1" />
+                    
+                <line x1="97" y1="1897.5" x2="97" y2="1927.5"
+                style="fill:#a5d6a7; stroke:#444; stroke-width:1" />
+                <line x1="197.2" y1="1897.5" x2="197.2" y2="1927.5"
+                style="fill:#a5d6a7; stroke:#444; stroke-width:1" />
+             
+                <title>(sock) =&gt;</title>
+            <text x="112" y="1917.5"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="112" y="1917.5">(sock) =&gt;</tspan>
+            </text>
+                
+            </g>
+                <g>
+                   <rect x="124" y="1946"
+            width="295.2" height="30"
+            rx="2" ry="2"
+            style="fill:#C5E1A5; stroke:#444; stroke-width:1" />
+                   <title>console.log(&apos;worker disconnected&apos;)</title>
+            <text x="139" y="1966"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="139" y="1966">console.log(&apos;worker disconnected&apos;)</tspan>
+            </text>
+                   
+                   
+                </g>
+                <g>
+                   <rect x="50" y="1994.5"
+            width="264" height="30"
+            rx="2" ry="2"
+            style="fill:#C5E1A5; stroke:#444; stroke-width:1" />
+                   <title>ioHost.listen(socketPort, *())</title>
+            <text x="65" y="2014.5"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="65" y="2014.5">ioHost.listen(socketPort, *())</tspan>
+            </text>
+                   
+                   
+                </g>
+            <g>
+                <rect x="87" y="2043"
+            width="89" height="30"
+            style="fill:#a5d6a7; stroke:#444; stroke-width:1" />
+                    
+                <line x1="97" y1="2043" x2="97" y2="2073"
+                style="fill:#a5d6a7; stroke:#444; stroke-width:1" />
+                <line x1="166" y1="2043" x2="166" y2="2073"
+                style="fill:#a5d6a7; stroke:#444; stroke-width:1" />
+             
+                <title>() =&gt;</title>
+            <text x="112" y="2063"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="112" y="2063">() =&gt;</tspan>
+            </text>
+                
+            </g>
+                <g>
+                   <rect x="124" y="2091.5"
+            width="108" height="30"
+            rx="3" ry="3"
+            style="fill:#90caf9; stroke:#444; stroke-width:1" />
+                   <title>socketPort</title>
+            <text x="139" y="2111.5"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="139" y="2111.5">socketPort</tspan>
+            </text>
+                   
+                   
+                </g>
+                <g>
+                   <rect x="124" y="2140"
+            width="443.4" height="30"
+            rx="2" ry="2"
+            style="fill:#C5E1A5; stroke:#444; stroke-width:1" />
+                   <title>console.log(`Socket is live on port ${socketPort}`)</title>
+            <text x="139" y="2160"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="139" y="2160">console.log(`Socket is live on port ${socketPort}`...</tspan>
+            </text>
+                   
+                   
+                </g>
+                <g>
+                   <rect x="50" y="2188.5"
+            width="326.4" height="30"
+            rx="3" ry="3"
+            style="fill:#90caf9; stroke:#444; stroke-width:1" />
+                   <title>global.io = client.connect(config.uri)</title>
+            <text x="65" y="2208.5"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="65" y="2208.5">global.io = client.connect(config.uri)</tspan>
+            </text>
+                   
+                   
+                </g>
+                <g>
+                   <rect x="50" y="2237"
+            width="357.59999999999997" height="30"
+            rx="2" ry="2"
+            style="fill:#C5E1A5; stroke:#444; stroke-width:1" />
+                   <title>console.log(`connecting to ${config.uri}`)</title>
+            <text x="65" y="2257"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="65" y="2257">console.log(`connecting to ${config.uri}`)</tspan>
+            </text>
+                   
+                   
+                </g>
+                <g>
+                   <rect x="50" y="2285.5"
+            width="326.4" height="30"
+            rx="3" ry="3"
+            style="fill:#90caf9; stroke:#444; stroke-width:1" />
+                   <title>const ioInter = setInterval(*(), 1000)</title>
+            <text x="65" y="2305.5"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="65" y="2305.5">const ioInter = setInterval(*(), 1000)</tspan>
+            </text>
+                   
+                   
+                </g>
+            <g>
+                <rect x="87" y="2334"
+            width="89" height="30"
+            style="fill:#a5d6a7; stroke:#444; stroke-width:1" />
+                    
+                <line x1="97" y1="2334" x2="97" y2="2364"
+                style="fill:#a5d6a7; stroke:#444; stroke-width:1" />
+                <line x1="166" y1="2334" x2="166" y2="2364"
+                style="fill:#a5d6a7; stroke:#444; stroke-width:1" />
+             
+                <title>() =&gt;</title>
+            <text x="112" y="2354"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="112" y="2354">() =&gt;</tspan>
+            </text>
+                
+            </g><g>
+            <rect x="154" y="2397.5"
+            width="223.79999999999998" height="30"
+            rx="3" ry="3"
+            style="fill:#ce93d8; stroke:#444; stroke-width:1" />                
+            <polygon points="124,2412.5 154,2382.5 184,2412.5 154,2442.5"
+            style="fill:#ce93d8; stroke:#444; stroke-width:1" />
+            <title>(global.io.connected)</title>
+            <text x="199" y="2417.5"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="199" y="2417.5">(global.io.connected)</tspan>
+            </text>
+            
+            <text x="146.2" y="2417.5"
+        font-family="monospace" font-size="13" fill="#222">if</text> <text x="161.8" y="2444.45"
+        font-family="monospace" font-size="13" fill="#222">+</text> 
+        </g>
+                <g>
+                   <rect x="174" y="2452.5"
+            width="349.8" height="30"
+            rx="2" ry="2"
+            style="fill:#C5E1A5; stroke:#444; stroke-width:1" />
+                   <title>console.log(`connected to ${config.uri}`)</title>
+            <text x="189" y="2472.5"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="189" y="2472.5">console.log(`connected to ${config.uri}`)</tspan>
+            </text>
+                   
+                   
+                </g>
+                <g>
+                   <rect x="174" y="2501"
+            width="201.6" height="30"
+            rx="2" ry="2"
+            style="fill:#C5E1A5; stroke:#444; stroke-width:1" />
+                   <title>clearInterval(ioInter)</title>
+            <text x="189" y="2521"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="189" y="2521">clearInterval(ioInter)</tspan>
+            </text>
+                   
+                   
+                </g>
+                <g>
+                   <rect x="50" y="2551"
+            width="225" height="30"
+            rx="2" ry="2"
+            style="fill:#C5E1A5; stroke:#444; stroke-width:1" />
+                   <title>worker.on(&apos;message&apos;, *())</title>
+            <text x="65" y="2571"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="65" y="2571">worker.on(&apos;message&apos;, *())</tspan>
+            </text>
+                   
+                   
+                </g>
+            <g>
+                <rect x="87" y="2599.5"
+            width="112.4" height="30"
+            style="fill:#a5d6a7; stroke:#444; stroke-width:1" />
+                    
+                <line x1="97" y1="2599.5" x2="97" y2="2629.5"
+                style="fill:#a5d6a7; stroke:#444; stroke-width:1" />
+                <line x1="189.4" y1="2599.5" x2="189.4" y2="2629.5"
+                style="fill:#a5d6a7; stroke:#444; stroke-width:1" />
+             
+                <title>(msg) =&gt;</title>
+            <text x="112" y="2619.5"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="112" y="2619.5">(msg) =&gt;</tspan>
+            </text>
+                
+            </g><g>
+            <rect x="154" y="2663"
+            width="216" height="30"
+            rx="3" ry="3"
+            style="fill:#ce93d8; stroke:#444; stroke-width:1" />                
+            <polygon points="124,2678 154,2648 184,2678 154,2708"
+            style="fill:#ce93d8; stroke:#444; stroke-width:1" />
+            <title>(msg.type == &apos;save&apos;)</title>
+            <text x="199" y="2683"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="199" y="2683">(msg.type == &apos;save&apos;)</tspan>
+            </text>
+            
+            <text x="146.2" y="2683"
+        font-family="monospace" font-size="13" fill="#222">if</text> <text x="161.8" y="2709.95"
+        font-family="monospace" font-size="13" fill="#222">+</text> <text x="373.9" y="2676.05"
+        font-family="monospace" font-size="13" fill="#222">-</text>
+        </g>
+                <g>
+                   <rect x="174" y="2718"
+            width="217.2" height="30"
+            rx="3" ry="3"
+            style="fill:#90caf9; stroke:#444; stroke-width:1" />
+                   <title>global.sps = msg.message</title>
+            <text x="189" y="2738"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="189" y="2738">global.sps = msg.message</tspan>
+            </text>
+                   
+                   
+                </g><g>
+            <rect x="481.2" y="2733"
+            width="270.6" height="30"
+            rx="3" ry="3"
+            style="fill:#ce93d8; stroke:#444; stroke-width:1" />                
+            <polygon points="451.2,2748 481.2,2718 511.2,2748 481.2,2778"
+            style="fill:#ce93d8; stroke:#444; stroke-width:1" />
+            <title>(msg.type == &apos;userpresent&apos;)</title>
+            <text x="526.2" y="2753"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="526.2" y="2753">(msg.type == &apos;userpresent&apos;)</tspan>
+            </text>
+            
+            <text x="473.4" y="2753"
+        font-family="monospace" font-size="13" fill="#222">if</text> <text x="489" y="2779.95"
+        font-family="monospace" font-size="13" fill="#222">+</text> 
+        </g>
+                <g>
+                   <rect x="501.2" y="2788"
+            width="303" height="30"
+            rx="2" ry="2"
+            style="fill:#C5E1A5; stroke:#444; stroke-width:1" />
+                   <title>io.emit(&apos;userpresent&apos;, msg.message)</title>
+            <text x="516.2" y="2808"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="516.2" y="2808">io.emit(&apos;userpresent&apos;, msg.message)</tspan>
+            </text>
+                   
+                   
+                </g>
+                <g>
+                   <rect x="50" y="2838"
+            width="209.4" height="30"
+            rx="2" ry="2"
+            style="fill:#C5E1A5; stroke:#444; stroke-width:1" />
+                   <title>worker.on(&apos;error&apos;, *())</title>
+            <text x="65" y="2858"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="65" y="2858">worker.on(&apos;error&apos;, *())</tspan>
+            </text>
+                   
+                   
+                </g>
+            <g>
+                <rect x="87" y="2886.5"
+            width="112.4" height="30"
+            style="fill:#a5d6a7; stroke:#444; stroke-width:1" />
+                    
+                <line x1="97" y1="2886.5" x2="97" y2="2916.5"
+                style="fill:#a5d6a7; stroke:#444; stroke-width:1" />
+                <line x1="189.4" y1="2886.5" x2="189.4" y2="2916.5"
+                style="fill:#a5d6a7; stroke:#444; stroke-width:1" />
+             
+                <title>(err) =&gt;</title>
+            <text x="112" y="2906.5"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="112" y="2906.5">(err) =&gt;</tspan>
+            </text>
+                
+            </g>
+                <g>
+                   <rect x="124" y="2935"
+            width="100.2" height="30"
+            rx="2" ry="2"
+            style="fill:#ef9a9a; stroke:#444; stroke-width:1" />
+                   <title>throw err</title>
+            <text x="139" y="2955"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="139" y="2955">throw err</tspan>
+            </text>
+                   
+                   
+                </g>
+                <g>
+                   <rect x="161" y="2983.5"
+            width="53.4" height="30"
+            rx="3" ry="3"
+            style="fill:#90caf9; stroke:#444; stroke-width:1" />
+                   <title>err</title>
+            <text x="176" y="3003.5"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="176" y="3003.5">err</tspan>
+            </text>
+                   
+                   
+                </g>
+                <g>
+                   <rect x="50" y="3032"
+            width="232.79999999999998" height="30"
+            rx="2" ry="2"
+            style="fill:#C5E1A5; stroke:#444; stroke-width:1" />
+                   <title>global.io.on(&apos;alert&apos;, *())</title>
+            <text x="65" y="3052"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="65" y="3052">global.io.on(&apos;alert&apos;, *())</tspan>
+            </text>
+                   
+                   
+                </g>
+            <g>
+                <rect x="87" y="3080.5"
+            width="120.2" height="30"
+            style="fill:#a5d6a7; stroke:#444; stroke-width:1" />
+                    
+                <line x1="97" y1="3080.5" x2="97" y2="3110.5"
+                style="fill:#a5d6a7; stroke:#444; stroke-width:1" />
+                <line x1="197.2" y1="3080.5" x2="197.2" y2="3110.5"
+                style="fill:#a5d6a7; stroke:#444; stroke-width:1" />
+             
+                <title>(data) =&gt;</title>
+            <text x="112" y="3100.5"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="112" y="3100.5">(data) =&gt;</tspan>
+            </text>
+                
+            </g>
+                <g>
+                   <rect x="124" y="3129"
+            width="147" height="30"
+            rx="2" ry="2"
+            style="fill:#C5E1A5; stroke:#444; stroke-width:1" />
+                   <title>global.runApp()</title>
+            <text x="139" y="3149"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="139" y="3149">global.runApp()</tspan>
+            </text>
+                   
+                   
+                </g>
+                <g>
+                   <rect x="124" y="3177.5"
+            width="108" height="30"
+            rx="2" ry="2"
+            style="fill:#C5E1A5; stroke:#444; stroke-width:1" />
+                   <title>.then(*())</title>
+            <text x="139" y="3197.5"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="139" y="3197.5">.then(*())</tspan>
+            </text>
+                   <circle cx="130" cy="3201.5" r="4"
+        style="fill:#ede7f6; stroke:#444; stroke-width:1" />
+                   
+                </g>
+            <g>
+                <rect x="161" y="3226"
+            width="89" height="30"
+            style="fill:#a5d6a7; stroke:#444; stroke-width:1" />
+                    
+                <line x1="171" y1="3226" x2="171" y2="3256"
+                style="fill:#a5d6a7; stroke:#444; stroke-width:1" />
+                <line x1="240" y1="3226" x2="240" y2="3256"
+                style="fill:#a5d6a7; stroke:#444; stroke-width:1" />
+             
+                <title>() =&gt;</title>
+            <text x="186" y="3246"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="186" y="3246">() =&gt;</tspan>
+            </text>
+                
+            </g>
+                <g>
+                   <rect x="198" y="3274.5"
+            width="209.4" height="30"
+            rx="2" ry="2"
+            style="fill:#C5E1A5; stroke:#444; stroke-width:1" />
+                   <title>console.log(&apos;captured&apos;)</title>
+            <text x="213" y="3294.5"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="213" y="3294.5">console.log(&apos;captured&apos;)</tspan>
+            </text>
+                   
+                   
+                </g>
+                <g>
+                   <rect x="198" y="3323"
+            width="303" height="30"
+            rx="2" ry="2"
+            style="fill:#C5E1A5; stroke:#444; stroke-width:1" />
+                   <title>fs.readFile(&apos;still-image.jpg&apos;, *())</title>
+            <text x="213" y="3343"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="213" y="3343">fs.readFile(&apos;still-image.jpg&apos;, *())</tspan>
+            </text>
+                   
+                   
+                </g>
+            <g>
+                <rect x="235" y="3371.5"
+            width="151.39999999999998" height="30"
+            style="fill:#a5d6a7; stroke:#444; stroke-width:1" />
+                    
+                <line x1="245" y1="3371.5" x2="245" y2="3401.5"
+                style="fill:#a5d6a7; stroke:#444; stroke-width:1" />
+                <line x1="376.4" y1="3371.5" x2="376.4" y2="3401.5"
+                style="fill:#a5d6a7; stroke:#444; stroke-width:1" />
+             
+                <title>(err, dat) =&gt;</title>
+            <text x="260" y="3391.5"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="260" y="3391.5">(err, dat) =&gt;</tspan>
+            </text>
+                
+            </g><g>
+            <rect x="302" y="3435"
+            width="99" height="30"
+            rx="3" ry="3"
+            style="fill:#ce93d8; stroke:#444; stroke-width:1" />                
+            <polygon points="272,3450 302,3420 332,3450 302,3480"
+            style="fill:#ce93d8; stroke:#444; stroke-width:1" />
+            <title>(err)</title>
+            <text x="347" y="3455"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="347" y="3455">(err)</tspan>
+            </text>
+            
+            <text x="294.2" y="3455"
+        font-family="monospace" font-size="13" fill="#222">if</text> <text x="309.8" y="3481.95"
+        font-family="monospace" font-size="13" fill="#222">+</text> 
+        </g>
+            <g>
+                <rect x="322" y="3490"
+            width="209.4" height="30"
+            rx="3" ry="3"
+            style="fill:#90caf9; stroke:#444; stroke-width:1" />
+                
+                <line x1="531.4" y1="3500" x2="536.4" y2="3500"
+                style="fill:#a5d6a7; stroke:#444; stroke-width:1" />
+                
+                <line x1="531.4" y1="3510" x2="536.4" y2="3510"
+                style="fill:#a5d6a7; stroke:#444; stroke-width:1" />
+
+                <path d="M536.4, 3494 L552.4, 3505 L536.4, 3516 Z" 
+        fill="#a5d6a7" stroke="#444" stroke-width="1" />
+                             
+                <title>return console.log(err)</title>
+            <text x="337" y="3510"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="337" y="3510">return console.log(err)</tspan>
+            </text>
+                
+            </g>
+                <g>
+                   <rect x="272" y="3540"
+            width="248.4" height="30"
+            rx="2" ry="2"
+            style="fill:#C5E1A5; stroke:#444; stroke-width:1" />
+                   <title>global.io.emit(&apos;image&apos;, dat)</title>
+            <text x="287" y="3560"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="287" y="3560">global.io.emit(&apos;image&apos;, dat)</tspan>
+            </text>
+                   
+                   
+                </g>
+                <g>
+                   <rect x="124" y="3588.5"
+            width="115.8" height="30"
+            rx="2" ry="2"
+            style="fill:#C5E1A5; stroke:#444; stroke-width:1" />
+                   <title>.catch(*())</title>
+            <text x="139" y="3608.5"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="139" y="3608.5">.catch(*())</tspan>
+            </text>
+                   <circle cx="130" cy="3612.5" r="4"
+        style="fill:#ede7f6; stroke:#444; stroke-width:1" />
+                   
+                </g>
+            <g>
+                <rect x="161" y="3637"
+            width="112.4" height="30"
+            style="fill:#a5d6a7; stroke:#444; stroke-width:1" />
+                    
+                <line x1="171" y1="3637" x2="171" y2="3667"
+                style="fill:#a5d6a7; stroke:#444; stroke-width:1" />
+                <line x1="263.4" y1="3637" x2="263.4" y2="3667"
+                style="fill:#a5d6a7; stroke:#444; stroke-width:1" />
+             
+                <title>(exc) =&gt;</title>
+            <text x="186" y="3657"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="186" y="3657">(exc) =&gt;</tspan>
+            </text>
+                
+            </g>
+                <g>
+                   <rect x="198" y="3685.5"
+            width="154.8" height="30"
+            rx="2" ry="2"
+            style="fill:#C5E1A5; stroke:#444; stroke-width:1" />
+                   <title>console.log(exc)</title>
+            <text x="213" y="3705.5"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="213" y="3705.5">console.log(exc)</tspan>
+            </text>
+                   
+                   
+                </g>
+            <g>
+               <rect x="25" y="13.75"
+            width="216.6" height="24"
+            style="fill:#fff59d; stroke:#444; stroke-width:1" />
+               <circle cx="25" cy="25" r="15"
+        style="fill:#fff59d; stroke:#444; stroke-width:1" />
+               <title>Program: source module</title>
+            <text x="55" y="30"
+                font-family="monospace" font-size="13" fill="#222">
+                <tspan x="55" y="30">Program: source module</tspan>
+            </text>
+            </g>
+            <g>
+               <path d="M25, 40 L25 76 Q25 80
+                29 80
+                L42 80 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M42, 77 L50, 80 L42, 83 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M25, 40 L25 124.5 Q25 128.5
+                29 128.5
+                L42 128.5 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M42, 125.5 L50, 128.5 L42, 131.5 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M25, 40 L25 173 Q25 177
+                29 177
+                L42 177 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M42, 174 L50, 177 L42, 180 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M25, 40 L25 221.5 Q25 225.5
+                29 225.5
+                L42 225.5 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M42, 222.5 L50, 225.5 L42, 228.5 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M25, 40 L25 270 Q25 274
+                29 274
+                L42 274 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M42, 271 L50, 274 L42, 277 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M25, 40 L25 318.5 Q25 322.5
+                29 322.5
+                L42 322.5 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M42, 319.5 L50, 322.5 L42, 325.5 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M25, 40 L25 367 Q25 371
+                29 371
+                L42 371 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M42, 368 L50, 371 L42, 374 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M25, 40 L25 415.5 Q25 419.5
+                29 419.5
+                L42 419.5 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M42, 416.5 L50, 419.5 L42, 422.5 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M25, 40 L25 464 Q25 468
+                29 468
+                L42 468 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M42, 465 L50, 468 L42, 471 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M25, 40 L25 512.5 Q25 516.5
+                29 516.5
+                L42 516.5 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M42, 513.5 L50, 516.5 L42, 519.5 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M25, 40 L25 561 Q25 565
+                29 565
+                L42 565 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M42, 562 L50, 565 L42, 568 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M25, 40 L25 609.5 Q25 613.5
+                29 613.5
+                L42 613.5 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M42, 610.5 L50, 613.5 L42, 616.5 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M68.5, 628.5 L68.5 658 Q68.5 662
+                72.5 662
+                L87 662 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               false
+            </g>
+            <g>
+               <path d="M68.5, 628.5 L68.5 706.5 Q68.5 710.5
+                72.5 710.5
+                L87 710.5 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               false
+            </g>
+            <g>
+               <path d="M68.5, 628.5 L68.5 755 Q68.5 759
+                72.5 759
+                L87 759 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               false
+            </g>
+            <g>
+               <path d="M25, 40 L25 803.5 Q25 807.5
+                29 807.5
+                L42 807.5 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M42, 804.5 L50, 807.5 L42, 810.5 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M25, 40 L25 852 Q25 856
+                29 856
+                L42 856 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M42, 853 L50, 856 L42, 859 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M25, 40 L25 900.5 Q25 904.5
+                29 904.5
+                L42 904.5 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M42, 901.5 L50, 904.5 L42, 907.5 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M25, 40 L25 964 Q25 968
+                29 968
+                L42 968 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M42, 965 L50, 968 L42, 971 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M68.5, 983 L68.5 1012.5 Q68.5 1016.5
+                72.5 1016.5
+                L79 1016.5 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M79, 1013.5 L87, 1016.5 L79, 1019.5 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M68.5, 983 L68.5 1061 Q68.5 1065
+                72.5 1065
+                L79 1065 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M79, 1062 L87, 1065 L79, 1068 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M68.5, 983 L68.5 1109.5 Q68.5 1113.5
+                72.5 1113.5
+                L79 1113.5 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M79, 1110.5 L87, 1113.5 L79, 1116.5 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M25, 40 L25 1158 Q25 1162
+                29 1162
+                L42 1162 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M42, 1159 L50, 1162 L42, 1165 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M68.5, 1177 L68.5 1206.5 Q68.5 1210.5
+                72.5 1210.5
+                L87 1210.5 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               false
+            </g>
+            <g>
+               <path d="M105.5, 1225.5 L105.5 1255 Q105.5 1259
+                109.5 1259
+                L116 1259 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M116, 1256 L124, 1259 L116, 1262 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M105.5, 1225.5 L105.5 1303.5 Q105.5 1307.5
+                109.5 1307.5
+                L116 1307.5 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M116, 1304.5 L124, 1307.5 L116, 1310.5 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M142.5, 1322.5 L142.5 1352 Q142.5 1356
+                146.5 1356
+                L161 1356 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               false
+            </g>
+            <g>
+               <path d="M179.5, 1371 L179.5 1400.5 Q179.5 1404.5
+                183.5 1404.5
+                L190 1404.5 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M190, 1401.5 L198, 1404.5 L190, 1407.5 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M179.5, 1371 L179.5 1449 Q179.5 1453
+                183.5 1453
+                L190 1453 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M190, 1450 L198, 1453 L190, 1456 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M179.5, 1371 L179.5 1497.5 Q179.5 1501.5
+                183.5 1501.5
+                L190 1501.5 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M190, 1498.5 L198, 1501.5 L190, 1504.5 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M216.5, 1516.5 L216.5 1546 Q216.5 1550
+                220.5 1550
+                L235 1550 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               false
+            </g>
+            <g>
+               <path d="M253.5, 1565 L253.5 1594.5 Q253.5 1598.5
+                257.5 1598.5
+                L264 1598.5 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M264, 1595.5 L272, 1598.5 L264, 1601.5 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M290.5, 1613.5 L290.5 1643 Q290.5 1647
+                294.5 1647
+                L309 1647 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               false
+            </g>
+            <g>
+               <path d="M327.5, 1662 L327.5 1706.5 Q327.5 1710.5
+                331.5 1710.5
+                L338 1710.5 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M338, 1707.5 L346, 1710.5 L338, 1713.5 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M376, 1740.5 L376 1761.5 Q376 1765.5
+                380 1765.5
+                L388 1765.5 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M388, 1762.5 L396, 1765.5 L388, 1768.5 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M327.5, 1662 L327.5 1811.5 Q327.5 1815.5
+                331.5 1815.5
+                L338 1815.5 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M338, 1812.5 L346, 1815.5 L338, 1818.5 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M25, 40 L25 1860 Q25 1864
+                29 1864
+                L42 1864 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M42, 1861 L50, 1864 L42, 1867 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M68.5, 1879 L68.5 1908.5 Q68.5 1912.5
+                72.5 1912.5
+                L87 1912.5 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               false
+            </g>
+            <g>
+               <path d="M105.5, 1927.5 L105.5 1957 Q105.5 1961
+                109.5 1961
+                L116 1961 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M116, 1958 L124, 1961 L116, 1964 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M25, 40 L25 2005.5 Q25 2009.5
+                29 2009.5
+                L42 2009.5 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M42, 2006.5 L50, 2009.5 L42, 2012.5 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M68.5, 2024.5 L68.5 2054 Q68.5 2058
+                72.5 2058
+                L87 2058 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               false
+            </g>
+            <g>
+               <path d="M105.5, 2073 L105.5 2102.5 Q105.5 2106.5
+                109.5 2106.5
+                L116 2106.5 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M116, 2103.5 L124, 2106.5 L116, 2109.5 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M105.5, 2073 L105.5 2151 Q105.5 2155
+                109.5 2155
+                L116 2155 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M116, 2152 L124, 2155 L116, 2158 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M25, 40 L25 2199.5 Q25 2203.5
+                29 2203.5
+                L42 2203.5 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M42, 2200.5 L50, 2203.5 L42, 2206.5 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M25, 40 L25 2248 Q25 2252
+                29 2252
+                L42 2252 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M42, 2249 L50, 2252 L42, 2255 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M25, 40 L25 2296.5 Q25 2300.5
+                29 2300.5
+                L42 2300.5 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M42, 2297.5 L50, 2300.5 L42, 2303.5 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M68.5, 2315.5 L68.5 2345 Q68.5 2349
+                72.5 2349
+                L87 2349 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               false
+            </g>
+            <g>
+               <path d="M105.5, 2364 L105.5 2408.5 Q105.5 2412.5
+                109.5 2412.5
+                L116 2412.5 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M116, 2409.5 L124, 2412.5 L116, 2415.5 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M154, 2442.5 L154 2463.5 Q154 2467.5
+                158 2467.5
+                L166 2467.5 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M166, 2464.5 L174, 2467.5 L166, 2470.5 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M154, 2442.5 L154 2512 Q154 2516
+                158 2516
+                L166 2516 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M166, 2513 L174, 2516 L166, 2519 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M25, 40 L25 2562 Q25 2566
+                29 2566
+                L42 2566 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M42, 2563 L50, 2566 L42, 2569 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M68.5, 2581 L68.5 2610.5 Q68.5 2614.5
+                72.5 2614.5
+                L87 2614.5 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               false
+            </g>
+            <g>
+               <path d="M105.5, 2629.5 L105.5 2674 Q105.5 2678
+                109.5 2678
+                L116 2678 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M116, 2675 L124, 2678 L116, 2681 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M154, 2708 L154 2729 Q154 2733
+                158 2733
+                L166 2733 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M166, 2730 L174, 2733 L166, 2736 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M370, 2678 L427.2 2678  Q431.2 2678
+                431.2 2682
+                L431.2 2740 Q431.2 2748
+                435.2 2748
+                L443.2 2748 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M443.2, 2745 L451.2, 2748 L443.2, 2751 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M481.2, 2778 L481.2 2799 Q481.2 2803
+                485.2 2803
+                L493.2 2803 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M493.2, 2800 L501.2, 2803 L493.2, 2806 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M25, 40 L25 2849 Q25 2853
+                29 2853
+                L42 2853 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M42, 2850 L50, 2853 L42, 2856 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M68.5, 2868 L68.5 2897.5 Q68.5 2901.5
+                72.5 2901.5
+                L87 2901.5 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               false
+            </g>
+            <g>
+               <path d="M105.5, 2916.5 L105.5 2946 Q105.5 2950
+                109.5 2950
+                L116 2950 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M116, 2947 L124, 2950 L116, 2953 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M142.5, 2965 L142.5 2994.5 Q142.5 2998.5
+                146.5 2998.5
+                L153 2998.5 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M153, 2995.5 L161, 2998.5 L153, 3001.5 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M25, 40 L25 3043 Q25 3047
+                29 3047
+                L42 3047 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M42, 3044 L50, 3047 L42, 3050 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M68.5, 3062 L68.5 3091.5 Q68.5 3095.5
+                72.5 3095.5
+                L87 3095.5 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               false
+            </g>
+            <g>
+               <path d="M105.5, 3110.5 L105.5 3140 Q105.5 3144
+                109.5 3144
+                L116 3144 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M116, 3141 L124, 3144 L116, 3147 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M105.5, 3110.5 L105.5 3188.5 Q105.5 3192.5
+                109.5 3192.5
+                L116 3192.5 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M116, 3189.5 L124, 3192.5 L116, 3195.5 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M142.5, 3207.5 L142.5 3237 Q142.5 3241
+                146.5 3241
+                L161 3241 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               false
+            </g>
+            <g>
+               <path d="M179.5, 3256 L179.5 3285.5 Q179.5 3289.5
+                183.5 3289.5
+                L190 3289.5 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M190, 3286.5 L198, 3289.5 L190, 3292.5 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M179.5, 3256 L179.5 3334 Q179.5 3338
+                183.5 3338
+                L190 3338 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M190, 3335 L198, 3338 L190, 3341 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M216.5, 3353 L216.5 3382.5 Q216.5 3386.5
+                220.5 3386.5
+                L235 3386.5 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               false
+            </g>
+            <g>
+               <path d="M253.5, 3401.5 L253.5 3446 Q253.5 3450
+                257.5 3450
+                L264 3450 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M264, 3447 L272, 3450 L264, 3453 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M302, 3480 L302 3501 Q302 3505
+                306 3505
+                L314 3505 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M314, 3502 L322, 3505 L314, 3508 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M253.5, 3401.5 L253.5 3551 Q253.5 3555
+                257.5 3555
+                L264 3555 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M264, 3552 L272, 3555 L264, 3558 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M105.5, 3110.5 L105.5 3599.5 Q105.5 3603.5
+                109.5 3603.5
+                L116 3603.5 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M116, 3600.5 L124, 3603.5 L116, 3606.5 Z" 
+        fill="#333" />
+            </g>
+            <g>
+               <path d="M142.5, 3618.5 L142.5 3648 Q142.5 3652
+                146.5 3652
+                L161 3652 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               false
+            </g>
+            <g>
+               <path d="M179.5, 3667 L179.5 3696.5 Q179.5 3700.5
+                183.5 3700.5
+                L190 3700.5 "
+        style="fill:none; stroke:#444; stroke-width:1" />
+               <path d="M190, 3697.5 L198, 3700.5 L190, 3703.5 Z" 
+        fill="#333" />
+            </g>
+            </svg>

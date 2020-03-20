@@ -1,0 +1,18 @@
+.condition-preference {
+    transition: background-color 300ms, color 300ms;
+}
+
+.pref-new.active {
+    background-color: #00A65A;
+    color: #ffffff!important;
+}
+
+.pref-used.active {
+    background-color: #0C58EA;
+    color: #ffffff!important;
+}
+
+.pref-old.active {
+    background-color: #FDB811;
+    color: #ffffff!important;
+}

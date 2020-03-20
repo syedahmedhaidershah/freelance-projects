@@ -1,0 +1,5 @@
+<select #selectEl [value]="current" class="border-light-gray extra-round py-2 px-4 small font-weight-bolder" [style]="selectStyle">
+    <option *ngFor="let e of array" [value]="e">
+        {{e}}
+    </option>
+</select>

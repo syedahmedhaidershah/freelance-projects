@@ -1,0 +1,57 @@
+<div class="col-md-12">
+    <div class="col-md-4 d-block mx-auto">
+        <div class="text-center col-md-12 text-center py-2 my-2 small text-info font-weight-semibold">
+            Complete the form below to place an order.
+        </div>
+        <form [formGroup]="order" class="col-md-12 px-3 position-relative">
+            <mat-form-field class="col-md-12 px-0 position-relative">
+                <input #listInp type="text" placeholder="Pick an Item or enter Custom" aria-label="Item" matInput
+                    formControlName="itemName" [matAutocomplete]="auto">
+                <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let i of itemsObs | async" [value]="i.name">
+                        {{i.name}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+            <mat-form-field class="col-md-12 px-0 position-relative">
+                <input type="text" placeholder="Enter your name" matInput formControlName="name"
+                    [matAutocomplete]="auto">
+            </mat-form-field>
+            <mat-form-field class="col-md-12 px-0 position-relative">
+                <input type="number" placeholder="Contact Number" matInput formControlName="contact"
+                    [matAutocomplete]="auto">
+            </mat-form-field>
+            <div class="col-md-12 p-0">
+                <div class="col-md-12 p-0 small text-secondary">Preferable Condition Required</div>
+            </div>
+            <div class="col-md-12 p-0 d-flex flex-row justify-content-between my-2">
+                <div class="col-md-4 h-100 p-1">
+                    <div (click)="activateCondition('old')" matRipple
+                        class="h-100 w-100 px-1 py-3 small lh-100 text-center rounded border-light-gray shadow-less-dark text-secondary condition-preference pref-old">
+                        Old
+                    </div>
+                </div>
+                <div class="col-md-4 h-100 p-1">
+                    <div (click)="activateCondition('used')" matRipple
+                        class="active h-100 w-100 px-1 py-3 small lh-100 text-center rounded border-light-gray shadow-less-dark text-secondary condition-preference pref-used">
+                        Used
+                    </div>
+                </div>
+                <div class="col-md-4 h-100 p-1">
+                    <div (click)="activateCondition('new')" matRipple
+                        class="h-100 w-100 px-1 py-3 small lh-100 text-center rounded border-light-gray shadow-less-dark text-secondary condition-preference pref-new">
+                        New
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div *ngIf="itemsArr.length === 0" class="text-info small py-3 col-md-12">
+            Loading items available ...
+        </div>
+        <button mat-raised-button [disabled]="itemsArr.length === 0"
+            class="bg-theme w-300px text-white d-block mx-auto extra-round px-5 py-2 mt-4 font-weight-semibold"
+            (click)="placeOrder()">
+            Place Order
+        </button>
+    </div>
+</div>

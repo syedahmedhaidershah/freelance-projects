@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">PointsOfInterest</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="my_location_marker_text">My Location</string>
+    <string name="show_list">Show List</string>
+    <string name="hide_list">Hide List</string>
+    <string name="toolbar_title">Points of Interest</string>
+    <string name="drawer_open_description">Navigation drawer was opened</string>
+    <string name="drawer_close_description">Navigation drawer was closed</string>
+    <string name="distance_miles_template">{%} mi</string>
+    <string name="menu_search_title">Find Place</string>
+    <string name="search_dialog_info">Find an address</string>
+    <string name="place_search_error">There was a problem getting your search results</string>
+</resources>

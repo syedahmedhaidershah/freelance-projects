@@ -1,0 +1,27 @@
+{
+    "name": "api",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "node server",
+        "dev": "nodemon server",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "body-parser": "^1.19.0",
+        "cors": "^2.8.5",
+        "express": "^4.17.1",
+        "mongodb": "^3.3.0-beta2",
+        "mysql": "^2.17.1",
+        "promise-mysql": "^4.1.0",
+        "saslprep": "^1.0.3",
+        "socket.io": "^2.2.0"
+    },
+    "devDependencies": {
+        "eslint": "^6.6.0",
+        "nodemon": "^1.19.4"
+    }
+}

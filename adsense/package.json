@@ -1,0 +1,20 @@
+{
+  "name": "adsense",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chromedriver": "^80.0.1",
+    "gimmeproxy-request": "^1.0.12",
+    "lodash": "^4.17.15",
+    "node-fetch": "^2.6.0",
+    "node-html-parser": "^1.2.5",
+    "nodemon": "^2.0.2",
+    "selenium-webdriver": "^4.0.0-alpha.5"
+  }
+}

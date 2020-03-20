@@ -1,0 +1,1 @@
+const oc = require('node-opencv');

@@ -1,0 +1,50 @@
+<h3 class="col-md-12 text-center pt-5 pb-1 m-0">
+    ORB
+</h3>
+<div class="col-md-12 text-center pt-1 pb-5 text-info">
+    <small>
+        Automated Order Booking
+    </small>
+</div>
+<div class="col-md-12 container py-2">
+    <form class="col-md-12 py-2" [formGroup]="login">
+        <div class="col-md-12 p-1 mb-2">
+            <mat-form-field class="col-md-12">
+                <input matInput placeholder="Username" formControlName="username" class="text-uppercase" />
+            </mat-form-field>
+            <div class="col-md-12 p-0">
+                <small
+                    *ngIf="!(login.controls.username.valid) && (login.controls.username.dirty || login.controls.username.touched)"
+                    class="col-md-12 text-center text-danger">
+                    Username must be 6 characters.
+                </small>
+            </div>
+        </div>
+        <div class="col-md-12 p-1 mb-2">
+            <mat-form-field class="col-md-12">
+                <input matInput placeholder="Password" formControlName="password" type="password" />
+            </mat-form-field>
+            <div class="col-md-12 p-0">
+                <small
+                    *ngIf="!(login.controls.password.valid) && (login.controls.password.dirty || login.controls.password.touched)"
+                    class="col-md-12 text-center text-danger">
+                    Password must be between 8 and 6 characters.
+                </small>
+            </div>
+        </div>
+    </form>
+    <div class="col-md-12 d-flex justify-content-center my-5">
+        <button mat-raised-button color="accent" class="text-white mb-5 mt-2">
+            <mat-icon class="vertical-align-middle mr-1">done</mat-icon>
+            <span class="vertical-align-middle font-weight-bold">Login</span>
+        </button>
+    </div>
+    <div class="col-md-12 d-flex justify-content-center mt-5">
+        <img src="../../assets/img/logo.png" height="50px" />
+    </div>
+    <div class="col-md-12 text-center d-flex justify-content-center">
+        <small class="col-md-12 text-secondary text-center vertical-align-middle">
+            Copyrights &copy; 2019. Powered by Ventiureon.
+        </small>
+    </div>
+</div>

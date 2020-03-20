@@ -1,0 +1,17 @@
+{
+  "name": "phonetest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "node-opencv": "0.0.2-security"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  }
+}
