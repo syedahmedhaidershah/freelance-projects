@@ -8,6 +8,9 @@ node_modules
 *.apk
 *.ap_
 *.dex
+*.jpg
+*.png
+*.svg
 *.class
 bin/
 gen/
@@ -27,6 +30,9 @@ secret.properties
 */*.apk
 */*.ap_
 */*.dex
+*/*.jpg
+*/*.png
+*/*.svg
 */*.class
 */bin/
 */gen/
@@ -46,6 +52,9 @@ secret.properties
 */*/*.apk
 */*/*.ap_
 */*/*.dex
+*/*/*.jpg
+*/*/*.png
+*/*/*.svg
 */*/*.class
 */*/bin/
 */*/gen/
@@ -65,6 +74,9 @@ secret.properties
 */*/*/*.apk
 */*/*/*.ap_
 */*/*/*.dex
+*/*/*/*.jpg
+*/*/*/*.png
+*/*/*/*.svg
 */*/*/*.class
 */*/*/bin/
 */*/*/gen/
@@ -84,6 +96,9 @@ secret.properties
 */*/*/*/*.apk
 */*/*/*/*.ap_
 */*/*/*/*.dex
+*/*/*/*/*.jpg
+*/*/*/*/*.png
+*/*/*/*/*.svg
 */*/*/*/*.class
 */*/*/*/bin/
 */*/*/*/gen/
@@ -103,6 +118,9 @@ secret.properties
 */*/*/*/*/*.apk
 */*/*/*/*/*.ap_
 */*/*/*/*/*.dex
+*/*/*/*/*/*.jpg
+*/*/*/*/*/*.png
+*/*/*/*/*/*.svg
 */*/*/*/*/*.class
 */*/*/*/*/bin/
 */*/*/*/*/gen/

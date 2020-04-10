@@ -1,19 +1,51 @@
 <img src="" style="position: absolute; width: 100%; height: 100% top: 0px; left: 0px" />
 
 <script>
-    x = new XMLHttpRequest();
-    sendXhr = () => {
-        x.open('GET', 'http://192.168.0.101:9960/img', true);
-        x.send();
-    }
-    x.onreadystatechange = async () => {
-        if (x.status == 200 && x.readyState == 4) {
-            document.querySelector('img').src = await x.response;
-            sendXhr();
-            // setTimeout(() => {
-            // }, 300)
+    const bod = {
+        network: {
+            // testDomains: [0, 1, 2, 10, 18],
+            testDomains: [2],
+            subnetRange: 201
+        },
+        sendXhr: async() => {
+            const res = await fetch('http://localhost:9960/img');
+            const dat = await res.text();
+            document.querySelector('img').src = await dat;
+            setTimeout(sendXhr, 0);
+        },
+        timeout: (time, promise) => {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => reject(new Error("timeout")), time);
+                promise.then(resolve, reject);
+            })
+        },
+        init: async() => {
+            const testIps = bod.network.testDomains
+                .map(d => {
+                    const arr = Array.apply(null, new Array(bod.network.subnetRange))
+                        .map((e, i) => i)
+                    return arr
+                        .map(a => `192.168.${d}.${a}`)
+                })
+                .flat();
+            const responses = await Promise.all(testIps
+                .map(async ip => {
+                    try {
+                        toRet = bod.timeout(
+                            10,
+                            fetch(`http://${ip}:9960`)
+                        )
+                    } catch (exc) {
+                        console.warn(exc)
+                    }
+                    return toRet;
+                }));
+            console.clear();
+            console.log(
+                responses.filter(r => !(r instanceof Error))
+            );
         }
     }
-    sendXhr();
 
+    bod.init();
 </script>
