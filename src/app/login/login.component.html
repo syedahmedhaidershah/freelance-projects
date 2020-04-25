@@ -1,0 +1,20 @@
+<div class="col-12 w-100 h-100 d-flex justify-content-center position-fixed z-5 t-0 l-0">
+    <div class="col-12 h-100 d-flex flex-column justify-content-center">
+        <div class="col-12 font-weight-semibold text-HIGHLIGHT-1 max-h-max-content fs-2r text-center">
+            Login
+        </div>
+        <form [formGroup]="loginForm" class="col-12 py-2 max-h-max-content">
+            <mat-form-field class="col-12 p-0">
+                <input matInput class="col-12 p-0" formControlName="username" placeholder="Username" autocomplete="off" />
+            </mat-form-field>
+            <mat-form-field class="col-12 p-0">
+                <input matInput class="col-12 p-0" formControlName="password" placeholder="Password" type="password" autocomplete="off" />
+            </mat-form-field>
+        </form>
+        <div class="col-12 p-0 d-flex justify-content-center py-3 max-h-max-content">
+            <button mat-raised-button class="bg-HIGHLIGHT-1 text-white px-5 py-2" (click)="login()">
+            Login
+          </button>
+        </div>
+    </div>
+</div>

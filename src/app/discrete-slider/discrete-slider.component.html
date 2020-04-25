@@ -1,0 +1,20 @@
+<div class="col-12 py-2">
+    <div class="col-12 p-0">
+        <app-progress-bar color="#0C58EA" [percentage]="percentage" class="col-12 p-2"></app-progress-bar>
+    </div>
+    <div class="col-12 d-flex justify-content-between">
+        <div>
+            <button mat-icon-button class="bg-white shadow" (click)="decrease()">
+              <span class="vertical-align-middle">-</span>
+            </button>
+        </div>
+        <div class="col-8 text-center fs-1-2r font-weight-semibold">
+            {{currentVal}}
+        </div>
+        <div>
+            <button mat-icon-button class="bg-white shadow" (click)="increase()">
+              <span class="vertical-align-middle">+</span>
+            </button>
+        </div>
+    </div>
+</div>

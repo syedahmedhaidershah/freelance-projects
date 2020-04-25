@@ -1,0 +1,21 @@
+<div class="col-12 p-2">
+    <div class="col-12 text-HIGHLIGHT-4 fs-1-2r">
+        Control Panel
+    </div>
+    <div class="col-12 py-2">
+        <div class="pt-4 pb-2 small font-weight-semibold text-secondary">
+            Switches
+        </div>
+        <div matRipple *ngFor="let s of switchesPresent" class="p-2">
+            <app-toggle [name]="s.name"></app-toggle>
+        </div>
+    </div>
+    <div class="col-12 py-2">
+        <div class="pt-4 pb-2 small font-weight-semibold text-secondary">
+            Fans
+        </div>
+        <div *ngFor="let s of sliders" class="col-12 py-2">
+            <app-discrete-slider [name]="s.name" [states]="s.states" class="col-12 p-0"></app-discrete-slider>
+        </div>
+    </div>
+</div>
