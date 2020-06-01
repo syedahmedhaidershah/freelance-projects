@@ -698,7 +698,7 @@ app.get('/getBACS', (req, res) => {
         //     // res.send(rows);
         // });
         var data = []
-        connection.query(`SELECT Stall.id , StallHolder.bankName , SUM( CAST(Invoices.total AS UNSIGNED ) ) AS total FROM Stall ,StallHolder , Invoices WHERE Stall.stallHolderId = StallHolder.id AND Stall.id = Invoices.stallId AND (DATE(Invoices.dateTime) BETWEEN '${moment("12/02/2020","DD/MM/YYYY").weekday(0).subtract(6,'d').format("YYYY-MM-DD")}' AND '${moment("12/02/2020","DD/MM/YYYY").weekday(0).format("YYYY-MM-DD")}') GROUP BY Stall.id`, (err, rows1) => {
+        connection.query(`SELECT Stall.id , StallHolder.bankName , SUM( CAST(Invoices.total AS UNSIGNED ) ) AS total FROM Stall ,StallHolder , Invoices WHERE Stall.stallHolderId = StallHolder.id AND Stall.id = Invoices.stallId AND (DATE(Invoices.dateTime) BETWEEN '${moment().weekday(0).subtract(6,'d').format("YYYY-MM-DD")}' AND '${moment().weekday(0).format("YYYY-MM-DD")}') GROUP BY Stall.id`, (err, rows1) => {
             if (err) throw err;
                 if(rows1){
                  data = rows1.filter(v=> {
@@ -757,7 +757,7 @@ app.get('/get_weekly_report_date', (req, res) => {
             //     // res.send(rows);
             // });
             var data = []
-            connection.query(`SELECT * FROM Invoices WHERE  (DATE(dateTime) BETWEEN '${moment("12/02/2020","DD/MM/YYYY").weekday(0).subtract(6,'d').format("YYYY-MM-DD")}' AND '${moment("12/02/2020","DD/MM/YYYY").weekday(0).format("YYYY-MM-DD")}')`, (err, rows1) => {
+            connection.query(`SELECT * FROM Invoices WHERE  (DATE(dateTime) BETWEEN '${moment().weekday(0).subtract(6,'d').format("YYYY-MM-DD")}' AND '${moment().weekday(0).format("YYYY-MM-DD")}')`, (err, rows1) => {
                 if (err) throw err;
                 data = rows1
                 res.send(data.sort(compareValues('id')))
