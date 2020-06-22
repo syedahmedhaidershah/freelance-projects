@@ -698,7 +698,7 @@ app.get('/getBACS', (req, res) => {
         //     // res.send(rows);
         // });
         var data = []
-        connection.query(`SELECT Stall.id , StallHolder.bankName , SUM( CAST(Invoices.total AS SIGNED ) ) AS total FROM Stall ,StallHolder , Invoices WHERE Stall.stallHolderId = StallHolder.id AND Stall.id = Invoices.stallId AND CAST(Invoices.total AS SIGNED) > 0 AND (DATE(Invoices.dateTime) BETWEEN '${moment().weekday(1).subtract(6,'d').format("YYYY-MM-DD")}' AND '${moment().weekday(1).format("YYYY-MM-DD")}') GROUP BY Stall.id`, (err, rows1) => {
+        connection.query(`SELECT Stall.id , StallHolder.bankName , SUM( CAST(Invoices.total AS SIGNED ) ) AS total FROM Stall ,StallHolder , Invoices WHERE Stall.stallHolderId = StallHolder.id AND Stall.id = Invoices.stallId AND CAST(Invoices.total AS SIGNED) > 0 AND (DATE(Invoices.dateTime) BETWEEN '${moment().weekday(-7).subtract(6,'d').format("YYYY-MM-DD")}' AND '${moment().weekday(-7).format("YYYY-MM-DD")}') GROUP BY Stall.id`, (err, rows1) => {
             if (err) throw err;
                 if(rows1){
                  data = rows1.filter(v=> {
@@ -728,7 +728,7 @@ app.get('/get_weekly_report_date', (req, res) => {
         //     // res.send(rows);
         // });
         var data = []
-        connection.query(`SELECT * FROM Invoices WHERE  (DATE(dateTime) BETWEEN '${moment().weekday(1).subtract(6,'d').format("YYYY-MM-DD")}' AND '${moment().weekday(1).format("YYYY-MM-DD")}') AND stallId ='${req.query.id}'`, (err, rows1) => {
+        connection.query(`SELECT * FROM Invoices WHERE  (DATE(dateTime) BETWEEN '${moment().weekday(-7).subtract(6,'d').format("YYYY-MM-DD")}' AND '${moment().weekday(-7).format("YYYY-MM-DD")}') AND stallId ='${req.query.id}'`, (err, rows1) => {
             if (err) throw err;
             data = rows1
             if(rows1.length == 0){
@@ -759,7 +759,7 @@ app.get('/get_weekly_report_date', (req, res) => {
             //     // res.send(rows);
             // });
             var data = []
-            connection.query(`SELECT * FROM Invoices WHERE  (DATE(dateTime) BETWEEN '${moment().weekday(1).subtract(6,'d').format("YYYY-MM-DD")}' AND '${moment().weekday(1).format("YYYY-MM-DD")}')`, (err, rows1) => {
+            connection.query(`SELECT * FROM Invoices WHERE  (DATE(dateTime) BETWEEN '${moment().weekday(-7).subtract(6,'d').format("YYYY-MM-DD")}' AND '${moment().weekday(-7).format("YYYY-MM-DD")}')`, (err, rows1) => {
                 if (err) throw err;
                 data = rows1
                 res.send(data.sort(compareValues('id')))
