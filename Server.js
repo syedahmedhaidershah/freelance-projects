@@ -97,18 +97,18 @@ app.get('/get_invoices', (req, res) => {
                 // res.send(rows);
             });
 
-            connection.query(`SELECT * FROM Refund where invoiceId = ${v.id}`, (err, rows2) => {
-                if (err) throw err;
-                console.log('Data received from Db:\n');
+            // connection.query(`SELECT * FROM Refund where invoiceId = ${v.id}`, (err, rows2) => {
+            //     if (err) throw err;
+            //     console.log('Data received from Db:\n');
 
-                rows2.map(r => {
+            //     rows2.map(r => {
 
-                    invoices[i].refunds.push(r);
-                    if (rows2.length == invoices[i].refunds.length) {
-                    }
-                })
-                // res.send(rows);
-            });
+            //         invoices[i].refunds.push(r);
+            //         if (rows2.length == invoices[i].refunds.length) {
+            //         }
+            //     })
+            //     // res.send(rows);
+            // });
 
         })
         res.send(invoices);
