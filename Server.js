@@ -51,10 +51,17 @@ const PORT = 9999;
 app.get('/get_invoices', (req, res) => {
     var invoices = '';
     connection.query('SELECT * FROM Invoices', (err, rows) => {
+        // if (err) {
+        //     res.status(400).json({
+        //         message: err
+        //     });
+        // };
         if (err) {
             res.status(400).json({
-                message: err
+                message: "Something Went Wrong"
             });
+        console.log('Error from Invoices from Db:', err);
+
         };
         console.log('Data received from Db:\n');
         invoices = rows
@@ -74,8 +81,10 @@ app.get('/get_invoices', (req, res) => {
                 // if (err) throw err
                 if (err) {
                     res.status(400).json({
-                        message: err
+                        message: "Something Went Wrong"
                     });
+                console.log('Error from InvoiceDetails from Db:', err);
+
                 };
                 console.log('Data received from Db:\n');
 
