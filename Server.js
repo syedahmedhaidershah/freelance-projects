@@ -75,7 +75,7 @@ app.get('/get_invoices', (req, res) => {
             //    year =date.getFullYear
             //  invoices[i].dateTime = day  + "/" + month + "/" + year
             // invoices[i].dateTime = moment(date).format("DD/MM/YYYY")
-            // invoices[i].items = []
+            invoices[i].items = []
             // invoices[i].refunds = []
             connection.query(`SELECT * FROM InvoiceDetails where id = '${v.id}'`, (err, rows1) => {
                 // if (err) throw err
