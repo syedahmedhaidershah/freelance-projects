@@ -87,13 +87,16 @@ app.get('/get_invoices', (req, res) => {
 
                 };
                 console.log('Data received from Db:\n');
-
+                if(rows1){
                 rows1.map(w => {
                     invoices[i].items.push(w)
 
 
 
                 })
+            } else {
+                console.log("No items for invoice :",v.id)
+            }
                 // res.send(rows);
             });
 
