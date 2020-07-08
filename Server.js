@@ -80,9 +80,9 @@ app.get('/get_invoices', (req, res) => {
             connection.query(`SELECT * FROM InvoiceDetails where id = ${v.id}`, (err, rows1) => {
                 // if (err) throw err
                 if (err) {
-                    res.status(400).json({
-                        message: "Something Went Wrong"
-                    });
+                    // res.status(400).json({
+                    //     message: "Something Went Wrong"
+                    // });
                 console.log('Error from InvoiceDetails from Db:', err);
 
                 };
