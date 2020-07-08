@@ -86,7 +86,7 @@ app.get('/get_invoices', (req, res) => {
                 console.log('Error from InvoiceDetails from Db:', err);
 
                 };
-                console.log('Data received from Db:\n');
+                // console.log('Data received from Db:\n');
                 if(rows1){
                 rows1.map(w => {
                     invoices[i].items.push(w)
