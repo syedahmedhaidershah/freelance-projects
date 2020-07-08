@@ -51,7 +51,11 @@ const PORT = 9999;
 app.get('/get_invoices', (req, res) => {
     var invoices = '';
     connection.query('SELECT * FROM Invoices', (err, rows) => {
-        if (err) throw err;
+        if (err) {
+            res.status(400).json({
+                message: err
+            });
+        };
         console.log('Data received from Db:\n');
         invoices = rows
         rows.map((v, i) => {
@@ -67,7 +71,12 @@ app.get('/get_invoices', (req, res) => {
             // invoices[i].items = []
             // invoices[i].refunds = []
             connection.query(`SELECT * FROM InvoiceDetails where id = ${v.id}`, (err, rows1) => {
-                if (err) throw err;
+                // if (err) throw err
+                if (err) {
+                    res.status(400).json({
+                        message: err
+                    });
+                };
                 console.log('Data received from Db:\n');
 
                 rows1.map(w => {
@@ -804,12 +813,15 @@ app.post("/add_invoice", (req, res) => {
     var error = null
     var body = req.body
     // var dateTime = Date.now();
+    if(body.items && body.items.length > 0){
     connection.query(`INSERT INTO Invoices(id,stallId,salesPersonId,stallHolderId,dateTime,paymentMethod,total,customerId,card,cash) \
     VALUES('${body.id}','${body.stallId}','${body.salesPersonId}','${body.stallHolderId}','${body.dateTime}','${body.paymentMethod}','${body.total}',${body.customerId},'${body.card}','${body.cash}')`, (err, data) => {
         if (err) {
             error = err;
             console.log("invoice table error: ",error);
-            
+            res.status(400).json({
+                message: error
+            });
         } else {
 
             // connection.query(`SELECT id FROM Invoices where customerId = ${body.customerId} AND dateTime = '${dateTime}'`, (err, rows) => {
@@ -822,7 +834,9 @@ app.post("/add_invoice", (req, res) => {
                         if (err) {
                             error = err;
             console.log("invoiceDetails table error: ",error);
-
+            res.status(400).json({
+                message: error
+            });
                         }
                     });
                 })
@@ -844,6 +858,11 @@ app.post("/add_invoice", (req, res) => {
             message: error
         });
     }
+} else {
+    res.status(400).json({
+        message: "No items in invoice"
+    });
+}
 
 });
 
