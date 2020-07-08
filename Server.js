@@ -57,9 +57,9 @@ app.get('/get_invoices', (req, res) => {
         //     });
         // };
         if (err) {
-            res.status(400).json({
-                message: "Something Went Wrong"
-            });
+            // res.status(400).json({
+            //     message: "Something Went Wrong"
+            // });
         console.log('Error from Invoices from Db:', err);
 
         };
