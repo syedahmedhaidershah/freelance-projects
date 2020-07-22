@@ -877,7 +877,66 @@ app.post("/add_invoice", (req, res) => {
 }
 
 });
+app.post("/add_invoice_new", (req, res) => {
 
+    //read product information from request
+    // let product = new Product(req.body.prd_name, req.body.prd_price);
+    console.log("add_invoice_new: ", req.body)
+    var error = null
+    var body = req.body
+    // var dateTime = Date.now();
+    if(body.items && body.items.length > 0){
+    connection.query(`INSERT INTO NewInvoices(id,stallId,salesPersonId,stallHolderId,dateTime,paymentMethod,total,customerId,card,cash) \
+    VALUES('${body.id}','${body.stallId}','${body.salesPersonId}','${body.stallHolderId}','${body.dateTime}','${body.paymentMethod}','${body.total}',${body.customerId},'${body.card}','${body.cash}')`, (err, data) => {
+        if (err) {
+            error = err;
+            console.log("invoice table error: ",error);
+            res.status(400).json({
+                message: error
+            });
+        } else {
+
+            // connection.query(`SELECT id FROM Invoices where customerId = ${body.customerId} AND dateTime = '${dateTime}'`, (err, rows) => {
+            //     if (err) throw err;
+            //     console.log('Data received from Db:\n');
+                // res.send(rows);
+                body.items.map(v => {
+                    connection.query(`INSERT INTO NewInvoiceDetails(id,productId,description,price,finalPrice,quantity,card,cash) \
+                    VALUES('${body.id}','${v.productId}','${v.description}','${v.price}','${v.finalPrice}','${v.quantity}','${body.card}','${body.cash}')`, (err, data) => {
+                        if (err) {
+                            error = err;
+            console.log("invoiceDetails table error: ",error);
+            res.status(400).json({
+                message: error
+            });
+                        }
+                    });
+                })
+            // });
+
+
+        }
+    });
+    // })
+
+
+    if (error == null) {
+        res.status(200).json({
+            message: "Invoice added.",
+            // productId: data
+        });
+    } else {
+        res.status(400).json({
+            message: error
+        });
+    }
+} else {
+    res.status(400).json({
+        message: "No items in invoice"
+    });
+}
+
+});
 // make the server listen to requests
 app.listen(PORT, () => {
     console.log(`Server running at: http://localhost:${PORT}/`);
