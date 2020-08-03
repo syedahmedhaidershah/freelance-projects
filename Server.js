@@ -216,6 +216,7 @@ app.get('/get_products_code', (req, res) => {
 });
 app.get('/get_stall_id', (req, res) => {
     console.log(req.query.id);
+    let stall = [];
 
     connection.query(`SELECT * FROM Stall WHERE id = '${req.query.id}'`, (err, rows) => {
         if (err) throw err;
