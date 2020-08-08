@@ -858,7 +858,7 @@ app.get('/get_daily_report_date', (req, res) => {
             //     // res.send(rows);
             // });
             var data = []
-            connection.query(`SELECT * FROM NewInvoiceDetails WHERE dateTime = '${req.query.date}'`, (err, rows1) => {
+            connection.query(`SELECT * FROM NewInvoiceDetails WHERE DATE(dateTime) = '${req.query.date}'`, (err, rows1) => {
                 if (err) throw err;
                 data = rows1
                 // rows1.map((v,i)=> {
