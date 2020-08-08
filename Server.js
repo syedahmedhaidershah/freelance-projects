@@ -817,6 +817,34 @@ app.get('/get_daily_report_date', (req, res) => {
         });
     
     });
+    app.get('/get_daily_items_report_date', (req, res) => {
+        //    get = { stallId: "0", stallHolderName: "Smith", description:"Some Product", salesPersonName: "Australia", productId: "33",invoiceId:"23",price:"300",card:"200",total:"500" }
+        
+            // connection.query('SELECT commission FROM Authentication', (err, rows) => {
+            //     if (err) throw err;
+            //     console.log('Data received from Db: commission', rows);
+            //     // res.send(rows);
+            // });
+            var data = []
+            connection.query(`SELECT * FROM Invoices WHERE dateTime = '${req.query.date}'`, (err, rows1) => {
+                if (err) throw err;
+                // data = rows1
+                rows1.map((v,i)=> {
+                    connection.query(`SELECT * FROM InvoiceDetails WHERE id = '${v.id}'`, (err, rows) => {
+                if (err) throw err;
+                data.push(...rows)
+                console.log('Data received from Db: commission', rows);
+                if((i+1) == rows1.length){
+                    res.send(data.sort(compareValues('id')))
+        
+                }
+                // res.send(rows);
+            });
+                })
+                console.log('Data received from Db:\n');
+            });
+        
+        });
 
 app.post("/add_invoice", (req, res) => {
 
@@ -902,8 +930,8 @@ app.post("/add_invoice_new", (req, res) => {
             //     console.log('Data received from Db:\n');
                 // res.send(rows);
                 body.items.map(v => {
-                    connection.query(`INSERT INTO NewInvoiceDetails(id,productId,description,price,finalPrice,quantity,card,cash) \
-                    VALUES('${body.id}','${v.productId}','${v.description}','${v.price}','${v.finalPrice}','${v.quantity}','${body.card}','${body.cash}')`, (err, data) => {
+                    connection.query(`INSERT INTO NewInvoiceDetails(id,productId,description,price,finalPrice,quantity,card,cash,stallId) \
+                    VALUES('${body.id}','${v.productId}','${v.description}','${v.price}','${v.finalPrice}','${v.quantity}','${body.card}','${body.cash}','${v.stallId}')`, (err, data) => {
                         if (err) {
                             error = err;
             console.log("invoiceDetails table error: ",error);
