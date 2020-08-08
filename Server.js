@@ -860,23 +860,22 @@ app.get('/get_daily_report_date', (req, res) => {
             var data = []
             connection.query(`SELECT * FROM NewInvoiceDetails WHERE dateTime = '${req.query.date}'`, (err, rows1) => {
                 if (err) throw err;
-                // data = rows1
-                rows1.map((v,i)=> {
-                    connection.query(`SELECT * FROM InvoiceDetails WHERE id = '${v.id}'`, (err, rows) => {
-                if (err) throw err;
-                data.push(...rows)
-                console.log('Data received from Db: commission', rows);
-                if((i+1) == rows1.length){
+                data = rows1
+                // rows1.map((v,i)=> {
+                //     connection.query(`SELECT * FROM InvoiceDetails WHERE id = '${v.id}'`, (err, rows) => {
+                // if (err) throw err;
+                // data.push(...rows)
+                // console.log('Data received from Db: commission', rows);
+                // if((i+1) == rows1.length){
                     res.send(data.sort(compareValues('id')))
         
-                }
+                // }
                 // res.send(rows);
-            });
+            // });
                 })
                 console.log('Data received from Db:\n');
             });
         
-        });
 
 app.post("/add_invoice", (req, res) => {
 
