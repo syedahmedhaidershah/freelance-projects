@@ -740,7 +740,39 @@ app.get('/getBACS', (req, res) => {
         console.log('Data received from Db:\n');
     })
         
+    app.get('/get_weekly_item_report_date', (req, res) => {
+        //    get = { stallId: "0", stallHolderName: "Smith", description:"Some Product", salesPersonName: "Australia", productId: "33",invoiceId:"23",price:"300",card:"200",total:"500" }
+        
+            // connection.query('SELECT commission FROM Authentication', (err, rows) => {
+            //     if (err) throw err;
+            //     console.log('Data received from Db: commission', rows);
+            //     // res.send(rows);
+            // });
+            var data = []
+            connection.query(`SELECT * FROM NewInvoiceDetails WHERE  (DATE(dateTime) BETWEEN '${moment().weekday(0).subtract(6,'d').format("YYYY-MM-DD")}' AND '${moment().weekday(0).format("YYYY-MM-DD")}') AND stallId ='${req.query.id}'`, (err, rows1) => {
+                if (err) throw err;
+                data = rows1
+                // if(rows1.length == 0){
+                    // res.send(data)
+                    res.send(data.sort(compareValues('id')))
 
+            //     // }
+            //     rows1.map((v,i)=> {
+            //         connection.query(`SELECT * FROM InvoiceDetails WHERE id = '${v.id}'`, (err, rows) => {
+            //     if (err) throw err;
+            //     data[i].items = rows
+            //     console.log('Data received from Db: commission', rows);
+            //     if((i+1) == rows1.length){
+            //         res.send(data.sort(compareValues('id')))
+        
+            //     }
+            //     // res.send(rows);
+            // });
+            //     })
+                console.log('Data received from Db:\n');
+            });
+        
+        });
 app.get('/get_weekly_report_date', (req, res) => {
     //    get = { stallId: "0", stallHolderName: "Smith", description:"Some Product", salesPersonName: "Australia", productId: "33",invoiceId:"23",price:"300",card:"200",total:"500" }
     
@@ -826,7 +858,7 @@ app.get('/get_daily_report_date', (req, res) => {
             //     // res.send(rows);
             // });
             var data = []
-            connection.query(`SELECT * FROM Invoices WHERE dateTime = '${req.query.date}'`, (err, rows1) => {
+            connection.query(`SELECT * FROM NewInvoiceDetails WHERE dateTime = '${req.query.date}'`, (err, rows1) => {
                 if (err) throw err;
                 // data = rows1
                 rows1.map((v,i)=> {
