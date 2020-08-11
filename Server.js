@@ -30,7 +30,7 @@ app.use(bodyParser.json());
 
 connection.connect((err) => {
     if (err) throw err;
-    console.log('Connected!');
+    // console.log('Connected!');
 });
 
 // server configuration
@@ -40,7 +40,7 @@ const PORT = 9999;
 // app.get('/check', (req, res) => {
 //     connection.query('SELECT * FROM Authentication', (err, rows) => {
 //         if (err) throw err;
-//         console.log('Data received from Db:\n');
+//         // console.log('Data received from Db:\n');
 //         res.send(rows);
 //     });
 
@@ -60,10 +60,10 @@ app.get('/get_invoices', (req, res) => {
             // res.status(400).json({
             //     message: "Something Went Wrong"
             // });
-        console.log('Error from NewInvoices from Db:', err);
+        // console.log('Error from NewInvoices from Db:', err);
 
         };
-        console.log('Data received from Db:\n');
+        // console.log('Data received from Db:\n');
         NewInvoices = rows
         rows.map((v, i) => {
             // var date = NewInvoices[i].dateTime
@@ -83,10 +83,10 @@ app.get('/get_invoices', (req, res) => {
                     // res.status(400).json({
                     //     message: "Something Went Wrong"
                     // });
-                console.log('Error from InvoiceDetails from Db:', err);
+                // console.log('Error from InvoiceDetails from Db:', err);
 
                 };
-                // console.log('Data received from Db:\n');
+                // // console.log('Data received from Db:\n');
                 if(rows1){
                 rows1.map(w => {
                     NewInvoices[i].items.push(w)
@@ -95,14 +95,14 @@ app.get('/get_invoices', (req, res) => {
 
                 })
             } else {
-                console.log("No items for invoice :",v.id)
+                // console.log("No items for invoice :",v.id)
             }
                 // res.send(rows);
             });
 
             // connection.query(`SELECT * FROM Refund where invoiceId = ${v.id}`, (err, rows2) => {
             //     if (err) throw err;
-            //     console.log('Data received from Db:\n');
+            //     // console.log('Data received from Db:\n');
 
             //     rows2.map(r => {
 
@@ -127,14 +127,14 @@ app.get('/get_invoice_id', (req, res) => {
     var NewInvoices = '';
     connection.query(`SELECT * FROM NewInvoices where id = ${req.query.id}`, (err, rows) => {
         if (err) throw err;
-        console.log('Data received from Db:\n');
+        // console.log('Data received from Db:\n');
         NewInvoices = rows
         var date = new Date(parseInt(NewInvoices[i].dateTime));
         NewInvoices.dateTime = moment(date).format("DD/MM/YYYY")
 
         connection.query(`SELECT * FROM NewInvoiceDetails where id = ${req.query.id}`, (err, rows1) => {
             if (err) throw err;
-            console.log('Data received from Db:\n');
+            // console.log('Data received from Db:\n');
             rows1.map(w => {
                 NewInvoices[i].items.push(w)
             })
@@ -142,7 +142,7 @@ app.get('/get_invoice_id', (req, res) => {
         });
         connection.query(`SELECT * FROM Refund where invoiceId = ${req.query.id}`, (err, rows2) => {
             if (err) throw err;
-            console.log('Data received from Db:\n');
+            // console.log('Data received from Db:\n');
             rows2.map(r => {
                 NewInvoices[i].refunds.push(r);
             })
@@ -158,18 +158,18 @@ app.get('/get_invoice_id', (req, res) => {
 app.get('/get_products', (req, res) => {
     connection.query('SELECT * FROM Products', (err, rows) => {
         if (err) throw err;
-        console.log('Data received from Db:\n');
+        // console.log('Data received from Db:\n');
         res.send(rows);
     });
 
 });
 
 app.get('/get_invoice_items_id', (req, res) => {
-    console.log(req.query.id);
+    // console.log(req.query.id);
 
     connection.query(`SELECT * FROM NewInvoiceDetails where id = '${req.query.id}'`, (err, rows1) => {
         if (err) throw err;
-        console.log('Data received from Db:\n');
+        // console.log('Data received from Db:\n');
         // rows1.map(w=> {
         //     NewInvoices[i].items.push(w)
         // })
@@ -179,11 +179,11 @@ app.get('/get_invoice_items_id', (req, res) => {
 
 });
 app.get('/get_refund_items_id', (req, res) => {
-    console.log(req.query.id);
+    // console.log(req.query.id);
 
     connection.query(`SELECT * FROM Refund where invoiceId = ${req.query.id}`, (err, rows1) => {
         if (err) throw err;
-        console.log('Data received from Db:\n');
+        // console.log('Data received from Db:\n');
         // rows1.map(w=> {
         //     NewInvoices[i].items.push(w)
         // })
@@ -194,29 +194,29 @@ app.get('/get_refund_items_id', (req, res) => {
 });
 
 app.get('/get_products_id', (req, res) => {
-    console.log(req.query.id);
+    // console.log(req.query.id);
 
     connection.query(`SELECT * FROM Products WHERE id = ${req.query.id}`, (err, rows) => {
         if (err) throw err;
 
-        console.log('Data received from Db:\n');
+        // console.log('Data received from Db:\n');
         res.send(rows);
     });
 
 });
 app.get('/get_products_code', (req, res) => {
-    console.log(req.query.code);
+    // console.log(req.query.code);
 
     connection.query(`SELECT * FROM Products WHERE barcode = '${req.query.code}'`, (err, rows) => {
         if (err) throw err;
 
-        console.log('Data received from Db:\n');
+        // console.log('Data received from Db:\n');
         res.send(rows);
     });
 
 });
 app.get('/get_stall_id', (req, res) => {
-    console.log(req.query.id);
+    // console.log(req.query.id);
     let stall = [];
 
     connection.query(`SELECT * FROM Stall WHERE id = '${req.query.id}'`, (err, rows) => {
@@ -224,7 +224,7 @@ app.get('/get_stall_id', (req, res) => {
         rows.map(v => {
             connection.query(`SELECT * FROM StallHolder where id = ${v.stallHolderId}`, (err, rows2) => {
                 if (err) throw err;
-                console.log('Data received from Db:\n');
+                // console.log('Data received from Db:\n');
                 // res.send(rows);
                 stall.push({ id: v.id, stallHolder: rows2[0] });
                 if (stall.length == rows.length) {
@@ -232,7 +232,7 @@ app.get('/get_stall_id', (req, res) => {
                 }
             });
         })
-        console.log('Data received from Db:\n');
+        // console.log('Data received from Db:\n');
         // res.send(rows);
     });
 
@@ -246,7 +246,7 @@ app.get('/get_stalls', (req, res) => {
         rows.map(v => {
             connection.query(`SELECT * FROM StallHolder where id = ${v.stallHolderId}`, (err, rows2) => {
                 if (err) throw err;
-                console.log('Data received from Db:\n');
+                // console.log('Data received from Db:\n');
                 // res.send(rows);
                 // var stallHolder = ""
                 // stallHolder = rows2[0];
@@ -261,7 +261,7 @@ app.get('/get_stalls', (req, res) => {
                 }
             });
         })
-        console.log('Data received from Db:\n');
+        // console.log('Data received from Db:\n');
     });
 
 });
@@ -269,12 +269,12 @@ app.get('/get_stall_holders', (req, res) => {
 
     connection.query('SELECT commission FROM Authentication', (err, rows) => {
         if (err) throw err;
-        console.log('Data received from Db: commission', rows);
+        // console.log('Data received from Db: commission', rows);
         // res.send(rows);
     });
     connection.query('SELECT * FROM StallHolder', (err, rows1) => {
         if (err) throw err;
-        console.log('Data received from Db:\n');
+        // console.log('Data received from Db:\n');
         res.send(rows1);
     });
 
@@ -284,7 +284,7 @@ app.get('/get_available_stall_holders', (req, res) => {
     var empty = null;
     connection.query(`SELECT * FROM StallHolder WHERE stallId IS NULL`, (err, rows1) => {
         if (err) throw err;
-        console.log('Data received from Db:\n');
+        // console.log('Data received from Db:\n');
         res.send(rows1);
     });
 
@@ -292,7 +292,7 @@ app.get('/get_available_stall_holders', (req, res) => {
 app.get('/get_stall_holder_id', (req, res) => {
     connection.query(`SELECT * FROM StallHolder where id = ${req.query.id}`, (err, rows) => {
         if (err) throw err;
-        console.log('Data received from Db:\n');
+        // console.log('Data received from Db:\n');
         res.send(rows);
     });
 
@@ -301,7 +301,7 @@ app.post("/add_product", (req, res) => {
 
     //read product information from request
     // let product = new Product(req.body.prd_name, req.body.prd_price);
-    console.log("add_product: ", req.body)
+    // console.log("add_product: ", req.body)
 
     var code = Math.floor(Math.random() * (99999 - 10000 + 1)) + "";
 
@@ -314,7 +314,7 @@ app.post("/add_product", (req, res) => {
                 productId: data
             });
         } else {
-            console.log(err);
+            // console.log(err);
             res.status(400).json({
                 message: err
             });
@@ -335,7 +335,7 @@ app.post("/login", (req, res) => {
                 credentials: data
             });
         } else {
-            console.log(err);
+            // console.log(err);
             res.status(400).json({
                 message: "Invalid Credentials"
             });
@@ -348,7 +348,7 @@ app.post("/refund", (req, res) => {
 
     //read product information from request
     // let product = new Product(req.body.prd_name, req.body.prd_price);
-    console.log("refund: ", req.body)
+    // console.log("refund: ", req.body)
 
     var refund = req.body
     // var code = Math.floor(Math.random() * (99999 - 10000 + 1)) + min;
@@ -367,7 +367,7 @@ app.post("/refund", (req, res) => {
                 // productId: data
             });
         } else {
-            console.log(error);
+            // console.log(error);
             res.status(400).json({
                 message: error
             });
@@ -382,7 +382,7 @@ app.post("/add_customer", (req, res) => {
 
     //read product information from request
     // let product = new Product(req.body.prd_name, req.body.prd_price);
-    console.log("add_product: ", req.body)
+    // console.log("add_product: ", req.body)
 
     // var code = Math.floor(Math.random() * (99999 - 10000 + 1)) + min;
 
@@ -394,7 +394,7 @@ app.post("/add_customer", (req, res) => {
                 customerId: data
             });
         } else {
-            console.log(err);
+            // console.log(err);
             res.status(400).json({
                 message: err
             });
@@ -407,7 +407,7 @@ app.post("/add_stall", (req, res) => {
 
     //read product information from request
     // let product = new Product(req.body.prd_name, req.body.prd_price);
-    console.log("add_stall: ", req.body)
+    // console.log("add_stall: ", req.body)
 
     // var code = Math.floor(Math.random() * (99999 - 10000 + 1)) + min;
 
@@ -419,7 +419,7 @@ app.post("/add_stall", (req, res) => {
                 customerId: data
             });
         } else {
-            console.log(err);
+            // console.log(err);
             res.status(400).json({
                 message: err
             });
@@ -431,7 +431,7 @@ app.post("/add_stall_holder", (req, res) => {
 
     //read product information from request
     // let product = new Product(req.body.prd_name, req.body.prd_price);
-    console.log("add_stall_holder: ", req.body)
+    // console.log("add_stall_holder: ", req.body)
 
     // var code = Math.floor(Math.random() * (99999 - 10000 + 1)) + min;
 
@@ -443,7 +443,7 @@ app.post("/add_stall_holder", (req, res) => {
                 customerId: data
             });
         } else {
-            console.log(err);
+            // console.log(err);
             res.status(400).json({
                 message: err
             });
@@ -455,7 +455,7 @@ app.post("/add_sales_person", (req, res) => {
 
     //read product information from request
     // let product = new Product(req.body.prd_name, req.body.prd_price);
-    console.log("add_sales_person: ", req.body)
+    // console.log("add_sales_person: ", req.body)
 
     // var code = Math.floor(Math.random() * (99999 - 10000 + 1)) + min;
 
@@ -468,7 +468,7 @@ app.post("/add_sales_person", (req, res) => {
                 customerId: data
             });
         } else {
-            console.log(err);
+            // console.log(err);
             res.status(400).json({
                 message: err
             });
@@ -479,7 +479,7 @@ app.post("/add_sales_person", (req, res) => {
 app.get('/get_customers', (req, res) => {
     connection.query('SELECT * FROM Customers', (err, rows) => {
         if (err) throw err;
-        console.log('Data received from Db:\n');
+        // console.log('Data received from Db:\n');
         res.send(rows);
     });
 
@@ -488,7 +488,7 @@ app.get('/get_customers', (req, res) => {
 app.get('/get_sales_persons', (req, res) => {
     connection.query('SELECT * FROM SalesPerson', (err, rows) => {
         if (err) throw err;
-        console.log('Data received from Db:\n');
+        // console.log('Data received from Db:\n');
         res.send(rows);
     });
 
@@ -496,7 +496,7 @@ app.get('/get_sales_persons', (req, res) => {
 app.get('/get_sales_person_id', (req, res) => {
     connection.query(`SELECT * FROM SalesPerson where id = ${req.query.id}`, (err, rows) => {
         if (err) throw err;
-        console.log('Data received from Db:\n');
+        // console.log('Data received from Db:\n');
         res.send(rows);
     });
 
@@ -505,7 +505,7 @@ app.post("/edit_sales_person", (req, res) => {
 
     //read product information from request
     // let product = new Product(req.body.prd_name, req.body.prd_price);
-    console.log("edit_sales_person: ", req.body)
+    // console.log("edit_sales_person: ", req.body)
 
     // var code = Math.floor(Math.random() * (99999 - 10000 + 1)) + min;
 
@@ -518,7 +518,7 @@ app.post("/edit_sales_person", (req, res) => {
                     stallId: data
                 });
             } else {
-                console.log(err);
+                // console.log(err);
                 res.status(400).json({
                     message: err
                 });
@@ -529,7 +529,7 @@ app.post("/edit_stall_holder", (req, res) => {
 
     //read product information from request
     // let product = new Product(req.body.prd_name, req.body.prd_price);
-    console.log("edit_stall_holder: ", req.body)
+    // console.log("edit_stall_holder: ", req.body)
 
     // var code = Math.floor(Math.random() * (99999 - 10000 + 1)) + min;
 
@@ -542,7 +542,7 @@ app.post("/edit_stall_holder", (req, res) => {
                     stallId: data
                 });
             } else {
-                console.log(err);
+                // console.log(err);
                 res.status(400).json({
                     message: err
                 });
@@ -555,7 +555,7 @@ app.post("/edit_customer", (req, res) => {
 
     //read product information from request
     // let product = new Product(req.body.prd_name, req.body.prd_price);
-    console.log("add_product: ", req.body)
+    // console.log("add_product: ", req.body)
 
     // var code = Math.floor(Math.random() * (99999 - 10000 + 1)) + min;
 
@@ -568,7 +568,7 @@ app.post("/edit_customer", (req, res) => {
                     customerId: data
                 });
             } else {
-                console.log(err);
+                // console.log(err);
                 res.status(400).json({
                     message: err
                 });
@@ -580,7 +580,7 @@ app.post("/edit_product", (req, res) => {
 
     //read product information from request
     // let product = new Product(req.body.prd_name, req.body.prd_price);
-    console.log("edit_product: ", req.body)
+    // console.log("edit_product: ", req.body)
 
     // var code = Math.floor(Math.random() * (99999 - 10000 + 1)) + min;
 
@@ -593,7 +593,7 @@ app.post("/edit_product", (req, res) => {
                     product: data[0]
                 });
             } else {
-                console.log(err);
+                // console.log(err);
                 res.status(400).json({
                     message: err
                 });
@@ -605,7 +605,7 @@ app.post("/edit_stall", (req, res) => {
 
     //read product information from request
     // let product = new Product(req.body.prd_name, req.body.prd_price);
-    console.log("edit_stall: ", req.body)
+    // console.log("edit_stall: ", req.body)
     var empty = null;
     // var code = Math.floor(Math.random() * (99999 - 10000 + 1)) + min;
     // connection.query(`UPDATE Stall SET stallHolderId=0  WHERE stallHolderId=${req.body.stallHolderId}`,
@@ -615,15 +615,15 @@ app.post("/edit_stall", (req, res) => {
         (err, data) => {
             connection.query(`UPDATE StallHolder SET stallId=${empty}  WHERE stallId = '${req.body.id}'`,
                 (err, data) => {
-                    console.log("edit_stall empty err",err);
-                    console.log("edit_stall empty",data);
+                    // console.log("edit_stall empty err",err);
+                    // console.log("edit_stall empty",data);
 
                     
                 });
             connection.query(`UPDATE StallHolder SET stallId='${req.body.id}'  WHERE id = '${req.body.stallHolderId}'`,
                 (err, data) => {
-                    console.log("edit_stall  err",err);
-                    console.log("edit_stall ",data);
+                    // console.log("edit_stall  err",err);
+                    // console.log("edit_stall ",data);
                 });
             if (!err) {
                 res.status(200).json({
@@ -631,7 +631,7 @@ app.post("/edit_stall", (req, res) => {
                     stallId: data
                 });
             } else {
-                console.log(err);
+                // console.log(err);
                 res.status(400).json({
                     message: err
                 });
@@ -643,7 +643,7 @@ app.post("/edit_stall", (req, res) => {
 
 //     //read product information from request
 //     // let product = new Product(req.body.prd_name, req.body.prd_price);
-//  console.log("add_product: ",req.body)
+//  // console.log("add_product: ",req.body)
 //     connection.query(`INSERT INTO NewInvoices(id,stallId,productId,description,price,finalPrice,salesPersonId,stallHolderId,dateTime,paymentMethod,total,customerId,quantity) \
 //     VALUES(${v.id},'${v.stallId}',${v.productId},'${req.body.description}',${req.body.price},${req.body.finalPrice},'${req.body.salesPersonId}','${req.body.stallHolderId}','${req.body.dateTime}','${req.body.paymentMethod}',${req.body.total},${req.body.customerId},${req.body.quantity})`, (err, data)=> {
 //         if(!err){
@@ -687,7 +687,7 @@ app.get('/get_daily_report', (req, res) => {
 
     // connection.query('SELECT commission FROM Authentication', (err, rows) => {
     //     if (err) throw err;
-    //     console.log('Data received from Db: commission', rows);
+    //     // console.log('Data received from Db: commission', rows);
     //     // res.send(rows);
     // });
     var data = []
@@ -698,7 +698,7 @@ app.get('/get_daily_report', (req, res) => {
             connection.query(`SELECT * FROM NewInvoices WHERE id = '${v.id}'`, (err, rows) => {
         if (err) throw err;
         data[i].invoice = rows[0]
-        console.log('Data received from Db: commission', rows);
+        // console.log('Data received from Db: commission', rows);
         if((i+1) == rows1.length){
             res.send(data.sort(compareValues('id')))
 
@@ -706,7 +706,7 @@ app.get('/get_daily_report', (req, res) => {
         // res.send(rows);
     });
         })
-        console.log('Data received from Db:\n');
+        // console.log('Data received from Db:\n');
     });
 
 });
@@ -717,7 +717,7 @@ app.get('/getBACS', (req, res) => {
     
         // connection.query('SELECT commission FROM Authentication', (err, rows) => {
         //     if (err) throw err;
-        //     console.log('Data received from Db: commission', rows);
+        //     // console.log('Data received from Db: commission', rows);
         //     // res.send(rows);
         // });
         var data = []
@@ -738,7 +738,7 @@ app.get('/getBACS', (req, res) => {
          
             // res.send(rows);
         });
-        console.log('Data received from Db:\n');
+        // console.log('Data received from Db:\n');
     })
         
     app.get('/get_weekly_item_report_date', (req, res) => {
@@ -746,7 +746,7 @@ app.get('/getBACS', (req, res) => {
         
             // connection.query('SELECT commission FROM Authentication', (err, rows) => {
             //     if (err) throw err;
-            //     console.log('Data received from Db: commission', rows);
+            //     // console.log('Data received from Db: commission', rows);
             //     // res.send(rows);
             // });
             var data = []
@@ -762,7 +762,7 @@ app.get('/getBACS', (req, res) => {
             //         connection.query(`SELECT * FROM InvoiceDetails WHERE id = '${v.id}'`, (err, rows) => {
             //     if (err) throw err;
             //     data[i].items = rows
-            //     console.log('Data received from Db: commission', rows);
+            //     // console.log('Data received from Db: commission', rows);
             //     if((i+1) == rows1.length){
             //         res.send(data.sort(compareValues('id')))
         
@@ -770,7 +770,7 @@ app.get('/getBACS', (req, res) => {
             //     // res.send(rows);
             // });
             //     })
-                console.log('Data received from Db:\n');
+                // console.log('Data received from Db:\n');
             });
         
         });
@@ -779,7 +779,7 @@ app.get('/get_weekly_report_date', (req, res) => {
     
         // connection.query('SELECT commission FROM Authentication', (err, rows) => {
         //     if (err) throw err;
-        //     console.log('Data received from Db: commission', rows);
+        //     // console.log('Data received from Db: commission', rows);
         //     // res.send(rows);
         // });
         var data = []
@@ -793,7 +793,7 @@ app.get('/get_weekly_report_date', (req, res) => {
                 connection.query(`SELECT * FROM NewInvoiceDetails WHERE id = '${v.id}'`, (err, rows) => {
             if (err) throw err;
             data[i].items = rows
-            console.log('Data received from Db: commission', rows);
+            // console.log('Data received from Db: commission', rows);
             if((i+1) == rows1.length){
                 res.send(data.sort(compareValues('id')))
     
@@ -801,7 +801,7 @@ app.get('/get_weekly_report_date', (req, res) => {
             // res.send(rows);
         });
             })
-            console.log('Data received from Db:\n');
+            // console.log('Data received from Db:\n');
         });
     
     });
@@ -810,7 +810,7 @@ app.get('/get_weekly_report_date', (req, res) => {
         
             // connection.query('SELECT commission FROM Authentication', (err, rows) => {
             //     if (err) throw err;
-            //     console.log('Data received from Db: commission', rows);
+            //     // console.log('Data received from Db: commission', rows);
             //     // res.send(rows);
             // });
             var data = []
@@ -818,7 +818,7 @@ app.get('/get_weekly_report_date', (req, res) => {
                 if (err) throw err;
                 data = rows1
                 res.send(data.sort(compareValues('id')))
-                console.log('Data received from Db:\n');
+                // console.log('Data received from Db:\n');
             });
         
         });
@@ -827,7 +827,7 @@ app.get('/get_daily_report_date', (req, res) => {
     
         // connection.query('SELECT commission FROM Authentication', (err, rows) => {
         //     if (err) throw err;
-        //     console.log('Data received from Db: commission', rows);
+        //     // console.log('Data received from Db: commission', rows);
         //     // res.send(rows);
         // });
         var data = []
@@ -838,7 +838,7 @@ app.get('/get_daily_report_date', (req, res) => {
                 connection.query(`SELECT * FROM NewInvoiceDetails WHERE id = '${v.id}'`, (err, rows) => {
             if (err) throw err;
             data[i].items = rows
-            console.log('Data received from Db: commission', rows);
+            // console.log('Data received from Db: commission', rows);
             if((i+1) == rows1.length){
                 res.send(data.sort(compareValues('id')))
     
@@ -846,7 +846,7 @@ app.get('/get_daily_report_date', (req, res) => {
             // res.send(rows);
         });
             })
-            console.log('Data received from Db:\n');
+            // console.log('Data received from Db:\n');
         });
     
     });
@@ -855,7 +855,7 @@ app.get('/get_daily_report_date', (req, res) => {
         
             // connection.query('SELECT commission FROM Authentication', (err, rows) => {
             //     if (err) throw err;
-            //     console.log('Data received from Db: commission', rows);
+            //     // console.log('Data received from Db: commission', rows);
             //     // res.send(rows);
             // });
             var data = []
@@ -866,7 +866,7 @@ app.get('/get_daily_report_date', (req, res) => {
                 //     connection.query(`SELECT * FROM InvoiceDetails WHERE id = '${v.id}'`, (err, rows) => {
                 // if (err) throw err;
                 // data.push(...rows)
-                // console.log('Data received from Db: commission', rows);
+                // // console.log('Data received from Db: commission', rows);
                 // if((i+1) == rows1.length){
                     res.send(data.sort(compareValues('id')))
         
@@ -874,7 +874,7 @@ app.get('/get_daily_report_date', (req, res) => {
                 // res.send(rows);
             // });
                 })
-                console.log('Data received from Db:\n');
+                // console.log('Data received from Db:\n');
             });
         
 
@@ -882,7 +882,7 @@ app.post("/add_invoice", (req, res) => {
 
     //read product information from request
     // let product = new Product(req.body.prd_name, req.body.prd_price);
-    console.log("add_invoice: ", req.body)
+    // console.log("add_invoice: ", req.body)
     var error = null
     var body = req.body
     // var dateTime = Date.now();
@@ -891,7 +891,7 @@ app.post("/add_invoice", (req, res) => {
     VALUES('${body.id}','${body.stallId}','${body.salesPersonId}','${body.stallHolderId}','${body.dateTime}','${body.paymentMethod}','${body.total}',${body.customerId},'${body.card}','${body.cash}')`, (err, data) => {
         if (err) {
             error = err;
-            console.log("invoice table error: ",error);
+            // console.log("invoice table error: ",error);
             res.status(400).json({
                 message: error
             });
@@ -899,14 +899,14 @@ app.post("/add_invoice", (req, res) => {
 
             // connection.query(`SELECT id FROM NewInvoices where customerId = ${body.customerId} AND dateTime = '${dateTime}'`, (err, rows) => {
             //     if (err) throw err;
-            //     console.log('Data received from Db:\n');
+            //     // console.log('Data received from Db:\n');
                 // res.send(rows);
                 body.items.map(v => {
                     connection.query(`INSERT INTO InvoiceDetails(id,productId,description,price,finalPrice,quantity,card,cash) \
                     VALUES('${body.id}','${v.productId}','${v.description}','${v.price}','${v.finalPrice}','${v.quantity}','${body.card}','${body.cash}')`, (err, data) => {
                         if (err) {
                             error = err;
-            console.log("invoiceDetails table error: ",error);
+            // console.log("invoiceDetails table error: ",error);
             res.status(400).json({
                 message: error
             });
@@ -942,7 +942,7 @@ app.post("/add_invoice_new", (req, res) => {
 
     //read product information from request
     // let product = new Product(req.body.prd_name, req.body.prd_price);
-    console.log("add_invoice_new: ", req.body)
+    // console.log("add_invoice_new: ", req.body)
     var error = null
     var body = req.body
     // var dateTime = Date.now();
@@ -951,7 +951,7 @@ app.post("/add_invoice_new", (req, res) => {
     VALUES('${body.id}','${body.stallId}','${body.salesPersonId}','${body.stallHolderId}','${body.dateTime}','${body.paymentMethod}','${body.total}',${body.customerId},'${body.card}','${body.cash}')`, (err, data) => {
         if (err) {
             error = err;
-            console.log("invoice table error: ",error);
+            // console.log("invoice table error: ",error);
             res.status(400).json({
                 message: error
             });
@@ -959,14 +959,14 @@ app.post("/add_invoice_new", (req, res) => {
 
             // connection.query(`SELECT id FROM NewInvoices where customerId = ${body.customerId} AND dateTime = '${dateTime}'`, (err, rows) => {
             //     if (err) throw err;
-            //     console.log('Data received from Db:\n');
+            //     // console.log('Data received from Db:\n');
                 // res.send(rows);
                 body.items.map(v => {
                     connection.query(`INSERT INTO NewInvoiceDetails(id,productId,description,price,finalPrice,quantity,card,cash,stallId,stallHolderId,refunded) \
                     VALUES('${body.id}','${v.productId}','${v.description}','${v.price}','${v.finalPrice}','${v.quantity}','${body.card}','${body.cash}','${v.stallId}','${v.stallHolder}',${v.refunded})`, (err, data) => {
                         if (err) {
                             error = err;
-            console.log("invoiceDetails table error: ",error);
+            // console.log("invoiceDetails table error: ",error);
             res.status(400).json({
                 message: error
             });
@@ -1000,5 +1000,5 @@ app.post("/add_invoice_new", (req, res) => {
 });
 // make the server listen to requests
 app.listen(PORT, () => {
-    console.log(`Server running at: http://localhost:${PORT}/`);
+    // console.log(`Server running at: http://localhost:${PORT}/`);
 });
