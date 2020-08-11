@@ -49,8 +49,8 @@ const PORT = 9999;
 
 
 app.get('/get_invoices', (req, res) => {
-    var invoices = '';
-    connection.query('SELECT * FROM Invoices', (err, rows) => {
+    var NewInvoices = '';
+    connection.query('SELECT * FROM NewInvoices', (err, rows) => {
         // if (err) {
         //     res.status(400).json({
         //         message: err
@@ -60,24 +60,24 @@ app.get('/get_invoices', (req, res) => {
             // res.status(400).json({
             //     message: "Something Went Wrong"
             // });
-        console.log('Error from Invoices from Db:', err);
+        console.log('Error from NewInvoices from Db:', err);
 
         };
         console.log('Data received from Db:\n');
-        invoices = rows
+        NewInvoices = rows
         rows.map((v, i) => {
-            // var date = invoices[i].dateTime
+            // var date = NewInvoices[i].dateTime
             // var date = new Date(parseInt(invoices[i].dateTime));
             //    var date = moment(invoices[i].dateTime,"DD/MM/YYYY");
 
             //    day = date.getDate
             //    month=date.getMonth
             //    year =date.getFullYear
-            //  invoices[i].dateTime = day  + "/" + month + "/" + year
-            // invoices[i].dateTime = moment(date).format("DD/MM/YYYY")
-            invoices[i].items = []
-            // invoices[i].refunds = []
-            connection.query(`SELECT * FROM InvoiceDetails where id = '${v.id}'`, (err, rows1) => {
+            //  NewInvoices[i].dateTime = day  + "/" + month + "/" + year
+            // NewInvoices[i].dateTime = moment(date).format("DD/MM/YYYY")
+            NewInvoices[i].items = []
+            // NewInvoices[i].refunds = []
+            connection.query(`SELECT * FROM NewInvoiceDetails where id = '${v.id}'`, (err, rows1) => {
                 // if (err) throw err
                 if (err) {
                     // res.status(400).json({
@@ -89,7 +89,7 @@ app.get('/get_invoices', (req, res) => {
                 // console.log('Data received from Db:\n');
                 if(rows1){
                 rows1.map(w => {
-                    invoices[i].items.push(w)
+                    NewInvoices[i].items.push(w)
 
 
 
@@ -106,15 +106,16 @@ app.get('/get_invoices', (req, res) => {
 
             //     rows2.map(r => {
 
-            //         invoices[i].refunds.push(r);
-            //         if (rows2.length == invoices[i].refunds.length) {
+            //         NewInvoices[i].refunds.push(r);
+            //         if (rows2.length == NewInvoices[i].refunds.length) {
             //         }
             //     })
             //     // res.send(rows);
             // });
 
         })
-        res.send(invoices);
+        // res.send(NewInvoices);
+        res.send(NewInvoices.sort(compareValues('id')))
 
 
         // res.send(rows); 
@@ -123,19 +124,19 @@ app.get('/get_invoices', (req, res) => {
 });
 
 app.get('/get_invoice_id', (req, res) => {
-    var invoices = '';
-    connection.query(`SELECT * FROM Invoices where id = ${req.query.id}`, (err, rows) => {
+    var NewInvoices = '';
+    connection.query(`SELECT * FROM NewInvoices where id = ${req.query.id}`, (err, rows) => {
         if (err) throw err;
         console.log('Data received from Db:\n');
-        invoices = rows
-        var date = new Date(parseInt(invoices[i].dateTime));
-        invoices.dateTime = moment(date).format("DD/MM/YYYY")
+        NewInvoices = rows
+        var date = new Date(parseInt(NewInvoices[i].dateTime));
+        NewInvoices.dateTime = moment(date).format("DD/MM/YYYY")
 
-        connection.query(`SELECT * FROM InvoiceDetails where id = ${req.query.id}`, (err, rows1) => {
+        connection.query(`SELECT * FROM NewInvoiceDetails where id = ${req.query.id}`, (err, rows1) => {
             if (err) throw err;
             console.log('Data received from Db:\n');
             rows1.map(w => {
-                invoices[i].items.push(w)
+                NewInvoices[i].items.push(w)
             })
             // res.send(rows);
         });
@@ -143,12 +144,12 @@ app.get('/get_invoice_id', (req, res) => {
             if (err) throw err;
             console.log('Data received from Db:\n');
             rows2.map(r => {
-                invoices[i].refunds.push(r);
+                NewInvoices[i].refunds.push(r);
             })
             // res.send(rows);
         });
 
-        res.send(invoices);
+        res.send(NewInvoices);
         // res.send(rows); 
     });
 
@@ -166,11 +167,11 @@ app.get('/get_products', (req, res) => {
 app.get('/get_invoice_items_id', (req, res) => {
     console.log(req.query.id);
 
-    connection.query(`SELECT * FROM InvoiceDetails where id = '${req.query.id}'`, (err, rows1) => {
+    connection.query(`SELECT * FROM NewInvoiceDetails where id = '${req.query.id}'`, (err, rows1) => {
         if (err) throw err;
         console.log('Data received from Db:\n');
         // rows1.map(w=> {
-        //     invoices[i].items.push(w)
+        //     NewInvoices[i].items.push(w)
         // })
 
         res.send(rows1);
@@ -184,7 +185,7 @@ app.get('/get_refund_items_id', (req, res) => {
         if (err) throw err;
         console.log('Data received from Db:\n');
         // rows1.map(w=> {
-        //     invoices[i].items.push(w)
+        //     NewInvoices[i].items.push(w)
         // })
 
         res.send(rows1);
@@ -643,7 +644,7 @@ app.post("/edit_stall", (req, res) => {
 //     //read product information from request
 //     // let product = new Product(req.body.prd_name, req.body.prd_price);
 //  console.log("add_product: ",req.body)
-//     connection.query(`INSERT INTO Invoices(id,stallId,productId,description,price,finalPrice,salesPersonId,stallHolderId,dateTime,paymentMethod,total,customerId,quantity) \
+//     connection.query(`INSERT INTO NewInvoices(id,stallId,productId,description,price,finalPrice,salesPersonId,stallHolderId,dateTime,paymentMethod,total,customerId,quantity) \
 //     VALUES(${v.id},'${v.stallId}',${v.productId},'${req.body.description}',${req.body.price},${req.body.finalPrice},'${req.body.salesPersonId}','${req.body.stallHolderId}','${req.body.dateTime}','${req.body.paymentMethod}',${req.body.total},${req.body.customerId},${req.body.quantity})`, (err, data)=> {
 //         if(!err){
 //         res.status(200).json({
@@ -690,11 +691,11 @@ app.get('/get_daily_report', (req, res) => {
     //     // res.send(rows);
     // });
     var data = []
-    connection.query('SELECT * FROM InvoiceDetails', (err, rows1) => {
+    connection.query('SELECT * FROM NewInvoiceDetails', (err, rows1) => {
         if (err) throw err;
         data = rows1
         rows1.map((v,i)=> {
-            connection.query(`SELECT * FROM Invoices WHERE id = '${v.id}'`, (err, rows) => {
+            connection.query(`SELECT * FROM NewInvoices WHERE id = '${v.id}'`, (err, rows) => {
         if (err) throw err;
         data[i].invoice = rows[0]
         console.log('Data received from Db: commission', rows);
@@ -720,7 +721,7 @@ app.get('/getBACS', (req, res) => {
         //     // res.send(rows);
         // });
         var data = []
-        connection.query(`SELECT Stall.id , StallHolder.bankName , SUM( CAST(Invoices.total AS SIGNED ) ) AS total FROM Stall ,StallHolder , Invoices WHERE Stall.stallHolderId = StallHolder.id AND Stall.id = Invoices.stallId AND CAST(Invoices.total AS SIGNED) > 0 AND (DATE(Invoices.dateTime) BETWEEN '${moment().weekday(0).subtract(6,'d').format("YYYY-MM-DD")}' AND '${moment().weekday(0).format("YYYY-MM-DD")}') GROUP BY Stall.id`, (err, rows1) => {
+        connection.query(`SELECT Stall.id , StallHolder.bankName , SUM( CAST(NewInvoices.total AS SIGNED ) ) AS total FROM Stall ,StallHolder , NewInvoices WHERE Stall.stallHolderId = StallHolder.id AND Stall.id = NewInvoices.stallId AND CAST(NewInvoices.total AS SIGNED) > 0 AND (DATE(NewInvoices.dateTime) BETWEEN '${moment().weekday(0).subtract(6,'d').format("YYYY-MM-DD")}' AND '${moment().weekday(0).format("YYYY-MM-DD")}') GROUP BY Stall.id`, (err, rows1) => {
             if (err) throw err;
                 if(rows1){
                  data = rows1.filter(v=> {
@@ -782,14 +783,14 @@ app.get('/get_weekly_report_date', (req, res) => {
         //     // res.send(rows);
         // });
         var data = []
-        connection.query(`SELECT * FROM Invoices WHERE  (DATE(dateTime) BETWEEN '${moment().weekday(0).subtract(6,'d').format("YYYY-MM-DD")}' AND '${moment().weekday(0).format("YYYY-MM-DD")}') AND stallId ='${req.query.id}'`, (err, rows1) => {
+        connection.query(`SELECT * FROM NewInvoices WHERE  (DATE(dateTime) BETWEEN '${moment().weekday(0).subtract(6,'d').format("YYYY-MM-DD")}' AND '${moment().weekday(0).format("YYYY-MM-DD")}') AND stallId ='${req.query.id}'`, (err, rows1) => {
             if (err) throw err;
             data = rows1
             if(rows1.length == 0){
                 res.send(data)
             }
             rows1.map((v,i)=> {
-                connection.query(`SELECT * FROM InvoiceDetails WHERE id = '${v.id}'`, (err, rows) => {
+                connection.query(`SELECT * FROM NewInvoiceDetails WHERE id = '${v.id}'`, (err, rows) => {
             if (err) throw err;
             data[i].items = rows
             console.log('Data received from Db: commission', rows);
@@ -813,7 +814,7 @@ app.get('/get_weekly_report_date', (req, res) => {
             //     // res.send(rows);
             // });
             var data = []
-            connection.query(`SELECT * FROM Invoices WHERE  (DATE(dateTime) BETWEEN '${moment().weekday(0).subtract(6,'d').format("YYYY-MM-DD")}' AND '${moment().weekday(0).format("YYYY-MM-DD")}')`, (err, rows1) => {
+            connection.query(`SELECT * FROM NewInvoices WHERE  (DATE(dateTime) BETWEEN '${moment().weekday(0).subtract(6,'d').format("YYYY-MM-DD")}' AND '${moment().weekday(0).format("YYYY-MM-DD")}')`, (err, rows1) => {
                 if (err) throw err;
                 data = rows1
                 res.send(data.sort(compareValues('id')))
@@ -830,11 +831,11 @@ app.get('/get_daily_report_date', (req, res) => {
         //     // res.send(rows);
         // });
         var data = []
-        connection.query(`SELECT * FROM Invoices WHERE dateTime = '${req.query.date}'`, (err, rows1) => {
+        connection.query(`SELECT * FROM NewInvoices WHERE dateTime = '${req.query.date}'`, (err, rows1) => {
             if (err) throw err;
             data = rows1
             rows1.map((v,i)=> {
-                connection.query(`SELECT * FROM InvoiceDetails WHERE id = '${v.id}'`, (err, rows) => {
+                connection.query(`SELECT * FROM NewInvoiceDetails WHERE id = '${v.id}'`, (err, rows) => {
             if (err) throw err;
             data[i].items = rows
             console.log('Data received from Db: commission', rows);
@@ -896,7 +897,7 @@ app.post("/add_invoice", (req, res) => {
             });
         } else {
 
-            // connection.query(`SELECT id FROM Invoices where customerId = ${body.customerId} AND dateTime = '${dateTime}'`, (err, rows) => {
+            // connection.query(`SELECT id FROM NewInvoices where customerId = ${body.customerId} AND dateTime = '${dateTime}'`, (err, rows) => {
             //     if (err) throw err;
             //     console.log('Data received from Db:\n');
                 // res.send(rows);
@@ -956,7 +957,7 @@ app.post("/add_invoice_new", (req, res) => {
             });
         } else {
 
-            // connection.query(`SELECT id FROM Invoices where customerId = ${body.customerId} AND dateTime = '${dateTime}'`, (err, rows) => {
+            // connection.query(`SELECT id FROM NewInvoices where customerId = ${body.customerId} AND dateTime = '${dateTime}'`, (err, rows) => {
             //     if (err) throw err;
             //     console.log('Data received from Db:\n');
                 // res.send(rows);
