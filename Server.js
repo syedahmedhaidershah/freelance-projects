@@ -115,7 +115,7 @@ app.get('/get_invoices', (req, res) => {
 
         })
         // res.send(NewInvoices);
-        res.send(NewInvoices.sort(compareValues('id')))
+        res.send(NewInvoices.sort(compareValues('id','desc')))
 
 
         // res.send(rows); 
