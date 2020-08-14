@@ -691,11 +691,11 @@ app.get('/get_daily_report', (req, res) => {
     //     // res.send(rows);
     // });
     var data = []
-    connection.query('SELECT * FROM InvoiceDetails', (err, rows1) => {
+    connection.query('SELECT * FROM NewInvoiceDetails', (err, rows1) => {
         if (err) throw err;
         data = rows1
         rows1.map((v,i)=> {
-            connection.query(`SELECT * FROM Invoices WHERE id = '${v.id}'`, (err, rows) => {
+            connection.query(`SELECT * FROM NewInvoices WHERE id = '${v.id}'`, (err, rows) => {
         if (err) throw err;
         data[i].invoice = rows[0]
         // console.log('Data received from Db: commission', rows);
@@ -831,11 +831,11 @@ app.get('/get_daily_report_date', (req, res) => {
         //     // res.send(rows);
         // });
         var data = []
-        connection.query(`SELECT * FROM NewInvoices WHERE dateTime = '${req.query.date}'`, (err, rows1) => {
+        connection.query(`SELECT * FROM Invoices WHERE dateTime = '${req.query.date}'`, (err, rows1) => {
             if (err) throw err;
             data = rows1
             rows1.map((v,i)=> {
-                connection.query(`SELECT * FROM NewInvoiceDetails WHERE id = '${v.id}'`, (err, rows) => {
+                connection.query(`SELECT * FROM InvoiceDetails WHERE id = '${v.id}'`, (err, rows) => {
             if (err) throw err;
             data[i].items = rows
             // console.log('Data received from Db: commission', rows);
