@@ -721,7 +721,7 @@ app.get('/getBACS', (req, res) => {
         //     // res.send(rows);
         // });
         var data = []
-        connection.query(`SELECT Stall.id , StallHolder.bankName , ((1-(CAST(StallHolder.accountNumber AS SIGNED)) / 100) * SUM( CAST(NewInvoiceDetails.price AS SIGNED ) )) AS total FROM Stall ,StallHolder , NewInvoiceDetails WHERE Stall.stallHolderId = StallHolder.id AND Stall.id = NewInvoiceDetails.stallId AND CAST(NewInvoiceDetails.price AS SIGNED) > 0 AND (DATE(NewInvoiceDetails.dateTime) BETWEEN '${moment().weekday(0).subtract(6,'d').format("YYYY-MM-DD")}' AND '${moment().weekday(0).format("YYYY-MM-DD")}') AND StallHolder.accountNumber > 0 AND StallHolder.accountNumber < 100 GROUP BY Stall.id`, (err, rows1) => {
+        connection.query(`SELECT Stall.id , StallHolder.bankName , ((1-(CAST(StallHolder.accountNumber AS SIGNED)) / 100) * SUM( CAST(NewInvoiceDetails.price AS SIGNED ) )) AS total FROM Stall ,StallHolder , NewInvoiceDetails WHERE Stall.stallHolderId = StallHolder.id AND Stall.id = NewInvoiceDetails.stallId AND (DATE(NewInvoiceDetails.dateTime) BETWEEN '${moment().weekday(0).subtract(6,'d').format("YYYY-MM-DD")}' AND '${moment().weekday(0).format("YYYY-MM-DD")}') AND StallHolder.accountNumber > 0 AND StallHolder.accountNumber < 100 GROUP BY Stall.id`, (err, rows1) => {
             if (err) throw err;
                 if(rows1){
                 //  data = rows1.filter(v=> {
