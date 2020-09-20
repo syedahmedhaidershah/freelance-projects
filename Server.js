@@ -732,7 +732,7 @@ app.get('/getBACS', (req, res) => {
                 //      return v
                 //     }
                 //  })
-                res.send(data.sort(compareValues('bankName')))
+                res.send(rows1.sort(compareValues('bankName')))
                     
                 }
          
