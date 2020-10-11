@@ -814,7 +814,7 @@ app.get('/get_weekly_report_date', (req, res) => {
             //     // res.send(rows);
             // });
             var data = []
-            connection.query(`SELECT * FROM NewInvoices WHERE  (DATE(dateTime) BETWEEN '${moment().isoWeekday(1).format("YYYY-MM-DD")}' AND '${moment().Weekday(1).add(6,'d').format("YYYY-MM-DD")}' )`, (err, rows1) => {
+            connection.query(`SELECT * FROM NewInvoices WHERE  (DATE(dateTime) BETWEEN '${moment().isoWeekday(1).format("YYYY-MM-DD")}' AND '${moment().isoWeekday(1).add(6,'d').format("YYYY-MM-DD")}' )`, (err, rows1) => {
                 if (err) throw err;
                 data = rows1
                 res.send(data.sort(compareValues('id')))
