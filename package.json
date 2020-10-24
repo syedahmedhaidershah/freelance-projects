@@ -1,0 +1,76 @@
+{
+    "name": "hikma-teacher-api",
+    "version": "1.0.0",
+    "description": "Hikma Teacher API",
+    "author": "Scientise7",
+    "main": "index.js",
+    "private": true,
+    "engines": {
+        "node": ">=10.20.1",
+        "npm": ">=6.14.4"
+    },
+    "scripts": {
+        "dev": "cross-env NODE_ENV=development DEBUG=node-server:* nodemon index.js",
+        "dev:debug": "cross-env NODE_ENV=development DEBUG=node-server:* nodemon --inspect=0.0.0.0 index.js",
+        "lint": "esw *.js src --color",
+        "lint:watch": "npm run lint -- --watch",
+        "start": "node index",
+        "start:debug": "cross-env DEBUG=node-server:* npm start"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/syedahmedhaidershah/hikma-teacher-api.git"
+    },
+    "keywords": [
+        "express",
+        "node",
+        "node.js",
+        "mongodb",
+        "mongoose",
+        "starter",
+        "es6",
+        "es7",
+        "REST",
+        "API",
+        "REST API"
+    ],
+    "dependencies": {
+        "@hapi/joi": "15.0.2",
+        "aws-sdk": "2.678.0",
+        "bluebird": "3.5.4",
+        "body-parser": "1.19.0",
+        "compression": "1.7.4",
+        "cookie-parser": "1.4.4",
+        "cors": "2.8.5",
+        "debug": "4.1.1",
+        "dotenv": "8.0.0",
+        "express": "4.16.4",
+        "express-fileupload": "1.1.9",
+        "express-validation": "3.0.5",
+        "helmet": "3.22.0",
+        "http-status": "1.3.2",
+        "jsonwebtoken": "8.5.1",
+        "lodash": "4.17.19",
+        "mongoose": "5.7.5",
+        "morgan": "1.9.1",
+        "socket.io": "2.3.0"
+    },
+    "devDependencies": {
+        "cross-env": "5.2.0",
+        "eslint": "5.16.0",
+        "eslint-config-airbnb-base": "14.1.0",
+        "eslint-plugin-import": "2.17.2",
+        "husky": "2.2.0",
+        "lint-staged": "9.2.3",
+        "nodemon": "2.0.4"
+    },
+    "lint-staged": {
+        "*.js": [
+            "eslint --fix",
+            "git add"
+        ]
+    },
+    "husky": {
+        "hooks": {}
+    }
+}
