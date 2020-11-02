@@ -36,6 +36,7 @@ const getAll = async (...data) => {
 
 const store = async (data) => {
   try {
+    data = JSON.parse(data);
     worker.postMessage({
       topic: 'store',
       data: {
@@ -44,7 +45,7 @@ const store = async (data) => {
       }
     });
   } catch (error) {
-    next(error);
+    console.log(error);
   }
 };
 
