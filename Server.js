@@ -46,7 +46,35 @@ const PORT = 9999;
 
 // });
 
+var nodemailer = require('nodemailer');
 
+var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'wadejohnson650@gmail.com',
+    pass: 'Salsoft@19'
+  }
+});
+
+var mailOptions = {
+    from: 'wadejohnson650@gmail.com',
+    to: 'rizviwajahat9@yahoo.com',
+    subject: 'Sending Email using Node.js',
+    text: 'That was easy!'
+  };
+
+app.get('/send_email_check', (req, res) => {
+    
+    transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+          console.log(error);
+        } else {
+          console.log('Email sent: ' + info.response);
+        }
+      }); 
+
+    
+    });
 
 app.get('/get_invoices', (req, res) => {
     var NewInvoices = '';
