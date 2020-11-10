@@ -76,9 +76,83 @@ app.get('/send_email_check', (req, res) => {
     
     });
 
-app.get('/get_invoices', (req, res) => {
+    app.get('/get_invoices', (req, res) => {
+        var NewInvoices = '';
+        connection.query('SELECT * FROM NewInvoices', (err, rows) => {
+            // if (err) {
+            //     res.status(400).json({
+            //         message: err
+            //     });
+            // };
+            if (err) {
+                // res.status(400).json({
+                //     message: "Something Went Wrong"
+                // });
+            // console.log('Error from NewInvoices from Db:', err);
+    
+            };
+            // console.log('Data received from Db:\n');
+            NewInvoices = rows
+            rows.map((v, i) => {
+                // var date = NewInvoices[i].dateTime
+                // var date = new Date(parseInt(invoices[i].dateTime));
+                //    var date = moment(invoices[i].dateTime,"DD/MM/YYYY");
+    
+                //    day = date.getDate
+                //    month=date.getMonth
+                //    year =date.getFullYear
+                //  NewInvoices[i].dateTime = day  + "/" + month + "/" + year
+                // NewInvoices[i].dateTime = moment(date).format("DD/MM/YYYY")
+                NewInvoices[i].items = []
+                // NewInvoices[i].refunds = []
+                connection.query(`SELECT * FROM NewInvoiceDetails where id = '${v.id}'`, (err, rows1) => {
+                    // if (err) throw err
+                    if (err) {
+                        // res.status(400).json({
+                        //     message: "Something Went Wrong"
+                        // });
+                    // console.log('Error from InvoiceDetails from Db:', err);
+    
+                    };
+                    // // console.log('Data received from Db:\n');
+                    if(rows1){
+                    rows1.map(w => {
+                        NewInvoices[i].items.push(w)
+    
+    
+    
+                    })
+                } else {
+                    // console.log("No items for invoice :",v.id)
+                }
+                    // res.send(rows);
+                });
+    
+                // connection.query(`SELECT * FROM Refund where invoiceId = ${v.id}`, (err, rows2) => {
+                //     if (err) throw err;
+                //     // console.log('Data received from Db:\n');
+    
+                //     rows2.map(r => {
+    
+                //         NewInvoices[i].refunds.push(r);
+                //         if (rows2.length == NewInvoices[i].refunds.length) {
+                //         }
+                //     })
+                //     // res.send(rows);
+                // });
+    
+            })
+            // res.send(NewInvoices);
+            res.send(NewInvoices.sort(compareValues('id','desc')))
+    
+    
+            // res.send(rows); 
+        });
+    
+    });
+app.get('/get_invoices_staging', (req, res) => {
     var NewInvoices = '';
-    connection.query('SELECT * FROM NewInvoices', (err, rows) => {
+    connection.query('SELECT * FROM Invoices', (err, rows) => {
         // if (err) {
         //     res.status(400).json({
         //         message: err
@@ -105,7 +179,7 @@ app.get('/get_invoices', (req, res) => {
             // NewInvoices[i].dateTime = moment(date).format("DD/MM/YYYY")
             NewInvoices[i].items = []
             // NewInvoices[i].refunds = []
-            connection.query(`SELECT * FROM NewInvoiceDetails where id = '${v.id}'`, (err, rows1) => {
+            connection.query(`SELECT * FROM InvoiceDetails where id = '${v.id}'`, (err, rows1) => {
                 // if (err) throw err
                 if (err) {
                     // res.status(400).json({
