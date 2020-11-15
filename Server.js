@@ -77,7 +77,7 @@ app.get('/send_email_check', async (req, res) => {
         if(rows1.length > 0){
             stallHolders = rows1
             var invoices = []
-            connection.query(`SELECT * FROM NewInvoiceDetails WHERE DATE(dateTime) = '${req.query.date}'`, (err, rows2) => {
+            connection.query(`SELECT * FROM NewInvoiceDetails WHERE DATE(dateTime) = '2020-10-30'`, (err, rows2) => {
                 if (err) throw err;
                 invoices = rows2
                 // rows1.map((v,i)=> {
