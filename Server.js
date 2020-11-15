@@ -68,7 +68,7 @@ var mailOptions = {
   var beforeTable = '</strong> </h4>        <table>      <tr>        <th>Stall No.</th>        <th>Invoice No. </th>        <th>Stall Holder</th>        <th>Stock No.</th>        <th>Item Sold</th>        <th>Price Sold</th>             </tr>           '
   var singleRow = '<tr> <td>G1</td>        <td>G-10001</td>        <td>Sarim Irfan</td>        <td>1000012</td>        <td>chair</td>        <td>100</td>     </tr>'
   var end = '</table>    </body>'
-app.get('/send_email_check', async (req, res) => {
+app.get('/send_email_check', (req, res) => {
     var stallHolders = []
     connection.query('SELECT * FROM StallHolder', (err, rows1) => {
         if (err) throw err;
@@ -93,7 +93,7 @@ app.get('/send_email_check', async (req, res) => {
                         invoicesToSend = invoices.filter(w=> w.stallId == v.stallId)
                         if(invoicesToSend.length > 0){
                             var invoicesString = ""
-                            await invoicesToSend.map(x=>{
+                            invoicesToSend.map(x=>{
                                invoicesString = invoicesString + '<tr> <td>'+x.stallId+'</td>        <td>'+x.id+'</td>        <td>'+v.name+'</td>        <td>'+x.productId+'</td>        <td>'+x.description+'</td>        <td>'+x.finalPrice+'</td>     </tr>'
                             })
                              
