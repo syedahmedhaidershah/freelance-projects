@@ -51,8 +51,8 @@ var nodemailer = require('nodemailer');
 var transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'wadejohnson650@gmail.com',
-    pass: 'Salsoft@19'
+    user: 'antiquesofkingston@gmail.com',
+    pass: 'antiquesofkingston!!'
   }
 });
 
@@ -101,7 +101,7 @@ var mailOptions = {
                              
                             
                             var mailOptions = {
-                                from: 'wadejohnson650@gmail.com',
+                                from: 'antiquesofkingston@gmail.com',
                                 to: 'rizviwajahat9@yahoo.com',
                                 subject: 'Sending daily report check to ' + v.name,
                                 html: beforeStallWeek + v.stallId + afterStallBeforeStallHolder + v.name + beforeTable + invoicesString + end
@@ -159,7 +159,7 @@ var mailOptions = {
                              
                             
                             var mailOptions = {
-                                from: 'wadejohnson650@gmail.com',
+                                from: 'antiquesofkingston@gmail.com',
                                 to: 'rizviwajahat9@yahoo.com',
                                 subject: 'Sending daily report check to ' + v.name,
                                 html: beforeStall + v.stallId + afterStallBeforeStallHolder + v.name + beforeTable + invoicesString + end
