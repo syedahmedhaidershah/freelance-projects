@@ -137,7 +137,7 @@ var mailOptions = {
         if(rows1.length > 0){
             stallHolders = rows1
             var invoices = []
-            connection.query(`SELECT * FROM NewInvoiceDetails WHERE DATE(dateTime) = '${moment().format('"YYYY-MM-DD"')}'`, (err, rows2) => {
+            connection.query(`SELECT * FROM NewInvoiceDetails WHERE DATE(dateTime) = '${moment().format("YYYY-MM-DD")}'`, (err, rows2) => {
                 if (err) throw err;
                 invoices = rows2
                 // rows1.map((v,i)=> {
