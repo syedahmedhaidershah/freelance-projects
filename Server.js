@@ -49,10 +49,10 @@ const PORT = 9999;
 var nodemailer = require('nodemailer');
 
 var transporter = nodemailer.createTransport({
-  service: 'gmail',
+  service: 'FastMail',
   auth: {
-    user: 'antiquesofkingston@gmail.com',
-    pass: 'antiquesofkingston!!'
+    user: 'systems@fastmail.com',
+    pass: 'gf7qar4smwz283zy'
   }
 });
 
@@ -159,7 +159,7 @@ var mailOptions = {
                              
                             
                             var mailOptions = {
-                                from: 'antiquesofkingston@gmail.com',
+                                from: 'systems@fastmail.com',
                                 to: 'rizviwajahat9@yahoo.com',
                                 subject: 'Sending daily report check to ' + v.name,
                                 html: beforeStall + v.stallId + afterStallBeforeStallHolder + v.name + beforeTable + invoicesString + end
