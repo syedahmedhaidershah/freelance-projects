@@ -96,15 +96,15 @@ var mailOptions = {
                         if(invoicesToSend.length > 0){
                             var invoicesString = ""
                             invoicesToSend.map(x=>{
-                               invoicesString = invoicesString + '<tr> <td>'+x.stallId+'</td>        <td>'+x.id+'</td>        <td>'+v.name+'</td>        <td>'+x.productId+'</td>        <td>'+x.description+'</td>        <td>'+x.finalPrice+'</td> <td>'+x.dateTime+'</td>     </tr>'
+                               invoicesString = invoicesString + '<tr> <td>'+x.stallId+'</td>        <td>'+x.id+'</td>        <td>'+v.name+'</td>        <td>'+x.productId+'</td>        <td>'+x.description+'</td>        <td>'+x.finalPrice+'</td> <td>'+moment(x.dateTime).format('YYYY-MM-DD hh:mm:ss')+'</td>     </tr>'
                             })
                              
                             
                             var mailOptions = {
                                 from: 'antiquesofkingston@gmail.com',
-                                to: 'rizviwajahat9@yahoo.com',
-                                subject: 'Sending daily report check to ' + v.name,
-                                html: beforeStallWeek + v.stallId + afterStallBeforeStallHolder + v.name + beforeTable + invoicesString + end
+                                to: v.email,
+                                subject: 'Weekly Sales Report',
+                                html: beforeStallWeek + v.stallId + afterStallBeforeStallHolder + v.name + beforeTableWeekly + invoicesString + end
                               };
 
                               transporter.sendMail(mailOptions, function(error, info){
@@ -160,8 +160,8 @@ var mailOptions = {
                             
                             var mailOptions = {
                                 from: 'antiquesofkingston@gmail.com',
-                                to: 'rizviwajahat9@yahoo.com',
-                                subject: 'Sending daily report check to ' + v.name,
+                                to: v.email,
+                                subject: 'Daily Sales report',
                                 html: beforeStall + v.stallId + afterStallBeforeStallHolder + v.name + beforeTable + invoicesString + end
                               };
 
