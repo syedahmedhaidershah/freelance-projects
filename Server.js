@@ -112,7 +112,7 @@ var mailOptions = {
                                 html: beforeStallWeek + v.stallId + afterStallBeforeStallHolder + v.name + beforeTableWeekly + invoicesString + end,
                                 attachments: [{
                                     filename: 'KingstonAntiquesLogo.jpeg',
-                                    path: '/assets',
+                                    path: './assets',
                                     cid: 'unique@logo.ee' //same cid value as in the html img src
                                 }]
                             };
