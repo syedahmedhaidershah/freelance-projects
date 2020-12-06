@@ -64,7 +64,7 @@ var mailOptions = {
   };
 
   var beforeStall = '<title>Antiques of Kingston</title><img class=center src="logo.png" alt="Logo" width="300" height="100"><style>    .center{        display: block;  margin-left: auto;  margin-right: auto;  width: 30%;    }    table {        font-family: arial, sans-serif;        border-collapse: collapse;        margin-left: 5%;        margin-right: 5%;        width: 90%;      }            td, th {        border: 1px solid #dddddd;        text-align: left;        padding: 8px;      }            tr:nth-child(even) {        background-color: #dddddd;      }</style><body>       <h2 style="text-align: center;">Daily Sales Report</h2>    <h4 style="padding-left: 5%;">Stall Number: '
-  var beforeStallWeek = '<title>Antiques of Kingston</title><img class=center src="logo.png" alt="Logo" width="300" height="100"><style>    .center{        display: block;  margin-left: auto;  margin-right: auto;  width: 30%;    }    table {        font-family: arial, sans-serif;        border-collapse: collapse;        margin-left: 5%;        margin-right: 5%;        width: 90%;      }            td, th {        border: 1px solid #dddddd;        text-align: left;        padding: 8px;      }            tr:nth-child(even) {        background-color: #dddddd;      }</style><body>       <h2 style="text-align: center;">Weekly Sales Report</h2>    <h4 style="padding-left: 5%;">Stall Number: '
+  var beforeStallWeek = '<title>Antiques of Kingston</title><img class=center src="cid:unique@logo.ee" alt="Logo" width="300" height="100"><style>    .center{        display: block;  margin-left: auto;  margin-right: auto;  width: 30%;    }    table {        font-family: arial, sans-serif;        border-collapse: collapse;        margin-left: 5%;        margin-right: 5%;        width: 90%;      }            td, th {        border: 1px solid #dddddd;        text-align: left;        padding: 8px;      }            tr:nth-child(even) {        background-color: #dddddd;      }</style><body>       <h2 style="text-align: center;">Weekly Sales Report</h2>    <h4 style="padding-left: 5%;">Stall Number: '
   var afterStallBeforeStallHolder = '</h4>    <h4 style="padding-left: 5%;"><strong>Stall Holder\'s Name: '
   var beforeTable = '</strong> </h4>        <table>      <tr>        <th>Stall No.</th>        <th>Invoice No. </th>        <th>Stall Holder</th>        <th>Stock No.</th>        <th>Item Sold</th>        <th>Price Sold</th>             </tr>           '
   var beforeTableWeekly = '</strong> </h4>        <table>      <tr>        <th>Stall No.</th>        <th>Invoice No. </th>        <th>Stall Holder</th>        <th>Stock No.</th>        <th>Item Sold</th>        <th>Price Sold</th>          <th>Date/Time</th>             </tr>           '
@@ -109,8 +109,13 @@ var mailOptions = {
                                 // to: v.email,
                                 to:'rizviwajahat9@yahoo.com',
                                 subject: 'Weekly Sales Report',
-                                html: beforeStallWeek + v.stallId + afterStallBeforeStallHolder + v.name + beforeTableWeekly + invoicesString + end
-                              };
+                                html: beforeStallWeek + v.stallId + afterStallBeforeStallHolder + v.name + beforeTableWeekly + invoicesString + end,
+                                attachments: [{
+                                    filename: 'KingstonAntiquesLogo.jpeg',
+                                    path: '/assets',
+                                    cid: 'unique@logo.ee' //same cid value as in the html img src
+                                }]
+                            };
 
                               transporter.sendMail(mailOptions, function(error, info){
                                 if (error) {
