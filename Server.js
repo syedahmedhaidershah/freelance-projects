@@ -95,14 +95,19 @@ var mailOptions = {
                         invoicesToSend = invoices.filter(w=> w.stallId == v.stallId)
                         if(invoicesToSend.length > 0){
                             var invoicesString = ""
+                            var total = 0;
                             invoicesToSend.map(x=>{
+                                total = parseInt(x.finalPrice) + total
                                invoicesString = invoicesString + '<tr> <td>'+x.stallId+'</td>        <td>'+x.id+'</td>        <td>'+v.name+'</td>        <td>'+x.productId+'</td>        <td>'+x.description+'</td>        <td>'+x.finalPrice+'</td> <td>'+moment(x.dateTime).format('YYYY-MM-DD hh:mm:ss')+'</td>     </tr>'
                             })
                              
+                            invoicesString = invoicesString + '<tr> <td></td>        <td></td>        <td></td>        <td></td>        <td>Total: </td>        <td>'+total+'</td> <td></td>     </tr>'
+                            
                             
                             var mailOptions = {
                                 from: 'antiquesofkingston@gmail.com',
-                                to: v.email,
+                                // to: v.email,
+                                to:'rizviwajahat9@yahoo.com',
                                 subject: 'Weekly Sales Report',
                                 html: beforeStallWeek + v.stallId + afterStallBeforeStallHolder + v.name + beforeTableWeekly + invoicesString + end
                               };
