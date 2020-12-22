@@ -230,7 +230,7 @@ export class CalcComponent implements OnInit {
         const { function: funct } = this.formGroups[2].value;
         params = this.formGroups[3].value;
         evaluated = this.math.runNRM(funct, params);
-        if(evaluated.error) return this.snackbar.open(evaluated.message, 'close', {duration: 3000})
+        if (evaluated.error) return this.snackbar.open(evaluated.message, 'close', { duration: 3000 })
         this.launchIterationsDialog(evaluated);
         break;
       default:
@@ -241,12 +241,11 @@ export class CalcComponent implements OnInit {
   launchIterationsDialog = (evaluated: any) => {
     this.dialog.open(
       IterationsDialogComponent, {
-        height: '100%',
-        width: '100%',
-        maxWidth: '100vw',
-        maxHeight: '100vw',
-        data: evaluated
-      }
-    )
+      height: '100%',
+      width: '100%',
+      minWidth: '100vw',
+      minHeight: '100vw',
+      data: evaluated
+    })
   }
 }

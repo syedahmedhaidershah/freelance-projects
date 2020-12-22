@@ -6,14 +6,14 @@
         </button>
     </div>
 </mat-toolbar>
-<div *ngIf="data.message==='nrm'" class="d-flex flex-column w-100 flex-grow-1 overflow-scroll">
+<div *ngIf="data.message==='NRM'" class="d-flex flex-column w-100 flex-grow-1 overflow-scroll">
     <div *ngFor="let it of data.values; let i=index" class="card p-2 m-1 shadow">
         <h3>{{data.message}} Iteration #{{i+1}}</h3>
-        <h5>x<sub>n</sub> = {{it.xn}}</h5>
-        <h5 class="bg-success text-white rounded p-2">x<sub>n+1</sub> = {{it.xn1}}</h5>
-        <h5>f(x) = {{it.fx}}</h5>
-        <h5>f'(x) = {{it.fdx}}</h5>
-        <h5>&epsilon;<sub>a</sub> = {{it.ea}}</h5>
-        <h5>&epsilon;<sub>t</sub> = {{it.et}}</h5>
+        <h6>x<sub>n</sub> = {{it.xn}}</h6>
+        <h6 class="bg-success text-white rounded p-2">x<sub>n+1</sub> = {{it.xn1}}</h6>
+        <h6>f(x) = {{it.fx}}</h6>
+        <h6>f'(x) = {{it.fdx}}</h6>
+        <h6>&epsilon;<sub>a</sub> = {{it.ea}}</h6>
+        <h6>&epsilon;<sub>t</sub> = {{it.et}}</h6>
     </div>
 </div>

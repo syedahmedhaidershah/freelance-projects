@@ -21,6 +21,6 @@ export class IterationsDialogComponent implements OnInit {
     this.data.message = this.data.message.toUpperCase();
   }
 
-  close = this.ref.close;
+  close = () => this.ref.close();
 
 }
