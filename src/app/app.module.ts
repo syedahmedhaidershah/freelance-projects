@@ -42,11 +42,13 @@ import { RoutingInterceptService } from '../services/routing-intercept.service';
 import { InterceptorService } from "../services/interceptor.service";
 
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { CalcComponent } from './calc/calc.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent
+    DashboardComponent,
+    CalcComponent
   ],
   imports: [
     BrowserModule,

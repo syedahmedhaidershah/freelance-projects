@@ -230,7 +230,7 @@ export class GeneralService {
     }
   }
 
-  
+
   /** Get a generator to yeild after a specified time, blocked by an unresolved promise
    * @param {number} obj - Object to check if it is number 
   * @returns {boolean} Returns true if the argument is a number
@@ -249,10 +249,10 @@ export class GeneralService {
       ev.stopImmediatePropagation();
       return false;
     }
-    
+
     await toExecute();
-    
-    toPrevent = () => {};
+
+    toPrevent = () => { };
 
     return false;
   }

@@ -16,7 +16,8 @@ $OsApp-primary: mat-palette($mat-indigo);
 $OsApp-accent: mat-palette($mat-pink, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
-$OsApp-warn: mat-palette($mat-red);
+$OsApp-danger: mat-palette($mat-red);
+$OsApp-warn: mat-palette($mat-orange);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
@@ -24,7 +25,8 @@ $OsApp-theme: mat-light-theme((
   color: (
     primary: $OsApp-primary,
     accent: $OsApp-accent,
-    warn: $OsApp-warn,
+    danger: $OsApp-warn,
+    warn: $OsApp-warn
   )
 ));
 

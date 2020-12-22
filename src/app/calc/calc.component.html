@@ -1,0 +1,26 @@
+<div class="d-flex flex-grow-1 flex-column justify-content-center align-items-center">
+    <mat-vertical-stepper [linear]="isLinear" #stepper (selectionChange)="trackSelection($event)">
+        <mat-step *ngFor="let fg of formGroups; let i=index" [stepControl]="fg" [color]="stepColors[i]">
+            <form [formGroup]="fg">
+                <ng-template matStepLabel>{{formgroupsData[i].label}}</ng-template>
+                <mat-form-field *ngFor="let c of formgroupsData[i].controls; let j=index" class="d-block">
+                    <mat-label>{{capitalize(c.name)}}</mat-label>
+                    <mat-select *ngIf="c.type==='select'" [formControlName]="c.name"
+                        (selectionChange)="selectTracker($event, c.selectionChange, null, i, j)">
+                        <mat-option *ngFor="let v of c.values" [value]="v">{{v}}</mat-option>
+                    </mat-select>
+                    <input #inp matInput *ngIf="c.type!=='select'" [type]="c.inputType||'text'" [min]="c.min||0"
+                        [required]="c.type" [formControlName]="c.name" [placeholder]="c.placeholder||c.name"
+                        autocomplete="off" [disabled]="inp.value!==''?c.disabled:false"
+                        (keyup)="selectTracker($event, c.keyup, inp)" />
+                </mat-form-field>
+                <div>
+                    <button *ngIf="stepper.selectedIndex>0" mat-button matStepperPrevious>Prev</button>
+                    <button *ngIf="stepper.selectedIndex<stepper.steps.length-1" mat-button matStepperNext>Next</button>
+                    <button *ngIf="stepper.selectedIndex===stepper.steps.length-1" mat-button
+                        (click)="runIterations()">Calculate</button>
+                </div>
+            </form>
+        </mat-step>
+    </mat-vertical-stepper>
+</div>
