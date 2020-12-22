@@ -43,12 +43,14 @@ import { InterceptorService } from "../services/interceptor.service";
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CalcComponent } from './calc/calc.component';
+import { IterationsDialogComponent } from './iterations-dialog/iterations-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    CalcComponent
+    CalcComponent,
+    IterationsDialogComponent
   ],
   imports: [
     BrowserModule,

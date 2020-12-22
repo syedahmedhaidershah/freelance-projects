@@ -16,3 +16,20 @@ button:active, button:focus {
 .fs2_5r {
     font-size: 2.5rem;
 }
+
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+box-shadow: inset 0 0 5px grey;
+border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+background: indigo;
+border-radius: 10px;
+}

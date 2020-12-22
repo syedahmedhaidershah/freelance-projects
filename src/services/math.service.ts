@@ -57,7 +57,7 @@ export class MathService {
   runNRM = (funct, params) => {
     funct = this.getJSMath(funct);
 
-    let message = '';
+    let message = 'nrm';
     let iterations = 0;
     let onemore = true;
 
@@ -82,9 +82,9 @@ export class MathService {
     }
 
     let e = Math.exp(1);
-
     fdx = this.getJSMath(fdx);
     let evalCondition = null;
+    stopValue = +stopValue;
 
     let fxArr = [];
     let fdxArr = [];
@@ -138,14 +138,16 @@ export class MathService {
       message = exc;
     }
     return {
-      values: {
-        xn,
-        xn1,
-        fxArr,
-        fdxArr,
-        ea,
-        et
-      },
+      values: xn.map((v, i) => {
+        return {
+          xn: xn[i],
+          xn1: xn1[i],
+          fx: fxArr[i],
+          fdx: fdxArr[i],
+          ea: ea[i],
+          et: et[i]
+        }
+      }),
       message,
       error: false
     };

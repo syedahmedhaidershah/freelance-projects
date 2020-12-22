@@ -6,6 +6,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { derivative } from 'mathjs';
 import { calc as Calculation } from '../../statics/calc';
 import { MathService } from 'src/services/math.service';
+import { MatDialog } from '@angular/material/dialog';
+import { IterationsDialogComponent } from '../iterations-dialog/iterations-dialog.component';
 
 const {
   methods,
@@ -39,7 +41,8 @@ export class CalcComponent implements OnInit {
     private fb: FormBuilder,
     private cdr: ChangeDetectorRef,
     private snackbar: MatSnackBar,
-    private math: MathService
+    private math: MathService,
+    private dialog: MatDialog
   ) {
     this.capitalize = this.general.capitalizeWord;
     this.formgroupsData = formgroupsData;
@@ -227,10 +230,23 @@ export class CalcComponent implements OnInit {
         const { function: funct } = this.formGroups[2].value;
         params = this.formGroups[3].value;
         evaluated = this.math.runNRM(funct, params);
-        if(evaluated.error) this.snackbar.open(evaluated.message, 'close', {duration: 3000})
+        if(evaluated.error) return this.snackbar.open(evaluated.message, 'close', {duration: 3000})
+        this.launchIterationsDialog(evaluated);
         break;
       default:
         break;
     }
+  }
+
+  launchIterationsDialog = (evaluated: any) => {
+    this.dialog.open(
+      IterationsDialogComponent, {
+        height: '100%',
+        width: '100%',
+        maxWidth: '100vw',
+        maxHeight: '100vw',
+        data: evaluated
+      }
+    )
   }
 }
