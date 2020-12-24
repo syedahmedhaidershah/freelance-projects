@@ -27,6 +27,7 @@ export class CalcComponent implements OnInit {
 
   stepColors = [];
   formgroupsData: any = [];
+  originalFGD: any = [];
   methods: any = [];
   derivative: any = (x) => x;
   nerdamer: any = (x) => x;
@@ -45,7 +46,8 @@ export class CalcComponent implements OnInit {
     private dialog: MatDialog
   ) {
     this.capitalize = this.general.capitalizeWord;
-    this.formgroupsData = formgroupsData;
+    this.formgroupsData = formgroupsData();
+    this.originalFGD = { ...formgroupsData() };
     this.methods = methods;
     this.derivative = derivative;
     this.nerdamer = window['nerdamer'];
@@ -55,7 +57,10 @@ export class CalcComponent implements OnInit {
     this.initGroups();
   }
 
-  initGroups = () => {
+  initGroups = (i?: number) => {
+    if (i) {
+      return this.formgroupsData[i] = formgroupsData()[i];
+    }
     this.formGroups = this.formgroupsData.map((fgd: any) => {
       this.stepColors.push('primary');
       if (!fgd.form) {
@@ -131,10 +136,37 @@ export class CalcComponent implements OnInit {
         break;
       case 3:
         const [useFunction, eq] = this.nrmExtractions;
-        switch (this.formGroups[1].value.method) {
-          case 'Newton Raphson':
+        let useFgSec: any;
+        let root: any;
+        let addFactor: any;
+
+        this.setRoot()
+
+        switch (this.getMethodKey) {
+          case 'newtonraphson':
             const fdx = this.derivative(useFunction, 'x').toString();
             this.formGroups[selectedIndex].controls.fdx.setValue(fdx)
+            break;
+          case 'secant':
+            useFgSec = this.formGroups[selectedIndex];
+            root = useFgSec.controls.root.value;
+            addFactor = +(+Math.random().toFixed(2) * 100) % 2 == 0 ? 0.9 : -0.9;
+            useFgSec.controls.x0.setValue((+root + addFactor));
+            useFgSec.controls.x1.setValue((+root + 2 * addFactor));
+            break;
+          case 'regulafalsi':
+            useFgSec = this.formGroups[selectedIndex];
+            root = useFgSec.controls.root.value;
+            addFactor = +(+Math.random().toFixed(2) * 100) % 2 == 0 ? 0.5 : -0.7;
+            useFgSec.controls.x0.setValue((+root + addFactor));
+            useFgSec.controls.x1.setValue((+root - addFactor));
+            break;
+          case 'bisection':
+            useFgSec = this.formGroups[selectedIndex];
+            root = useFgSec.controls.root.value;
+            addFactor = +(+Math.random().toFixed(2) * 100) % 2 == 0 ? 0.6 : -0.8;
+            useFgSec.controls.x0.setValue((+root + addFactor));
+            useFgSec.controls.x1.setValue((+root - addFactor));
             break;
           default:
             break;
@@ -162,14 +194,19 @@ export class CalcComponent implements OnInit {
 
   get nrmExtractions() {
     const useFunction = this.formGroups[2].value.function;
+    const nerdamer = this.nerdamer
+      .solveEquations(useFunction, 'x')
+      .toString()
+      .split(',')[0];
 
     let eq = this.math.getJSMath(
-      this.nerdamer
-        .solveEquations(useFunction, 'x')
-        .toString()
-        .split(',')[0]
+      typeof nerdamer === 'string' ? nerdamer : nerdamer.pop()
     )
     return [useFunction, eq];
+  }
+
+  get getMethodKey() {
+    return this.formGroups[1].value.method.toLowerCase().replace(/\s/g, '');
   }
 
   selectTracker = ($e, callback: any, inp?: HTMLInputElement, i?: number, j?: number) => {
@@ -180,13 +217,33 @@ export class CalcComponent implements OnInit {
   }
 
   loadMethod = ({ value }, { i, j }) => {
-    switch (value.toLowerCase().replace(' ', '')) {
+    this.initGroups(3);
+    switch (value.toLowerCase().replace(/\s/g, '')) {
       case 'newtonraphson':
         this.mountNrm(3, j);
         break;
+      case 'secant':
+        this.mountSecant(3, j);
+        break;
+      case 'regulafalsi':
+        this.mountRf(3, j);
+      case 'bisection':
+        this.mountBs(3, j);
       default:
         break;
     }
+  }
+
+  mountSecant = (i, j) => {
+    const controls = this.math.secForm as any;
+    controls.forEach(({
+      render,
+      fgd,
+      control: { name, value }
+    }) => {
+      if (render) this.formgroupsData[i].controls.unshift(fgd);
+      this.formGroups[i].addControl(name, value);
+    });
   }
 
   mountNrm = (i, j) => {
@@ -201,6 +258,41 @@ export class CalcComponent implements OnInit {
     })
   }
 
+  mountRf = (i, j) => {
+    const controls = this.math.rfForm as any;
+    controls.forEach(({
+      render,
+      fgd,
+      control: { name, value }
+    }) => {
+      if (render) this.formgroupsData[i].controls.unshift(fgd);
+      this.formGroups[i].addControl(name, value);
+    });
+  }
+
+  mountBs = (i, j) => {
+    const controls = this.math.bsForm as any;
+    controls.forEach(({
+      render,
+      fgd,
+      control: { name, value }
+    }) => {
+      if (render) this.formgroupsData[i].controls.unshift(fgd);
+      this.formGroups[i].addControl(name, value);
+    });
+  }
+
+  setRoot = () => {
+    const [useFunction, eq] = this.nrmExtractions;
+    let useVal = 0;
+    try {
+      useVal = eval(eq);
+    } catch (exc) { }
+    const root = useVal.toFixed(this.precision);
+    this.formGroups[3].controls.root
+      .setValue(root);
+  }
+
   trackPrecision = ({ value }, $e) => {
     this.precision = value;
     const { stopCriteria } = this.formGroups[3].value;
@@ -212,30 +304,65 @@ export class CalcComponent implements OnInit {
     this.formGroups[3].controls.stopValue
       .setValue(stopValue)
 
-    const [useFunction, eq] = this.nrmExtractions;
-    let useVal = 0;
-    try {
-      useVal = eval(eq);
-    } catch (exc) { }
-    const root = useVal.toFixed(this.precision);
-    this.formGroups[3].controls.root
-      .setValue(root)
+    this.setRoot();
+    switch (this.getMethodKey) {
+      case 'newtonraphson':
+        let x0nrm = (+this.formGroups[3].value.x0).toFixed(this.precision);
+        this.formGroups[3].controls.x0
+          .setValue(x0nrm);
+        break;
+      case 'secant':
+        let x0sec = (+this.formGroups[3].value.x0).toFixed(this.precision);
+        this.formGroups[3].controls.x0
+          .setValue(x0sec);
+        let x1sec = (+this.formGroups[3].value.x1).toFixed(this.precision);
+        this.formGroups[3].controls.x1
+          .setValue(x1sec);
+        break;
+      case 'regulafalsi':
+        let x0rf = (+this.formGroups[3].value.x0).toFixed(this.precision);
+        this.formGroups[3].controls.x0
+          .setValue(x0rf);
+        let x1rf = (+this.formGroups[3].value.x1).toFixed(this.precision);
+        this.formGroups[3].controls.x1
+          .setValue(x1rf);
+        break;
+      case 'bisection':
+        let x0bs = (+this.formGroups[3].value.x0).toFixed(this.precision);
+        this.formGroups[3].controls.x0
+          .setValue(x0bs);
+        let x1bs = (+this.formGroups[3].value.x1).toFixed(this.precision);
+        this.formGroups[3].controls.x1
+          .setValue(x1bs);
+        break;
+      default:
+        break;
+    }
   }
 
   runIterations = () => {
     let evaluated: any = null;
     let params: any = null;
-    switch (this.formGroups[1].value.method.toLowerCase().replace(' ', '')) {
+    const { function: funct } = this.formGroups[2].value;
+    let callMethod: any = null;
+    switch (this.getMethodKey) {
       case 'newtonraphson':
-        const { function: funct } = this.formGroups[2].value;
-        params = this.formGroups[3].value;
-        evaluated = this.math.runNRM(funct, params);
-        if (evaluated.error) return this.snackbar.open(evaluated.message, 'close', { duration: 3000 })
-        this.launchIterationsDialog(evaluated);
+        callMethod = 'NRM';
         break;
+      case 'secant':
+        callMethod = 'SEC';
+      case 'regulafalsi':
+        callMethod = 'RF';
+      case 'bisection':
+        callMethod = 'BS';
       default:
         break;
     }
+    if (!callMethod) throw Error('Method not selected');
+    params = this.formGroups[3].value;
+    evaluated = this.math[`run${callMethod}`](funct, params);
+    if (evaluated.error) return this.snackbar.open(evaluated.message, 'close', { duration: 3000 })
+    this.launchIterationsDialog(evaluated);
   }
 
   launchIterationsDialog = (evaluated: any) => {

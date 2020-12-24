@@ -23,4 +23,10 @@ export class IterationsDialogComponent implements OnInit {
 
   close = () => this.ref.close();
 
+  precise = (n: any) => {
+    return (+n).toFixed(+this.data.precision);
+  }
+
+  getBSUpdate = (useDat: any) => (useDat.fx0*useDat.fx2)<0?'x<sub>2</sub> = x<sub>3</sub>':'x<sub>1</sub> = x<sub>3</sub>';
+
 }

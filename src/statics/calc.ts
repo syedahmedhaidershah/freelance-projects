@@ -1,17 +1,21 @@
 export const calc: any = {
     methods: {
-        open: ['Newton Raphson',
-            // 'Secant'
+        open: [
+            'Newton Raphson',
+            'Secant'
         ],
-        // closed: ['Bisection', 'Regula Falsi']
+        closed: [
+            'Regula Falsi',
+            'Bisection',
+        ]
     },
 
-    formgroupsData: [
+    formgroupsData: () => [
         {
             controls: [
                 { type: 'select', name: 'type', required: true, values: [
                     'Open',
-                    // 'Closed'
+                    'Closed'
                 ], selectionChange: 'window.console.log' },
             ],
             label: 'Choose a Method Type'
@@ -34,7 +38,7 @@ export const calc: any = {
                 {
                     type: 'select', name: 'stopCriteria',
                     required: true,
-                    values: ['Estimated Error', 'Iterations'],
+                    values: ['Estimated Error', 'Iterations', 'Total Error'],
                     selectionChange: 'window.console.log',
                 },
                 { name: 'stopValue', inputType: 'number', min: 0, required: true },
