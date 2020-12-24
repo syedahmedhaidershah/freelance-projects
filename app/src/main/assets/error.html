@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <title>Error Page</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1, user-scalable=no'>
+    <style>
+        html,body{height:100%;}body{margin:0;font-family:Roboto,"HelveticaNeue",sans-serif;}*{user-select:none;-webkit-touch-callout:none;/*font-size:2rem;*/}button:active,button:focus{outline:none!important;}.fs2_5r{font-size:2.5rem;}/*width*/::-webkit-scrollbar{width:5px;}/*Track*/::-webkit-scrollbar-track{box-shadow:inset005pxgrey;border-radius:10px;}/*Handle*/::-webkit-scrollbar-thumb{background:indigo;border-radius:10px;}
+        .d-flex {display: flex;}
+        .flex-row {flex-direction: row;}
+        .flex-column {flex-direction: column;}
+        .flex-grow-1 {flex-grow: 1;}
+        .flex-1 {flex: 1}
+        .justify-content-center { justify-content: center;}
+        .align-items-center { align-items: center;}
+        .h-100 {height: 100%;}
+        .w-100 {width: 100%}
+        .text-center {text-align: center;}
+        .p-2 {padding: 2rem}
+        .button, .button:active, .button:focus {
+            color:white;
+            background-color: indigo;
+            outline: none!important;
+            font-size: 2rem;
+            padding: 1rem;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="d-flex h-100 w-100 flex-grow-1 justify-content-center align-items-center flex-column">
+        <img src="./cloud.svg" alt="Maths APIs Down" />
+        <div class="text-center p-2">Oops. Online APIs required for Mathematical functions are down. Kindly connect to internet our app to it's utmost maximum.</div>
+        <button onclick="reload()" class="button">Try again</button>
+    </div>
+    <script async defer>
+        function reload() {
+            Android.reloadPage();
+        }
+        window['Android']['showToast']('Error connecting to the cloud');
+    </script>
+</body>
+</html>>
