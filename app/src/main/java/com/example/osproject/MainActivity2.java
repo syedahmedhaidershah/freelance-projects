@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.webkit.ConsoleMessage;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebResourceError;
@@ -13,20 +14,27 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 public class MainActivity2 extends AppCompatActivity {
     private static MainActivity2 instance;
     WebView webView;
+    ProgressBar progBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+        progBar = (ProgressBar) findViewById(R.id.progressBar);
+        progBar.bringToFront();
+
         instance = this;
 
-        WebView.setWebContentsDebuggingEnabled(true);
         webView = (WebView) findViewById(R.id.webView);
+
+
+        WebView.setWebContentsDebuggingEnabled(true);
         WebSettings webSettings = webView.getSettings();
 
         webSettings.setJavaScriptEnabled(true);

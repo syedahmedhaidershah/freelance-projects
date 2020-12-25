@@ -6,10 +6,21 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity2">
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="206dp"
+        android:layout_height="174dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <WebView
         android:id="@+id/webView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="244dp"
-        tools:layout_editor_absoluteY="472dp" />
+        tools:layout_editor_absoluteX="222dp"
+        tools:layout_editor_absoluteY="299dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
