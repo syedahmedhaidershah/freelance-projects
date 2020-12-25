@@ -215,7 +215,10 @@ export class MathService {
         if (useCriteria.includes('error'))
           onemore = eval(baseEval);
 
+        // xn1[iterations -1 ] => latest value of x0 or xn
         let useXn = parseFloat(
+          // xn assumes either x0 if the first iteration is taking place
+          // or xn assumes previous value of xn+1
           ((xn.length === 0) ? +x0 : +(xn1[iterations - 1])).toFixed(precision)
         )
         xn.push(useXn);
@@ -223,6 +226,9 @@ export class MathService {
         const useFx = this.fx(useXn, funct);
         const useFdx = this.fx(useXn, fdx);
 
+        // useXn = x0 or xn
+        // useFx = f(x)
+        // useFdx = f'(x)
         let useXn1 = parseFloat(
           (useXn - (useFx / useFdx)).toFixed(precision)
         )
@@ -231,6 +237,8 @@ export class MathService {
         fxArr.push(parseFloat(useFx.toFixed(precision)));
         fdxArr.push(parseFloat(useFdx.toFixed(precision)));
 
+        // ea = Estimated Error
+        // et = Total Error
         ea.push(
           +(Math.abs((useXn1 - useXn) / useXn1) * 100).toFixed(precision)
         );
@@ -309,6 +317,8 @@ export class MathService {
         if (useCriteria.includes('error'))
           onemore = eval(baseEval);
 
+        // xl[iterations -1] = latest value for xl or x0 (lower bracketing value for interval)
+        // xu[iterations -1] = latest value for  xu or x1 (upper bracketing value for interval)
         let useXl = parseFloat(
           ((xl.length === 0) ? +x0 : +(xu[iterations - 1])).toFixed(precision)
         );
@@ -321,6 +331,13 @@ export class MathService {
         const useFlx = this.fx(useXl, funct);
         const useFux = this.fx(useXu, funct);
 
+        // useXu = x0
+        // useFux = f(x1)
+        // useXu = x1 - upper
+        // useXl = x0 - lower
+        //  useFux = f(x1)
+        // useFlx = f(x0)
+        // useX2 = x2;
         let useX2 = parseFloat(
           (useXu - (useFux * (useXu - useXl) / (useFux - useFlx))).toFixed(precision)
         )
@@ -413,10 +430,16 @@ export class MathService {
         if (useCriteria.includes('error'))
           onemore = eval(baseEval);
 
+        // x0a[iterations - 1] = latest value for x0 or x1 in lectures
+        // x2a[iterations - 1] = latest value for x2 or x3 in lectures
+        // useX0 = x0 --> retreived from the statement above
+        // useX1 = x1 --> retreived from the statement above
         let useX0 = parseFloat(
+          // +((x0a[iterations - 1] < 0) == (x2a[iterations - 1] < 0) => x0<0 AND x2<0 - OR Both negative/positive
           ((x0a.length === 0) ? +x0 : +((x0a[iterations - 1] < 0) == (x2a[iterations - 1] < 0) ? x2a[iterations - 1] : x0a[iterations - 1])).toFixed(precision)
-        );
-        let useX1 = parseFloat(
+          );
+          let useX1 = parseFloat(
+          // +((x0a[iterations - 1] < 0) !== (x2a[iterations - 1] < 0) => x0<0 AND x2>0 - OR x0>0 AND x2<0 - OR Opp polarity
           ((x1a.length === 0) ? +x1 : +((x0a[iterations - 1] < 0) !== (x2a[iterations - 1] < 0) ? x2a[iterations - 1] : x1a[iterations - 1])).toFixed(precision)
         )
         x0a.push(useX0);
@@ -425,10 +448,18 @@ export class MathService {
         const useF0x = this.fx(useX0, funct);
         const useF1x = this.fx(useX1, funct);
 
+        // useX1 = x1 or x2 in lectures
+        // useF1x = f(x1) or f(x2) in lectures
+        // useX0 = x0 or x1 in lectures
+        // useX1 = x1 or x2 in lectures
+        // useF0x = f(x0) or f(x1) in lectures
+        // useF1x = f(x1) or f(x2) in lectures
+        // useF2 = x2 or x3 in lectures
         let useX2 = parseFloat(
           (useX1 - (useF1x * (useX0 - useX1) / (useF0x - useF1x))).toFixed(precision)
         )
         x2a.push(useX2);
+        // useF2x = f(x2) or f(x3) in lectures
         const useF2x = this.fx(useX2, funct);
 
         fx0.push(parseFloat(useF0x.toFixed(precision)));
@@ -516,9 +547,12 @@ export class MathService {
         onemore = eval(baseEval);
 
         let useX0 = parseFloat(
+          // fx0[iterations - 1] * fx2[iterations - 1]  < 0   => f(x0)*f(x2) < 0 (negative)
           ((x0a.length === 0) ? +x0 : +(fx0[iterations - 1] * fx2[iterations - 1] < 0 ? x0a[iterations - 1] : x2a[iterations - 1])).toFixed(precision)
-        );
-        let useX1 = parseFloat(
+          );
+          let useX1 = parseFloat(
+            // same condition - parameters reversed instead of putting f(x0)*f(x2) >= 0
+            // fx0[iterations - 1] * fx2[iterations - 1]  < 0   => f(x0)*f(x2) < 0 (positive or equal to 0)
           ((x1a.length === 0) ? +x1 : +(fx0[iterations - 1] * fx2[iterations - 1] < 0 ? x2a[iterations - 1] : x1a[iterations - 1])).toFixed(precision)
         )
         x0a.push(useX0);

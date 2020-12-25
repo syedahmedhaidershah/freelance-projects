@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GeneralService } from 'src/services/general.service';
 import * as _ from "lodash";
@@ -22,7 +22,7 @@ const {
     class: 'd-flex flex-grow-1'
   }
 })
-export class CalcComponent implements OnInit {
+export class CalcComponent implements OnInit, AfterViewInit {
   isLinear = true;
 
   stepColors = [];
@@ -36,6 +36,13 @@ export class CalcComponent implements OnInit {
   precision = 0;
 
   formGroups: Array<FormGroup> = [];
+
+  toastEnabled = false;
+
+  toast = (str: string, action, options) => {
+    if(this.toastEnabled) return (window as any)?.Android?.showToast(str);
+    this.snackbar.open(str, action, options);
+  }
 
   constructor(
     private general: GeneralService,
@@ -51,6 +58,7 @@ export class CalcComponent implements OnInit {
     this.methods = methods;
     this.derivative = derivative;
     this.nerdamer = window['nerdamer'];
+    this.toastEnabled = (window as any)?.Android?.showToast||false;
   }
 
   ngOnInit(): void {
@@ -172,7 +180,7 @@ export class CalcComponent implements OnInit {
             break;
         }
         if (eq.includes('i') || eq.includes('-i')) {
-          this.snackbar.open('The roots for this function are imaginary/complex', 'close', { duration: 5000 });
+          this.toast('The roots for this function are imaginary/complex', 'close', { duration: 5000 });
           this.stepColors[previouslySelectedIndex] = 'warn';
         } else {
           this.formGroups[selectedIndex].controls.root
@@ -186,7 +194,7 @@ export class CalcComponent implements OnInit {
     }
     if (!proValid) {
       this.stepColors[previouslySelectedIndex] = 'warn';
-      this.snackbar.open('The entered function might be incorrect', 'close', { duration: 3000 });
+      this.toast('The entered function might be incorrect', 'close', { duration: 3000 });
       return false;
     }
     this.cdr.detectChanges();
@@ -227,8 +235,10 @@ export class CalcComponent implements OnInit {
         break;
       case 'regulafalsi':
         this.mountRf(3, j);
+        break;
       case 'bisection':
         this.mountBs(3, j);
+        break;
       default:
         break;
     }
@@ -351,17 +361,24 @@ export class CalcComponent implements OnInit {
         break;
       case 'secant':
         callMethod = 'SEC';
+        break;
       case 'regulafalsi':
         callMethod = 'RF';
+        break;
       case 'bisection':
         callMethod = 'BS';
+        break;
       default:
         break;
     }
+    // runNRM
+    // runSEC
+    // runRF
+    // runBS
     if (!callMethod) throw Error('Method not selected');
     params = this.formGroups[3].value;
     evaluated = this.math[`run${callMethod}`](funct, params);
-    if (evaluated.error) return this.snackbar.open(evaluated.message, 'close', { duration: 3000 })
+    if (evaluated.error) return this.toast(evaluated.message, 'close', { duration: 3000 })
     this.launchIterationsDialog(evaluated);
   }
 
@@ -374,5 +391,15 @@ export class CalcComponent implements OnInit {
       minHeight: '100vw',
       data: evaluated
     })
+  }
+
+  ngAfterViewInit() {
+   this.hideProgressBar();
+  }
+
+  hideProgressBar () {
+    if((window as any)?.Android?.hideProgressBar) {
+      (window as any)?.Android?.hideProgressBar();
+    }
   }
 }
