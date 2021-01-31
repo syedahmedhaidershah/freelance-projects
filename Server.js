@@ -106,9 +106,11 @@ var mailOptions = {
                             
                             var mailOptions = {
                                 from: 'antiquesofkingston@gmail.com',
-                                to: v.email,
+                                // to: v.email,
+                                to:'muhammadsarimirfan@gmail.com',
                                 // to:'rizviwajahat9@yahoo.com',
-                                subject: 'Weekly Sales Report',
+                                // subject: 'Weekly Sales Report',
+                                subject: 'Weekly Sales Report for '+ v.email + ' ' + v.stallId,
                                 html: beforeStallWeek + v.stallId + afterStallBeforeStallHolder + v.name + beforeTableWeekly + invoicesString + end,
                                 attachments: [{
                                     filename: 'KingstonAntiquesLogo.jpeg',
