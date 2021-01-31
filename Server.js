@@ -120,7 +120,7 @@ app.get('/send_weekly_report', (req, res) => {
                                 invoicesString = invoicesString + '<tr> <td>' + x.stallId + '</td>        <td>' + x.id + '</td>        <td>' + v.name + '</td>        <td>' + x.productId + '</td>        <td>' + x.description + '</td>        <td>' + x.finalPrice + '</td> <td>' + moment(x.dateTime).format('YYYY-MM-DD hh:mm:ss') + '</td>     </tr>'
                                 // console.log('Email sent to ' + v.email + " invoicesstring: " , invoicesString);
                             })
-                            setTimeout(() => {
+                            // setTimeout(() => {
                                 // invoicesString = invoicesString + '<tr> <td></td>        <td></td>        <td></td>        <td></td>        <td>Total £: </td>        <td>' + total + '</td> <td></td>     </tr>'
                             // invoicesString = invoicesString + '<tr> <td></td>        <td></td>        <td></td>        <td></td>        <td>Refund Amount £: </td>        <td>' + total - totalWRefund + '</td> <td></td>     </tr>'
                             invoicesString = invoicesString + '<tr> <td></td>        <td></td>        <td></td>        <td></td>        <td>Sub Total £: </td>        <td>' + totalWRefund + '</td> <td></td>     </tr>'
@@ -130,8 +130,8 @@ app.get('/send_weekly_report', (req, res) => {
 
                             var mailOptions = {
                                 from: 'antiquesofkingston@gmail.com',
-                                // to: v.email,
-                                to: 'rizviwajahat9@yahoo.com',
+                                to: v.email,
+                                // to: 'rizviwajahat9@yahoo.com',
                                 subject: 'Weekly Sales Report',
                                 html: beforeStallWeek + v.stallId + afterStallBeforeStallHolder + v.name + beforeTableWeekly + invoicesString + end,
                                 attachments: [{
@@ -148,7 +148,7 @@ app.get('/send_weekly_report', (req, res) => {
                                     console.log('Email sent to ' + v.email + " response: " + info.response);
                                 }
                             });
-                            }, 5000);
+                            // }, 5000);
                             
                         }
                     })
