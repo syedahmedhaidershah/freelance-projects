@@ -147,7 +147,7 @@ app.get('/send_weekly_report', (req, res) => {
                                     console.log('Email sent to ' + v.email + " response: " + info.response);
                                 }
                             });
-                            }, 1000);
+                            }, 5000);
                             
                         }
                     })
