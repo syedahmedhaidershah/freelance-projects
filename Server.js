@@ -130,8 +130,8 @@ app.get('/send_weekly_report', (req, res) => {
 
                             var mailOptions = {
                                 from: 'antiquesofkingston@gmail.com',
-                                to: v.email,
-                                // to: 'rizviwajahat9@yahoo.com',
+                                // to: v.email,
+                                to: 'rizviwajahat9@yahoo.com',
                                 subject: 'Weekly Sales Report',
                                 html: beforeStallWeek + v.stallId + afterStallBeforeStallHolder + v.name + beforeTableWeekly + invoicesString + end,
                                 attachments: [{
