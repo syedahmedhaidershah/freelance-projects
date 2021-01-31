@@ -118,6 +118,7 @@ app.get('/send_weekly_report', (req, res) => {
                                      }
                                      totalWRefund = parseInt(x.finalPrice, 10) + totalWRefund;
                                 invoicesString = invoicesString + '<tr> <td>' + x.stallId + '</td>        <td>' + x.id + '</td>        <td>' + v.name + '</td>        <td>' + x.productId + '</td>        <td>' + x.description + '</td>        <td>' + x.finalPrice + '</td> <td>' + moment(x.dateTime).format('YYYY-MM-DD hh:mm:ss') + '</td>     </tr>'
+                                console.log('Email sent to ' + v.email + " response: " + info.response + " invoicesstring: " , invoicesString);
                             })
                             setTimeout(() => {
                                 invoicesString = invoicesString + '<tr> <td></td>        <td></td>        <td></td>        <td></td>        <td>Total £: </td>        <td>' + total + '</td> <td></td>     </tr>'
