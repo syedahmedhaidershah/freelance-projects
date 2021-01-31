@@ -49,11 +49,11 @@ const PORT = 9999;
 var nodemailer = require('nodemailer');
 
 var transporter = nodemailer.createTransport({
-  service: "FastMail",
-  auth: {
-    user: 'systems@fastmail.com',
-    pass: 'gf7qar4smwz283zy'
-  }
+    service: "FastMail",
+    auth: {
+        user: 'systems@fastmail.com',
+        pass: 'gf7qar4smwz283zy'
+    }
 });
 
 var mailOptions = {
@@ -61,25 +61,25 @@ var mailOptions = {
     to: 'rizviwajahat9@yahoo.com',
     subject: 'Sending Email using Node.js',
     html: '      <tr>        <td>G1</td>        <td>G-10001</td>        <td>Sarim Irfan</td>        <td>1000012</td>        <td>chair</td>        <td>100</td>      </tr>      <tr>        <td>G1</td>        <td>G-10001</td>        <td>Sarim Irfan</td>        <td>1000012</td>        <td>chair</td>        <td>100</td>      </tr>      <tr>        <td>G1</td>        <td>G-10001</td>        <td>Sarim Irfan</td>        <td>1000012</td>        <td>chair</td>        <td>100</td>      </tr>      <tr>        <td>G1</td>        <td>G-10001</td>        <td>Sarim Irfan</td>        <td>1000012</td>        <td>chair</td>        <td>100</td>      </tr>      <tr>        <td>G1</td>        <td>G-10001</td>        <td>Sarim Irfan</td>        <td>1000012</td>        <td>chair</td>        <td>100</td>      </tr>    '
-  };
+};
 
-  var beforeStall = '<title>Antiques of Kingston</title><img class=center src="cid:unique@logo.ee" alt="Logo" width="300" height="100"><style>    .center{        display: block;  margin-left: auto;  margin-right: auto;  width: 30%;    }    table {        font-family: arial, sans-serif;        border-collapse: collapse;        margin-left: 5%;        margin-right: 5%;        width: 90%;      }            td, th {        border: 1px solid #dddddd;        text-align: left;        padding: 8px;      }            tr:nth-child(even) {        background-color: #dddddd;      }</style><body>       <h2 style="text-align: center;">Daily Sales Report</h2>    <h4 style="padding-left: 5%;">Stall Number: '
-  var beforeStallWeek = '<title>Antiques of Kingston</title><img class=center src="cid:unique@logo.ee" alt="Logo" width="300" height="100"><style>    .center{        display: block;  margin-left: auto;  margin-right: auto;  width: 30%;    }    table {        font-family: arial, sans-serif;        border-collapse: collapse;        margin-left: 5%;        margin-right: 5%;        width: 90%;      }            td, th {        border: 1px solid #dddddd;        text-align: left;        padding: 8px;      }            tr:nth-child(even) {        background-color: #dddddd;      }</style><body>       <h2 style="text-align: center;">Weekly Sales Report</h2>    <h4 style="padding-left: 5%;">Stall Number: '
-  var afterStallBeforeStallHolder = '</h4>    <h4 style="padding-left: 5%;"><strong>Stall Holder\'s Name: '
-  var beforeTable = '</strong> </h4>        <table>      <tr>        <th>Stall No.</th>        <th>Invoice No. </th>        <th>Stall Holder</th>        <th>Stock No.</th>        <th>Item Sold</th>        <th>Price Sold</th>             </tr>           '
-  var beforeTableWeekly = '</strong> </h4>        <table>      <tr>        <th>Stall No.</th>        <th>Invoice No. </th>        <th>Stall Holder</th>        <th>Stock No.</th>        <th>Item Sold</th>        <th>Price Sold</th>          <th>Date/Time</th>             </tr>           '
-  var singleRow = '<tr> <td>G1</td>        <td>G-10001</td>        <td>Sarim Irfan</td>        <td>1000012</td>        <td>chair</td>        <td>100</td>     </tr>'
-  var end = '</table>    </body>'
-  app.get('/send_weekly_report', (req, res) => {
+var beforeStall = '<title>Antiques of Kingston</title><img class=center src="cid:unique@logo.ee" alt="Logo" width="300" height="100"><style>    .center{        display: block;  margin-left: auto;  margin-right: auto;  width: 30%;    }    table {        font-family: arial, sans-serif;        border-collapse: collapse;        margin-left: 5%;        margin-right: 5%;        width: 90%;      }            td, th {        border: 1px solid #dddddd;        text-align: left;        padding: 8px;      }            tr:nth-child(even) {        background-color: #dddddd;      }</style><body>       <h2 style="text-align: center;">Daily Sales Report</h2>    <h4 style="padding-left: 5%;">Stall Number: '
+var beforeStallWeek = '<title>Antiques of Kingston</title><img class=center src="cid:unique@logo.ee" alt="Logo" width="300" height="100"><style>    .center{        display: block;  margin-left: auto;  margin-right: auto;  width: 30%;    }    table {        font-family: arial, sans-serif;        border-collapse: collapse;        margin-left: 5%;        margin-right: 5%;        width: 90%;      }            td, th {        border: 1px solid #dddddd;        text-align: left;        padding: 8px;      }            tr:nth-child(even) {        background-color: #dddddd;      }</style><body>       <h2 style="text-align: center;">Weekly Sales Report</h2>    <h4 style="padding-left: 5%;">Stall Number: '
+var afterStallBeforeStallHolder = '</h4>    <h4 style="padding-left: 5%;"><strong>Stall Holder\'s Name: '
+var beforeTable = '</strong> </h4>        <table>      <tr>        <th>Stall No.</th>        <th>Invoice No. </th>        <th>Stall Holder</th>        <th>Stock No.</th>        <th>Item Sold</th>        <th>Price Sold</th>             </tr>           '
+var beforeTableWeekly = '</strong> </h4>        <table>      <tr>        <th>Stall No.</th>        <th>Invoice No. </th>        <th>Stall Holder</th>        <th>Stock No.</th>        <th>Item Sold</th>        <th>Price Sold</th>          <th>Date/Time</th>             </tr>           '
+var singleRow = '<tr> <td>G1</td>        <td>G-10001</td>        <td>Sarim Irfan</td>        <td>1000012</td>        <td>chair</td>        <td>100</td>     </tr>'
+var end = '</table>    </body>'
+app.get('/send_weekly_report', (req, res) => {
     var stallHolders = []
     connection.query('SELECT * FROM StallHolder', (err, rows1) => {
         if (err) throw err;
         // console.log('Data received from Db:\n');
         // res.send(rows1);
-        if(rows1.length > 0){
+        if (rows1.length > 0) {
             stallHolders = rows1
             var invoices = []
-            connection.query(`SELECT * FROM NewInvoiceDetails WHERE (DATE(dateTime) BETWEEN '${moment().weekday(0).subtract(6,'d').format("YYYY-MM-DD")}' AND '${moment().weekday(0).format("YYYY-MM-DD")}')`, (err, rows2) => {
+            connection.query(`SELECT * FROM NewInvoiceDetails WHERE (DATE(dateTime) BETWEEN '${moment().weekday(0).subtract(6, 'd').format("YYYY-MM-DD")}' AND '${moment().weekday(0).format("YYYY-MM-DD")}')`, (err, rows2) => {
                 if (err) throw err;
                 invoices = rows2
                 // rows1.map((v,i)=> {
@@ -88,29 +88,50 @@ var mailOptions = {
                 // data.push(...rows)
                 // // console.log('Data received from Db: commission', rows);
                 // if((i+1) == rows1.length){
-        
-                if(invoices.length > 0){
+
+                if (invoices.length > 0) {
                     var invoicesToSend = []
-                    stallHolders.map(v=>{
-                        invoicesToSend = invoices.filter(w=> w.stallId == v.stallId)
-                        if(invoicesToSend.length > 0){
+                    stallHolders.map(v => {
+                        invoicesToSend = invoices.filter(w => w.stallId == v.stallId)
+                        if (invoicesToSend.length > 0) {
                             var invoicesString = ""
-                            var total = 0;
-                            invoicesToSend.map(x=>{
-                                total = parseInt(x.finalPrice) + total
-                               invoicesString = invoicesString + '<tr> <td>'+x.stallId+'</td>        <td>'+x.id+'</td>        <td>'+v.name+'</td>        <td>'+x.productId+'</td>        <td>'+x.description+'</td>        <td>'+x.finalPrice+'</td> <td>'+moment(x.dateTime).format('YYYY-MM-DD hh:mm:ss')+'</td>     </tr>'
+                            var total = 0
+                            var totalWRefund = 0
+                            var commission = 0.1
+                            var afterCommission = 0.9
+                            if(v.accountNumber){
+                                var comm = 10
+                                comm = parseInt(v.accountNumber)
+                                if(comm != 0){
+                                  commission = comm / 100
+                                  afterCommission = 1 - commission 
+                                } else {
+                                  commission = 0
+                                  afterCommission = 1
+                                }
+                                
+                              }
+                            invoicesToSend.map(x => {
+                                // total = parseInt(x.finalPrice) + total
+                                if(parseInt(x.finalPrice, 10) > 0){
+                                    total = parseInt(x.finalPrice, 10) + total;
+                                     }
+                                     totalWRefund = parseInt(x.finalPrice, 10) + totalWRefund;
+                                invoicesString = invoicesString + '<tr> <td>' + x.stallId + '</td>        <td>' + x.id + '</td>        <td>' + v.name + '</td>        <td>' + x.productId + '</td>        <td>' + x.description + '</td>        <td>' + x.finalPrice + '</td> <td>' + moment(x.dateTime).format('YYYY-MM-DD hh:mm:ss') + '</td>     </tr>'
                             })
-                             
-                            invoicesString = invoicesString + '<tr> <td></td>        <td></td>        <td></td>        <td></td>        <td>Total: </td>        <td>'+total+'</td> <td></td>     </tr>'
-                            
-                            
+
+                            invoicesString = invoicesString + '<tr> <td></td>        <td></td>        <td></td>        <td></td>        <td>Total £: </td>        <td>' + total + '</td> <td></td>     </tr>'
+                            invoicesString = invoicesString + '<tr> <td></td>        <td></td>        <td></td>        <td></td>        <td>Refund Amount £: </td>        <td>' + total - totalWRefund + '</td> <td></td>     </tr>'
+                            invoicesString = invoicesString + '<tr> <td></td>        <td></td>        <td></td>        <td></td>        <td>Sub Total £: </td>        <td>' + totalWRefund + '</td> <td></td>     </tr>'
+                            invoicesString = invoicesString + '<tr> <td></td>        <td></td>        <td></td>        <td></td>        <td>Commission Deduction £: </td>        <td>' + (totalWRefund * commission).toFixed(2) + '</td> <td></td>     </tr>'
+                            invoicesString = invoicesString + '<tr> <td></td>        <td></td>        <td></td>        <td></td>        <td>Net Amount £: </td>        <td>' + (totalWRefund * afterCommission).toFixed(2) + '</td> <td></td>     </tr>'
+
+
                             var mailOptions = {
                                 from: 'antiquesofkingston@gmail.com',
                                 // to: v.email,
-                                to:'muhammadsarimirfan@gmail.com',
-                                // to:'rizviwajahat9@yahoo.com',
-                                // subject: 'Weekly Sales Report',
-                                subject: 'Weekly Sales Report for '+ v.email + ' ' + v.stallId,
+                                to: 'rizviwajahat9@yahoo.com',
+                                subject: 'Weekly Sales Report',
                                 html: beforeStallWeek + v.stallId + afterStallBeforeStallHolder + v.name + beforeTableWeekly + invoicesString + end,
                                 attachments: [{
                                     filename: 'KingstonAntiquesLogo.jpeg',
@@ -119,34 +140,34 @@ var mailOptions = {
                                 }]
                             };
 
-                              transporter.sendMail(mailOptions, function(error, info){
+                            transporter.sendMail(mailOptions, function (error, info) {
                                 if (error) {
-                                  console.log(error);
+                                    console.log(error);
                                 } else {
-                                  console.log('Email sent to ' + v.email + " response: "+ info.response);
+                                    console.log('Email sent to ' + v.email + " response: " + info.response);
                                 }
-                              });
+                            });
                         }
                     })
                 }
-                })
+            })
         }
-        
+
     });
 
 
 
-     
 
-    
-    });
-  app.get('/send_daily_report', (req, res) => {
+
+
+});
+app.get('/send_daily_report', (req, res) => {
     var stallHolders = []
     connection.query('SELECT * FROM StallHolder', (err, rows1) => {
         if (err) throw err;
         // console.log('Data received from Db:\n');
         // res.send(rows1);
-        if(rows1.length > 0){
+        if (rows1.length > 0) {
             stallHolders = rows1
             var invoices = []
             connection.query(`SELECT * FROM NewInvoiceDetails WHERE DATE(dateTime) = '${moment().format("YYYY-MM-DD")}'`, (err, rows2) => {
@@ -158,18 +179,18 @@ var mailOptions = {
                 // data.push(...rows)
                 // // console.log('Data received from Db: commission', rows);
                 // if((i+1) == rows1.length){
-        
-                if(invoices.length > 0){
+
+                if (invoices.length > 0) {
                     var invoicesToSend = []
-                    stallHolders.map(v=>{
-                        invoicesToSend = invoices.filter(w=> w.stallId == v.stallId)
-                        if(invoicesToSend.length > 0){
+                    stallHolders.map(v => {
+                        invoicesToSend = invoices.filter(w => w.stallId == v.stallId)
+                        if (invoicesToSend.length > 0) {
                             var invoicesString = ""
-                            invoicesToSend.map(x=>{
-                               invoicesString = invoicesString + '<tr> <td>'+x.stallId+'</td>        <td>'+x.id+'</td>        <td>'+v.name+'</td>        <td>'+x.productId+'</td>        <td>'+x.description+'</td>        <td>'+x.finalPrice+'</td>     </tr>'
+                            invoicesToSend.map(x => {
+                                invoicesString = invoicesString + '<tr> <td>' + x.stallId + '</td>        <td>' + x.id + '</td>        <td>' + v.name + '</td>        <td>' + x.productId + '</td>        <td>' + x.description + '</td>        <td>' + x.finalPrice + '</td>     </tr>'
                             })
-                             
-                            
+
+
                             var mailOptions = {
                                 from: 'antiquesofkingston@gmail.com',
                                 to: v.email,
@@ -180,108 +201,108 @@ var mailOptions = {
                                     path: './assets/KingstonAntiquesLogo.jpeg',
                                     cid: 'unique@logo.ee' //same cid value as in the html img src
                                 }]
-                              };
+                            };
 
-                              transporter.sendMail(mailOptions, function(error, info){
+                            transporter.sendMail(mailOptions, function (error, info) {
                                 if (error) {
-                                  console.log(error);
+                                    console.log(error);
                                 } else {
-                                  console.log('Email sent to ' + v.email + " response: "+ info.response);
+                                    console.log('Email sent to ' + v.email + " response: " + info.response);
                                 }
-                              });
+                            });
                         }
                     })
                 }
 
                 // }
                 // res.send(rows);
-            // });
-                })
-        }
-        
-    });
-
-
-
-     
-
-    
-    });
-
-    app.get('/get_invoices', (req, res) => {
-        var NewInvoices = '';
-        connection.query('SELECT * FROM NewInvoices', (err, rows) => {
-            // if (err) {
-            //     res.status(400).json({
-            //         message: err
-            //     });
-            // };
-            if (err) {
-                // res.status(400).json({
-                //     message: "Something Went Wrong"
                 // });
+            })
+        }
+
+    });
+
+
+
+
+
+
+});
+
+app.get('/get_invoices', (req, res) => {
+    var NewInvoices = '';
+    connection.query('SELECT * FROM NewInvoices', (err, rows) => {
+        // if (err) {
+        //     res.status(400).json({
+        //         message: err
+        //     });
+        // };
+        if (err) {
+            // res.status(400).json({
+            //     message: "Something Went Wrong"
+            // });
             // console.log('Error from NewInvoices from Db:', err);
-    
-            };
-            // console.log('Data received from Db:\n');
-            NewInvoices = rows
-            rows.map((v, i) => {
-                // var date = NewInvoices[i].dateTime
-                // var date = new Date(parseInt(invoices[i].dateTime));
-                //    var date = moment(invoices[i].dateTime,"DD/MM/YYYY");
-    
-                //    day = date.getDate
-                //    month=date.getMonth
-                //    year =date.getFullYear
-                //  NewInvoices[i].dateTime = day  + "/" + month + "/" + year
-                // NewInvoices[i].dateTime = moment(date).format("DD/MM/YYYY")
-                NewInvoices[i].items = []
-                // NewInvoices[i].refunds = []
-                connection.query(`SELECT * FROM NewInvoiceDetails where id = '${v.id}'`, (err, rows1) => {
-                    // if (err) throw err
-                    if (err) {
-                        // res.status(400).json({
-                        //     message: "Something Went Wrong"
-                        // });
+
+        };
+        // console.log('Data received from Db:\n');
+        NewInvoices = rows
+        rows.map((v, i) => {
+            // var date = NewInvoices[i].dateTime
+            // var date = new Date(parseInt(invoices[i].dateTime));
+            //    var date = moment(invoices[i].dateTime,"DD/MM/YYYY");
+
+            //    day = date.getDate
+            //    month=date.getMonth
+            //    year =date.getFullYear
+            //  NewInvoices[i].dateTime = day  + "/" + month + "/" + year
+            // NewInvoices[i].dateTime = moment(date).format("DD/MM/YYYY")
+            NewInvoices[i].items = []
+            // NewInvoices[i].refunds = []
+            connection.query(`SELECT * FROM NewInvoiceDetails where id = '${v.id}'`, (err, rows1) => {
+                // if (err) throw err
+                if (err) {
+                    // res.status(400).json({
+                    //     message: "Something Went Wrong"
+                    // });
                     // console.log('Error from InvoiceDetails from Db:', err);
-    
-                    };
-                    // // console.log('Data received from Db:\n');
-                    if(rows1){
+
+                };
+                // // console.log('Data received from Db:\n');
+                if (rows1) {
                     rows1.map(w => {
                         NewInvoices[i].items.push(w)
-    
-    
-    
+
+
+
                     })
                 } else {
                     // console.log("No items for invoice :",v.id)
                 }
-                    // res.send(rows);
-                });
-    
-                // connection.query(`SELECT * FROM Refund where invoiceId = ${v.id}`, (err, rows2) => {
-                //     if (err) throw err;
-                //     // console.log('Data received from Db:\n');
-    
-                //     rows2.map(r => {
-    
-                //         NewInvoices[i].refunds.push(r);
-                //         if (rows2.length == NewInvoices[i].refunds.length) {
-                //         }
-                //     })
-                //     // res.send(rows);
-                // });
-    
-            })
-            // res.send(NewInvoices);
-            res.send(NewInvoices.sort(compareValues('id','desc')))
-    
-    
-            // res.send(rows); 
-        });
-    
+                // res.send(rows);
+            });
+
+            // connection.query(`SELECT * FROM Refund where invoiceId = ${v.id}`, (err, rows2) => {
+            //     if (err) throw err;
+            //     // console.log('Data received from Db:\n');
+
+            //     rows2.map(r => {
+
+            //         NewInvoices[i].refunds.push(r);
+            //         if (rows2.length == NewInvoices[i].refunds.length) {
+            //         }
+            //     })
+            //     // res.send(rows);
+            // });
+
+        })
+        // res.send(NewInvoices);
+        res.send(NewInvoices.sort(compareValues('id', 'desc')))
+
+
+        // res.send(rows); 
     });
+
+});
 app.get('/get_invoices_staging', (req, res) => {
     var NewInvoices = '';
     connection.query('SELECT * FROM Invoices', (err, rows) => {
@@ -294,7 +315,7 @@ app.get('/get_invoices_staging', (req, res) => {
             // res.status(400).json({
             //     message: "Something Went Wrong"
             // });
-        // console.log('Error from NewInvoices from Db:', err);
+            // console.log('Error from NewInvoices from Db:', err);
 
         };
         // console.log('Data received from Db:\n');
@@ -317,20 +338,20 @@ app.get('/get_invoices_staging', (req, res) => {
                     // res.status(400).json({
                     //     message: "Something Went Wrong"
                     // });
-                // console.log('Error from InvoiceDetails from Db:', err);
+                    // console.log('Error from InvoiceDetails from Db:', err);
 
                 };
                 // // console.log('Data received from Db:\n');
-                if(rows1){
-                rows1.map(w => {
-                    NewInvoices[i].items.push(w)
+                if (rows1) {
+                    rows1.map(w => {
+                        NewInvoices[i].items.push(w)
 
 
 
-                })
-            } else {
-                // console.log("No items for invoice :",v.id)
-            }
+                    })
+                } else {
+                    // console.log("No items for invoice :",v.id)
+                }
                 // res.send(rows);
             });
 
@@ -349,7 +370,7 @@ app.get('/get_invoices_staging', (req, res) => {
 
         })
         // res.send(NewInvoices);
-        res.send(NewInvoices.sort(compareValues('id','desc')))
+        res.send(NewInvoices.sort(compareValues('id', 'desc')))
 
 
         // res.send(rows); 
@@ -867,7 +888,7 @@ app.post("/edit_stall", (req, res) => {
                     // console.log("edit_stall empty err",err);
                     // console.log("edit_stall empty",data);
 
-                    
+
                 });
             connection.query(`UPDATE StallHolder SET stallId='${req.body.id}'  WHERE id = '${req.body.stallHolderId}'`,
                 (err, data) => {
@@ -909,30 +930,30 @@ app.post("/edit_stall", (req, res) => {
 // });
 function compareValues(key, order = 'asc') {
     return function innerSort(a, b) {
-      if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
-        // property doesn't exist on either object
-        return 0;
-      }
-  
-      const varA = (typeof a[key] === 'string')
-        ? a[key].toUpperCase() : a[key];
-      const varB = (typeof b[key] === 'string')
-        ? b[key].toUpperCase() : b[key];
-  
-      let comparison = 0;
-      if (varA > varB) {
-        comparison = 1;
-      } else if (varA < varB) {
-        comparison = -1;
-      }
-      return (
-        (order === 'desc') ? (comparison * -1) : comparison
-      );
+        if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
+            // property doesn't exist on either object
+            return 0;
+        }
+
+        const varA = (typeof a[key] === 'string')
+            ? a[key].toUpperCase() : a[key];
+        const varB = (typeof b[key] === 'string')
+            ? b[key].toUpperCase() : b[key];
+
+        let comparison = 0;
+        if (varA > varB) {
+            comparison = 1;
+        } else if (varA < varB) {
+            comparison = -1;
+        }
+        return (
+            (order === 'desc') ? (comparison * -1) : comparison
+        );
     };
-  }
+}
 
 app.get('/get_daily_report', (req, res) => {
-//    get = { stallId: "0", stallHolderName: "Smith", description:"Some Product", salesPersonName: "Australia", productId: "33",invoiceId:"23",price:"300",card:"200",total:"500" }
+    //    get = { stallId: "0", stallHolderName: "Smith", description:"Some Product", salesPersonName: "Australia", productId: "33",invoiceId:"23",price:"300",card:"200",total:"500" }
 
     // connection.query('SELECT commission FROM Authentication', (err, rows) => {
     //     if (err) throw err;
@@ -943,189 +964,189 @@ app.get('/get_daily_report', (req, res) => {
     connection.query('SELECT * FROM NewInvoiceDetails', (err, rows1) => {
         if (err) throw err;
         data = rows1
-        rows1.map((v,i)=> {
+        rows1.map((v, i) => {
             connection.query(`SELECT * FROM NewInvoices WHERE id = '${v.id}'`, (err, rows) => {
-        if (err) throw err;
-        data[i].invoice = rows[0]
-        // console.log('Data received from Db: commission', rows);
-        if((i+1) == rows1.length){
-            res.send(data.sort(compareValues('id')))
+                if (err) throw err;
+                data[i].invoice = rows[0]
+                // console.log('Data received from Db: commission', rows);
+                if ((i + 1) == rows1.length) {
+                    res.send(data.sort(compareValues('id')))
 
-        }
-        // res.send(rows);
-    });
+                }
+                // res.send(rows);
+            });
         })
         // console.log('Data received from Db:\n');
     });
 
 });
- 
+
 
 app.get('/getBACS', (req, res) => {
     //    get = { stallId: "0", stallHolderName: "Smith", description:"Some Product", salesPersonName: "Australia", productId: "33",invoiceId:"23",price:"300",card:"200",total:"500" }
-    
-        // connection.query('SELECT commission FROM Authentication', (err, rows) => {
+
+    // connection.query('SELECT commission FROM Authentication', (err, rows) => {
+    //     if (err) throw err;
+    //     // console.log('Data received from Db: commission', rows);
+    //     // res.send(rows);
+    // });
+    var data = []
+    connection.query(`SELECT Stall.id , StallHolder.bankName , ((1-(CAST(StallHolder.accountNumber AS SIGNED)) / 100) * SUM( CAST(NewInvoiceDetails.price AS SIGNED ) )) AS total FROM Stall ,StallHolder , NewInvoiceDetails WHERE Stall.stallHolderId = StallHolder.id AND Stall.id = NewInvoiceDetails.stallId AND (DATE(NewInvoiceDetails.dateTime) BETWEEN '${moment().weekday(0).subtract(6, 'd').format("YYYY-MM-DD")}' AND '${moment().weekday(0).format("YYYY-MM-DD")}') AND StallHolder.accountNumber > 0 AND StallHolder.accountNumber < 100 GROUP BY Stall.id`, (err, rows1) => {
+        if (err) throw err;
+        if (rows1) {
+            //  data = rows1.filter(v=> {
+            //      if(parseInt(v.total,10) > 0){
+            //      total = v.total
+            //      v.total = total * 0.9
+            //      v.total = parseFloat(v.total.toFixed(2))
+            //      return v
+            //     }
+            //  })
+            res.send(rows1.sort(compareValues('bankName')))
+
+        }
+
+        // res.send(rows);
+    });
+    // console.log('Data received from Db:\n');
+})
+
+app.get('/get_weekly_item_report_date', (req, res) => {
+    //    get = { stallId: "0", stallHolderName: "Smith", description:"Some Product", salesPersonName: "Australia", productId: "33",invoiceId:"23",price:"300",card:"200",total:"500" }
+
+    // connection.query('SELECT commission FROM Authentication', (err, rows) => {
+    //     if (err) throw err;
+    //     // console.log('Data received from Db: commission', rows);
+    //     // res.send(rows);
+    // });
+    var data = []
+    connection.query(`SELECT * FROM NewInvoiceDetails WHERE  (DATE(dateTime) BETWEEN '${moment().weekday(0).subtract(6, 'd').format("YYYY-MM-DD")}' AND '${moment().weekday(0).format("YYYY-MM-DD")}') AND stallId ='${req.query.id}'`, (err, rows1) => {
+        if (err) throw err;
+        data = rows1
+        // if(rows1.length == 0){
+        // res.send(data)
+        res.send(data.sort(compareValues('id')))
+
+        //     // }
+        //     rows1.map((v,i)=> {
+        //         connection.query(`SELECT * FROM InvoiceDetails WHERE id = '${v.id}'`, (err, rows) => {
         //     if (err) throw err;
+        //     data[i].items = rows
         //     // console.log('Data received from Db: commission', rows);
+        //     if((i+1) == rows1.length){
+        //         res.send(data.sort(compareValues('id')))
+
+        //     }
         //     // res.send(rows);
         // });
-        var data = []
-        connection.query(`SELECT Stall.id , StallHolder.bankName , ((1-(CAST(StallHolder.accountNumber AS SIGNED)) / 100) * SUM( CAST(NewInvoiceDetails.price AS SIGNED ) )) AS total FROM Stall ,StallHolder , NewInvoiceDetails WHERE Stall.stallHolderId = StallHolder.id AND Stall.id = NewInvoiceDetails.stallId AND (DATE(NewInvoiceDetails.dateTime) BETWEEN '${moment().weekday(0).subtract(6,'d').format("YYYY-MM-DD")}' AND '${moment().weekday(0).format("YYYY-MM-DD")}') AND StallHolder.accountNumber > 0 AND StallHolder.accountNumber < 100 GROUP BY Stall.id`, (err, rows1) => {
-            if (err) throw err;
-                if(rows1){
-                //  data = rows1.filter(v=> {
-                //      if(parseInt(v.total,10) > 0){
-                //      total = v.total
-                //      v.total = total * 0.9
-                //      v.total = parseFloat(v.total.toFixed(2))
-                //      return v
-                //     }
-                //  })
-                res.send(rows1.sort(compareValues('bankName')))
-                    
-                }
-         
-            // res.send(rows);
-        });
+        //     })
         // console.log('Data received from Db:\n');
-    })
-        
-    app.get('/get_weekly_item_report_date', (req, res) => {
-        //    get = { stallId: "0", stallHolderName: "Smith", description:"Some Product", salesPersonName: "Australia", productId: "33",invoiceId:"23",price:"300",card:"200",total:"500" }
-        
-            // connection.query('SELECT commission FROM Authentication', (err, rows) => {
-            //     if (err) throw err;
-            //     // console.log('Data received from Db: commission', rows);
-            //     // res.send(rows);
-            // });
-            var data = []
-            connection.query(`SELECT * FROM NewInvoiceDetails WHERE  (DATE(dateTime) BETWEEN '${moment().weekday(0).subtract(6,'d').format("YYYY-MM-DD")}' AND '${moment().weekday(0).format("YYYY-MM-DD")}') AND stallId ='${req.query.id}'`, (err, rows1) => {
-                if (err) throw err;
-                data = rows1
-                // if(rows1.length == 0){
-                    // res.send(data)
-                    res.send(data.sort(compareValues('id')))
+    });
 
-            //     // }
-            //     rows1.map((v,i)=> {
-            //         connection.query(`SELECT * FROM InvoiceDetails WHERE id = '${v.id}'`, (err, rows) => {
-            //     if (err) throw err;
-            //     data[i].items = rows
-            //     // console.log('Data received from Db: commission', rows);
-            //     if((i+1) == rows1.length){
-            //         res.send(data.sort(compareValues('id')))
-        
-            //     }
-            //     // res.send(rows);
-            // });
-            //     })
-                // console.log('Data received from Db:\n');
-            });
-        
-        });
+});
 app.get('/get_weekly_report_date', (req, res) => {
     //    get = { stallId: "0", stallHolderName: "Smith", description:"Some Product", salesPersonName: "Australia", productId: "33",invoiceId:"23",price:"300",card:"200",total:"500" }
-    
-        // connection.query('SELECT commission FROM Authentication', (err, rows) => {
-        //     if (err) throw err;
-        //     // console.log('Data received from Db: commission', rows);
-        //     // res.send(rows);
-        // });
-        var data = []
-        connection.query(`SELECT * FROM NewInvoices WHERE  (DATE(dateTime) BETWEEN '${moment().weekday(0).subtract(6,'d').format("YYYY-MM-DD")}' AND '${moment().weekday(0).format("YYYY-MM-DD")}') AND stallId ='${req.query.id}'`, (err, rows1) => {
-            if (err) throw err;
-            data = rows1
-            if(rows1.length == 0){
-                res.send(data)
-            }
-            rows1.map((v,i)=> {
-                connection.query(`SELECT * FROM NewInvoiceDetails WHERE id = '${v.id}'`, (err, rows) => {
-            if (err) throw err;
-            data[i].items = rows
-            // console.log('Data received from Db: commission', rows);
-            if((i+1) == rows1.length){
-                res.send(data.sort(compareValues('id')))
-    
-            }
-            // res.send(rows);
-        });
-            })
-            // console.log('Data received from Db:\n');
-        });
-    
-    });
-    app.get('/get_weekly_summary', (req, res) => {
-        //    get = { stallId: "0", stallHolderName: "Smith", description:"Some Product", salesPersonName: "Australia", productId: "33",invoiceId:"23",price:"300",card:"200",total:"500" }
-        
-            // connection.query('SELECT commission FROM Authentication', (err, rows) => {
-            //     if (err) throw err;
-            //     // console.log('Data received from Db: commission', rows);
-            //     // res.send(rows);
-            // });
-            var data = []
-            connection.query(`SELECT * FROM NewInvoices WHERE  (DATE(dateTime) BETWEEN '${moment().isoWeekday(1).format("YYYY-MM-DD")}' AND '${moment().isoWeekday(1).add(6,'d').format("YYYY-MM-DD")}' )`, (err, rows1) => {
+
+    // connection.query('SELECT commission FROM Authentication', (err, rows) => {
+    //     if (err) throw err;
+    //     // console.log('Data received from Db: commission', rows);
+    //     // res.send(rows);
+    // });
+    var data = []
+    connection.query(`SELECT * FROM NewInvoices WHERE  (DATE(dateTime) BETWEEN '${moment().weekday(0).subtract(6, 'd').format("YYYY-MM-DD")}' AND '${moment().weekday(0).format("YYYY-MM-DD")}') AND stallId ='${req.query.id}'`, (err, rows1) => {
+        if (err) throw err;
+        data = rows1
+        if (rows1.length == 0) {
+            res.send(data)
+        }
+        rows1.map((v, i) => {
+            connection.query(`SELECT * FROM NewInvoiceDetails WHERE id = '${v.id}'`, (err, rows) => {
                 if (err) throw err;
-                data = rows1
-                res.send(data.sort(compareValues('id')))
-                // console.log('Data received from Db:\n');
+                data[i].items = rows
+                // console.log('Data received from Db: commission', rows);
+                if ((i + 1) == rows1.length) {
+                    res.send(data.sort(compareValues('id')))
+
+                }
+                // res.send(rows);
             });
-        
-        });
+        })
+        // console.log('Data received from Db:\n');
+    });
+
+});
+app.get('/get_weekly_summary', (req, res) => {
+    //    get = { stallId: "0", stallHolderName: "Smith", description:"Some Product", salesPersonName: "Australia", productId: "33",invoiceId:"23",price:"300",card:"200",total:"500" }
+
+    // connection.query('SELECT commission FROM Authentication', (err, rows) => {
+    //     if (err) throw err;
+    //     // console.log('Data received from Db: commission', rows);
+    //     // res.send(rows);
+    // });
+    var data = []
+    connection.query(`SELECT * FROM NewInvoices WHERE  (DATE(dateTime) BETWEEN '${moment().isoWeekday(1).format("YYYY-MM-DD")}' AND '${moment().isoWeekday(1).add(6, 'd').format("YYYY-MM-DD")}' )`, (err, rows1) => {
+        if (err) throw err;
+        data = rows1
+        res.send(data.sort(compareValues('id')))
+        // console.log('Data received from Db:\n');
+    });
+
+});
 app.get('/get_daily_report_date', (req, res) => {
     //    get = { stallId: "0", stallHolderName: "Smith", description:"Some Product", salesPersonName: "Australia", productId: "33",invoiceId:"23",price:"300",card:"200",total:"500" }
-    
-        // connection.query('SELECT commission FROM Authentication', (err, rows) => {
-        //     if (err) throw err;
-        //     // console.log('Data received from Db: commission', rows);
-        //     // res.send(rows);
-        // });
-        var data = []
-        connection.query(`SELECT * FROM NewInvoices WHERE dateTime = '${req.query.date}'`, (err, rows1) => {
-            if (err) throw err;
-            data = rows1
-            rows1.map((v,i)=> {
-                connection.query(`SELECT * FROM NewInvoiceDetails WHERE id = '${v.id}'`, (err, rows) => {
-            if (err) throw err;
-            data[i].items = rows
-            // console.log('Data received from Db: commission', rows);
-            if((i+1) == rows1.length){
-                res.send(data.sort(compareValues('id')))
-    
-            }
-            // res.send(rows);
-        });
-            })
-            // console.log('Data received from Db:\n');
-        });
-    
-    });
-    app.get('/get_daily_items_report_date', (req, res) => {
-        //    get = { stallId: "0", stallHolderName: "Smith", description:"Some Product", salesPersonName: "Australia", productId: "33",invoiceId:"23",price:"300",card:"200",total:"500" }
-        
-            // connection.query('SELECT commission FROM Authentication', (err, rows) => {
-            //     if (err) throw err;
-            //     // console.log('Data received from Db: commission', rows);
-            //     // res.send(rows);
-            // });
-            var data = []
-            connection.query(`SELECT * FROM NewInvoiceDetails WHERE DATE(dateTime) = '${req.query.date}'`, (err, rows1) => {
+
+    // connection.query('SELECT commission FROM Authentication', (err, rows) => {
+    //     if (err) throw err;
+    //     // console.log('Data received from Db: commission', rows);
+    //     // res.send(rows);
+    // });
+    var data = []
+    connection.query(`SELECT * FROM NewInvoices WHERE dateTime = '${req.query.date}'`, (err, rows1) => {
+        if (err) throw err;
+        data = rows1
+        rows1.map((v, i) => {
+            connection.query(`SELECT * FROM NewInvoiceDetails WHERE id = '${v.id}'`, (err, rows) => {
                 if (err) throw err;
-                data = rows1
-                // rows1.map((v,i)=> {
-                //     connection.query(`SELECT * FROM InvoiceDetails WHERE id = '${v.id}'`, (err, rows) => {
-                // if (err) throw err;
-                // data.push(...rows)
-                // // console.log('Data received from Db: commission', rows);
-                // if((i+1) == rows1.length){
+                data[i].items = rows
+                // console.log('Data received from Db: commission', rows);
+                if ((i + 1) == rows1.length) {
                     res.send(data.sort(compareValues('id')))
-        
-                // }
+
+                }
                 // res.send(rows);
-            // });
-                })
-                // console.log('Data received from Db:\n');
             });
-        
+        })
+        // console.log('Data received from Db:\n');
+    });
+
+});
+app.get('/get_daily_items_report_date', (req, res) => {
+    //    get = { stallId: "0", stallHolderName: "Smith", description:"Some Product", salesPersonName: "Australia", productId: "33",invoiceId:"23",price:"300",card:"200",total:"500" }
+
+    // connection.query('SELECT commission FROM Authentication', (err, rows) => {
+    //     if (err) throw err;
+    //     // console.log('Data received from Db: commission', rows);
+    //     // res.send(rows);
+    // });
+    var data = []
+    connection.query(`SELECT * FROM NewInvoiceDetails WHERE DATE(dateTime) = '${req.query.date}'`, (err, rows1) => {
+        if (err) throw err;
+        data = rows1
+        // rows1.map((v,i)=> {
+        //     connection.query(`SELECT * FROM InvoiceDetails WHERE id = '${v.id}'`, (err, rows) => {
+        // if (err) throw err;
+        // data.push(...rows)
+        // // console.log('Data received from Db: commission', rows);
+        // if((i+1) == rows1.length){
+        res.send(data.sort(compareValues('id')))
+
+        // }
+        // res.send(rows);
+        // });
+    })
+    // console.log('Data received from Db:\n');
+});
+
 
 app.post("/add_invoice", (req, res) => {
 
@@ -1135,56 +1156,56 @@ app.post("/add_invoice", (req, res) => {
     var error = null
     var body = req.body
     // var dateTime = Date.now();
-    if(body.items && body.items.length > 0){
-    connection.query(`INSERT INTO Invoices(id,stallId,salesPersonId,stallHolderId,dateTime,paymentMethod,total,customerId,card,cash) \
+    if (body.items && body.items.length > 0) {
+        connection.query(`INSERT INTO Invoices(id,stallId,salesPersonId,stallHolderId,dateTime,paymentMethod,total,customerId,card,cash) \
     VALUES('${body.id}','${body.stallId}','${body.salesPersonId}','${body.stallHolderId}','${body.dateTime}','${body.paymentMethod}','${body.total}',${body.customerId},'${body.card}','${body.cash}')`, (err, data) => {
-        if (err) {
-            error = err;
-            // console.log("invoice table error: ",error);
-            res.status(400).json({
-                message: error
-            });
-        } else {
+            if (err) {
+                error = err;
+                // console.log("invoice table error: ",error);
+                res.status(400).json({
+                    message: error
+                });
+            } else {
 
-            // connection.query(`SELECT id FROM NewInvoices where customerId = ${body.customerId} AND dateTime = '${dateTime}'`, (err, rows) => {
-            //     if (err) throw err;
-            //     // console.log('Data received from Db:\n');
+                // connection.query(`SELECT id FROM NewInvoices where customerId = ${body.customerId} AND dateTime = '${dateTime}'`, (err, rows) => {
+                //     if (err) throw err;
+                //     // console.log('Data received from Db:\n');
                 // res.send(rows);
                 body.items.map(v => {
                     connection.query(`INSERT INTO InvoiceDetails(id,productId,description,price,finalPrice,quantity,card,cash) \
                     VALUES('${body.id}','${v.productId}','${v.description}','${v.price}','${v.finalPrice}','${v.quantity}','${body.card}','${body.cash}')`, (err, data) => {
                         if (err) {
                             error = err;
-            // console.log("invoiceDetails table error: ",error);
-            res.status(400).json({
-                message: error
-            });
+                            // console.log("invoiceDetails table error: ",error);
+                            res.status(400).json({
+                                message: error
+                            });
                         }
                     });
                 })
-            // });
+                // });
 
 
-        }
-    });
-    // })
-
-
-    if (error == null) {
-        res.status(200).json({
-            message: "Invoice added.",
-            // productId: data
+            }
         });
+        // })
+
+
+        if (error == null) {
+            res.status(200).json({
+                message: "Invoice added.",
+                // productId: data
+            });
+        } else {
+            res.status(400).json({
+                message: error
+            });
+        }
     } else {
         res.status(400).json({
-            message: error
+            message: "No items in invoice"
         });
     }
-} else {
-    res.status(400).json({
-        message: "No items in invoice"
-    });
-}
 
 });
 app.post("/add_invoice_new", (req, res) => {
@@ -1195,56 +1216,56 @@ app.post("/add_invoice_new", (req, res) => {
     var error = null
     var body = req.body
     // var dateTime = Date.now();
-    if(body.items && body.items.length > 0){
-    connection.query(`INSERT INTO NewInvoices(id,stallId,salesPersonId,stallHolderId,dateTime,paymentMethod,total,customerId,card,cash) \
+    if (body.items && body.items.length > 0) {
+        connection.query(`INSERT INTO NewInvoices(id,stallId,salesPersonId,stallHolderId,dateTime,paymentMethod,total,customerId,card,cash) \
     VALUES('${body.id}','${body.stallId}','${body.salesPersonId}','${body.stallHolderId}','${body.dateTime}','${body.paymentMethod}','${body.total}',${body.customerId},'${body.card}','${body.cash}')`, (err, data) => {
-        if (err) {
-            error = err;
-            // console.log("invoice table error: ",error);
-            res.status(400).json({
-                message: error
-            });
-        } else {
+            if (err) {
+                error = err;
+                // console.log("invoice table error: ",error);
+                res.status(400).json({
+                    message: error
+                });
+            } else {
 
-            // connection.query(`SELECT id FROM NewInvoices where customerId = ${body.customerId} AND dateTime = '${dateTime}'`, (err, rows) => {
-            //     if (err) throw err;
-            //     // console.log('Data received from Db:\n');
+                // connection.query(`SELECT id FROM NewInvoices where customerId = ${body.customerId} AND dateTime = '${dateTime}'`, (err, rows) => {
+                //     if (err) throw err;
+                //     // console.log('Data received from Db:\n');
                 // res.send(rows);
                 body.items.map(v => {
                     connection.query(`INSERT INTO NewInvoiceDetails(id,productId,description,price,finalPrice,quantity,card,cash,stallId,stallHolderId,refunded) \
                     VALUES('${body.id}','${v.productId}','${v.description}','${v.price}','${v.finalPrice}','${v.quantity}','${body.card}','${body.cash}','${v.stallId}','${v.stallHolder}',${v.refunded})`, (err, data) => {
                         if (err) {
                             error = err;
-            // console.log("invoiceDetails table error: ",error);
-            res.status(400).json({
-                message: error
-            });
+                            // console.log("invoiceDetails table error: ",error);
+                            res.status(400).json({
+                                message: error
+                            });
                         }
                     });
                 })
-            // });
+                // });
 
 
-        }
-    });
-    // })
-
-
-    if (error == null) {
-        res.status(200).json({
-            message: "Invoice added.",
-            // productId: data
+            }
         });
+        // })
+
+
+        if (error == null) {
+            res.status(200).json({
+                message: "Invoice added.",
+                // productId: data
+            });
+        } else {
+            res.status(400).json({
+                message: error
+            });
+        }
     } else {
         res.status(400).json({
-            message: error
+            message: "No items in invoice"
         });
     }
-} else {
-    res.status(400).json({
-        message: "No items in invoice"
-    });
-}
 
 });
 // make the server listen to requests
