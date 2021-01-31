@@ -121,10 +121,10 @@ app.get('/send_weekly_report', (req, res) => {
                                 console.log('Email sent to ' + v.email + " invoicesstring: " , invoicesString);
                             })
                             setTimeout(() => {
-                                invoicesString = invoicesString + '<tr> <td></td>        <td></td>        <td></td>        <td></td>        <td>Total £: </td>        <td>' + total + '</td> <td></td>     </tr>'
-                            invoicesString = invoicesString + '<tr> <td></td>        <td></td>        <td></td>        <td></td>        <td>Refund Amount £: </td>        <td>' + total - totalWRefund + '</td> <td></td>     </tr>'
-                            invoicesString = invoicesString + '<tr> <td></td>        <td></td>        <td></td>        <td></td>        <td>Sub Total £: </td>        <td>' + totalWRefund + '</td> <td></td>     </tr>'
-                            invoicesString = invoicesString + '<tr> <td></td>        <td></td>        <td></td>        <td></td>        <td>Commission Deduction £: </td>        <td>' + (totalWRefund * commission).toFixed(2) + '</td> <td></td>     </tr>'
+                            //     invoicesString = invoicesString + '<tr> <td></td>        <td></td>        <td></td>        <td></td>        <td>Total £: </td>        <td>' + total + '</td> <td></td>     </tr>'
+                            // invoicesString = invoicesString + '<tr> <td></td>        <td></td>        <td></td>        <td></td>        <td>Refund Amount £: </td>        <td>' + total - totalWRefund + '</td> <td></td>     </tr>'
+                            // invoicesString = invoicesString + '<tr> <td></td>        <td></td>        <td></td>        <td></td>        <td>Sub Total £: </td>        <td>' + totalWRefund + '</td> <td></td>     </tr>'
+                            // invoicesString = invoicesString + '<tr> <td></td>        <td></td>        <td></td>        <td></td>        <td>Commission Deduction £: </td>        <td>' + (totalWRefund * commission).toFixed(2) + '</td> <td></td>     </tr>'
                             invoicesString = invoicesString + '<tr> <td></td>        <td></td>        <td></td>        <td></td>        <td>Net Amount £: </td>        <td>' + (totalWRefund * afterCommission).toFixed(2) + '</td> <td></td>     </tr>'
 
 
