@@ -576,10 +576,10 @@ app.post("/add_product", (req, res) => {
     // let product = new Product(req.body.prd_name, req.body.prd_price);
     // console.log("add_product: ", req.body)
 
-    var code = Math.floor(Math.random() * (99999 - 10000 + 1)) + "";
+    // var code = Math.floor(Math.random() * (99999 - 10000 + 1)) + "";
 
     connection.query(`INSERT INTO Products(description,price,barcode,quantity,stallId) \
-    VALUES('${req.body.description}','${req.body.price}','${code}','${req.body.quantity}','${req.body.stallId}')`, (err, data) => {
+    VALUES('${req.body.description}','${req.body.price}','${req.body.code}','${req.body.quantity}','${req.body.stallId}')`, (err, data) => {
 
         if (!err) {
             res.status(200).json({
