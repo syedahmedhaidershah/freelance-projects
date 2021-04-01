@@ -574,7 +574,7 @@ app.post("/add_product", (req, res) => {
 
     //read product information from request
     // let product = new Product(req.body.prd_name, req.body.prd_price);
-    // console.log("add_product: ", req.body)
+    console.log("add_product: ", req.body)
 
     // var code = Math.floor(Math.random() * (99999 - 10000 + 1)) + "";
 
