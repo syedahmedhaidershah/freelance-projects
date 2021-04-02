@@ -578,8 +578,8 @@ app.post("/add_product", (req, res) => {
 
     // var code = Math.floor(Math.random() * (99999 - 10000 + 1)) + "";
 
-    connection.query(`INSERT INTO Products(description,price,barcode,quantity,stallId) \
-    VALUES('${req.body.description}','${req.body.price}','${req.body.code}','${req.body.quantity}','${req.body.stallId}')`, (err, data) => {
+    connection.query(`INSERT INTO Products(description,price,barcode,quantity,stallId,stallHolderId) \
+    VALUES('${req.body.description}','${req.body.price}','${req.body.code}','${req.body.quantity}','${req.body.stallId}','${req.body.stallHolder}')`, (err, data) => {
 
         if (!err) {
             res.status(200).json({
@@ -857,7 +857,7 @@ app.post("/edit_product", (req, res) => {
 
     // var code = Math.floor(Math.random() * (99999 - 10000 + 1)) + min;
 
-    connection.query(`UPDATE Products SET description='${req.body.description}',price='${req.body.price}',barcode='${req.body.barcode}',quantity=${req.body.quantity},stallId='${req.body.stallId}'  WHERE id = ${req.body.id}`,
+    connection.query(`UPDATE Products SET description='${req.body.description}',price='${req.body.price}',quantity=${req.body.quantity},stallId='${req.body.stallId}',stallHolderId='${req.body.stallHolder}'  WHERE barcode = '${req.body.barcode}'`,
         (err, data) => {
 
             if (!err) {
