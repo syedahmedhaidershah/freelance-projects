@@ -574,7 +574,7 @@ app.post("/add_product", (req, res) => {
 
     //read product information from request
     // let product = new Product(req.body.prd_name, req.body.prd_price);
-    console.log("add_product: ", req.body)
+    // console.log("add_product: ", req.body)
 
     // var code = Math.floor(Math.random() * (99999 - 10000 + 1)) + "";
 
@@ -1215,7 +1215,7 @@ app.post("/add_invoice_new", (req, res) => {
 
     //read product information from request
     // let product = new Product(req.body.prd_name, req.body.prd_price);
-    // console.log("add_invoice_new: ", req.body)
+    console.log("add_invoice_new: ", req.body)
     var error = null
     var body = req.body
     // var dateTime = Date.now();
