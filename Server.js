@@ -1220,8 +1220,8 @@ app.post("/add_invoice_new", (req, res) => {
     var body = req.body
     // var dateTime = Date.now();
     if (body.items && body.items.length > 0) {
-        connection.query(`INSERT INTO NewInvoices(id,stallId,salesPersonId,stallHolderId,dateTime,paymentMethod,total,customerId,card,cash) \
-    VALUES('${body.id}','${body.stallId}','${body.salesPersonId}','${body.stallHolderId}','${body.dateTime}','${body.paymentMethod}','${body.total}',${body.customerId},'${body.card}','${body.cash}')`, (err, data) => {
+        connection.query(`INSERT INTO NewInvoices(id,stallId,salesPersonId,stallHolderId,dateTime,paymentMethod,total,customerId,card,cash,soldOnline) \
+    VALUES('${body.id}','${body.stallId}','${body.salesPersonId}','${body.stallHolderId}','${body.dateTime}','${body.paymentMethod}','${body.total}',${body.customerId},'${body.card}','${body.cash}','${body.soldOnline}')`, (err, data) => {
             if (err) {
                 error = err;
                 // console.log("invoice table error: ",error);
@@ -1235,8 +1235,8 @@ app.post("/add_invoice_new", (req, res) => {
                 //     // console.log('Data received from Db:\n');
                 // res.send(rows);
                 body.items.map(v => {
-                    connection.query(`INSERT INTO NewInvoiceDetails(id,productId,description,price,finalPrice,quantity,card,cash,stallId,stallHolderId,refunded) \
-                    VALUES('${body.id}','${v.productId}','${v.description}','${v.price}','${v.finalPrice}','${v.quantity}','${body.card}','${body.cash}','${v.stallId}','${v.stallHolder}',${v.refunded})`, (err, data) => {
+                    connection.query(`INSERT INTO NewInvoiceDetails(id,productId,description,price,finalPrice,quantity,card,cash,stallId,stallHolderId,refunded,soldOnline) \
+                    VALUES('${body.id}','${v.productId}','${v.description}','${v.price}','${v.finalPrice}','${v.quantity}','${body.card}','${body.cash}','${v.stallId}','${v.stallHolder}',${v.refunded},'${body.soldOnline}')`, (err, data) => {
                         if (err) {
                             error = err;
                             // console.log("invoiceDetails table error: ",error);
