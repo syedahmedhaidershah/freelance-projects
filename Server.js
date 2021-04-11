@@ -1235,8 +1235,8 @@ app.post("/add_invoice_new", (req, res) => {
                 //     // console.log('Data received from Db:\n');
                 // res.send(rows);
                 body.items.map(v => {
-                    connection.query(`INSERT INTO NewInvoiceDetails(id,productId,description,price,finalPrice,quantity,card,cash,stallId,stallHolderId,refunded,soldOnline) \
-                    VALUES('${body.id}','${v.productId}','${v.description}','${v.price}','${v.finalPrice}','${v.quantity}','${body.card}','${body.cash}','${v.stallId}','${v.stallHolder}',${v.refunded},'${body.soldOnline}')`, (err, data) => {
+                    connection.query(`INSERT INTO NewInvoiceDetails(id,productId,description,price,finalPrice,quantity,card,cash,stallId,stallHolderId,refunded,soldOnline,salesPersonId) \
+                    VALUES('${body.id}','${v.productId}','${v.description}','${v.price}','${v.finalPrice}','${v.quantity}','${body.card}','${body.cash}','${v.stallId}','${v.stallHolder}',${v.refunded},'${body.soldOnline}','${body.salesPersonId}')`, (err, data) => {
                         if (err) {
                             error = err;
                             // console.log("invoiceDetails table error: ",error);
