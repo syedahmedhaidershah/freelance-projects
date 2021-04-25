@@ -130,7 +130,9 @@ app.get('/send_weekly_report', (req, res) => {
 
                             var mailOptions = {
                                 from: 'antiquesofkingston@gmail.com',
-                                to: v.email,
+                                // to: v.email,
+                                // to: v.email,
+                                to:'steve-eo@mailinator.com',
                                 // to: 'rizviwajahat9@yahoo.com',
                                 subject: 'Weekly Sales Report',
                                 html: beforeStallWeek + v.stallId + afterStallBeforeStallHolder + v.name + beforeTableWeekly + invoicesString + end,
@@ -196,7 +198,8 @@ app.get('/send_daily_report', (req, res) => {
 
                             var mailOptions = {
                                 from: 'antiquesofkingston@gmail.com',
-                                to: v.email,
+                                // to: v.email,
+                                to:'steve-eo@mailinator.com',
                                 subject: 'Daily Sales report',
                                 html: beforeStall + v.stallId + afterStallBeforeStallHolder + v.name + beforeTable + invoicesString + end,
                                 attachments: [{
