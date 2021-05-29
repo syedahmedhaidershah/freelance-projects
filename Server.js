@@ -74,7 +74,7 @@ var end = '</table>    </body>'
 
 function compileInvoices(arr, stallId) {
     return new Promise(function (resolve, reject) {
-        console.log("arr: ", arr[0]);
+        // console.log("arr: ", arr[0]);
         var arrayToSend = [];
         arr.map((v, i) => {
             if (v.stallId == stallId) {
@@ -84,7 +84,7 @@ function compileInvoices(arr, stallId) {
             }
             if (i == (arr.length - 1)) {
                 if (arrayToSend.length > 0) {
-                    console.log("StallId: " + stallId + " ", arrayToSend[0]);
+                    // console.log("StallId: " + stallId + " ", arrayToSend[0]);
                     resolve(arrayToSend);
                 } else {
                     reject(moment() + "No invoices for " + stallId);
@@ -160,8 +160,8 @@ app.get('/send_weekly_report', (req, res) => {
 
                                 var mailOptions = {
                                     from: 'antiquesofkingston@gmail.com',
-                                    // to: [v.email, 'antiquescentre@fastmail.com'],
-                                    to: 'wadejohnson650@gmail.com',
+                                    to: [v.email, 'antiquescentre@fastmail.com'],
+                                    // to: 'wadejohnson650@gmail.com',
                                     subject: 'Weekly Sales Report',
                                     html: beforeStallWeek + v.stallId + afterStallBeforeStallHolder + v.name + beforeTableWeekly + invoicesString + end,
                                     attachments: [{
@@ -175,7 +175,7 @@ app.get('/send_weekly_report', (req, res) => {
                                     if (error) {
                                         console.log(error);
                                     } else {
-                                        console.log('Email sent to ' + v.email + " response: " + info.response);
+                                        // console.log('Email sent to ' + v.email + " response: " + info.response);
                                         // count++;
                                         // console.log("count: ",count);
                                     }
@@ -183,8 +183,7 @@ app.get('/send_weekly_report', (req, res) => {
                                 // }, 5000);
 
                             }
-                        })
-                        .catch(e => {
+                        }).catch(e => {
                             // console.log(e);
                         })
                     })
@@ -215,7 +214,7 @@ app.get('/send_daily_report', (req, res) => {
                 // if((i+1) == rows1.length){
 
                 if (invoices.length > 0) {
-                    var invoicesToSend = []
+                    // var invoicesToSend = []
                     stallHolders.map(v => {
                         // invoicesToSend = invoices.filter(w => w.stallId == v.stallId)
                         compileInvoices(invoices, v.stallId).then(invoicesToSend => {
@@ -229,8 +228,8 @@ app.get('/send_daily_report', (req, res) => {
 
                                 var mailOptions = {
                                     from: 'antiquesofkingston@gmail.com',
-                                    // to: [v.email, 'antiquescentre@fastmail.com'],
-                                    to: 'wadejohnson650@gmail.com',
+                                    to: [v.email, 'antiquescentre@fastmail.com'],
+                                    // to: 'wadejohnson650@gmail.com',
                                     subject: 'Daily Sales report',
                                     html: beforeStall + v.stallId + afterStallBeforeStallHolder + v.name + beforeTable + invoicesString + end,
                                     attachments: [{
@@ -244,7 +243,7 @@ app.get('/send_daily_report', (req, res) => {
                                     if (error) {
                                         console.log(error);
                                     } else {
-                                        console.log('Email sent to ' + v.email + " response: " + info.response);
+                                        // console.log('Email sent to ' + v.email + " response: " + info.response);
                                     }
                                 });
                             }
