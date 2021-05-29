@@ -49,7 +49,7 @@ const PORT = 9999;
 var nodemailer = require('nodemailer');
 
 var transporter = nodemailer.createTransport({
-    pool:true,
+    pool: true,
     service: "FastMail",
     auth: {
         user: 'systems@fastmail.com',
@@ -87,7 +87,7 @@ function compileInvoices(arr, stallId) {
                     console.log("StallId: " + stallId + " ", arrayToSend[0]);
                     resolve(arrayToSend);
                 } else {
-                    // return Promise.reject(moment() + "No invoices for " + stallId);
+                    reject(moment() + "No invoices for " + stallId);
                 }
             }
         })
@@ -96,7 +96,7 @@ function compileInvoices(arr, stallId) {
 }
 
 app.get('/send_weekly_report', (req, res) => {
-    var count = 0;
+    // var count = 0;
     var stallHolders = []
     connection.query('SELECT * FROM StallHolder', (err, rows1) => {
         if (err) throw err;
@@ -176,17 +176,17 @@ app.get('/send_weekly_report', (req, res) => {
                                         console.log(error);
                                     } else {
                                         console.log('Email sent to ' + v.email + " response: " + info.response);
-                                        count++;
-                                        console.log("count: ",count);
+                                        // count++;
+                                        // console.log("count: ",count);
                                     }
                                 });
                                 // }, 5000);
 
                             }
                         })
-                        // .catch(e => {
-                        //     // console.log(e);
-                        // })
+                        .catch(e => {
+                            // console.log(e);
+                        })
                     })
 
                 }
@@ -194,12 +194,6 @@ app.get('/send_weekly_report', (req, res) => {
         }
 
     });
-
-
-
-
-
-
 });
 app.get('/send_daily_report', (req, res) => {
     var stallHolders = []
@@ -223,34 +217,40 @@ app.get('/send_daily_report', (req, res) => {
                 if (invoices.length > 0) {
                     var invoicesToSend = []
                     stallHolders.map(v => {
-                        invoicesToSend = invoices.filter(w => w.stallId == v.stallId)
-                        if (invoicesToSend.length > 0) {
-                            var invoicesString = ""
-                            invoicesToSend.map(x => {
-                                invoicesString = invoicesString + '<tr> <td>' + x.stallId + '</td>        <td>' + x.id + '</td>        <td>' + v.name + '</td>        <td>' + x.productId + '</td>        <td>' + x.description + '</td>        <td>' + x.finalPrice + '</td>     </tr>'
-                            })
+                        // invoicesToSend = invoices.filter(w => w.stallId == v.stallId)
+                        compileInvoices(invoices, v.stallId).then(invoicesToSend => {
+
+                            if (invoicesToSend.length > 0) {
+                                var invoicesString = ""
+                                invoicesToSend.map(x => {
+                                    invoicesString = invoicesString + '<tr> <td>' + x.stallId + '</td>        <td>' + x.id + '</td>        <td>' + v.name + '</td>        <td>' + x.productId + '</td>        <td>' + x.description + '</td>        <td>' + x.finalPrice + '</td>     </tr>'
+                                })
 
 
-                            var mailOptions = {
-                                from: 'antiquesofkingston@gmail.com',
-                                to: [v.email, 'antiquescentre@fastmail.com'],
-                                subject: 'Daily Sales report',
-                                html: beforeStall + v.stallId + afterStallBeforeStallHolder + v.name + beforeTable + invoicesString + end,
-                                attachments: [{
-                                    filename: 'KingstonAntiquesLogo.jpeg',
-                                    path: './assets/KingstonAntiquesLogo.jpeg',
-                                    cid: 'unique@logo.ee' //same cid value as in the html img src
-                                }]
-                            };
+                                var mailOptions = {
+                                    from: 'antiquesofkingston@gmail.com',
+                                    // to: [v.email, 'antiquescentre@fastmail.com'],
+                                    to: 'wadejohnson650@gmail.com',
+                                    subject: 'Daily Sales report',
+                                    html: beforeStall + v.stallId + afterStallBeforeStallHolder + v.name + beforeTable + invoicesString + end,
+                                    attachments: [{
+                                        filename: 'KingstonAntiquesLogo.jpeg',
+                                        path: './assets/KingstonAntiquesLogo.jpeg',
+                                        cid: 'unique@logo.ee' //same cid value as in the html img src
+                                    }]
+                                };
 
-                            transporter.sendMail(mailOptions, function (error, info) {
-                                if (error) {
-                                    console.log(error);
-                                } else {
-                                    console.log('Email sent to ' + v.email + " response: " + info.response);
-                                }
-                            });
-                        }
+                                transporter.sendMail(mailOptions, function (error, info) {
+                                    if (error) {
+                                        console.log(error);
+                                    } else {
+                                        console.log('Email sent to ' + v.email + " response: " + info.response);
+                                    }
+                                });
+                            }
+                        }).catch(e => {
+                            // console.log(e);
+                        })
                     })
                 }
 
@@ -261,12 +261,6 @@ app.get('/send_daily_report', (req, res) => {
         }
 
     });
-
-
-
-
-
-
 });
 
 app.get('/get_invoices', (req, res) => {
