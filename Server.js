@@ -72,6 +72,7 @@ var singleRow = '<tr> <td>G1</td>        <td>G-10001</td>        <td>Sarim Irfan
 var end = '</table>    </body>'
 
 async function compileInvoices(arr, stallId) {
+    console.log(stallId);
     var arrayToSend = [];
     return arr.map((v, i) => {
         if (v.stallId == stallId) {
@@ -81,7 +82,7 @@ async function compileInvoices(arr, stallId) {
             if(arrayToSend.length > 0){
             return Promise.resolve(arrayToSend);
         } else {
-            return Promise.reject(moment() + "No invoices for ",stallId);
+            return Promise.reject(moment() + "No invoices for "+ stallId);
         }
         }
     })
@@ -131,6 +132,7 @@ app.get('/send_weekly_report', (req, res) => {
 
                                 }
                                 invoicesToSend.map(x => {
+                                    console.log("invoicesToSend: ",x.finalPrice);
                                     // total = parseInt(x.finalPrice) + total
                                     if (parseInt(x.finalPrice, 10) > 0) {
                                         total = parseInt(x.finalPrice, 10) + total;
