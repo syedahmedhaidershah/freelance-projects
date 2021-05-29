@@ -70,6 +70,23 @@ var beforeTable = '</strong> </h4>        <table>      <tr>        <th>Stall No.
 var beforeTableWeekly = '</strong> </h4>        <table>      <tr>        <th>Stall No.</th>        <th>Invoice No. </th>        <th>Stall Holder</th>        <th>Stock No.</th>        <th>Item Sold</th>        <th>Price Sold</th>          <th>Date/Time</th>             </tr>           '
 var singleRow = '<tr> <td>G1</td>        <td>G-10001</td>        <td>Sarim Irfan</td>        <td>1000012</td>        <td>chair</td>        <td>100</td>     </tr>'
 var end = '</table>    </body>'
+
+async function compileInvoices(arr, stallId) {
+    var arrayToSend = [];
+    return arr.map((v, i) => {
+        if (v.stallId == stallId) {
+            arrayToSend.push(v)
+        }
+        if (i == (arr.length - 1)) {
+            if(arrayToSend.length > 0){
+            return Promise.resolve(arrayToSend);
+        } else {
+            return Promise.reject(moment() + "No invoices for ",stallId);
+        }
+        }
+    })
+}
+
 app.get('/send_weekly_report', (req, res) => {
     var stallHolders = []
     connection.query('SELECT * FROM StallHolder', (err, rows1) => {
@@ -90,68 +107,74 @@ app.get('/send_weekly_report', (req, res) => {
                 // if((i+1) == rows1.length){
 
                 if (invoices.length > 0) {
-                    var invoicesToSend = []
+                    // var invoicesToSend = []
                     stallHolders.map(v => {
-                        invoicesToSend = invoices.filter(w => w.stallId == v.stallId)
-                        if (invoicesToSend.length > 0) {
-                            var invoicesString = ""
-                            var total = 0
-                            var totalWRefund = 0
-                            var commission = 0.1
-                            var afterCommission = 0.9
-                            if(v.accountNumber){
-                                var comm = 10
-                                comm = parseInt(v.accountNumber)
-                                if(comm != 0){
-                                  commission = comm / 100
-                                  afterCommission = 1 - commission 
-                                } else {
-                                  commission = 0
-                                  afterCommission = 1
+                        // invoicesToSend = invoices.filter(w => w.stallId == v.stallId)
+                        compileInvoices(invoices, v.stallId).then(invoicesToSend => {
+
+                            if (invoicesToSend.length > 0) {
+                                var invoicesString = ""
+                                var total = 0
+                                var totalWRefund = 0
+                                var commission = 0.1
+                                var afterCommission = 0.9
+                                if (v.accountNumber) {
+                                    var comm = 10
+                                    comm = parseInt(v.accountNumber)
+                                    if (comm != 0) {
+                                        commission = comm / 100
+                                        afterCommission = 1 - commission
+                                    } else {
+                                        commission = 0
+                                        afterCommission = 1
+                                    }
+
                                 }
-                                
-                              }
-                            invoicesToSend.map(x => {
-                                // total = parseInt(x.finalPrice) + total
-                                if(parseInt(x.finalPrice, 10) > 0){
-                                    total = parseInt(x.finalPrice, 10) + total;
-                                     }
-                                     totalWRefund = parseInt(x.finalPrice, 10) + totalWRefund;
-                                invoicesString = invoicesString + '<tr> <td>' + x.stallId + '</td>        <td>' + x.id + '</td>        <td>' + v.name + '</td>        <td>' + x.productId + '</td>        <td>' + x.description + '</td>        <td>' + x.finalPrice + '</td> <td>' + moment(x.dateTime).format('YYYY-MM-DD hh:mm:ss') + '</td>     </tr>'
-                                // console.log('Email sent to ' + v.email + " invoicesstring: " , invoicesString);
-                            })
-                            // setTimeout(() => {
+                                invoicesToSend.map(x => {
+                                    // total = parseInt(x.finalPrice) + total
+                                    if (parseInt(x.finalPrice, 10) > 0) {
+                                        total = parseInt(x.finalPrice, 10) + total;
+                                    }
+                                    totalWRefund = parseInt(x.finalPrice, 10) + totalWRefund;
+                                    invoicesString = invoicesString + '<tr> <td>' + x.stallId + '</td>        <td>' + x.id + '</td>        <td>' + v.name + '</td>        <td>' + x.productId + '</td>        <td>' + x.description + '</td>        <td>' + x.finalPrice + '</td> <td>' + moment(x.dateTime).format('YYYY-MM-DD hh:mm:ss') + '</td>     </tr>'
+                                    // console.log('Email sent to ' + v.email + " invoicesstring: " , invoicesString);
+                                })
+                                // setTimeout(() => {
                                 // invoicesString = invoicesString + '<tr> <td></td>        <td></td>        <td></td>        <td></td>        <td>Total £: </td>        <td>' + total + '</td> <td></td>     </tr>'
-                            // invoicesString = invoicesString + '<tr> <td></td>        <td></td>        <td></td>        <td></td>        <td>Refund Amount £: </td>        <td>' + total - totalWRefund + '</td> <td></td>     </tr>'
-                            invoicesString = invoicesString + '<tr> <td></td>        <td></td>        <td></td>        <td></td>        <td>Sub Total £: </td>        <td>' + totalWRefund + '</td> <td></td>     </tr>'
-                            // invoicesString = invoicesString + '<tr> <td></td>        <td></td>        <td></td>        <td></td>        <td>Commission Deduction £: </td>        <td>' + (totalWRefund * commission).toFixed(2) + '</td> <td></td>     </tr>'
-                            invoicesString = invoicesString + '<tr> <td></td>        <td></td>        <td></td>        <td></td>        <td>Net Amount £: </td>        <td>' + (totalWRefund * afterCommission).toFixed(2) + '</td> <td></td>     </tr>'
+                                // invoicesString = invoicesString + '<tr> <td></td>        <td></td>        <td></td>        <td></td>        <td>Refund Amount £: </td>        <td>' + total - totalWRefund + '</td> <td></td>     </tr>'
+                                invoicesString = invoicesString + '<tr> <td></td>        <td></td>        <td></td>        <td></td>        <td>Sub Total £: </td>        <td>' + totalWRefund + '</td> <td></td>     </tr>'
+                                // invoicesString = invoicesString + '<tr> <td></td>        <td></td>        <td></td>        <td></td>        <td>Commission Deduction £: </td>        <td>' + (totalWRefund * commission).toFixed(2) + '</td> <td></td>     </tr>'
+                                invoicesString = invoicesString + '<tr> <td></td>        <td></td>        <td></td>        <td></td>        <td>Net Amount £: </td>        <td>' + (totalWRefund * afterCommission).toFixed(2) + '</td> <td></td>     </tr>'
 
 
-                            var mailOptions = {
-                                from: 'antiquesofkingston@gmail.com',
-                                to: [v.email,'antiquescentre@fastmail.com'],
-                                // to: 'rizviwajahat9@yahoo.com',
-                                subject: 'Weekly Sales Report',
-                                html: beforeStallWeek + v.stallId + afterStallBeforeStallHolder + v.name + beforeTableWeekly + invoicesString + end,
-                                attachments: [{
-                                    filename: 'KingstonAntiquesLogo.jpeg',
-                                    path: './assets/KingstonAntiquesLogo.jpeg',
-                                    cid: 'unique@logo.ee' //same cid value as in the html img src
-                                }]
-                            };
+                                var mailOptions = {
+                                    from: 'antiquesofkingston@gmail.com',
+                                    // to: [v.email, 'antiquescentre@fastmail.com'],
+                                    to: 'wadejohnson650@gmail.com',
+                                    subject: 'Weekly Sales Report',
+                                    html: beforeStallWeek + v.stallId + afterStallBeforeStallHolder + v.name + beforeTableWeekly + invoicesString + end,
+                                    attachments: [{
+                                        filename: 'KingstonAntiquesLogo.jpeg',
+                                        path: './assets/KingstonAntiquesLogo.jpeg',
+                                        cid: 'unique@logo.ee' //same cid value as in the html img src
+                                    }]
+                                };
 
-                            transporter.sendMail(mailOptions, function (error, info) {
-                                if (error) {
-                                    console.log(error);
-                                } else {
-                                    console.log('Email sent to ' + v.email + " response: " + info.response);
-                                }
-                            });
-                            // }, 5000);
-                            
-                        }
+                                transporter.sendMail(mailOptions, function (error, info) {
+                                    if (error) {
+                                        console.log(error);
+                                    } else {
+                                        console.log('Email sent to ' + v.email + " response: " + info.response);
+                                    }
+                                });
+                                // }, 5000);
+
+                            }
+                        }).catch(e=>{
+                            console.log(e);
+                        })
                     })
+
                 }
             })
         }
@@ -196,7 +219,7 @@ app.get('/send_daily_report', (req, res) => {
 
                             var mailOptions = {
                                 from: 'antiquesofkingston@gmail.com',
-                                to: [v.email,'antiquescentre@fastmail.com'],
+                                to: [v.email, 'antiquescentre@fastmail.com'],
                                 subject: 'Daily Sales report',
                                 html: beforeStall + v.stallId + afterStallBeforeStallHolder + v.name + beforeTable + invoicesString + end,
                                 attachments: [{
