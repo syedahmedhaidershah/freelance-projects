@@ -49,6 +49,7 @@ const PORT = 9999;
 var nodemailer = require('nodemailer');
 
 var transporter = nodemailer.createTransport({
+    pool:true,
     service: "FastMail",
     auth: {
         user: 'systems@fastmail.com',
@@ -95,6 +96,7 @@ function compileInvoices(arr, stallId) {
 }
 
 app.get('/send_weekly_report', (req, res) => {
+    var count = 0;
     var stallHolders = []
     connection.query('SELECT * FROM StallHolder', (err, rows1) => {
         if (err) throw err;
@@ -174,6 +176,8 @@ app.get('/send_weekly_report', (req, res) => {
                                         console.log(error);
                                     } else {
                                         console.log('Email sent to ' + v.email + " response: " + info.response);
+                                        count++;
+                                        console.log("count: ",count);
                                     }
                                 });
                                 // }, 5000);
