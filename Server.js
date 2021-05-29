@@ -74,7 +74,7 @@ var end = '</table>    </body>'
 async function compileInvoices(arr, stallId) {
     console.log("arr: ",arr[0]);
     var arrayToSend = [];
-    return arr.map((v, i) => {
+    arr.map((v, i) => {
         if (v.stallId == stallId) {
             
             arrayToSend = [...arrayToSend,v]
@@ -83,7 +83,7 @@ async function compileInvoices(arr, stallId) {
         if (i == (arr.length - 1)) {
             if (arrayToSend.length > 0) {
                 console.log("StallId: "+stallId + " ",arrayToSend[0]);
-                return Promise.resolve(arrayToSend);
+                 Promise.resolve(arrayToSend);
             } else {
                 // return Promise.reject(moment() + "No invoices for " + stallId);
             }
