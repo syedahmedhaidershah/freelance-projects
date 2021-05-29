@@ -76,7 +76,8 @@ async function compileInvoices(arr, stallId) {
     var arrayToSend = [];
     return arr.map((v, i) => {
         if (v.stallId == stallId) {
-            arrayToSend.push(v)
+            arrayToSend = [...arrayToSend,v]
+            // arrayToSend.push(v)
         }
         if (i == (arr.length - 1)) {
             if (arrayToSend.length > 0) {
