@@ -72,7 +72,7 @@ var singleRow = '<tr> <td>G1</td>        <td>G-10001</td>        <td>Sarim Irfan
 var end = '</table>    </body>'
 
 async function compileInvoices(arr, stallId) {
-    console.log(stallId);
+    // console.log(stallId);
     var arrayToSend = [];
     return arr.map((v, i) => {
         if (v.stallId == stallId) {
@@ -112,7 +112,7 @@ app.get('/send_weekly_report', (req, res) => {
                     stallHolders.map(v => {
                         // invoicesToSend = invoices.filter(w => w.stallId == v.stallId)
                         compileInvoices(invoices, v.stallId).then(invoicesToSend => {
-
+                            console.log("invoicesToSend: ",invoicesToSend);
                             if (invoicesToSend.length > 0) {
                                 var invoicesString = ""
                                 var total = 0
@@ -132,7 +132,7 @@ app.get('/send_weekly_report', (req, res) => {
 
                                 }
                                 invoicesToSend.map(x => {
-                                    console.log("invoicesToSend: ",x.finalPrice);
+                                    // console.log("invoicesToSend: ",x.finalPrice);
                                     // total = parseInt(x.finalPrice) + total
                                     if (parseInt(x.finalPrice, 10) > 0) {
                                         total = parseInt(x.finalPrice, 10) + total;
