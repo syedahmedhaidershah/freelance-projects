@@ -71,7 +71,7 @@ var beforeTableWeekly = '</strong> </h4>        <table>      <tr>        <th>Sta
 var singleRow = '<tr> <td>G1</td>        <td>G-10001</td>        <td>Sarim Irfan</td>        <td>1000012</td>        <td>chair</td>        <td>100</td>     </tr>'
 var end = '</table>    </body>'
 
-async function compileInvoices(arr, stallId) {
+function compileInvoices(arr, stallId) {
     return new Promise(function (resolve, reject) {
         console.log("arr: ", arr[0]);
         var arrayToSend = [];
@@ -119,64 +119,64 @@ app.get('/send_weekly_report', (req, res) => {
                         // invoicesToSend = invoices.filter(w => w.stallId == v.stallId)
                         compileInvoices(invoices, v.stallId).then(invoicesToSend => {
                             if (invoicesToSend.length > 0) {
-                                console.log("invoicesToSend: ", invoicesToSend[0]);
+                                // console.log("invoicesToSend: ", invoicesToSend[0]);
 
-                                //     var invoicesString = ""
-                                //     var total = 0
-                                //     var totalWRefund = 0
-                                //     var commission = 0.1
-                                //     var afterCommission = 0.9
-                                //     if (v.accountNumber) {
-                                //         var comm = 10
-                                //         comm = parseInt(v.accountNumber)
-                                //         if (comm != 0) {
-                                //             commission = comm / 100
-                                //             afterCommission = 1 - commission
-                                //         } else {
-                                //             commission = 0
-                                //             afterCommission = 1
-                                //         }
+                                var invoicesString = ""
+                                var total = 0
+                                var totalWRefund = 0
+                                var commission = 0.1
+                                var afterCommission = 0.9
+                                if (v.accountNumber) {
+                                    var comm = 10
+                                    comm = parseInt(v.accountNumber)
+                                    if (comm != 0) {
+                                        commission = comm / 100
+                                        afterCommission = 1 - commission
+                                    } else {
+                                        commission = 0
+                                        afterCommission = 1
+                                    }
 
-                                //     }
-                                //     invoicesToSend.map(x => {
-                                //         // console.log("invoicesToSend: ",x.finalPrice);
-                                //         // total = parseInt(x.finalPrice) + total
-                                //         if (parseInt(x.finalPrice, 10) > 0) {
-                                //             total = parseInt(x.finalPrice, 10) + total;
-                                //         }
-                                //         totalWRefund = parseInt(x.finalPrice, 10) + totalWRefund;
-                                //         invoicesString = invoicesString + '<tr> <td>' + x.stallId + '</td>        <td>' + x.id + '</td>        <td>' + v.name + '</td>        <td>' + x.productId + '</td>        <td>' + x.description + '</td>        <td>' + x.finalPrice + '</td> <td>' + moment(x.dateTime).format('YYYY-MM-DD hh:mm:ss') + '</td>     </tr>'
-                                //         // console.log('Email sent to ' + v.email + " invoicesstring: " , invoicesString);
-                                //     })
-                                //     // setTimeout(() => {
-                                //     // invoicesString = invoicesString + '<tr> <td></td>        <td></td>        <td></td>        <td></td>        <td>Total £: </td>        <td>' + total + '</td> <td></td>     </tr>'
-                                //     // invoicesString = invoicesString + '<tr> <td></td>        <td></td>        <td></td>        <td></td>        <td>Refund Amount £: </td>        <td>' + total - totalWRefund + '</td> <td></td>     </tr>'
-                                //     invoicesString = invoicesString + '<tr> <td></td>        <td></td>        <td></td>        <td></td>        <td>Sub Total £: </td>        <td>' + totalWRefund + '</td> <td></td>     </tr>'
-                                //     // invoicesString = invoicesString + '<tr> <td></td>        <td></td>        <td></td>        <td></td>        <td>Commission Deduction £: </td>        <td>' + (totalWRefund * commission).toFixed(2) + '</td> <td></td>     </tr>'
-                                //     invoicesString = invoicesString + '<tr> <td></td>        <td></td>        <td></td>        <td></td>        <td>Net Amount £: </td>        <td>' + (totalWRefund * afterCommission).toFixed(2) + '</td> <td></td>     </tr>'
+                                }
+                                invoicesToSend.map(x => {
+                                    // console.log("invoicesToSend: ",x.finalPrice);
+                                    // total = parseInt(x.finalPrice) + total
+                                    if (parseInt(x.finalPrice, 10) > 0) {
+                                        total = parseInt(x.finalPrice, 10) + total;
+                                    }
+                                    totalWRefund = parseInt(x.finalPrice, 10) + totalWRefund;
+                                    invoicesString = invoicesString + '<tr> <td>' + x.stallId + '</td>        <td>' + x.id + '</td>        <td>' + v.name + '</td>        <td>' + x.productId + '</td>        <td>' + x.description + '</td>        <td>' + x.finalPrice + '</td> <td>' + moment(x.dateTime).format('YYYY-MM-DD hh:mm:ss') + '</td>     </tr>'
+                                    // console.log('Email sent to ' + v.email + " invoicesstring: " , invoicesString);
+                                })
+                                // setTimeout(() => {
+                                // invoicesString = invoicesString + '<tr> <td></td>        <td></td>        <td></td>        <td></td>        <td>Total £: </td>        <td>' + total + '</td> <td></td>     </tr>'
+                                // invoicesString = invoicesString + '<tr> <td></td>        <td></td>        <td></td>        <td></td>        <td>Refund Amount £: </td>        <td>' + total - totalWRefund + '</td> <td></td>     </tr>'
+                                invoicesString = invoicesString + '<tr> <td></td>        <td></td>        <td></td>        <td></td>        <td>Sub Total £: </td>        <td>' + totalWRefund + '</td> <td></td>     </tr>'
+                                // invoicesString = invoicesString + '<tr> <td></td>        <td></td>        <td></td>        <td></td>        <td>Commission Deduction £: </td>        <td>' + (totalWRefund * commission).toFixed(2) + '</td> <td></td>     </tr>'
+                                invoicesString = invoicesString + '<tr> <td></td>        <td></td>        <td></td>        <td></td>        <td>Net Amount £: </td>        <td>' + (totalWRefund * afterCommission).toFixed(2) + '</td> <td></td>     </tr>'
 
 
-                                //     var mailOptions = {
-                                //         from: 'antiquesofkingston@gmail.com',
-                                //         // to: [v.email, 'antiquescentre@fastmail.com'],
-                                //         to: 'wadejohnson650@gmail.com',
-                                //         subject: 'Weekly Sales Report',
-                                //         html: beforeStallWeek + v.stallId + afterStallBeforeStallHolder + v.name + beforeTableWeekly + invoicesString + end,
-                                //         attachments: [{
-                                //             filename: 'KingstonAntiquesLogo.jpeg',
-                                //             path: './assets/KingstonAntiquesLogo.jpeg',
-                                //             cid: 'unique@logo.ee' //same cid value as in the html img src
-                                //         }]
-                                //     };
+                                var mailOptions = {
+                                    from: 'antiquesofkingston@gmail.com',
+                                    // to: [v.email, 'antiquescentre@fastmail.com'],
+                                    to: 'wadejohnson650@gmail.com',
+                                    subject: 'Weekly Sales Report',
+                                    html: beforeStallWeek + v.stallId + afterStallBeforeStallHolder + v.name + beforeTableWeekly + invoicesString + end,
+                                    attachments: [{
+                                        filename: 'KingstonAntiquesLogo.jpeg',
+                                        path: './assets/KingstonAntiquesLogo.jpeg',
+                                        cid: 'unique@logo.ee' //same cid value as in the html img src
+                                    }]
+                                };
 
-                                //     transporter.sendMail(mailOptions, function (error, info) {
-                                //         if (error) {
-                                //             console.log(error);
-                                //         } else {
-                                //             console.log('Email sent to ' + v.email + " response: " + info.response);
-                                //         }
-                                //     });
-                                //     // }, 5000);
+                                transporter.sendMail(mailOptions, function (error, info) {
+                                    if (error) {
+                                        console.log(error);
+                                    } else {
+                                        console.log('Email sent to ' + v.email + " response: " + info.response);
+                                    }
+                                });
+                                // }, 5000);
 
                             }
                         })
