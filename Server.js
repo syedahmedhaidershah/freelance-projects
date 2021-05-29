@@ -75,15 +75,16 @@ async function compileInvoices(arr, stallId) {
     // console.log(stallId);
     var arrayToSend = [];
     return arr.map((v, i) => {
+        console.log(v);
         if (v.stallId == stallId) {
             arrayToSend.push(v)
         }
         if (i == (arr.length - 1)) {
-            if(arrayToSend.length > 0){
-            return Promise.resolve(arrayToSend);
-        } else {
-            return Promise.reject(moment() + "No invoices for "+ stallId);
-        }
+            if (arrayToSend.length > 0) {
+                return Promise.resolve(arrayToSend);
+            } else {
+                return Promise.reject(moment() + "No invoices for " + stallId);
+            }
         }
     })
 }
@@ -112,7 +113,7 @@ app.get('/send_weekly_report', (req, res) => {
                     stallHolders.map(v => {
                         // invoicesToSend = invoices.filter(w => w.stallId == v.stallId)
                         compileInvoices(invoices, v.stallId).then(invoicesToSend => {
-                            console.log("invoicesToSend: ",invoicesToSend);
+                            console.log("invoicesToSend: ", invoicesToSend);
                             if (invoicesToSend.length > 0) {
                                 var invoicesString = ""
                                 var total = 0
@@ -172,7 +173,7 @@ app.get('/send_weekly_report', (req, res) => {
                                 // }, 5000);
 
                             }
-                        }).catch(e=>{
+                        }).catch(e => {
                             console.log(e);
                         })
                     })
