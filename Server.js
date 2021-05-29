@@ -113,7 +113,7 @@ app.get('/send_weekly_report', (req, res) => {
                     stallHolders.map(v => {
                         // invoicesToSend = invoices.filter(w => w.stallId == v.stallId)
                         compileInvoices(invoices, v.stallId).then(invoicesToSend => {
-                            console.log("invoicesToSend: ", invoicesToSend);
+                            // console.log("invoicesToSend: ", invoicesToSend);
                             if (invoicesToSend.length > 0) {
                                 var invoicesString = ""
                                 var total = 0
@@ -174,7 +174,7 @@ app.get('/send_weekly_report', (req, res) => {
 
                             }
                         }).catch(e => {
-                            console.log(e);
+                            // console.log(e);
                         })
                     })
 
