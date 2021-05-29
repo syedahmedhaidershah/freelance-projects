@@ -84,7 +84,7 @@ async function compileInvoices(arr, stallId) {
                 console.log(arrayToSend);
                 return Promise.resolve(arrayToSend);
             } else {
-                return Promise.reject(moment() + "No invoices for " + stallId);
+                // return Promise.reject(moment() + "No invoices for " + stallId);
             }
         }
     })
@@ -174,9 +174,10 @@ app.get('/send_weekly_report', (req, res) => {
                                 // }, 5000);
 
                             }
-                        }).catch(e => {
-                            // console.log(e);
                         })
+                        // .catch(e => {
+                        //     // console.log(e);
+                        // })
                     })
 
                 }
