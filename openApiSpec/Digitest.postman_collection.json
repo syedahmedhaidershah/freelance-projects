@@ -1,0 +1,1450 @@
+{
+	"info": {
+		"_postman_id": "d6d59caa-ba37-4866-8a72-7742fa1d568a",
+		"name": "Digitest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Teacher Api",
+			"item": [
+				{
+					"name": "user",
+					"item": [
+						{
+							"name": "auth",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "747abf8f-1338-4093-bb11-9472e591d03e",
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);",
+											"postman.setEnvironmentVariable(\"token\", jsonData.message[0].accessToken);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\t\"googleId\": \"100696332155977592204\",\r\n\t\"emailAddress\": \"digitest.uat@gmail.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}/api/users",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"api",
+										"users"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "reports",
+					"item": [
+						{
+							"name": "Create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "authorization",
+										"value": "{{token}}",
+										"type": "text"
+									},
+									{
+										"key": "authorization",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"totalCandidates\": 123,\n\t\"examId\":\"5d9754573492e43bd0fe96bd\",\n\t\"gradedDate\": \"2019-09-23T17:28:54.797+0000\"\n\t\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}/api/report/create",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"api",
+										"report",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getAll",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{local}}/api/report/getAll",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"api",
+										"report",
+										"getAll"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "notification",
+					"item": [
+						{
+							"name": "Create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"message\": \"ok asdf\",\n\t\"isActive\": 0\n\t\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}api/notification/create",
+									"host": [
+										"{{local}}api"
+									],
+									"path": [
+										"notification",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getAll",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{local}}/api/notification/getAll?",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"api",
+										"notification",
+										"getAll"
+									],
+									"query": [
+										{
+											"key": "authorization",
+											"value": "{{token}}",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Mark Read",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "authorization",
+										"type": "text",
+										"value": "{{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"notificationId\": \"5d8f5a26c01faa15bc2e5dca\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{network}}api/notification/markRead",
+									"host": [
+										"{{network}}api"
+									],
+									"path": [
+										"notification",
+										"markRead"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "element",
+					"item": [
+						{
+							"name": "create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{   \"examId\":\"5d9754573492e43bd0fe96bd\",\r\n    \"title\": \"testing\",\r\n    \"deleted\": 0,\r\n    \"description\": \"tesing\",\r\n    \"imageUrl\": \"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\"\r\n   \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}/api/element/create",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"api",
+										"element",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetAll",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{network}}/api/element/getall",
+									"host": [
+										"{{network}}"
+									],
+									"path": [
+										"api",
+										"element",
+										"getall"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "authorization",
+										"type": "text",
+										"value": "{{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{   \"elementId\": \"5d936362149b4b33d447393f\",\r\n\t\"examId\":\"5d9754573492e43bd0fe96bd\",\r\n    \"title\": \"updating \",\r\n    \"deleted\": 0,\r\n    \"description\": \"tesing\",\r\n    \"imageUrl\": \"https://mongoose-os.com/images/forum.png\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}/api/element/update",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"api",
+										"element",
+										"update"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "remove",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "authorization",
+										"type": "text",
+										"value": "{{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{   \"elementId\": \"5d936362149b4b33d447393f\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}/api/element/remove",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"api",
+										"element",
+										"remove"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "s3Bucket",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "authorization",
+										"type": "text",
+										"value": "{{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{   \"examId\":\"5d9754573492e43bd0fe96bd\",\r\n    \"title\": \"testing\",\r\n    \"deleted\": 0,\r\n    \"description\": \"tesing\",\r\n    \"imageUrl\": \"https://mongoose-os.com/images/forum.png\"\r\n   \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}/api/element/s3",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"api",
+										"element",
+										"s3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetById",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "authorization",
+										"type": "text",
+										"value": "{{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"elementId\": \"5d9b4f9a085f1b378059cb26\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}/api/element/getById",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"api",
+										"element",
+										"getById"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "exams",
+					"item": [
+						{
+							"name": "create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{   \"examTitle\":\"Calculas Mid Exam\",\r\n    \"examColor\":\"#008000\",\r\n    \"startDate\": \"2019-09-23T17:28:54.797Z\",\r\n    \"endDate\": \"2019-09-23T17:28:54.797Z\",\r\n    \"schoolLevel\": [\"VMBO\",\"HAVO\"],\r\n    \"schoolYear\": \"7th\",\r\n    \"subject\": \"History\",\r\n    \"topic\": \"World War 2\",\r\n    \"description\": \"Add a note Description\",\r\n    \"tools\": [\"Calculator\",\"Dictionary\"],\r\n    \"tags\": [\"history\",\"social\",\"science\",\"midterm\"],\r\n    \"status\": -1,\r\n    \"autoShuffle\": true,\r\n    \"deleted\": 0\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}/api/exam/create",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"api",
+										"exam",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetAll",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"limit\": 1,\n\t\"pageNumber\": 1000\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}/api/exam/getall",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"api",
+										"exam",
+										"getall"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "underProcess",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}/api/exam/underprocess?",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"api",
+										"exam",
+										"underprocess"
+									],
+									"query": [
+										{
+											"key": "authorization",
+											"value": "{{token}}",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "needToGrade",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}/api/exam/needToGrade?",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"api",
+										"exam",
+										"needToGrade"
+									],
+									"query": [
+										{
+											"key": "authorization",
+											"value": "{{token}}",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "draftedexams",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}/api/exam/draftedexams?",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"api",
+										"exam",
+										"draftedexams"
+									],
+									"query": [
+										{
+											"key": "authorization",
+											"value": "{{token}}",
+											"disabled": true
+										},
+										{
+											"key": "authorization",
+											"value": "{{token}}",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "graded",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}/api/exam/graded?",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"api",
+										"exam",
+										"graded"
+									],
+									"query": [
+										{
+											"key": "authorization",
+											"value": "{{token}}",
+											"disabled": true
+										},
+										{
+											"key": "authorization",
+											"value": "",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "calender",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"year\": \"2019\",\n\t\"month\": \"08\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}/api/exam/calender?",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"api",
+										"exam",
+										"calender"
+									],
+									"query": [
+										{
+											"key": "authorization",
+											"value": "{{token}}",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "authorization",
+										"type": "text",
+										"value": "{{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{   \r\n    \"examId\":\"5d9754573492e43bd0fe96bd\",\r\n    \"status\": 1,\r\n    \"description\": \"I AM UPDATED\"\r\n    \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}/api/exam/update",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"api",
+										"exam",
+										"update"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "remove",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "authorization",
+										"type": "text",
+										"value": "{{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"examId\":\"5d8cf29aa885d01cb4cf9a0e\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}/api/exam/remove",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"api",
+										"exam",
+										"remove"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get By Id",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "authorization",
+										"type": "text",
+										"value": "{{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\n\t\"examId\":\"5d9754573492e43bd0fe96bd\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}/api/exam/getbyid",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"api",
+										"exam",
+										"getbyid"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Share Exam",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "authorization",
+										"type": "text",
+										"value": "{{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\n\t\"examId\":\"5d8cf1eb4cde1b0e2c259d3d\",\n\t\"sharedByEmail\": \"furqan.polani11@gmail.com\",\n\t\"right\": 3\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{network}}api/exam/shareExam",
+									"host": [
+										"{{network}}api"
+									],
+									"path": [
+										"exam",
+										"shareExam"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Exam Detail",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "authorization",
+										"type": "text",
+										"value": "{{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"examId\": \"5da49781eff9dc106cedc8f5\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}/api/exam/examDetail",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"api",
+										"exam",
+										"examDetail"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Exam Autofill",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "authorization",
+										"type": "text",
+										"value": "{{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{network}}api/exam/autofill/getfilters",
+									"host": [
+										"{{network}}api"
+									],
+									"path": [
+										"exam",
+										"autofill",
+										"getfilters"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Exam Count",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "authorization",
+										"type": "text",
+										"value": "{{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{network}}api/exam/count",
+									"host": [
+										"{{network}}api"
+									],
+									"path": [
+										"exam",
+										"count"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "questions",
+					"item": [
+						{
+							"name": "create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n        \"type\": 1,\r\n        \"title\": \"who is the current ceo of Microsoft?\",\r\n        \"items\": [\r\n            \"Steve Jobs\",\r\n            \"Bill Gates\",\r\n            \"Tim Cook\",\r\n            \"Stpehn Hawking\"\r\n        ],\r\n        \"category\": \"insights\",\r\n        \"points\": 5,\r\n        \"elementId\": \"5d936362149b4b33d447393f\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}/api/question/create",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"api",
+										"question",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetAll",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}/api/question/getall",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"api",
+										"question",
+										"getall"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "authorization",
+										"type": "text",
+										"value": "{{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{   \"elementId\": \"5d936362149b4b33d447393f\",\r\n\t\"examCode\":\"12001\",\r\n    \"title\": \"updating \",\r\n    \"deleted\": 0,\r\n    \"description\": \"tesing\",\r\n    \"imageUrl\": \"https://mongoose-os.com/images/forum.png\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}/api/question/update",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"api",
+										"question",
+										"update"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "remove",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "authorization",
+										"type": "text",
+										"value": "{{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{   \"elementId\": \"5d936362149b4b33d447393f\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}/api/question/remove",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"api",
+										"question",
+										"remove"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "bulk Create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "authorization",
+										"type": "text",
+										"value": "{{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[\r\n    {\r\n        \"type\": 1,\r\n        \"title\": \"who is the current ceo of Apple?\",\r\n        \"items\": [\r\n            \"Steve Jobs\",\r\n            \"Bill Gates\",\r\n            \"Tim Cook\",\r\n            \"Stpehn Hawking\"\r\n        ],\r\n        \"category\": \"insights\",\r\n        \"points\": 5,\r\n        \"elementId\": \"5d936362149b4b33d447393f\"\r\n    },\r\n    {\r\n        \"type\": 2,\r\n        \"title\": \"Fill in the gaps with appropiate word\",\r\n        \"items\": [\r\n            \"Pakistan's Capital is\",\r\n            0\r\n        ],\r\n        \"category\": \"reproductive\",\r\n        \"points\": 5,\r\n        \"elementId\": \"5d936362149b4b33d447393f\"\r\n    },\r\n    {\r\n        \"type\": 3,\r\n        \"title\": \"Connect the appropiate items\",\r\n        \"items\": [\r\n            {\r\n                \"rs\": \"Steve Jobs\",\r\n                \"ls\": \"Apple\"\r\n            },\r\n            {\r\n                \"rs\": \"Bill Gates\",\r\n                \"ls\": \"Microsoft\"\r\n            },\r\n            {\r\n                \"rs\": \"Pakistan\",\r\n                \"ls\": \"Islamabad\"\r\n            }\r\n        ],\r\n        \"category\": \"insights\",\r\n        \"points\": 5,\r\n        \"elementId\": \"5d936362149b4b33d447393f\"\r\n    },\r\n    {\r\n        \"type\": 5,\r\n        \"title\": \"Write a paragraph about LoadShedding ?\",\r\n        \"category\": \"insights\",\r\n        \"points\": 5,\r\n        \"elementId\": \"5d936362149b4b33d447393f\"\r\n    },\r\n    {\r\n        \"type\": 6,\r\n        \"title\": \"Re order in chronological order\",\r\n        \"items\": [\r\n            \"This is first Item\",\r\n            \"This is second Item\",\r\n            \"This is third Item\",\r\n            \"This is fourth Item\"\r\n        ],\r\n        \"category\": \"insights\",\r\n        \"points\": 5,\r\n        \"elementId\": \"5d936362149b4b33d447393f\"\r\n    },\r\n    {\r\n        \"type\": 7,\r\n        \"title\": \"Draw the map of Hollad\",\r\n        \"category\": \"insights\",\r\n        \"points\": 5,\r\n        \"elementId\": \"5d936362149b4b33d447393f\"\r\n    }\r\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}/api/question/bulkcreate",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"api",
+										"question",
+										"bulkcreate"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get By Id",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "authorization",
+										"type": "text",
+										"value": "{{token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"questionId\": \"5d9492acf4bab23160bbba89\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}/api/question/getbyid",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"api",
+										"question",
+										"getbyid"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "form",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "authorization",
+								"type": "text",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \r\n\t\"examInfo\":{\r\n\t\t\"examTitle\":\"Calculas Mid Exam\",\r\n\t    \"examColor\":\"#008000\",\r\n\t    \"startDate\": \"2019-09-23T17:28:54.797Z\",\r\n\t    \"endDate\": \"2019-09-23T17:28:54.797Z\",\r\n\t    \"schoolLevel\": [\"VMBO\",\"HAVO\"],\r\n\t    \"schoolYear\": \"7th\",\r\n\t    \"subject\": \"History\",\r\n\t    \"topic\": \"World War 2\",\r\n\t    \"description\": \"Add a note Description\",\r\n\t    \"tools\": [\"Calculator\",\"Dictionary\"],\r\n\t    \"tags\": [\"history\",\"social\",\"science\",\"midterm\"],\r\n\t    \"status\": 1,\r\n\t    \"autoShuffle\": true,\r\n\t    \"deleted\": 0\r\n\t},\r\n\t\"elements\":[\r\n\t\t{   \r\n\t    \t\"title\": \"Alfa \",\r\n\t\t    \"description\": \"Alfa for forms\",\r\n\t\t    \"questions\": [\r\n\t\t\t    {\r\n\t\t\t        \"type\": 3,\r\n\t\t\t        \"title\": \"Alfa for forms\",\r\n\t\t\t        \"items\": [\r\n\t\t\t            {\r\n\t\t\t                \"rs\": \"Alfa Jobs\",\r\n\t\t\t                \"ls\": \"Alfa\"\r\n\t\t\t            },\r\n\t\t\t            {\r\n\t\t\t                \"rs\": \"Alfa Gates\",\r\n\t\t\t                \"ls\": \"Alfa\"\r\n\t\t\t            },\r\n\t\t\t            {\r\n\t\t\t                \"rs\": \"Pakistan\",\r\n\t\t\t                \"ls\": \"Islamabad\"\r\n\t\t\t            }\r\n\t\t\t        ],\r\n\t\t\t        \"category\": \"Alfa\",\r\n\t\t\t        \"points\": 5\r\n\t\t\t    },\r\n\t\t\t\t{\r\n\t\t\t        \"type\": 6,\r\n\t\t\t        \"title\": \"Re Alfa in chronological order\",\r\n\t\t\t        \"items\": [\r\n\t\t\t            \"This is first Item\",\r\n\t\t\t            \"This is second Item\",\r\n\t\t\t            \"This is third Item\",\r\n\t\t\t            \"This is fourth Item\"\r\n\t\t\t        ],\r\n\t\t\t        \"category\": \"insights\",\r\n\t\t\t        \"points\": 5\r\n\t\t    \t}\r\n\r\n\t\t\t]\r\n\t\t},{   \r\n\t    \t\"title\": \"22222Testing for forms \",\r\n\t\t    \"description\": \"2222Testing for forms\",\r\n\t\t    \"questions\": [\r\n\t\t\t    {\r\n\t\t\t        \"type\": 3,\r\n\t\t\t        \"title\": \"22222222222Testing for forms\",\r\n\t\t\t        \"items\": [\r\n\t\t\t            {\r\n\t\t\t                \"rs\": \"22Steve Jobs\",\r\n\t\t\t                \"ls\": \"Apple\"\r\n\t\t\t            },\r\n\t\t\t            {\r\n\t\t\t                \"rs\": \"Bill Gates\",\r\n\t\t\t                \"ls\": \"Microsoft\"\r\n\t\t\t            },\r\n\t\t\t            {\r\n\t\t\t                \"rs\": \"Pakistan\",\r\n\t\t\t                \"ls\": \"Islamabad\"\r\n\t\t\t            }\r\n\t\t\t        ],\r\n\t\t\t        \"category\": \"insights\",\r\n\t\t\t        \"points\": 5\r\n\t\t\t    },\r\n\t\t\t\t{\r\n\t\t\t        \"type\": 6,\r\n\t\t\t        \"title\": \"222Re order in chronological order\",\r\n\t\t\t        \"items\": [\r\n\t\t\t            \"This is first Item\",\r\n\t\t\t            \"This is second Item\",\r\n\t\t\t            \"This is third Item\",\r\n\t\t\t            \"This is fourth Item\"\r\n\t\t\t        ],\r\n\t\t\t        \"category\": \"insights\",\r\n\t\t\t        \"points\": 5\r\n\t\t    \t}\r\n\r\n\t\t\t]\r\n\t\t}\r\n\t]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/api/exam/form",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"exam",
+								"form"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateForm",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "authorization",
+								"type": "text",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \r\n\t\"examInfo\":{\r\n\t\t\"_id\": \"5da5dd9db558921d9c8fe82d\",\r\n\t\t\"examTitle\":\"32Calc34ul3232as 13212123312Mid Exam\",\r\n\t    \"topic\": \"World War 213212\",\r\n\t    \"description\": \"Add 32a note Descr21iption\"\r\n\t},\r\n\t\"elements\":[\r\n\t{   \"_id\": \"5da5dd9db558921d9c8fe82e\",\r\n    \t\"title\": \"aaa34aa34123\",\r\n\t    \"description\": \"Testi34ng for forms\",\r\n\t    \"questions\": [\r\n\t\t\t    {\t\r\n\t\t\t    \t\"_id\" : \"5da5dd9eb558921d9c8fe830\",\r\n\t\t\t        \"type\": 3,\r\n\t\t\t        \"title\": \"Al343423fa for forms\",\r\n\t\t\t        \"items\": [\r\n\t\t\t            {\r\n\t\t\t                \"rs\": \"Al334fa Jobs\",\r\n\t\t\t                \"ls\": \"Alfa\"\r\n\t\t\t            },\r\n\t\t\t            {\r\n\t\t\t                \"rs\": \"Alfa Gates\",\r\n\t\t\t                \"ls\": \"Alfa\"\r\n\t\t\t            },\r\n\t\t\t            {\r\n\t\t\t                \"rs\": \"Pakistan\",\r\n\t\t\t                \"ls\": \"Islamabad\"\r\n\t\t\t            }\r\n\t\t\t        ],\r\n\t\t\t        \"category\": \"A3434lfa\",\r\n\t\t\t        \"points\": 5\r\n\t\t\t    }\r\n\t\t\t]\r\n\t},\r\n\t{\r\n\t\t\"_id\": \"5da5dd9db558921d9c8fe82f\",\r\n\t\t\"title\": \"aaaaaaaaaa12\",\r\n\t    \"description\": \"Why testing for fomrs\"\r\n\t}\r\n\t]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/api/exam/form/update",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"exam",
+								"form",
+								"update"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

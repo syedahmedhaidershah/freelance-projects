@@ -1,0 +1,10 @@
+{
+    "status":{
+        "exam_draft":-1,
+        "exam_published": 1,
+        "exam_underprocess": 2,
+        "exam_completed": 3,
+        "exam_graded": 4
+    }
+     
+}
