@@ -33,8 +33,7 @@ const saveSensorData = async (receivedData) => {
 
                 const [r1, r2, r3, r4] = requestTimestamps;
 
-                if ((r4 - r1) < business.acceptableDuration) {
-                    requestTimestamps = [r1, r2, r3, timeNow];
+                if ((timeNow - r2) < business.acceptableDuration) {
                     return false;
                 }
 
