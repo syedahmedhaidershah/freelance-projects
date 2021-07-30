@@ -36,7 +36,8 @@ const saveSensorData = async (receivedData) => {
                 if ((timeNow - r2) < business.acceptableDuration) {
                     return false;
                 }
-
+                
+                requestTimestamps = [r2, r3, r4, timeNow];
                 await setValue(uniqueId, JSON.stringify({ requestTimestamps }));
                 return SensorStrategy.saveData(receivedData);
             }
