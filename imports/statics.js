@@ -1,5 +1,7 @@
 const statics = {
-    uri: 'https://www.pakwheels.com/used-cars/search/-/featured_1/',
+    uri: {
+        pakWheelsUsedCars: 'https://www.pakwheels.com/used-cars/search/-/featured_1/',
+    },
     omitTexts: [
         'managedbypakwheels',
         'mentionpakwheels.comwhencallingsellertogetagooddeal',

@@ -1,183 +1,66 @@
-const { parse: parser } = require('node-html-parser');
-
+/** custom factories and libraries */
 const {
-    fetch,
-    controlledGenerator
+    fetch,  // fetch API replica function - uses http/https module
+    controlledGenerator, // a controlled, timed generator function
+    pakWheelsUsedCarsData // Retreival / loading mechanism for data from pakwheels
 } = require('./libraries');
 
+/** Static imports and data objects */
 const {
     statics: {
-        uri,
-        omitTexts,
-        citiesInPakistan
+        uri, // uri paths for retreiving pages
     },
     extractionLogics: { skipFields, extractFieldsCount }
 } = require('./imports');
 
-class PostDetails {
-    attrs = {
-        title: '',
-        originalImageData: '',
-        imageSrc: '',
-        price: 'PKR0',
-        city: '',
-        year: '',
-        mileage: '0',
-        consumptionType: 'Petrol',
-        ccDisplacement: '0 cc',
-        transmission: 'Manual',
-    }
+/** Program control folow algorithm */
+const collectPakWheelsUsedCars = async (uri, options = {}) => {
+    /** Retreiving a used cars page from pak wheels  */
+    let response = await fetch(
+        uri,
+        options,
+        true
+    );
 
-    constructor(data = {}) {
-        for (let key in data) {
-            this.attrs[key] = data[key];
-        }
-    }
+    /** Extracting and transforming information */
+    const dataArray = pakWheelsUsedCarsData(response);
 
-    setAttribute = (key, value) => {
-        this.attrs[key] = value;
-    }
-
-    setAttributes = (data) => {
-        for (let key in data) {
-            this.attrs[key] = data[key];
-        }
-    }
-
-    get data() {
-        return { ...this.attrs };
-    }
+    /** Returning transformed information */
+    return dataArray;
 }
 
-const informationExtractor = (elements) => {
-    return Array.from(elements)
-        .map(element => {
-            const useData = element.innerText
-                .split(/[\n]{1,}|[\s]{2,}/g)
-                .filter(text => text)
-                .filter(text => !omitTexts.includes(text.toLowerCase().replace(/\s/g, '')));
 
-            let rating = null;
-
-            const useLength = useData.length;
-
-            // cutt off last line
-            useData.splice(useLength - 1, 1);
-
-            /** if CALL not available
-            * cut off 7th field
-            * cut off 5th field
-            * cut off 4th field
-            * cut off 3rd field
-            * cut off 2nd field
-            * **/
-            onCallPricePresent = useData.reduce((t, a) => {
-                const present = a.toLowerCase() === 'call';
-                return t || present;
-            }, false);
-
-            if (!onCallPricePresent) {
-                useData.splice(6, 1);
-                useData.splice(4, 1);
-                useData.splice(3, 1);
-                useData.splice(2, 1);
-                useData.splice(1, 1);
-            }
-
-
-            /**
-             * if element 6 includes "/"
-             * remove rating and store
-             */
-            if (useData[5].includes('\/')) {
-                rating = useData[5];
-                useData.splice(5, 1);
-            }
-
-            /** if element 5 is not in cities
-            * remove it */
-            if (!citiesInPakistan.includes(useData[5].toLowerCase())) {
-                useData.splice(5, 1)
-            }
-
-            /** if element 5 is not in cities
-            * combine element 5 into 4 */
-            if (!citiesInPakistan.includes(useData[3].toLowerCase())) {
-                useData[3] += useData[4];
-                useData.splice(4, 1);
-            }
-
-            /**
-             * search for PKR
-            * if found
-            * remove first match
-            * move second match to first position
-             */
-            const priceFields = useData
-                .map((e, i) => {
-                    if (e.toString().includes('PKR'))
-                        return i;
-                })
-                .filter(e => e)
-
-            const [toRemove, toKeep] = priceFields;
-
-            useData.splice(toRemove, 1);
-
-            const [keep] = useData.splice(toKeep - 1, 1);
-
-            useData.unshift(keep);
-
-            return [
-                useData.length,
-                ...useData
-            ];
-        });
-}
-
-const collect = async (uri, options = {}) => {
+/** IIFE controlFlow funcction to start processes */
+(controlFlow = async () => {
     try {
-        let response = await fetch(uri, options, true);
+        /** Declaring url to use */
+        const { pakWheelsUsedCars: useUrl } = uri;
 
-
-        let resolverWaitLoaded;
-        let searchResultULs;
-
-        waitTillLoadedPromise = new Promise((resolve, reject) => {
-            resolverWaitLoaded = resolve;
+        /** Generator function for controlled / timed iterations */
+        const generatorController = controlledGenerator(10, {
+            timeout: 7000
         });
 
-        setTimeout(() => {
-            const root = parser(response);
+        /** Async iterable generator based loop */
+        for await (let iterator of generatorController) {
+            /** Page 1 query parameters */
+            page = iterator + 1;
 
-            searchResultULs = root.querySelectorAll('.search-list')
+            /** Log for indication of page retreival */
+            console.log(`retreiving page ${page}`);
 
-            resolverWaitLoaded(searchResultULs);
-        }, 0);
+            /** extrating and reteiving transformed information */
+            const collected = await collectPakWheelsUsedCars(useUrl + `?page=${page}`, { method: 'get' });
 
-        const foundElements = await waitTillLoadedPromise;
+            /** If null / falsey object is returned an error is thrown */
+            if (!collected) throw new Error(collected);
 
-        const dataArray = informationExtractor(foundElements);
+            console.log(collected);
+        }
 
-        return dataArray;
     } catch (exc) {
         console.log(exc);
         return false;
-    }
-}
-
-
-(async () => {
-    const generatorController = controlledGenerator(100, {
-        timeout: 3000
-    });
-
-    for await (let iterator of generatorController) {
-        page = iterator + 1;
-        console.log(`retreiving page ${page}`);
-        const collected = await collect(uri + `?page=${page}`, { method: 'get' });
-        if (!collected) throw new Error(collected);
-        console.log(collected);
     }
 })();
 
