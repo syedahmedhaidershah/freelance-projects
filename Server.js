@@ -228,7 +228,8 @@ app.get('/send_daily_report', (req, res) => {
 
                                 var mailOptions = {
                                     from: 'antiquesofkingston@gmail.com',
-                                    to: [v.email, 'antiquescentre@fastmail.com'],
+                                    // to: [v.email, 'antiquescentre@fastmail.com'],
+                                    to: v.email,
                                     // to: 'wadejohnson650@gmail.com',
                                     subject: 'Daily Sales report',
                                     html: beforeStall + v.stallId + afterStallBeforeStallHolder + v.name + beforeTable + invoicesString + end,
@@ -812,7 +813,7 @@ app.post("/edit_sales_person", (req, res) => {
 
     // var code = Math.floor(Math.random() * (99999 - 10000 + 1)) + min;
 
-    connection.query(`UPDATE SalesPerson SET firstName='${req.body.firstName}',lastName='${req.body.lastName}',address='${req.body.address}',number='${req.body.number}',dallasKeyCode='${req.body.dallasKeyCode}',userName='${req.body.userName}',password='${req.body.password}'  WHERE id = ${req.body.id}`,
+    connection.query(`UPDATE SalesPerson SET firstName='${req.body.firstName}',lastName='${req.body.lastName}',address='${req.body.address}',number='${req.body.number}',userName='${req.body.userName}',password='${req.body.password}'  WHERE dallasKeyCode = ${req.body.dallasKeyCode}`,
         (err, data) => {
 
             if (!err) {
