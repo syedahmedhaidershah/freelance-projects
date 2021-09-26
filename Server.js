@@ -1265,6 +1265,30 @@ app.post("/add_invoice_new", (req, res) => {
                 //     if (err) throw err;
                 //     // console.log('Data received from Db:\n');
                 // res.send(rows);
+
+
+                connection.query(`SELECT * FROM Customers where email = '${body.customerEmail}'`, (err, rows) => {
+                    if (err) throw err;
+                    // console.log('Data received from Db:\n');
+                    // res.send(rows);
+                    if (rows.length == 0) {
+                        connection.query(`INSERT INTO Customers( name, address, number, email) VALUES ('${body.customerName}','${body.customerAddress}','${body.customerId}','${body.customerEmail}')`, (err, data) => {
+
+                            // if (!err) {
+                            //     res.status(200).json({
+                            //         message: "Customer added.",
+                            //         customerId: data
+                            //     });
+                            // } else {
+                            //     // console.log(err);
+                            //     res.status(400).json({
+                            //         message: err
+                            //     });
+                            // }
+                        });
+                    }
+                });
+
                 body.items.map(v => {
                     connection.query(`INSERT INTO NewInvoiceDetails(id,productId,description,price,finalPrice,quantity,card,cash,stallId,stallHolderId,refunded,soldOnline,salesPersonId) \
                     VALUES('${body.id}','${v.productId}','${v.description}','${v.price}','${v.finalPrice}','${v.quantity}','${body.card}','${body.cash}','${v.stallId}','${v.stallHolder}',${v.refunded},'${body.soldOnline}','${body.salesPersonId}')`, (err, data) => {
