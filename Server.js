@@ -829,6 +829,30 @@ app.post("/edit_sales_person", (req, res) => {
             }
         });
 });
+app.post("/delete_sales_person", (req, res) => {
+
+    //read product information from request
+    // let product = new Product(req.body.prd_name, req.body.prd_price);
+    // console.log("edit_sales_person: ", req.body)
+
+    // var code = Math.floor(Math.random() * (99999 - 10000 + 1)) + min;
+
+    connection.query(`Delete From SalesPerson WHERE dallasKeyCode = ${req.body.dallasKeyCode}`,
+        (err, data) => {
+
+            if (!err) {
+                res.status(200).json({
+                    message: "Sales Person Deleted.",
+                    stallId: data
+                });
+            } else {
+                // console.log(err);
+                res.status(400).json({
+                    message: err
+                });
+            }
+        });
+});
 app.post("/edit_stall_holder", (req, res) => {
 
     //read product information from request
