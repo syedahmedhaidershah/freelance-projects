@@ -1155,7 +1155,18 @@ app.get('/getSalesPersonWeeklyStats', (req, res) => {
             //      return v
             //     }
             //  })
-            res.send(rows1.sort(compareValues('bankName')))
+            var data = {
+                salesPersonId : [],
+                counts:[]
+            }
+            if(rows1.length > 0){
+                rows1.map(v=>{
+                    data.salesPersonId.push(v.salesPersonId)
+                    data.counts.push(v.count)
+                })
+            }
+
+            res.send(data)
 
         }
 
