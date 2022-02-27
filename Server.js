@@ -1311,6 +1311,46 @@ app.get('/getSalesPersonWeeklyStats', (req, res) => {
     // console.log('Data received from Db:\n');
 })
 
+app.get('/getSalesPersonMonthlyStats', (req, res) => {
+    //    get = { stallId: "0", stallHolderName: "Smith", description:"Some Product", salesPersonName: "Australia", productId: "33",invoiceId:"23",price:"300",card:"200",total:"500" }
+
+    // connection.query('SELECT commission FROM Authentication', (err, rows) => {
+    //     if (err) throw err;
+    //     // console.log('Data received from Db: commission', rows);
+    //     // res.send(rows);
+    // });
+    var data = []
+    connection.query(`select salesPersonId,COUNT(*) AS count  FROM NewInvoices WHERE  NewInvoices.total NOT LIKE '-%' AND  (DATE(NewInvoices.dateTime) BETWEEN '${moment().startOf('month').format("YYYY-MM-DD")}' AND '${moment().format("YYYY-MM-DD")}') GROUP BY salesPersonId`, (err, rows1) => {
+        if (err) throw err;
+        if (rows1) {
+            //  data = rows1.filter(v=> {
+            //      if(parseInt(v.total,10) > 0){
+            //      total = v.total
+            //      v.total = total * 0.9
+            //      v.total = parseFloat(v.total.toFixed(2))
+            //      return v
+            //     }
+            //  })
+            var data = {
+                salesPersonId : [],
+                counts:[]
+            }
+            if(rows1.length > 0){
+                rows1.map(v=>{
+                    data.salesPersonId.push(v.salesPersonId)
+                    data.counts.push(v.count)
+                })
+            }
+
+            res.send(data)
+
+        }
+
+        // res.send(rows);
+    });
+    // console.log('Data received from Db:\n');
+})
+
 app.get('/get_weekly_item_report_date', (req, res) => {
     //    get = { stallId: "0", stallHolderName: "Smith", description:"Some Product", salesPersonName: "Australia", productId: "33",invoiceId:"23",price:"300",card:"200",total:"500" }
 
