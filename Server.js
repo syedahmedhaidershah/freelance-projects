@@ -1135,6 +1135,34 @@ app.get('/getBACS', (req, res) => {
     });
     // console.log('Data received from Db:\n');
 })
+app.get('/getSalesPersonWeeklyStats', (req, res) => {
+    //    get = { stallId: "0", stallHolderName: "Smith", description:"Some Product", salesPersonName: "Australia", productId: "33",invoiceId:"23",price:"300",card:"200",total:"500" }
+
+    // connection.query('SELECT commission FROM Authentication', (err, rows) => {
+    //     if (err) throw err;
+    //     // console.log('Data received from Db: commission', rows);
+    //     // res.send(rows);
+    // });
+    var data = []
+    connection.query(`select salesPersonId,COUNT(*) AS count  FROM NewInvoices WHERE (DATE(NewInvoices.dateTime) BETWEEN '${moment().weekday(0).subtract(6, 'd').format("YYYY-MM-DD")}' AND '${moment().weekday(0).format("YYYY-MM-DD")}') GROUP BY salesPersonId`, (err, rows1) => {
+        if (err) throw err;
+        if (rows1) {
+            //  data = rows1.filter(v=> {
+            //      if(parseInt(v.total,10) > 0){
+            //      total = v.total
+            //      v.total = total * 0.9
+            //      v.total = parseFloat(v.total.toFixed(2))
+            //      return v
+            //     }
+            //  })
+            res.send(rows1.sort(compareValues('bankName')))
+
+        }
+
+        // res.send(rows);
+    });
+    // console.log('Data received from Db:\n');
+})
 
 app.get('/get_weekly_item_report_date', (req, res) => {
     //    get = { stallId: "0", stallHolderName: "Smith", description:"Some Product", salesPersonName: "Australia", productId: "33",invoiceId:"23",price:"300",card:"200",total:"500" }
@@ -1421,3 +1449,4 @@ app.post("/add_invoice_new", (req, res) => {
 app.listen(PORT, () => {
     // console.log(`Server running at: http://localhost:${PORT}/`);
 });
+
