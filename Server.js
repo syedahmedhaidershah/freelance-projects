@@ -1144,7 +1144,7 @@ app.get('/getSalesPersonWeeklyStats', (req, res) => {
     //     // res.send(rows);
     // });
     var data = []
-    connection.query(`select salesPersonId,COUNT(*) AS count  FROM NewInvoices WHERE (DATE(NewInvoices.dateTime) BETWEEN '${moment().weekday(0).subtract(6, 'd').format("YYYY-MM-DD")}' AND '${moment().weekday(0).format("YYYY-MM-DD")}') GROUP BY salesPersonId`, (err, rows1) => {
+    connection.query(`select salesPersonId,COUNT(*) AS count  FROM NewInvoices WHERE NewInvoices.total != '0' AND NewInvoices.total NOT LIKE '-%'  (DATE(NewInvoices.dateTime) BETWEEN '${moment().weekday(0).subtract(6, 'd').format("YYYY-MM-DD")}' AND '${moment().weekday(0).format("YYYY-MM-DD")}') GROUP BY salesPersonId`, (err, rows1) => {
         if (err) throw err;
         if (rows1) {
             //  data = rows1.filter(v=> {
