@@ -66,11 +66,17 @@ var mailOptions = {
 
 var beforeStall = '<title>Antiques of Kingston</title><img class=center src="cid:unique@logo.ee" alt="Logo" width="300" height="100"><style>    .center{        display: block;  margin-left: auto;  margin-right: auto;  width: 30%;    }    table {        font-family: arial, sans-serif;        border-collapse: collapse;        margin-left: 5%;        margin-right: 5%;        width: 90%;      }            td, th {        border: 1px solid #dddddd;        text-align: left;        padding: 8px;      }            tr:nth-child(even) {        background-color: #dddddd;      }</style><body>       <h2 style="text-align: center;">Daily Sales Report</h2>    <h4 style="padding-left: 5%;">Stall Number: '
 var beforeStallWeek = '<title>Antiques of Kingston</title><img class=center src="cid:unique@logo.ee" alt="Logo" width="300" height="100"><style>    .center{        display: block;  margin-left: auto;  margin-right: auto;  width: 30%;    }    table {        font-family: arial, sans-serif;        border-collapse: collapse;        margin-left: 5%;        margin-right: 5%;        width: 90%;      }            td, th {        border: 1px solid #dddddd;        text-align: left;        padding: 8px;      }            tr:nth-child(even) {        background-color: #dddddd;      }</style><body>       <h2 style="text-align: center;">Weekly Sales Report</h2>    <h4 style="padding-left: 5%;">Stall Number: '
+var beforeInvoices = '<title>Antiques of Kingston</title><img class=center src="cid:unique@logo.ee" alt="Logo" width="300" height="100"><style>    .center{        display: block;  margin-left: auto;  margin-right: auto;  width: 30%;    }    table {        font-family: arial, sans-serif;        border-collapse: collapse;        margin-left: 5%;        margin-right: 5%;        width: 90%;      }            td, th {        border: 1px solid #dddddd;        text-align: left;        padding: 8px;      }            tr:nth-child(even) {        background-color: #dddddd;      }</style><body>       <h2 style="text-align: center;">Customer Invoice</h2>    '
+
 var afterStallBeforeStallHolder = '</h4>    <h4 style="padding-left: 5%;"><strong>Stall Holder\'s Name: '
+var CustomerNameInvoices = '<h4 style="padding-left: 5%;"><strong>Customer Name: '
 var beforeTable = '</strong> </h4>        <table>      <tr>        <th>Stall No.</th>        <th>Invoice No. </th>        <th>Stall Holder</th>        <th>Stock No.</th>        <th>Item Sold</th>        <th>Price Sold</th>             </tr>           '
 var beforeTableWeekly = '</strong> </h4>        <table>      <tr>        <th>Stall No.</th>        <th>Invoice No. </th>        <th>Stall Holder</th>        <th>Stock No.</th>        <th>Item Sold</th>        <th>Price Sold</th>          <th>Date/Time</th>             </tr>           '
+var beforeTableInvoices = '</strong> </h4>        <table>      <tr>        <th>Stall No.</th>        <th>Invoice No. </th>           <th>Stock No.</th>        <th>Item Sold</th>        <th>Price Sold</th>          <th>Date/Time</th>             </tr>           '
+
 var singleRow = '<tr> <td>G1</td>        <td>G-10001</td>        <td>Sarim Irfan</td>        <td>1000012</td>        <td>chair</td>        <td>100</td>     </tr>'
 var end = '</table>    </body>'
+var endInvoice = '</table> <h3 style="text-align: center;">Thank you for your purchase from Antiques of Kingston<br><a href="www.antiquesofkingston.co.uk">www.antiquesofkingston.co.uk</a></h3>    </body>'
 
 function compileInvoices(arr, stallId) {
     return new Promise(function (resolve, reject) {
@@ -94,6 +100,136 @@ function compileInvoices(arr, stallId) {
     })
 
 }
+
+app.post("/add_invoice_new", (req, res) => {
+
+    //read product information from request
+    // let product = new Product(req.body.prd_name, req.body.prd_price);
+    console.log("add_invoice_new: ", req.body)
+    var error = null
+    var body = req.body
+    // var dateTime = Date.now();
+    if (body.items && body.items.length > 0) {
+        connection.query(`INSERT INTO NewInvoices(id,stallId,salesPersonId,stallHolderId,dateTime,paymentMethod,total,customerId,card,cash,soldOnline) \
+    VALUES('${body.id}','${body.stallId}','${body.salesPersonId}','${body.stallHolderId}','${body.dateTime}','${body.paymentMethod}','${body.total}',${body.customerId},'${body.card}','${body.cash}','${body.soldOnline}')`, (err, data) => {
+            if (err) {
+                error = err;
+                // console.log("invoice table error: ",error);
+                res.status(400).json({
+                    message: error
+                });
+            } else {
+
+                // connection.query(`SELECT id FROM NewInvoices where customerId = ${body.customerId} AND dateTime = '${dateTime}'`, (err, rows) => {
+                //     if (err) throw err;
+                //     // console.log('Data received from Db:\n');
+                // res.send(rows);
+
+
+                connection.query(`SELECT * FROM Customers where email = '${body.customerEmail}'`, (err, rows) => {
+                    if (err) throw err;
+                    // console.log('Data received from Db:\n');
+                    // res.send(rows);
+                    if (rows.length == 0) {
+                        connection.query(`INSERT INTO Customers( name, address, number, email) VALUES ('${body.customerName}','${body.customerAddress}','${body.customerId}','${body.customerEmail}')`, (err, data) => {
+
+                            // if (!err) {
+                            //     res.status(200).json({
+                            //         message: "Customer added.",
+                            //         customerId: data
+                            //     });
+                            // } else {
+                            //     // console.log(err);
+                            //     res.status(400).json({
+                            //         message: err
+                            //     });
+                            // }
+                        });
+                    }
+                });
+
+                body.items.map(v => {
+                    connection.query(`INSERT INTO NewInvoiceDetails(id,productId,description,price,finalPrice,quantity,card,cash,stallId,stallHolderId,refunded,soldOnline,salesPersonId) \
+                    VALUES('${body.id}','${v.productId}','${v.description}','${v.price}','${v.finalPrice}','${v.quantity}','${body.card}','${body.cash}','${v.stallId}','${v.stallHolder}',${v.refunded},'${body.soldOnline}','${body.salesPersonId}')`, (err, data) => {
+                        if (err) {
+                            error = err;
+                            // console.log("invoiceDetails table error: ",error);
+                            res.status(400).json({
+                                message: error
+                            });
+                        }
+                    });
+                })
+                // });
+
+
+            }
+        });
+        // })
+
+
+        if (error == null) {
+
+            var invoicesString = ""
+            var total = 0
+            var totalWRefund = 0
+           
+            body.items.map(x => {
+                // console.log("invoicesToSend: ",x.finalPrice);
+                // total = parseInt(x.finalPrice) + total
+                if (parseInt(x.finalPrice, 10) > 0) {
+                    total = parseInt(x.finalPrice, 10) + total;
+                }
+                totalWRefund = parseInt(x.finalPrice, 10) + totalWRefund;
+                invoicesString = invoicesString + '<tr> <td>' + x.stallId + '</td>        <td>' + x.id + '</td>        <td>' + x.productId + '</td>        <td>' + x.description + '</td>        <td>' + x.finalPrice + '</td> <td>' + moment(x.dateTime).format('YYYY-MM-DD hh:mm:ss') + '</td>     </tr>'
+                // console.log('Email sent to ' + v.email + " invoicesstring: " , invoicesString);
+            })
+            // setTimeout(() => {
+            // invoicesString = invoicesString + '<tr> <td></td>        <td></td>        <td></td>        <td></td>        <td>Total £: </td>        <td>' + total + '</td> <td></td>     </tr>'
+            // invoicesString = invoicesString + '<tr> <td></td>        <td></td>        <td></td>        <td></td>        <td>Refund Amount £: </td>        <td>' + total - totalWRefund + '</td> <td></td>     </tr>'
+            invoicesString = invoicesString + '<tr> <td></td>        <td></td>              <td></td>        <td>Total £: </td>        <td>' + totalWRefund + '</td> <td></td>     </tr>'
+            // invoicesString = invoicesString + '<tr> <td></td>        <td></td>        <td></td>        <td></td>        <td>Commission Deduction £: </td>        <td>' + (totalWRefund * commission).toFixed(2) + '</td> <td></td>     </tr>'
+           
+
+            var mailOptions = {
+                from: 'antiquesofkingston@gmail.com',
+                to: body.customerEmail,
+                // to: 'wadejohnson650@gmail.com',
+                subject: 'Customer Invoice',
+                html: beforeInvoices + CustomerNameInvoices + body.customerName + beforeTableInvoices + invoicesString + endInvoice,
+                attachments: [{
+                    filename: 'KingstonAntiquesLogo.jpeg',
+                    path: './assets/KingstonAntiquesLogo.jpeg',
+                    cid: 'unique@logo.ee' //same cid value as in the html img src
+                }]
+            };
+
+            transporter.sendMail(mailOptions, function (error, info) {
+                if (error) {
+                    console.log(error);
+                } else {
+                    // console.log('Email sent to ' + v.email + " response: " + info.response);
+                    // count++;
+                    // console.log("count: ",count);
+                }
+            });
+
+            res.status(200).json({
+                message: "Invoice added.",
+                // productId: data
+            });
+        } else {
+            res.status(400).json({
+                message: error
+            });
+        }
+    } else {
+        res.status(400).json({
+            message: "No items in invoice"
+        });
+    }
+
+});
 
 app.get('/send_weekly_report', (req, res) => {
     // var count = 0;
@@ -1372,90 +1508,7 @@ app.post("/add_invoice", (req, res) => {
     }
 
 });
-app.post("/add_invoice_new", (req, res) => {
 
-    //read product information from request
-    // let product = new Product(req.body.prd_name, req.body.prd_price);
-    console.log("add_invoice_new: ", req.body)
-    var error = null
-    var body = req.body
-    // var dateTime = Date.now();
-    if (body.items && body.items.length > 0) {
-        connection.query(`INSERT INTO NewInvoices(id,stallId,salesPersonId,stallHolderId,dateTime,paymentMethod,total,customerId,card,cash,soldOnline) \
-    VALUES('${body.id}','${body.stallId}','${body.salesPersonId}','${body.stallHolderId}','${body.dateTime}','${body.paymentMethod}','${body.total}',${body.customerId},'${body.card}','${body.cash}','${body.soldOnline}')`, (err, data) => {
-            if (err) {
-                error = err;
-                // console.log("invoice table error: ",error);
-                res.status(400).json({
-                    message: error
-                });
-            } else {
-
-                // connection.query(`SELECT id FROM NewInvoices where customerId = ${body.customerId} AND dateTime = '${dateTime}'`, (err, rows) => {
-                //     if (err) throw err;
-                //     // console.log('Data received from Db:\n');
-                // res.send(rows);
-
-
-                connection.query(`SELECT * FROM Customers where email = '${body.customerEmail}'`, (err, rows) => {
-                    if (err) throw err;
-                    // console.log('Data received from Db:\n');
-                    // res.send(rows);
-                    if (rows.length == 0) {
-                        connection.query(`INSERT INTO Customers( name, address, number, email) VALUES ('${body.customerName}','${body.customerAddress}','${body.customerId}','${body.customerEmail}')`, (err, data) => {
-
-                            // if (!err) {
-                            //     res.status(200).json({
-                            //         message: "Customer added.",
-                            //         customerId: data
-                            //     });
-                            // } else {
-                            //     // console.log(err);
-                            //     res.status(400).json({
-                            //         message: err
-                            //     });
-                            // }
-                        });
-                    }
-                });
-
-                body.items.map(v => {
-                    connection.query(`INSERT INTO NewInvoiceDetails(id,productId,description,price,finalPrice,quantity,card,cash,stallId,stallHolderId,refunded,soldOnline,salesPersonId) \
-                    VALUES('${body.id}','${v.productId}','${v.description}','${v.price}','${v.finalPrice}','${v.quantity}','${body.card}','${body.cash}','${v.stallId}','${v.stallHolder}',${v.refunded},'${body.soldOnline}','${body.salesPersonId}')`, (err, data) => {
-                        if (err) {
-                            error = err;
-                            // console.log("invoiceDetails table error: ",error);
-                            res.status(400).json({
-                                message: error
-                            });
-                        }
-                    });
-                })
-                // });
-
-
-            }
-        });
-        // })
-
-
-        if (error == null) {
-            res.status(200).json({
-                message: "Invoice added.",
-                // productId: data
-            });
-        } else {
-            res.status(400).json({
-                message: error
-            });
-        }
-    } else {
-        res.status(400).json({
-            message: "No items in invoice"
-        });
-    }
-
-});
 // make the server listen to requests
 app.listen(PORT, () => {
     // console.log(`Server running at: http://localhost:${PORT}/`);
