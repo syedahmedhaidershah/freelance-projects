@@ -262,7 +262,74 @@ app.get('/send_daily_report', (req, res) => {
 
     });
 });
+app.get('/send_daily_report_test', (req, res) => {
+    var stallHolders = []
+    connection.query('SELECT * FROM StallHolder', (err, rows1) => {
+        if (err) throw err;
+        // console.log('Data received from Db:\n');
+        // res.send(rows1);
+        if (rows1.length > 0) {
+            stallHolders = rows1
+            var invoices = []
+            connection.query(`SELECT * FROM NewInvoiceDetails WHERE DATE(dateTime) = '2022-02-26'`, (err, rows2) => {
+                if (err) throw err;
+                invoices = rows2
+                // rows1.map((v,i)=> {
+                //     connection.query(`SELECT * FROM InvoiceDetails WHERE id = '${v.id}'`, (err, rows) => {
+                // if (err) throw err;
+                // data.push(...rows)
+                // // console.log('Data received from Db: commission', rows);
+                // if((i+1) == rows1.length){
 
+                if (invoices.length > 0) {
+                    // var invoicesToSend = []
+                    stallHolders.map(v => {
+                        // invoicesToSend = invoices.filter(w => w.stallId == v.stallId)
+                        compileInvoices(invoices, v.stallId).then(invoicesToSend => {
+
+                            if (invoicesToSend.length > 0) {
+                                var invoicesString = ""
+                                invoicesToSend.map(x => {
+                                    invoicesString = invoicesString + '<tr> <td>' + x.stallId + '</td>        <td>' + x.id + '</td>        <td>' + v.name + '</td>        <td>' + x.productId + '</td>        <td>' + x.description + '</td>        <td>' + x.finalPrice + '</td>     </tr>'
+                                })
+
+
+                                var mailOptions = {
+                                    from: 'antiquesofkingston@gmail.com',
+                                    // to: [v.email, 'antiquescentre@fastmail.com'],
+                                    // to: v.email,
+                                    to: 'rizviwajahat9@yahoo.com',
+                                    subject: 'Daily Sales report',
+                                    html: beforeStall + v.stallId + afterStallBeforeStallHolder + v.name + beforeTable + invoicesString + end,
+                                    attachments: [{
+                                        filename: 'KingstonAntiquesLogo.jpeg',
+                                        path: './assets/KingstonAntiquesLogo.jpeg',
+                                        cid: 'unique@logo.ee' //same cid value as in the html img src
+                                    }]
+                                };
+
+                                transporter.sendMail(mailOptions, function (error, info) {
+                                    if (error) {
+                                        console.log(error);
+                                    } else {
+                                        // console.log('Email sent to ' + v.email + " response: " + info.response);
+                                    }
+                                });
+                            }
+                        }).catch(e => {
+                            // console.log(e);
+                        })
+                    })
+                }
+
+                // }
+                // res.send(rows);
+                // });
+            })
+        }
+
+    });
+});
 app.get('/get_invoices', (req, res) => {
     var NewInvoices = '';
     connection.query('SELECT * FROM NewInvoices', (err, rows) => {
