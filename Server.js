@@ -1492,7 +1492,7 @@ app.post("/add_invoice", (req, res) => {
 
     //read product information from request
     // let product = new Product(req.body.prd_name, req.body.prd_price);
-    // console.log("add_invoice: ", req.body)
+    console.log("add_invoice: ", req.body)
     var error = null
     var body = req.body
     // var dateTime = Date.now();
