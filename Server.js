@@ -181,7 +181,7 @@ app.post("/add_invoice_new", (req, res) => {
                     total = parseInt(x.finalPrice, 10) + total;
                 }
                 totalWRefund = parseInt(x.finalPrice, 10) + totalWRefund;
-                invoicesString = invoicesString + '<tr> <td>' + x.stallId + '</td>        <td>' + x.id + '</td>        <td>' + x.productId + '</td>        <td>' + x.description + '</td>        <td>' + x.finalPrice + '</td> <td>' + moment(x.dateTime).format('YYYY-MM-DD hh:mm:ss') + '</td>     </tr>'
+                invoicesString = invoicesString + '<tr> <td>' + x.stallId + '</td>        <td>' + body.id + '</td>        <td>' + x.productId + '</td>        <td>' + x.description + '</td>        <td>' + x.finalPrice + '</td> <td>' + moment(x.dateTime).format('YYYY-MM-DD hh:mm:ss') + '</td>     </tr>'
                 // console.log('Email sent to ' + v.email + " invoicesstring: " , invoicesString);
             })
             // setTimeout(() => {
