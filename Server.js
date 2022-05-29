@@ -552,7 +552,7 @@ app.get('/get_invoices_staging', (req, res) => {
             // res.status(400).json({
             //     message: "Something Went Wrong"
             // });
-            // console.log('Error from NewInvoices from Db:', err);
+            console.log('Error from Invoices from Db:', err);
 
         };
         // console.log('Data received from Db:\n');
@@ -575,7 +575,7 @@ app.get('/get_invoices_staging', (req, res) => {
                     // res.status(400).json({
                     //     message: "Something Went Wrong"
                     // });
-                    // console.log('Error from InvoiceDetails from Db:', err);
+                    console.log('Error from InvoiceDetails from Db:', err);
 
                 };
                 // // console.log('Data received from Db:\n');
