@@ -984,7 +984,7 @@ app.post("/add_sales_person", (req, res) => {
 });
 
 app.get('/get_customers', (req, res) => {
-    connection.query('SELECT * FROM Customers', (err, rows) => {
+    connection.query('SELECT * FROM Customers ORDER BY id desc', (err, rows) => {
         if (err) throw err;
         // console.log('Data received from Db:\n');
         res.send(rows);
@@ -1056,6 +1056,30 @@ app.post("/delete_sales_person", (req, res) => {
             }
         });
 });
+app.post("/delete_stall_holder", (req, res) => {
+
+    //read product information from request
+    // let product = new Product(req.body.prd_name, req.body.prd_price);
+    // console.log("edit_sales_person: ", req.body)
+
+    // var code = Math.floor(Math.random() * (99999 - 10000 + 1)) + min;
+
+    connection.query(`Delete From StallHolder WHERE id = ${req.body.id}`,
+        (err, data) => {
+
+            if (!err) {
+                res.status(200).json({
+                    message: "Stall Holder Deleted.",
+                    stallId: data
+                });
+            } else {
+                // console.log(err);
+                res.status(400).json({
+                    message: err
+                });
+            }
+        });
+});
 app.post("/edit_stall_holder", (req, res) => {
 
     //read product information from request
@@ -1081,7 +1105,30 @@ app.post("/edit_stall_holder", (req, res) => {
         });
 });
 
+app.post("/delete_customer", (req, res) => {
 
+    //read product information from request
+    // let product = new Product(req.body.prd_name, req.body.prd_price);
+    // console.log("edit_sales_person: ", req.body)
+
+    // var code = Math.floor(Math.random() * (99999 - 10000 + 1)) + min;
+
+    connection.query(`Delete From Customers WHERE id = ${req.body.id}`,
+        (err, data) => {
+
+            if (!err) {
+                res.status(200).json({
+                    message: "Customer Deleted.",
+                    stallId: data
+                });
+            } else {
+                // console.log(err);
+                res.status(400).json({
+                    message: err
+                });
+            }
+        });
+});
 app.post("/edit_customer", (req, res) => {
 
     //read product information from request
@@ -1131,7 +1178,36 @@ app.post("/edit_product", (req, res) => {
             }
         });
 });
+app.post("/delete_stall", (req, res) => {
 
+    //read product information from request
+    // let product = new Product(req.body.prd_name, req.body.prd_price);
+    // console.log("edit_sales_person: ", req.body)
+
+    // var code = Math.floor(Math.random() * (99999 - 10000 + 1)) + min;
+
+    connection.query(`Delete From Stall WHERE id = ${req.body.id}`,
+        (err, data) => {
+            connection.query(`UPDATE StallHolder SET stallId=${empty}  WHERE stallId = '${req.body.id}'`,
+            (err, data) => {
+                // console.log("edit_stall empty err",err);
+                // console.log("edit_stall empty",data);
+
+
+            });
+            if (!err) {
+                res.status(200).json({
+                    message: "Stall Deleted.",
+                    stallId: data
+                });
+            } else {
+                // console.log(err);
+                res.status(400).json({
+                    message: err
+                });
+            }
+        });
+});
 app.post("/edit_stall", (req, res) => {
 
     //read product information from request
