@@ -1183,6 +1183,7 @@ app.post("/delete_stall", (req, res) => {
     //read product information from request
     // let product = new Product(req.body.prd_name, req.body.prd_price);
     // console.log("edit_sales_person: ", req.body)
+    var empty = null;
 
     // var code = Math.floor(Math.random() * (99999 - 10000 + 1)) + min;
 
