@@ -680,7 +680,7 @@ app.get('/get_invoice_items_id', (req, res) => {
         // rows1.map(w=> {
         //     NewInvoices[i].items.push(w)
         // })
-
+        console.log("get_invoice_items_id: ",rows1);
         res.send(rows1);
     });
 
