@@ -468,7 +468,7 @@ app.get('/send_daily_report_test', (req, res) => {
 });
 app.get('/get_invoices', (req, res) => {
     var NewInvoices = '';
-    connection.query('SELECT * FROM NewInvoices', (err, rows) => {
+    connection.query('SELECT * FROM NewInvoices ORDER BY id desc', (err, rows) => {
         // if (err) {
         //     res.status(400).json({
         //         message: err
@@ -532,8 +532,8 @@ app.get('/get_invoices', (req, res) => {
             // });
 
         })
-        // res.send(NewInvoices);
-        res.send(NewInvoices.sort(compareValues('id', 'desc')))
+        res.send(NewInvoices);
+        // res.send(NewInvoices.sort(compareValues('id', 'desc')))
 
 
         // res.send(rows); 
