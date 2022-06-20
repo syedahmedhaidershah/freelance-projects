@@ -241,8 +241,8 @@ app.get('/send_weekly_report', (req, res) => {
         if (rows1.length > 0) {
             stallHolders = rows1
             var invoices = []
-            // connection.query(`SELECT * FROM NewInvoiceDetails WHERE (DATE(dateTime) BETWEEN '${moment().weekday(0).subtract(6, 'd').format("YYYY-MM-DD")}' AND '${moment().weekday(0).format("YYYY-MM-DD")}')`, (err, rows2) => {
-            connection.query(`SELECT * FROM NewInvoiceDetails WHERE (DATE(dateTime) BETWEEN '2022-06-13' AND '2022-06-19')`, (err, rows2) => {
+            connection.query(`SELECT * FROM NewInvoiceDetails WHERE (DATE(dateTime) BETWEEN '${moment().weekday(0).subtract(6, 'd').format("YYYY-MM-DD")}' AND '${moment().weekday(0).format("YYYY-MM-DD")}')`, (err, rows2) => {
+            // connection.query(`SELECT * FROM NewInvoiceDetails WHERE (DATE(dateTime) BETWEEN '2022-06-13' AND '2022-06-19')`, (err, rows2) => {
                 if (err) throw err;
                 invoices = rows2
                 // rows1.map((v,i)=> {
@@ -297,8 +297,8 @@ app.get('/send_weekly_report', (req, res) => {
 
                                 var mailOptions = {
                                     from: 'antiquesofkingston@gmail.com',
-                                    // to: [v.email, 'antiquescentre@fastmail.com'],
-                                    to: 'antiquescentre@fastmail.com',
+                                    to: [v.email, 'antiquescentre@fastmail.com'],
+                                    // to: 'antiquescentre@fastmail.com',
                                     subject: 'Weekly Sales Report',
                                     html: beforeStallWeek + v.stallId + afterStallBeforeStallHolder + v.name + beforeTableWeekly + invoicesString + end,
                                     attachments: [{
@@ -340,8 +340,8 @@ app.get('/send_daily_report', (req, res) => {
         if (rows1.length > 0) {
             stallHolders = rows1
             var invoices = []
-            // connection.query(`SELECT * FROM NewInvoiceDetails WHERE DATE(dateTime) = '${moment().format("YYYY-MM-DD")}'`, (err, rows2) => {
-            connection.query(`SELECT * FROM NewInvoiceDetails WHERE DATE(dateTime) = '2022-06-19'`, (err, rows2) => {
+            connection.query(`SELECT * FROM NewInvoiceDetails WHERE DATE(dateTime) = '${moment().format("YYYY-MM-DD")}'`, (err, rows2) => {
+            // connection.query(`SELECT * FROM NewInvoiceDetails WHERE DATE(dateTime) = '2022-06-19'`, (err, rows2) => {
                 if (err) throw err;
                 invoices = rows2
                 // rows1.map((v,i)=> {
@@ -367,8 +367,8 @@ app.get('/send_daily_report', (req, res) => {
                                 var mailOptions = {
                                     from: 'antiquesofkingston@gmail.com',
                                     // to: [v.email, 'antiquescentre@fastmail.com'],
-                                    // to: v.email,
-                                    to: 'antiquescentre@fastmail.com',
+                                    to: v.email,
+                                    // to: 'antiquescentre@fastmail.com',
                                     subject: 'Daily Sales report',
                                     html: beforeStall + v.stallId + afterStallBeforeStallHolder + v.name + beforeTable + invoicesString + end,
                                     attachments: [{
