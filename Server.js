@@ -339,7 +339,7 @@ app.get('/send_daily_report', (req, res) => {
         if (rows1.length > 0) {
             stallHolders = rows1
             var invoices = []
-            connection.query(`SELECT * FROM NewInvoiceDetails WHERE DATE(dateTime) = '2022-06-19'`, (err, rows2) => {
+            connection.query(`SELECT * FROM NewInvoiceDetails WHERE DATE(dateTime) = '${moment().format("YYYY-MM-DD")}'`, (err, rows2) => {
                 if (err) throw err;
                 invoices = rows2
                 // rows1.map((v,i)=> {
@@ -365,8 +365,8 @@ app.get('/send_daily_report', (req, res) => {
                                 var mailOptions = {
                                     from: 'antiquesofkingston@gmail.com',
                                     // to: [v.email, 'antiquescentre@fastmail.com'],
-                                    // to: v.email,
-                                    to: 'rizviwajahat9@yahoo.com',
+                                    to: v.email,
+                                    // to: 'rizviwajahat9@yahoo.com',
                                     subject: 'Daily Sales report',
                                     html: beforeStall + v.stallId + afterStallBeforeStallHolder + v.name + beforeTable + invoicesString + end,
                                     attachments: [{
