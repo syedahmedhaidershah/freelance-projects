@@ -177,11 +177,11 @@ app.post("/add_invoice_new", (req, res) => {
             body.items.map(x => {
                 // console.log("invoicesToSend: ",x.finalPrice);
                 // total = parseInt(x.finalPrice) + total
-                if (parseInt(x.finalPrice, 10) > 0) {
-                    total = parseInt(x.finalPrice, 10) + total;
+                if (parseInt(x.price, 10) > 0) {
+                    total = parseInt(x.price, 10) + total;
                 }
-                totalWRefund = parseInt(x.finalPrice, 10) + totalWRefund;
-                invoicesString = invoicesString + '<tr> <td>' + x.stallId + '</td>        <td>' + body.id + '</td>        <td>' + x.productId + '</td>        <td>' + x.description + '</td>        <td>' + x.finalPrice + '</td> <td>' + moment(x.dateTime).format('YYYY-MM-DD hh:mm:ss') + '</td>     </tr>'
+                totalWRefund = parseInt(x.price, 10) + totalWRefund;
+                invoicesString = invoicesString + '<tr> <td>' + x.stallId + '</td>        <td>' + body.id + '</td>        <td>' + x.productId + '</td>        <td>' + x.description + '</td>        <td>' + x.price + '</td> <td>' + moment(x.dateTime).format('YYYY-MM-DD hh:mm:ss') + '</td>     </tr>'
                 // console.log('Email sent to ' + v.email + " invoicesstring: " , invoicesString);
             })
             // setTimeout(() => {
@@ -279,11 +279,11 @@ app.get('/send_weekly_report', (req, res) => {
                                 invoicesToSend.map(x => {
                                     // console.log("invoicesToSend: ",x.finalPrice);
                                     // total = parseInt(x.finalPrice) + total
-                                    if (parseInt(x.finalPrice, 10) > 0) {
-                                        total = parseInt(x.finalPrice, 10) + total;
+                                    if (parseInt(x.price, 10) > 0) {
+                                        total = parseInt(x.price, 10) + total;
                                     }
-                                    totalWRefund = parseInt(x.finalPrice, 10) + totalWRefund;
-                                    invoicesString = invoicesString + '<tr> <td>' + x.stallId + '</td>        <td>' + x.id + '</td>        <td>' + v.name + '</td>        <td>' + x.productId + '</td>        <td>' + x.description + '</td>        <td>' + x.finalPrice + '</td> <td>' + moment(x.dateTime).format('YYYY-MM-DD hh:mm:ss') + '</td>     </tr>'
+                                    totalWRefund = parseInt(x.price, 10) + totalWRefund;
+                                    invoicesString = invoicesString + '<tr> <td>' + x.stallId + '</td>        <td>' + x.id + '</td>        <td>' + v.name + '</td>        <td>' + x.productId + '</td>        <td>' + x.description + '</td>        <td>' + x.price + '</td> <td>' + moment(x.dateTime).format('YYYY-MM-DD hh:mm:ss') + '</td>     </tr>'
                                     // console.log('Email sent to ' + v.email + " invoicesstring: " , invoicesString);
                                 })
                                 // setTimeout(() => {
@@ -358,15 +358,15 @@ app.get('/send_daily_report', (req, res) => {
                             if (invoicesToSend.length > 0) {
                                 var invoicesString = ""
                                 invoicesToSend.map(x => {
-                                    invoicesString = invoicesString + '<tr> <td>' + x.stallId + '</td>        <td>' + x.id + '</td>        <td>' + v.name + '</td>        <td>' + x.productId + '</td>        <td>' + x.description + '</td>        <td>' + x.finalPrice + '</td>     </tr>'
+                                    invoicesString = invoicesString + '<tr> <td>' + x.stallId + '</td>        <td>' + x.id + '</td>        <td>' + v.name + '</td>        <td>' + x.productId + '</td>        <td>' + x.description + '</td>        <td>' + x.price + '</td>     </tr>'
                                 })
 
 
                                 var mailOptions = {
                                     from: 'antiquesofkingston@gmail.com',
                                     // to: [v.email, 'antiquescentre@fastmail.com'],
-                                    to: v.email,
-                                    // to: 'wadejohnson650@gmail.com',
+                                    // to: v.email,
+                                    to: 'steve-kingston@mailinator.com',
                                     subject: 'Daily Sales report',
                                     html: beforeStall + v.stallId + afterStallBeforeStallHolder + v.name + beforeTable + invoicesString + end,
                                     attachments: [{
@@ -426,7 +426,7 @@ app.get('/send_daily_report_test', (req, res) => {
                             if (invoicesToSend.length > 0) {
                                 var invoicesString = ""
                                 invoicesToSend.map(x => {
-                                    invoicesString = invoicesString + '<tr> <td>' + x.stallId + '</td>        <td>' + x.id + '</td>        <td>' + v.name + '</td>        <td>' + x.productId + '</td>        <td>' + x.description + '</td>        <td>' + x.finalPrice + '</td>     </tr>'
+                                    invoicesString = invoicesString + '<tr> <td>' + x.stallId + '</td>        <td>' + x.id + '</td>        <td>' + v.name + '</td>        <td>' + x.productId + '</td>        <td>' + x.description + '</td>        <td>' + x.price + '</td>     </tr>'
                                 })
 
 
