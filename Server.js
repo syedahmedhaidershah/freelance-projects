@@ -366,7 +366,7 @@ app.get('/send_daily_report', (req, res) => {
                                     from: 'antiquesofkingston@gmail.com',
                                     // to: [v.email, 'antiquescentre@fastmail.com'],
                                     // to: v.email,
-                                    to: 'steve-kingston@mailinator.com',
+                                    to: 'rizviwajahat9@yahoo.com',
                                     subject: 'Daily Sales report',
                                     html: beforeStall + v.stallId + afterStallBeforeStallHolder + v.name + beforeTable + invoicesString + end,
                                     attachments: [{
