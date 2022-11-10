@@ -25,7 +25,7 @@
     "md5": "^2.2.1",
     "mongodb": "^3.1.6",
     "popper.js": "^1.14.4",
-    "socket.io": "^2.1.1"
+    "socket.io": "^2.5.0"
   },
   "devDependencies": {
     "nodemon": "^1.18.4"
