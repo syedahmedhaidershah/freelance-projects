@@ -12,7 +12,7 @@ const connection = mysql.createConnection({
     host: 'localhost',
     user: 'kingstonantiques_haider',
     password: 'woulzmvu54fz',
-    database: 'kingstonantiques_1',
+    database: 'kingstonantiques-1',
     port: 3306
 });
 
